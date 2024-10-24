@@ -27,12 +27,13 @@ const Home: React.FC = () => {
       {show && (
         <ContactModal isModalOpen={show} handleToggle={handleToogleForms} />
       )}
-      <section className=" flex justify-between items-center">
-        <div className=" w-[485px] flex flex-col h-[378px] mx-auto gap-9 justify-between">
-          <h1 className=" text-[#24536E] font-bold text-[44px]">
+
+      <section className="flex justify-between items-center px-4 lg:px-0 py-8 lg:py-16">
+        <div className="w-full lg:w-[485px] flex flex-col h-auto lg:h-[378px] mx-auto gap-6 lg:gap-9 justify-between">
+          <h1 className="text-[#24536E] font-bold text-3xl lg:text-[44px] text-center lg:text-left">
             Creative Solutions for a Brighter Future
           </h1>
-          <p className=" text-[20px] leading-7 text-[#000000]">
+          <p className="text-base lg:text-[20px] leading-6 lg:leading-7 text-[#000000] text-center lg:text-left">
             Embrace a brighter future with our technology-driven solutions that
             enhance your business capabilities. We empower your success through
             innovation, helping you unlock new opportunities and stay ahead in a
@@ -41,23 +42,24 @@ const Home: React.FC = () => {
           <ButtonWrapper
             onClick={handleToogleForms}
             label={"Contact Us"}
-            className={
-              "bg-[#20B2FF] p-[10px] text-[#FFFFFF] rounded-lg font-semibold text-base h-[46px] w-[139px]"
-            }
+            className="bg-[#20B2FF] p-3 lg:p-[10px] text-white rounded-lg font-semibold text-sm lg:text-base h-[46px] w-[120px] lg:w-[139px] mx-auto lg:mx-0"
           />
         </div>
-        <div className="relative">
-          <img src={CurlArrows} alt="" className=" absolute right-80 top-24" />
-          <img src={Hero1} alt="" className="" />
-          <div>
-            <img
-              src={YelloSquare}
-              alt=""
-              className=" absolute bottom-8 z-100 right-80"
-            />
-          </div>
+        <div className="relative hidden lg:block">
+          <img
+            src={CurlArrows}
+            alt="arrows"
+            className="absolute right-20 lg:right-80 top-10 lg:top-24"
+          />
+          <img src={Hero1} alt="hero" className="relative" />
+          <img
+            src={YelloSquare}
+            alt="yellow square"
+            className="absolute bottom-4 lg:bottom-8 right-16 lg:right-80 z-10"
+          />
         </div>
       </section>
+
       <section className=" testmonial w-full h-[520px] flex flex-col justify-around bg-[#E0F3FF]">
         <div className=" relative">
           <h1 className=" text-center font-bold text-[38px] leading-[45px] text-[#031924]">

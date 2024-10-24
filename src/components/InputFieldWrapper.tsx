@@ -6,6 +6,7 @@ interface propsTypes {
   placeholder: string;
   onChange: (value: string) => void;
   className?: string;
+  pricing?: true;
 }
 
 const InputFieldWrapper: React.FC<propsTypes> = ({
@@ -13,28 +14,36 @@ const InputFieldWrapper: React.FC<propsTypes> = ({
   placeholder,
   onChange,
   value,
+  className,
+  pricing,
 }) => {
   return (
-    <div className="flex flex-col w-full gap-2">
+    <div className="flex flex-col w-full gap-2 ">
       <label className="text-[#031924] text-base leading-5" htmlFor={label}>
         {label}
       </label>
       {label === "Comments" ? (
         <textarea
           id={label}
+          required
           value={value}
           placeholder={placeholder}
           onChange={(e) => onChange(e.target.value)}
           draggable={false}
-          className={`border-[#DDE4EE] focus:outline-none border resize-none placeholder:text-[#F9FBFC] rounded-lg p-3 `}
+          className={`border-[#DDE4EE] focus:outline-none border resize-none  placeholder:text-[#F9FBFC] rounded-lg p-3 `}
         />
       ) : (
         <input
-          className={`border-[#DDE4EE] border placeholder:text-[#F9FBFC] focus:outline-none rounded-lg p-3 h-[48px]`}
+          className={`${className} border-[#DDE4EE] border ${
+            pricing
+              ? " placeholder:text-[#999999] text-[#999999]"
+              : "placeholder:text-[#F9FBFC] text-[#F9FBFC]"
+          }  focus:outline-none rounded-lg p-3 h-[48px]`}
           placeholder={placeholder}
           type={label === "Email" ? "email" : "text"}
           name={label}
           id={label}
+          required
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />

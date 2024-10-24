@@ -6,6 +6,10 @@ export default {
       boxShadow: {
         clientCustom: "0px 2px 10px 0px rgba(151,151,151,0.25)",
       },
+      colors: {
+        primary: "#20B2FF",
+        secondary: "#032435",
+      },
     },
   },
   plugins: [],

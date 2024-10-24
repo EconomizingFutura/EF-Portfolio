@@ -2,56 +2,62 @@ import React, { useEffect, useState } from "react";
 import InputFieldWrapper from "../components/InputFieldWrapper";
 import ButtonWrapper from "../components/ButtonWrapper";
 import CancelIcon from "../assets/CancelIcon.svg";
+
 interface propsTypes {
   handleToggle: () => void;
   isModalOpen: boolean;
 }
+
 const ContactModal: React.FC<propsTypes> = ({ isModalOpen, handleToggle }) => {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [comments, setComments] = useState<string>("");
+
   useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = isModalOpen ? "hidden" : "auto";
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [isModalOpen]);
+
   return (
-    <div className="fixed inset-0 z-[1000] bg-[#1e75bb] gap-3 bg-opacity-40 flex flex-col justify-center items-center">
+    <div
+      className={`fixed inset-0 z-[1000] bg-[#1e75bb] bg-opacity-40 flex flex-col justify-center items-center gap-3 ${
+        isModalOpen ? "block" : "hidden"
+      }`}
+    >
       <img
         src={CancelIcon}
         onClick={handleToggle}
-        className=" cursor-pointer"
+        className="cursor-pointer "
+        alt=""
       />
-      <div className="bg-white rounded-3xl p-6 h-[557px] gap-5 w-[740px] flex flex-col justify-start items-start">
-        <div className=" mx-auto w-[644px]">
-          <h1 className="text-start py-2.5 text-[32px] leading-[38.41px] text-[#24536E] font-bold">
+      <div className="bg-white rounded-3xl px-5 lg:p-6 gap-5 flex flex-col justify-start items-start md:h-[557px] h-4/5 w-11/12 max-w-lg lg:max-w-2xl mx-4 lg:mx-0">
+        <div className="w-full ">
+          <h1 className="text-center md:text-start md:py-2.5 text-2xl lg:text-[32px] leading-[38.41px] text-[#24536E] font-bold">
             Contact Us
           </h1>
-          <p className="font-medium py-2.5 text-base leading-[19.2px] text-[#031924]">
+          <p className="font-medium md:py-2.5 text-xs lg:text-base leading-[19.2px] text-[#031924]">
             Please provide your email address, and our team will get in touch
             with you.
           </p>
         </div>
 
-        <form className="w-[644px] flex flex-col gap-6 mx-auto">
-          <div className="flex justify-between gap-2">
+        <form className="w-full flex flex-col gap-1 md:gap-3 lg:gap-6 ">
+          <div className="flex flex-col lg:flex-row gap-3 lg:gap-4">
             <InputFieldWrapper
               label="First Name"
-              placeholder="Name"
+              placeholder="First Name"
               value={firstName}
-              className="w-1/2"
+              className="w-full lg:w-1/2"
               onChange={setFirstName}
             />
             <InputFieldWrapper
               label="Last Name"
-              placeholder="Name"
+              placeholder="Last Name"
               value={lastName}
+              className="w-full lg:w-1/2"
               onChange={setLastName}
             />
           </div>
@@ -63,12 +69,12 @@ const ContactModal: React.FC<propsTypes> = ({ isModalOpen, handleToggle }) => {
           />
           <InputFieldWrapper
             label="Comments"
-            placeholder="Enter"
+            placeholder="Enter your message"
             value={comments}
             onChange={setComments}
           />
           <ButtonWrapper
-            className="bg-[#20B2FF] h-[47px] rounded-lg font-semibold text-base leading-5 text-[#FFFFFF] w-[644px]"
+            className="bg-[#20B2FF] h-[35px] md:h-[47px] rounded-lg font-semibold text-base leading-5 text-white w-full"
             label="Contact Us"
             onClick={() => console.log("Contact Us clicked")}
           />
