@@ -15,7 +15,6 @@ const InputFieldWrapper: React.FC<propsTypes> = ({
   onChange,
   value,
   className,
-  pricing,
 }) => {
   return (
     <div className="flex flex-col w-full gap-2 ">
@@ -34,10 +33,8 @@ const InputFieldWrapper: React.FC<propsTypes> = ({
         />
       ) : (
         <input
-          className={`${className} border-[#DDE4EE] border ${
-            pricing
-              ? " placeholder:text-[#999999] text-[#999999]"
-              : "placeholder:text-[#F9FBFC] text-[#F9FBFC]"
+          className={`${className} border-[#DDE4EE] border
+               placeholder:text-[#999999] text-[#999999]"
           }  focus:outline-none rounded-lg p-3 h-[48px]`}
           placeholder={placeholder}
           type={label === "Email" ? "email" : "text"}

@@ -6,6 +6,7 @@ import { Technologies } from "../constants/constants";
 import AvailableIcon from "../assets/AvailableIcon.svg";
 import Footer from "../sections/Footer";
 import ContactModal from "../modal/ContactModal";
+import EnqueryModal from "../modal/EnqueryModal";
 
 const Technology: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -14,7 +15,11 @@ const Technology: React.FC = () => {
   };
   return (
     <div className="overflow-x-hidden">
-      <Header background="bg-[#c5eaff] " handleShowForms={handleToggle} />
+      <Header
+        width="xl:w-[1246px]"
+        background="bg-[#c5eaff] "
+        handleShowForms={handleToggle}
+      />
       <div
         className="bg-sky-200 h-48   sm:h-60 md:h-72 lg:h-[248px] flex justify-between items-center"
         style={{
@@ -44,7 +49,7 @@ const Technology: React.FC = () => {
           draggable={false}
         />
       </div>
-      <section className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto py-8 sm:py-10 px-4">
+      <section className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto py-8 sm:py-10 px-4 min-h-screen">
         {Technologies.map((tech) => (
           <div
             key={tech.id}
@@ -78,6 +83,9 @@ const Technology: React.FC = () => {
           </div>
         ))}
       </section>
+      <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
+        <EnqueryModal />
+      </div>
       <Footer />
       {show && <ContactModal isModalOpen={show} handleToggle={handleToggle} />}
     </div>

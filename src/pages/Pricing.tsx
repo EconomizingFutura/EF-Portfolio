@@ -6,7 +6,10 @@ import Dropbox from "../assets/Dropbox.svg";
 import File from "../assets/File.svg";
 import "../style.css";
 import InputFieldWrapper from "../components/InputFieldWrapper";
-
+import Proppers from "../assets/Proppers.json";
+import Lottie from "lottie-react";
+import ContactModal from "../modal/ContactModal";
+import EnqueryModal from "../modal/EnqueryModal";
 const Pricing: React.FC = () => {
   const [show, setShow] = useState(false);
   const handleToggle = () => {
@@ -93,18 +96,23 @@ const Pricing: React.FC = () => {
   console.log(MainSection);
 
   return (
-    <div className="Prizing-section flex  flex-col w-full overflow-hidden">
-      <Header background="bg-[#ddf3ff] " handleShowForms={handleToggle} />
+    <div className="Prizing-section flex min-h-screen flex-col w-full overflow-hidden">
+      <Header
+        background="bg-[#ddf3ff] "
+        width="xl:w-[1136px]"
+        handleShowForms={handleToggle}
+      />
+      {show && <ContactModal isModalOpen={show} handleToggle={handleToggle} />}
       <div className=" h-[250px] bg-gradient-to-b from-[#d6f1ff] via-[#ddf3ff] to-[#ecf8ff] w-full flex justify-center items-center ">
         <h1 className=" text-[#24536E] font-bold leading-[52.81px] text-center text-[44px]">
           Pricing
         </h1>
       </div>
-      <div className=" w-full  mb-10 flex-col justify-evenly items-center h-auto  flex">
+      <div className="flex-grow w-full  mb-10 flex-col justify-evenly items-center h-auto  flex">
         {selected < 6 ? (
-          <div className="lg:h-[428px] flex justify-center flex-col md:flex-row gap-10 items-start py-16 lg:w-[1136px] w-11/12 rounded-[30px] bg-[#ffffff] border-[#E0E0E0] border-[1px] md:px-10 ">
-            <div className="flex w-full md:w-1/2 flex-col px-2 md:px-0 gap-6 my-2">
-              <div className=" flex justify-between md:w-[239px] w-[200px]">
+          <div className="lg:h-[428px] flex justify-center sm:justify-center sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 lg:w-[1136px] w-11/12 rounded-[30px] bg-[#ffffff] border-[#E0E0E0] border-[1px] md:px-10 ">
+            <div className="flex w-full sm:w-1/2  flex-col px-2 md:px-0 gap-6 my-2">
+              <div className=" flex justify-between lg:w-[239px]  w-[200px]">
                 {Array.from({ length: selectSections.length }, (_, index) => (
                   <div
                     key={index}
@@ -121,37 +129,45 @@ const Pricing: React.FC = () => {
                 ))}
               </div>
 
-              <p className=" font-medium text-[17px] leading-4 tracking-[0.02em] text-[#999999]">
+              <p className=" font-medium text-[17px]  leading-4 tracking-[0.02em] text-[#999999]">
                 Label
               </p>
-              <h1 className=" font-semibold text-[28px] leading-[39px]-tracting-[0.02em] text-[#032435]">
+              <h1 className=" font-semibold lg:text-[28px] text-[20px]  leading-[39px]-tracting-[0.02em] text-[#032435]">
                 What is Question What is Question ?
               </h1>
             </div>
-            <div className="md:w-[487px] flex flex-col w-full h-full  justify-between px-2 md:px-0">
+            <div className="md:w-[487px]  sm:w-[350px] sm:justify-center sm:items-end md:gap-10 gap-3 flex flex-col w-full h-full  justify-between px-2 md:px-0">
               <div
-                className={`lg:h-[228px]  lg:w-[487px] w-full ${
+                className={`lg:h-[228px]  lg:w-[487px] w-full
+                ${
                   selected === 4
-                    ? "border-dashed-spaced items-center inline-block"
+                    ? "md:w-[423px] border-dashed-spaced items-center inline-block"
                     : "border-[1px]  border-[#E0E0E0]"
                 } flex lg:justify-center lg:items-center rounded-[16px] ${
-                  selected === 5 ? "md:items-center h-[200px]" : "h-min py-2"
-                }`}
+                  selected === 5
+                    ? "md:items-center  h-[180px] w-[423px] md:p-10 "
+                    : "h-min py-2"
+                } ${selected === 3 && " sm:w-full md:w-[423px]"}`}
               >
                 <div
                   className={`${
-                    selected == 3 ? "md:h-[180px] py-5 md:py-0" : "h-[164px] "
+                    selected == 3
+                      ? "md:h-[175px] md:w-[423px] py-0 md:p-5 md:py-0 h-[180px] mx-auto  flex"
+                      : "h-[180px] "
                   }  flex flex-wrap gap-4 items-center ${
                     selected <= 2
-                      ? "md:justify-between md:w-[416px]"
-                      : " w-[453px]"
+                      ? "sm:justify-evenly justify-center w-full items-center md:w-[416px] "
+                      : " w-[453px] "
+                  } ${
+                    selected === 5 &&
+                    " justify-center h-[180px] mx-auto  items-center flex pt-1"
                   }`}
                 >
                   {selected <= 2 &&
                     MainSection.labels?.map((a, index) => (
                       <div
                         key={index}
-                        className="md:w-[109px] w-20 justify-center items-center px-1 gap-1 h-[44px] md:p-3 flex md:gap-[10px]"
+                        className="md:w-[109px]  w-20 justify-center items-center px-1 gap-1 h-[44px] md:p-3 flex md:gap-[10px]"
                       >
                         <input type={selected == 1 ? "radio" : "checkbox"} />
                         <label htmlFor={a.label} className=" text-re">
@@ -160,8 +176,8 @@ const Pricing: React.FC = () => {
                       </div>
                     ))}
                   {selected == 3 && (
-                    <div className=" flex flex-col mx-5 w-full ">
-                      <h1 className=" text-[#031924] mb-2 font-normal text-[16px] leading-[19.2px]">
+                    <div className=" flex flex-col mx-5 md:mx-0  w-full ">
+                      <h1 className=" text-[#031924] md:mb-0.5 mb-2 font-normal text-[16px] leading-[19.2px]">
                         Comments
                       </h1>
                       <textarea
@@ -260,18 +276,30 @@ const Pricing: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="md:h-[428px] h-[250px] md:w-[1136px] w-11/12  rounded-[30px] flex justify-center items-center bg-[#FFFFFF] border-[#E0E0E0] border-[1px]">
-            <div className=" w-full lg:h-[96px] justify-center items-center  flex flex-col gap-2">
-              {/* <Lottie animationData={un} loop={true} className="h-11 w-11" /> */}
+          <div className="lg:h-[428px] h-[250px] lg:w-[1136px] w-11/12  rounded-[30px] flex justify-center items-center bg-[#FFFFFF] border-[#E0E0E0] border-[1px]">
+            <div className=" w-full lg:h-[96px] justify-center relative items-center  flex flex-row gap-2">
+              <Lottie
+                animationData={Proppers}
+                loop={true}
+                className=" lg:w-72 absolute h-56 w-56 left-0"
+              />
               <p className=" text-secondary text-center font-bold lg:text-[40px] text-[30px]  leading-[48.01px] -tracking-[0.02em]">
                 <span className=" text-primary">
                   Thanks! <br />
                 </span>
                 Our team will be reach out you in 24hrs!
               </p>
+              <Lottie
+                animationData={Proppers}
+                loop={true}
+                className="lg:h-72 lg:w-72 h-56 w-56 absolute right-0 rounded-full"
+              />
             </div>
           </div>
         )}
+      </div>
+      <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
+        <EnqueryModal />
       </div>
       <Footer />
     </div>

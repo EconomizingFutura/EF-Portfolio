@@ -8,6 +8,19 @@ import mobileApp from "../assets/mobileApp.svg";
 import webapp from "../assets/webapp.svg";
 import devops from "../assets/devops.svg";
 import uiux from "../assets/uiux.svg";
+import Blog_banner_1 from "../assets/Blog_banner_1.svg";
+import Blog_banner_2 from "../assets/Blog_banner_2.svg";
+import pencil from "../assets/pencil.json";
+import Blogs1 from "../assets/Blogs1.svg";
+import Thunder from "../assets/Thunder.json";
+import AeniniBanner from "../assets/AeniniBanner.svg";
+import Aenini from "../assets/Aenini.svg";
+import TrevaChat from "../assets/TrevaChat.svg";
+import AeiniImg from "../assets/AeiniImg.svg";
+import mobile_dev from "../assets/mobile_dev.svg";
+import web_dev from "../assets/web_dev.svg";
+import devops_dev from "../assets/devops_dev.svg";
+import UI_dev from "../assets/UI_dev.svg";
 export const navLinks = [
   {
     id: 1,
@@ -28,6 +41,49 @@ export const navLinks = [
     id: 4,
     link: "/technologies",
     name: "Technology",
+  },
+];
+interface ProjectItem {
+  id: number;
+  projectName: string;
+  description: string;
+  lottie: object;
+  projectBanner: string;
+  image: string;
+  briefNote: string;
+  problemStatement: string;
+  services: string;
+}
+export const projectsInfo: ProjectItem[] = [
+  {
+    id: 1,
+    lottie: Thunder,
+    projectName: "Aenini",
+    description:
+      "Aenini is an offline tool for counting warp and weft threads in fabric, with data stored locally. It ensures real-time thread count analysis for fabric quality in textile manufacturing. The user-friendly interface allows seamless operation without internet access.",
+    projectBanner: AeniniBanner,
+    image: Aenini,
+    briefNote:
+      "Designed for ease of use, Aenini simplifies thread count analysis for textile experts.It delivers fast, accurate measurements of warp and weft threads.This efficiency improves the speed and precision of fabric quality checks.Aenini supports quality control processes, ensuring industry standards are met.Its seamless operation helps reduce errors and enhance inspection workflows.",
+    problemStatement:
+      "In many textile facilities, signal jammers are deployed to block internet and cellular connectivity for security purposes.This disrupts the functionality of cloud-based or online-dependent fabric inspection tools, leading to operational inefficiencies.Without access to real-time thread count analysis, ensuring fabric quality becomes a bottleneck.Traditional tools relying on continuous network access are rendered unusable in such environments.Aenini addresses this issue with its offline-first architecture, utilising LocalDB to store and process data locally, ensuring uninterrupted inspection workflows",
+    services:
+      "Aenini offers real-time offline thread count analysis and fabric inspection, ensuring accuracy without internet dependence.Our admin dashboard provides secure user management, role-based access control, and analytics for operational efficiency.",
+  },
+  {
+    id: 2,
+    lottie: pencil,
+    projectName: "Treva Chat",
+    description:
+      "Treva Chat is an advanced chatbot platform designed for easy question resolution, with features like reference tracking for seamless conversations. It stores the last five chat sessions for quick access and includes feedback mechanisms to ensure quality interactions. With built-in user authentication, it provides a secure and personalized support experience.",
+    projectBanner: TrevaChat,
+    image: AeiniImg,
+    briefNote:
+      "Treva is a comprehensive platform designed to simplify workflow management by integrating with GitHub and Google Drive. It offers an intuitive dashboard for reviewing workflows, managing user data, and visualising chat sessions. Treva Chat provides a seamless chatbot experience with conversation history, feedback mechanisms, and reference tracking for enhanced support.",
+    problemStatement:
+      "Many professionals struggle with managing workflows across platforms like GitHub and Google Drive, leading to inefficiencies and wasted time. Without seamless integration, teams face disjointed processes and a lack of clear data visualisation. There’s a need for a unified solution that can streamline workflows, provide secure communication, and offer insights through analytics to boost productivity. Treva bridges this gap by bringing these tools together, ensuring a smooth, integrated experience.",
+    services:
+      "Treva offers end-to-end workflow management with personalized workflows, secure real-time chat, and conversation history tracking. It features data visualization via Chart.js, ensuring actionable insights. Additionally, the platform supports CRUD operations and integrates third-party tools like GitHub and Google Drive for a more cohesive and efficient workflow.",
   },
 ];
 
@@ -94,6 +150,7 @@ export const AreasConstants = [
     li1: "Focus on creating user-friendly, responsive interfaces that work seamlessly across devices.",
     li2: "Prioritisation of scalability, security, and performance to ensure long-term success.",
     logo: webapp,
+    icons: web_dev,
   },
   {
     id: "2",
@@ -102,6 +159,7 @@ export const AreasConstants = [
     info: "We create mobile apps that provide seamless and engaging experiences across all platforms.",
     li1: "Our developers are expertise in developing intuitive, high-performance apps for both iOS and Android.",
     li2: "Focus on user-centric design, ensuring smooth functionality and responsiveness for all devices.",
+    icons: mobile_dev,
   },
   {
     id: "3",
@@ -110,6 +168,7 @@ export const AreasConstants = [
     info: "Our DevOps solutions streamline the development lifecycle, ensuring faster delivery and efficient workflows.",
     li1: "We implement CI/CD pipelines using tools such as Jenkins for continuous integration, Docker for containerization, and Kubernetes for orchestration.",
     li2: "We are expertise in cloud infrastructure management on AWS, Azure, and Google Cloud to support scalable applications.",
+    icons: devops_dev,
   },
   {
     id: "4",
@@ -118,5 +177,99 @@ export const AreasConstants = [
     info: "Our design philosophy revolves around crafting visually stunning and highly intuitive experiences that captivate users and drive engagement.",
     li1: "We employ a user-first design strategy, leveraging tools like Figma, Adobe XD, and Sketch to bring ideas to life with clarity and creativity.",
     li2: "By focusing on accessibility, responsive design, and dynamic prototypes, we create a fluid user experience across all platforms, ensuring every interaction is intuitive and engaging.",
+    icons: UI_dev,
+  },
+];
+
+export const blogs = [
+  {
+    id: 1,
+    header: "Name",
+    date: "25 March",
+    min: "3 Mins",
+    heading:
+      "How Scanflow helps manufacturing Industries with VIN number Scanning",
+    sub: "Managing a tire warehouse efficiently is critical for businesses in the automotive industry.",
+    icon: Blog_banner_1,
+  },
+  {
+    id: 2,
+    header: "Name",
+    date: "25 March",
+    min: "3 Mins",
+    heading:
+      "How Scanflow helps manufacturing Industries with VIN number Scanning",
+    sub: "Managing a tire warehouse efficiently is critical for businesses in the automotive industry.",
+    icon: Blog_banner_2,
+  },
+  {
+    id: 3,
+    header: "Name",
+    date: "25 March",
+    min: "3 Mins",
+    heading:
+      "How Scanflow helps manufacturing Industries with VIN number Scanning",
+    sub: "Managing a tire warehouse efficiently is critical for businesses in the automotive industry.",
+    icon: Blogs1,
+  },
+  {
+    id: 4,
+    header: "Name",
+    date: "25 March",
+    min: "3 Mins",
+    heading:
+      "How Scanflow helps manufacturing Industries with VIN number Scanning",
+    sub: "Managing a tire warehouse efficiently is critical for businesses in the automotive industry.",
+    icon: Blog_banner_2,
+  },
+  {
+    id: 5,
+    header: "Name",
+    date: "25 March",
+    min: "3 Mins",
+    heading:
+      "How Scanflow helps manufacturing Industries with VIN number Scanning",
+    sub: "Managing a tire warehouse efficiently is critical for businesses in the automotive industry.",
+    icon: Blog_banner_1,
+  },
+  {
+    id: 6,
+    header: "Name",
+    date: "25 March",
+    min: "3 Mins",
+    heading:
+      "How Scanflow helps manufacturing Industries with VIN number Scanning",
+    sub: "Managing a tire warehouse efficiently is critical for businesses in the automotive industry.",
+    icon: Blogs1,
+  },
+  {
+    id: 7,
+    header: "Name",
+    date: "25 March",
+    min: "3 Mins",
+    heading:
+      "How Scanflow helps manufacturing Industries with VIN number Scanning",
+    sub: "Managing a tire warehouse efficiently is critical for businesses in the automotive industry.",
+    icon: Blog_banner_2,
+  },
+  {
+    id: 8,
+    header: "Name",
+    date: "25 March",
+    min: "3 Mins",
+    heading:
+      "How Scanflow helps manufacturing Industries with VIN number Scanning",
+    sub: "Managing a tire warehouse efficiently is critical for businesses in the automotive industry.",
+    icon: Blog_banner_1,
+  },
+  {
+    id: 9,
+    header: "Name",
+    date: "25 March",
+    min: "3 Mins",
+    heading:
+      "How Scanflow helps manufacturing Industries with VIN number Scanning",
+    sub: "Managing a tire warehouse efficiently is critical for businesses in the automotive industry.",
+    icon: Blogs1,
   },
 ];

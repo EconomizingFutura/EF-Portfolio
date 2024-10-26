@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
-
+import { motion } from "framer-motion";
 const Clients: React.FC = () => {
   const [toggle, setToggle] = useState<number>(0);
 
@@ -48,6 +48,13 @@ const Clients: React.FC = () => {
     { id: 2, section: "How We Work" },
   ];
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setToggle((prevToggle) => (prevToggle === 0 ? 1 : 0));
+    }, 15000);
+    return () => clearInterval(intervalId);
+  }, []);
+
   const activeSection = sections[toggle];
 
   const ToggleSection = () => {
@@ -60,7 +67,11 @@ const Clients: React.FC = () => {
             className={`relative h-[72px] w-full rounded-lg cursor-pointer shadow-clientCustom flex justify-between items-center bg-white`}
           >
             {toggle === header.id - 1 && (
-              <div className="absolute -top-[0px] h-[8px]  border-b-4 w-3/4 rounded-lg border-b-white bg-[#20B2FF]"></div>
+              <motion.div
+                className="absolute -top-[0px] h-[8px]  border-b-4  rounded-lg border-b-white bg-[#20B2FF]"
+                animate={{ width: "75%" }}
+                transition={{ duration: 5 }}
+              ></motion.div>
             )}
             <p className="font-semibold text-xl px-6">{header.section}</p>
             {toggle === header.id - 1 && (
@@ -73,7 +84,7 @@ const Clients: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row lg:space-x-2 w-full lg:w-[1137px] justify-center">
+    <div className="flex flex-col lg:flex-row xl:space-x-2 w-11/12 xl:w-[1137px] justify-center">
       <ToggleSection />
       <div className="flex flex-col w-full lg:max-w-[701px]">
         {activeSection.content.map((section, index) => (

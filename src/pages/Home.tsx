@@ -9,28 +9,53 @@ import TestimonialSlider from "../sections/TestimonialSlider";
 import ContactModal from "../modal/ContactModal";
 import Footer from "../sections/Footer";
 import Projects from "../sections/Projects";
+import Boxes from "../assets/Boxes.svg";
 import Area from "../assets/Area.svg";
 import AreaSection from "../sections/AreaSection";
 import Clients from "../sections/Clients";
 import FAQ from "../assets/FAQ.svg";
 import Faq from "../sections/Faq";
+import BlogsCard from "../components/BlogsCard";
+import { useNavigate } from "react-router";
+import { blogs, projectsInfo } from "../constants/constants";
+import EnqueryModal from "../modal/EnqueryModal";
 
+interface ProjectItem {
+  id: number;
+  projectName: string;
+  description: string;
+  lottie: object;
+  projectBanner: string;
+  image: string;
+}
 const Home: React.FC = () => {
   const [show, setShow] = useState<boolean>(false);
   const handleToogleForms = () => {
-    setShow(!show);
+    console.log(show);
+    console.log("clicked");
+    setShow((pre) => !pre);
   };
+  console.log(show);
+  const blogsSection = blogs.slice(0, 3);
 
+  const navigate = useNavigate();
   return (
-    <div className=" overflow-x-clip flex flex-col justify-between">
-      <Header background={""} handleShowForms={handleToogleForms} />
+    <div className=" overflow-x-clip flex flex-col justify-between ">
+      <Header
+        background={"#b1e3ff"}
+        width={"xl:w-[1200px]"}
+        handleShowForms={handleToogleForms}
+      />
       {show && (
         <ContactModal isModalOpen={show} handleToggle={handleToogleForms} />
       )}
-
-      <section className="flex justify-between items-center px-4 lg:px-0 py-8 lg:py-16">
-        <div className="w-full lg:w-[485px] flex flex-col h-auto lg:h-[378px] mx-auto gap-6 lg:gap-9 justify-between">
-          <h1 className="text-[#24536E] font-bold text-3xl lg:text-[44px] text-center lg:text-left">
+      <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
+        <EnqueryModal />
+      </div>
+      {/* ceedff */}
+      <section className="flex  bg-[#ceedff] backdrop-blur-304 bg-opacity-50 justify-end items-center px-4 lg:pe-0 py-8 lg:py-12">
+        <div className="w-full lg:w-[520px] flex flex-col h-auto lg:h-[378px] gap-6 lg:gap-9 justify-between">
+          <h1 className="text-[#24536E] leading-[52.81px] font-bold text-3xl lg:text-[44px] text-center lg:text-left">
             Creative Solutions for a Brighter Future
           </h1>
           <p className="text-base lg:text-[20px] leading-6 lg:leading-7 text-[#000000] text-center lg:text-left">
@@ -76,9 +101,21 @@ const Home: React.FC = () => {
         </div>
       </section>
       {/* projects */}
-      <Projects />
+      <section className="h-auto py-10 w-11/12 mx-auto bg-[#FFFFFF] relative flex flex-col justify-evenly items-center ">
+        <h1 className="font-bold text-[32px] sm:text-[38px] leading-[40px] sm:leading-[45.61px] text-[#031924] text-center ">
+          Projects
+        </h1>
+        <img
+          src={Boxes}
+          alt=""
+          className="absolute right-0 top-1 w-[80px] sm:w-auto"
+        />
+        {projectsInfo.map((a: ProjectItem) => (
+          <Projects key={a.id} project={a} />
+        ))}
+      </section>
       {/* Area of expertise */}
-      <section className="h-min py-8 lg:py-0 lg:h-[2033px] flex flex-col justify-center items-center bg-[#032435] w-full gap-10 lg:gap-0">
+      <section className="h-min py-8 lg:py-0 lg:h-[2033px] flex flex-col justify-center items-center bg-[#032435] w-full  gap-10 lg:gap-0">
         <div className="relative">
           <h1 className="font-bold text-[30px] md:text-[38px] leading-[45.61px] text-[#ffffff] text-center">
             Area of <span className="text-[#20B2FF]">Expertise</span>
@@ -98,8 +135,30 @@ const Home: React.FC = () => {
         </h1>
         <Clients />
       </section>
+      {/* Blogs */}
+      <section className="min-h-screen xl:overflow-x-hidden flex flex-col justify-evenly items-center p-4 md:p-6  md:h-[741px] bg-white">
+        <h1 className="text-[32px] md:text-[38px] font-bold text-[#032435] leading-tight text-center">
+          Blog
+        </h1>
+
+        {/* Blog Card Container */}
+        <div className="flex flex-row xl:w-[1139px] justify-start md:justify-between overflow-x-auto  gap-4 md:gap-6 items-center w-full sm:w-4/5 md:w-11/12 h-auto">
+          {blogsSection.map((a) => (
+            <BlogsCard card={a} key={a.id} />
+          ))}
+        </div>
+
+        {/* View All Button */}
+        <button
+          onClick={() => navigate("/blogs")}
+          className="w-[120px] h-[40px] md:w-[140px] md:h-[45px] lg:w-[202px] lg:h-[56px] font-bold text-[14px] md:text-[16px] lg:text-[18px] leading-snug bg-[#F1FAFF] text-primary hover:underline mt-6 xl:me-28 ml-auto"
+        >
+          View All
+        </button>
+      </section>
+      {/* F4F8FB */}
       {/* FAQ */}
-      <section className="bg-[#F4F8FB] w-full h-auto flex flex-col md:flex-row justify-center py-10 md:px-5 lg:px-0 md:h-[799px]">
+      <section className="bg-[#F4F8FB] w-11/12 mx-auto h-auto flex flex-col md:flex-row justify-center py-10 md:px-5 lg:px-0 md:h-[799px]">
         <div className="text-center md:text-left">
           <h1 className="text-[#032435] font-bold text-3xl lg:text-[38px] md:leading-[45.61px] w-full lg:w-[360px] mx-auto md:mx-0">
             Frequently asked questions

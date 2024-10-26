@@ -50,14 +50,14 @@ const ContactModal: React.FC<propsTypes> = ({ isModalOpen, handleToggle }) => {
               label="First Name"
               placeholder="First Name"
               value={firstName}
-              className="w-full lg:w-1/2"
+              className="w-full text-[#999999]"
               onChange={setFirstName}
             />
             <InputFieldWrapper
               label="Last Name"
               placeholder="Last Name"
               value={lastName}
-              className="w-full lg:w-1/2"
+              className="w-full text-[#999999]"
               onChange={setLastName}
             />
           </div>
@@ -66,12 +66,14 @@ const ContactModal: React.FC<propsTypes> = ({ isModalOpen, handleToggle }) => {
             placeholder="xyz@gmail.com"
             value={email}
             onChange={setEmail}
+            className="text-[#999999]"
           />
           <InputFieldWrapper
             label="Comments"
             placeholder="Enter your message"
             value={comments}
             onChange={setComments}
+            className="text-[#999999]"
           />
           <ButtonWrapper
             className="bg-[#20B2FF] h-[35px] md:h-[47px] rounded-lg font-semibold text-base leading-5 text-white w-full"
