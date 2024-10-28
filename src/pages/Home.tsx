@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Header from "../sections/Header";
+import React, { useRef, useState } from "react";
 import Hero1 from "../assets/Hero1.svg";
 import ButtonWrapper from "../components/ButtonWrapper";
 import CurlArrows from "../assets/CurlArrows.svg";
@@ -19,6 +18,7 @@ import BlogsCard from "../components/BlogsCard";
 import { useNavigate } from "react-router";
 import { blogs, projectsInfo } from "../constants/constants";
 import EnqueryModal from "../modal/EnqueryModal";
+import { useScroll } from "framer-motion";
 
 interface ProjectItem {
   id: number;
@@ -31,21 +31,18 @@ interface ProjectItem {
 const Home: React.FC = () => {
   const [show, setShow] = useState<boolean>(false);
   const handleToogleForms = () => {
-    console.log(show);
-    console.log("clicked");
     setShow((pre) => !pre);
   };
   console.log(show);
   const blogsSection = blogs.slice(0, 3);
-
+  const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
   const navigate = useNavigate();
   return (
     <div className=" overflow-x-clip flex flex-col justify-between ">
-      <Header
-        background={"#b1e3ff"}
-        width={"xl:w-[1200px]"}
-        handleShowForms={handleToogleForms}
-      />
       {show && (
         <ContactModal isModalOpen={show} handleToggle={handleToogleForms} />
       )}
@@ -110,9 +107,21 @@ const Home: React.FC = () => {
           alt=""
           className="absolute right-0 top-1 w-[80px] sm:w-auto"
         />
-        {projectsInfo.map((a: ProjectItem) => (
-          <Projects key={a.id} project={a} />
-        ))}
+        <div ref={container} className=" mt-20 relative">
+          {projectsInfo.map((a: ProjectItem, i: number) => {
+            const targetScale = 1 - (projectsInfo.length - i) * 0.05;
+            return (
+              <Projects
+                key={a.id}
+                project={a}
+                i={i}
+                progress={scrollYProgress}
+                range={[i * 0.25, 1]}
+                targetScale={targetScale}
+              />
+            );
+          })}
+        </div>
       </section>
       {/* Area of expertise */}
       <section className="h-min py-8 lg:py-0 lg:h-[2033px] flex flex-col justify-center items-center bg-[#032435] w-full  gap-10 lg:gap-0">
@@ -158,7 +167,7 @@ const Home: React.FC = () => {
       </section>
       {/* F4F8FB */}
       {/* FAQ */}
-      <section className="bg-[#F4F8FB] w-11/12 mx-auto h-auto flex flex-col md:flex-row justify-center py-10 md:px-5 lg:px-0 md:h-[799px]">
+      <section className="bg-[#F4F8FB]  w-11/12 lg:w-[1120px] mx-auto h-auto flex flex-col md:flex-row justify-center py-10 md:px-5 lg:px-0 md:h-[799px]">
         <div className="text-center md:text-left">
           <h1 className="text-[#032435] font-bold text-3xl lg:text-[38px] md:leading-[45.61px] w-full lg:w-[360px] mx-auto md:mx-0">
             Frequently asked questions

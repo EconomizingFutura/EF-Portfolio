@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Header from "../sections/Header";
 import Footer from "../sections/Footer";
 import ButtonWrapper from "../components/ButtonWrapper";
 import Dropbox from "../assets/Dropbox.svg";
@@ -97,11 +96,6 @@ const Pricing: React.FC = () => {
 
   return (
     <div className="Prizing-section flex min-h-screen flex-col w-full overflow-hidden">
-      <Header
-        background="bg-[#ddf3ff] "
-        width="xl:w-[1136px]"
-        handleShowForms={handleToggle}
-      />
       {show && <ContactModal isModalOpen={show} handleToggle={handleToggle} />}
       <div className=" h-[250px] bg-gradient-to-b from-[#d6f1ff] via-[#ddf3ff] to-[#ecf8ff] w-full flex justify-center items-center ">
         <h1 className=" text-[#24536E] font-bold leading-[52.81px] text-center text-[44px]">

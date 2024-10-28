@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "../sections/Header";
 import Footer from "../sections/Footer";
 import ContactModal from "../modal/ContactModal";
 import WaveRight from "../assets/WaveRight.svg";
@@ -25,12 +24,6 @@ const Blogs: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header
-        background="bg-[#c5eaff]"
-        width="xl:w-[1140px]"
-        handleShowForms={handleToggle}
-      />
-
       {/* Content Section */}
       <div className="flex-grow">
         {/* Hero Section */}

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "../sections/Header";
 import WaveRight from "../assets/WaveRight.svg";
 import WaveLeft from "../assets/WaveLeft.svg";
 import { Technologies } from "../constants/constants";
@@ -15,11 +14,6 @@ const Technology: React.FC = () => {
   };
   return (
     <div className="overflow-x-hidden">
-      <Header
-        width="xl:w-[1246px]"
-        background="bg-[#c5eaff] "
-        handleShowForms={handleToggle}
-      />
       <div
         className="bg-sky-200 h-48   sm:h-60 md:h-72 lg:h-[248px] flex justify-between items-center"
         style={{

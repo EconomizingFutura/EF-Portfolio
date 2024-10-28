@@ -32,14 +32,14 @@ const TestimonialSlider: React.FC = () => {
 
   return (
     <div className="relative w-full  mx-auto h-[250px] overflow-hidden">
-      <div className="flex justify-center gap-10 items-center h-full">
+      <div className="flex justify-center gap-14 items-center h-full">
         {getVisibleTestimonials().map((index, i) => (
           <div
             key={index}
-            className={`transition-all duration-300 ${
+            className={`transition-all duration-300 shrink-0 ${
               i === 1
                 ? "w-1/2 z-20 scale-100 opacity-100"
-                : "w-1/4 scale-95 opacity-50"
+                : "w-1/2 scale-95 opacity-50"
             }`}
           >
             <div className="relative h-[250px] flex justify-center items-center px-2">

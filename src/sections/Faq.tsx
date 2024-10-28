@@ -17,7 +17,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 }) => {
   return (
     <div
-      className={`w-full  border-b-[1px] py-6 ${
+      className={`w-full border-b-[1px] py-6 ${
         isLast ? "border-b-0" : "border-b-[#ECECEC]"
       }`}
     >

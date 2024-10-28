@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "../sections/Header";
 import Footer from "../sections/Footer";
 import ContactModal from "../modal/ContactModal";
 import { useParams } from "react-router";
@@ -22,10 +21,6 @@ const Blog: React.FC = () => {
   const content = blogs.filter((a) => a.id == Number(param.id))[0];
   return (
     <div className=" min-h-screen flex flex-col overflow-x-hidden">
-      <Header
-        background="bg-[#c5eaff] lg:px-32"
-        handleShowForms={handleToggle}
-      />
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal />
       </div>

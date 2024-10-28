@@ -90,7 +90,7 @@ export const projectsInfo: ProjectItem[] = [
 export const testimonials = [
   {
     id: 1,
-    name: "Michel Bromely",
+    name: "Miche",
     position: "Co-founder",
     feedback:
       "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
@@ -98,7 +98,7 @@ export const testimonials = [
   },
   {
     id: 3,
-    name: "Michel Bromely",
+    name: "Bromely",
     position: "Co-founder",
     feedback:
       "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
@@ -106,7 +106,31 @@ export const testimonials = [
   },
   {
     id: 2,
-    name: "Michel Bromely",
+    name: "Lllllallall",
+    position: "Co-founder",
+    feedback:
+      "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
+    image: Testimonial,
+  },
+  {
+    id: 2,
+    name: "Lllllallall",
+    position: "Co-founder",
+    feedback:
+      "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
+    image: Testimonial,
+  },
+  {
+    id: 2,
+    name: "Lllllallall",
+    position: "Co-founder",
+    feedback:
+      "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
+    image: Testimonial,
+  },
+  {
+    id: 2,
+    name: "Lllllallall",
     position: "Co-founder",
     feedback:
       "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
