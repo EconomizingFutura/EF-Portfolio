@@ -7,7 +7,7 @@ interface PropsTypes {
 
 const ButtonWrapper: React.FC<PropsTypes> = ({ className, label, onClick }) => {
   return (
-    <button className={className} onClick={onClick}>
+    <button className={`${className} font-hellix`} onClick={onClick}>
       {label}
     </button>
   );

@@ -44,7 +44,7 @@ const ContactModal: React.FC<propsTypes> = ({ isModalOpen, handleToggle }) => {
           </p>
         </div>
 
-        <form className="w-full flex flex-col gap-1 md:gap-3 lg:gap-6 ">
+        <form className="w-full flex flex-col h-full gap-1 md:gap-3 py-2 justify-between lg:gap-6 ">
           <div className="flex flex-col lg:flex-row gap-3 lg:gap-4">
             <InputFieldWrapper
               label="First Name"

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Hero1 from "../assets/Hero1.svg";
 import ButtonWrapper from "../components/ButtonWrapper";
 import CurlArrows from "../assets/CurlArrows.svg";
@@ -19,6 +19,8 @@ import { useNavigate } from "react-router";
 import { blogs, projectsInfo } from "../constants/constants";
 import EnqueryModal from "../modal/EnqueryModal";
 import { useScroll } from "framer-motion";
+import Header from "../sections/Header";
+import { sectionColors } from "../constants/constants";
 
 interface ProjectItem {
   id: number;
@@ -34,28 +36,111 @@ const Home: React.FC = () => {
     setShow((pre) => !pre);
   };
   console.log(show);
-  const blogsSection = blogs.slice(0, 3);
+  const blog = blogs.slice(0, 3);
   const container = useRef(null);
+
+  const [headerBg, setHeaderBg] = useState(sectionColors.hero);
+
+  const heroSection = useRef<HTMLElement | null>(null);
+  const testimonialsSection = useRef<HTMLElement | null>(null);
+  const projectsSection = useRef<HTMLElement | null>(null);
+  const expertiseSection = useRef<HTMLElement | null>(null);
+  const clientsSection = useRef<HTMLElement | null>(null);
+  const blogsSection = useRef<HTMLElement | null>(null);
+  const faqSection = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            switch (entry.target) {
+              case heroSection.current:
+                setHeaderBg(sectionColors.hero);
+                break;
+              case testimonialsSection.current:
+                setHeaderBg(sectionColors.testimonials);
+                break;
+              case projectsSection.current:
+                setHeaderBg(sectionColors.projects);
+                break;
+              case expertiseSection.current:
+                setHeaderBg(sectionColors.expertise);
+                break;
+              case clientsSection.current:
+                setHeaderBg(sectionColors.clients);
+                break;
+              case blogsSection.current:
+                setHeaderBg(sectionColors.blogs);
+                break;
+              case faqSection.current:
+                setHeaderBg(sectionColors.faq);
+                break;
+              default:
+                break;
+            }
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    const sections = [
+      heroSection,
+      testimonialsSection,
+      projectsSection,
+      expertiseSection,
+      clientsSection,
+      blogsSection,
+      faqSection,
+    ];
+    sections.forEach((section) => {
+      if (section.current) observer.observe(section.current);
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        if (section.current) observer.unobserve(section.current);
+      });
+    };
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start start", "end end"],
   });
   const navigate = useNavigate();
   return (
-    <div className=" overflow-x-clip flex flex-col justify-between ">
+    <div className=" mt-16 overflow-x-clip flex flex-col justify-between ">
       {show && (
         <ContactModal isModalOpen={show} handleToggle={handleToogleForms} />
       )}
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal />
       </div>
-      {/* ceedff */}
-      <section className="flex  bg-[#ceedff] backdrop-blur-304 bg-opacity-50 justify-end items-center px-4 lg:pe-0 py-8 lg:py-12">
-        <div className="w-full lg:w-[520px] flex flex-col h-auto lg:h-[378px] gap-6 lg:gap-9 justify-between">
-          <h1 className="text-[#24536E] leading-[52.81px] font-bold text-3xl lg:text-[44px] text-center lg:text-left">
+      <Header
+        width={"xl:w-[1167px]"}
+        handleShowForms={handleToogleForms}
+        background={headerBg}
+      />
+      {/* ceedff #DAF1FF */}
+      <section
+        ref={heroSection}
+        className="flex lg:flex-row flex-col bg-[#c3e9ff] backdrop-blur-304 bg-opacity-50 lg:justify-end items-center px-4 lg:pe-0 py-8 lg:py-12"
+        // style={{
+        //   backgroundImage: `url(${new URL(wave, window.location.origin)})`,
+        //   backgroundRepeat: "repeat",
+        //   backgroundPositionY: 0,
+        //   backgroundPositionX: "0",
+        //   // backgroundColor: "#DAF1FF",
+        //   backgroundSize: "50% 30%",
+        // }}
+      >
+        <div className="w-full font-hellix lg:w-[520px] flex flex-col h-auto lg:h-[450px] gap-6 lg:gap-9 justify-between">
+          <h1 className="text-[#24536E] lg:leading-[52.81px] font-bold text-3xl lg:text-[44px] leading-[38.5px] text-start lg:text-left ">
             Creative Solutions for a Brighter Future
           </h1>
-          <p className="text-base lg:text-[20px] leading-6 lg:leading-7 text-[#000000] text-center lg:text-left">
+          <p className="text-base lg:text-[20px] text-[16px] leading-6 lg:leading-7 text-[#000000] text-start lg:text-left">
             Embrace a brighter future with our technology-driven solutions that
             enhance your business capabilities. We empower your success through
             innovation, helping you unlock new opportunities and stay ahead in a
@@ -64,41 +149,51 @@ const Home: React.FC = () => {
           <ButtonWrapper
             onClick={handleToogleForms}
             label={"Contact Us"}
-            className="bg-[#20B2FF] p-3 lg:p-[10px] text-white rounded-lg font-semibold text-sm lg:text-base h-[46px] w-[120px] lg:w-[139px] mx-auto lg:mx-0"
+            className="bg-[#20B2FF] p-3 lg:p-[10px] text-white rounded-lg font-semibold text-sm lg:text-base h-[46px] w-[120px] lg:w-[139px]  "
           />
         </div>
-        <div className="relative hidden lg:block">
+        <div className="relative">
           <img
             src={CurlArrows}
             alt="arrows"
-            className="absolute right-20 lg:right-80 top-10 lg:top-24"
+            className="absolute h-[24px] w-[28px] top-5 right-1/2 sm:h-auto sm:w-auto sm:right-20 lg:right-80  sm:top-10 lg:top-24"
           />
-          <img src={Hero1} alt="hero" className="relative" />
+          <img
+            src={Hero1}
+            alt="hero"
+            className="relative sm:w-full sm:h-auto "
+          />
           <img
             src={YelloSquare}
             alt="yellow square"
-            className="absolute bottom-4 lg:bottom-8 right-16 lg:right-80 z-10"
+            className="absolute hidden md:block bottom-4 lg:bottom-8 right-16 lg:right-80 z-10"
           />
         </div>
       </section>
-
-      <section className=" testmonial w-full h-[520px] flex flex-col justify-around bg-[#E0F3FF]">
+      {/* Testimonials */}
+      <section
+        ref={testimonialsSection}
+        className="testmonial font-hellix w-full h-auto xl:h-[520px] flex flex-col justify-around bg-[#E0F3FF]"
+      >
         <div className=" relative">
-          <h1 className=" text-center font-bold text-[38px] leading-[45px] text-[#031924]">
+          <h1 className=" text-center font-bold sm:text-[38px] text-[20px] sm:leading-[45px] text-[#031924]">
             Testimonials for Happy Clients
           </h1>
           <img
             src={ClientUnderline}
             alt=""
-            className="absolute right-1/3 translate-x-3 top-12"
+            className="absolute md:right-1/3 sm:right-16 md:translate-x-3 w-[135px] sm:w-auto right-11 md:top-12"
           />
         </div>
-        <div className=" flex gap-10 w-screen overflow-x-auto ">
+        <div className=" flex gap-10 my-10 h-auto w-screen overflow-x-auto ">
           <TestimonialSlider />
         </div>
       </section>
       {/* projects */}
-      <section className="h-auto py-10 w-11/12 mx-auto bg-[#FFFFFF] relative flex flex-col justify-evenly items-center ">
+      <section
+        ref={projectsSection}
+        className=" font-hellix min-h-svh py-10 w-11/12 mx-auto  bg-[#FFFFFF] relative flex flex-col justify-evenly items-center mb-48 md:mb-0"
+      >
         <h1 className="font-bold text-[32px] sm:text-[38px] leading-[40px] sm:leading-[45.61px] text-[#031924] text-center ">
           Projects
         </h1>
@@ -124,8 +219,11 @@ const Home: React.FC = () => {
         </div>
       </section>
       {/* Area of expertise */}
-      <section className="h-min py-8 lg:py-0 lg:h-[2033px] flex flex-col justify-center items-center bg-[#032435] w-full  gap-10 lg:gap-0">
-        <div className="relative">
+      <section
+        ref={expertiseSection}
+        className="h-min py-8 lg:py-0 lg:h-[2033px] flex flex-col justify-center sm:mt-40 md:mt-0 items-center bg-[#032435] w-full font-hellix  lg:gap-20"
+      >
+        <div className="relative my-10">
           <h1 className="font-bold text-[30px] md:text-[38px] leading-[45.61px] text-[#ffffff] text-center">
             Area of <span className="text-[#20B2FF]">Expertise</span>
           </h1>
@@ -138,21 +236,27 @@ const Home: React.FC = () => {
         <AreaSection />
       </section>
       {/* section Client handling */}
-      <section className="h-auto lg:h-[818px] bg-[#F4F8FB] flex flex-col justify-center items-center w-full py-10">
+      <section
+        ref={clientsSection}
+        className="h-auto font-hellix lg:h-[818px] bg-[#F4F8FB] flex flex-col justify-center items-center w-full py-10"
+      >
         <h1 className="text-[32px] lg:text-[38px] leading-tight lg:leading-[45.16px] font-bold text-center text-[#032435] mb-10">
           Client Handling
         </h1>
         <Clients />
       </section>
       {/* Blogs */}
-      <section className="min-h-screen xl:overflow-x-hidden flex flex-col justify-evenly items-center p-4 md:p-6  md:h-[741px] bg-white">
+      <section
+        ref={blogsSection}
+        className="min-h-screen xl:overflow-x-hidden flex flex-col justify-evenly items-center p-4 md:p-6  md:h-[741px] bg-white font-hellix"
+      >
         <h1 className="text-[32px] md:text-[38px] font-bold text-[#032435] leading-tight text-center">
           Blog
         </h1>
 
         {/* Blog Card Container */}
-        <div className="flex flex-row xl:w-[1139px] justify-start md:justify-between overflow-x-auto  gap-4 md:gap-6 items-center w-full sm:w-4/5 md:w-11/12 h-auto">
-          {blogsSection.map((a) => (
+        <div className="flex font-hellix flex-row xl:w-[1139px] justify-start md:justify-between overflow-x-auto  gap-4 md:gap-6 items-center w-full sm:w-4/5 md:w-11/12 h-auto">
+          {blog.map((a) => (
             <BlogsCard card={a} key={a.id} />
           ))}
         </div>
@@ -167,19 +271,24 @@ const Home: React.FC = () => {
       </section>
       {/* F4F8FB */}
       {/* FAQ */}
-      <section className="bg-[#F4F8FB]  w-11/12 lg:w-[1120px] mx-auto h-auto flex flex-col md:flex-row justify-center py-10 md:px-5 lg:px-0 md:h-[799px]">
-        <div className="text-center md:text-left">
-          <h1 className="text-[#032435] font-bold text-3xl lg:text-[38px] md:leading-[45.61px] w-full lg:w-[360px] mx-auto md:mx-0">
-            Frequently asked questions
-          </h1>
-          <img
-            src={FAQ}
-            alt="FAQ illustration"
-            className="mt-4 md:mt-0 mx-auto md:mx-0"
-          />
-        </div>
-        <div className="w-full lg:w-[608px] flex justify-center items-start mt-10 md:mt-0">
-          <Faq />
+      <section
+        ref={faqSection}
+        className="bg-[#F4F8FB] h-auto w-full font-hellix"
+      >
+        <div className="xl:w-[1120px] mx-auto h-auto flex flex-col lg:flex-row justify-between py-10 px-2  md:px-10 lg:px-5 lg:h-[799px] items-center">
+          <div className="text-center md:text-left">
+            <h1 className="text-[#032435] font-bold text-3xl lg:text-[38px] md:leading-[45.61px] w-full lg:w-[360px] mx-auto md:mx-0">
+              Frequently asked questions
+            </h1>
+            <img
+              src={FAQ}
+              alt="FAQ illustration"
+              className="mt-4 md:mt-0 mx-auto md:mx-0"
+            />
+          </div>
+          <div className="w-full lg:w-[608px]  lg:h-[639px]  flex justify-center items-center mt-10 ">
+            <Faq />
+          </div>
         </div>
       </section>
       <Footer />

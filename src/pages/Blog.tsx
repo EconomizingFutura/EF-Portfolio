@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Footer from "../sections/Footer";
 import ContactModal from "../modal/ContactModal";
 import { useParams } from "react-router";
@@ -6,12 +6,57 @@ import { blogs } from "../constants/constants";
 import Star from "../assets/Star.svg";
 import EnqueryModal from "../modal/EnqueryModal";
 import BlogsCard from "../components/BlogsCard";
+import Header from "../sections/Header";
+
+const sectionColors = ["#e3f5ff", "#ffffff"];
 
 const Blog: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const handleToggle = () => {
     setShowModal(!showModal);
   };
+
+  const [backgroundColor, setBackgroundColor] = useState(sectionColors[0]);
+  const mainSectionRef = useRef<HTMLDivElement | null>(null);
+  const techSectionRef = useRef<HTMLDivElement | null>(null);
+
+  console.log(backgroundColor);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          console.log(entry);
+          if (entry.isIntersecting) {
+            if (entry.target === mainSectionRef.current) {
+              setBackgroundColor(sectionColors[0]);
+              console.log("Main section in view");
+            } else if (entry.target === techSectionRef.current) {
+              setBackgroundColor(sectionColors[1]);
+              console.log("Tech section in view");
+            }
+          }
+        });
+      },
+      { threshold: 0.3 } // Adjust this for sensitivity in detecting section visibility
+    );
+
+    // Observe both sections
+    const sections = [mainSectionRef, techSectionRef];
+    sections.forEach((section) => {
+      if (section.current) {
+        console.log(`Observing section: ${section.current}`);
+        observer.observe(section.current);
+      }
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        if (section.current) observer.unobserve(section.current);
+      });
+    };
+  }, [backgroundColor]);
+
   const param = useParams<{ id?: string }>();
   console.log(blogs);
 
@@ -20,11 +65,22 @@ const Blog: React.FC = () => {
 
   const content = blogs.filter((a) => a.id == Number(param.id))[0];
   return (
-    <div className=" min-h-screen flex flex-col overflow-x-hidden">
+    <div className=" font-hellix min-h-screen flex flex-col overflow-x-hidden">
+      <div className=" bg-red-500 h-[32px] w-full" ref={mainSectionRef}>
+        <Header
+          width={"xl:w-[1107px]"}
+          handleShowForms={handleToggle}
+          background={backgroundColor}
+        />
+      </div>
+
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal />
       </div>
-      <section className=" flex-grow flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto py-8 sm:py-10 w-11/12">
+      <section
+        ref={techSectionRef}
+        className=" h-auto flex-grow flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto xl:w-[1107px] mt-16  py-8 sm:py-10 w-11/12"
+      >
         <div className="flex flex-col lg:flex-row justify-between w-full lg:h-[412px] gap-4">
           {/* Blog Details */}
           <div className="flex flex-col h-auto lg:h-full w-full lg:w-[532px] gap-4">

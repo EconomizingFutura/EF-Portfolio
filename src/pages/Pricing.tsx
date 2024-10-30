@@ -9,6 +9,10 @@ import Proppers from "../assets/Proppers.json";
 import Lottie from "lottie-react";
 import ContactModal from "../modal/ContactModal";
 import EnqueryModal from "../modal/EnqueryModal";
+import Header from "../sections/Header";
+
+const sectionColors = ["#BCE7FF", "#ffffff"];
+
 const Pricing: React.FC = () => {
   const [show, setShow] = useState(false);
   const handleToggle = () => {
@@ -19,12 +23,53 @@ const Pricing: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 
+  const [backgroundColor, setBackgroundColor] = useState(sectionColors[0]);
+  const mainSectionRef = useRef<HTMLDivElement | null>(null);
+  const techSectionRef = useRef<HTMLDivElement | null>(null);
+
+  console.log(mainSectionRef, techSectionRef);
+
   const handleNextSection = () => {
     setSelected((pre) => pre + 1);
     if (selected > 5) {
       setSelected(1);
     }
   };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          console.log(entry);
+          if (entry.isIntersecting) {
+            if (entry.target === mainSectionRef.current) {
+              setBackgroundColor(sectionColors[0]);
+              console.log("Main section in view");
+            } else if (entry.target === techSectionRef.current) {
+              setBackgroundColor(sectionColors[1]);
+              console.log("Tech section in view");
+            }
+          }
+        });
+      },
+      { threshold: 0.25, rootMargin: "0px 0px -40% 0px" } // Adjust this for sensitivity in detecting section visibility
+    );
+
+    // Observe both sections
+    const sections = [mainSectionRef, techSectionRef];
+    sections.forEach((section) => {
+      if (section.current) {
+        console.log(`Observing section: ${section.current}`);
+        observer.observe(section.current);
+      }
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        if (section.current) observer.unobserve(section.current);
+      });
+    };
+  }, []);
 
   const ref = useRef<HTMLInputElement>(null);
 
@@ -95,14 +140,25 @@ const Pricing: React.FC = () => {
   console.log(MainSection);
 
   return (
-    <div className="Prizing-section flex min-h-screen flex-col w-full overflow-hidden">
+    <div className="Prizing-section flex min-h-screen flex-col font-hellix w-full overflow-hidden">
       {show && <ContactModal isModalOpen={show} handleToggle={handleToggle} />}
-      <div className=" h-[250px] bg-gradient-to-b from-[#d6f1ff] via-[#ddf3ff] to-[#ecf8ff] w-full flex justify-center items-center ">
+      <Header
+        width={"xl:w-[1136px] "}
+        handleShowForms={handleToggle}
+        background={backgroundColor}
+      />
+      <div
+        ref={mainSectionRef}
+        className=" h-[340px] bg-gradient-to-b from-[#d6f1ff] via-[#ddf3ff] to-[#ecf8ff] w-full flex justify-center items-center "
+      >
         <h1 className=" text-[#24536E] font-bold leading-[52.81px] text-center text-[44px]">
           Pricing
         </h1>
       </div>
-      <div className="flex-grow w-full  mb-10 flex-col justify-evenly items-center h-auto  flex">
+      <section
+        ref={techSectionRef}
+        className="flex-grow w-full  mb-10 flex-col justify-evenly items-center h-min  flex"
+      >
         {selected < 6 ? (
           <div className="lg:h-[428px] flex justify-center sm:justify-center sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 lg:w-[1136px] w-11/12 rounded-[30px] bg-[#ffffff] border-[#E0E0E0] border-[1px] md:px-10 ">
             <div className="flex w-full sm:w-1/2  flex-col px-2 md:px-0 gap-6 my-2">
@@ -154,7 +210,7 @@ const Pricing: React.FC = () => {
                       : " w-[453px] "
                   } ${
                     selected === 5 &&
-                    " justify-center h-[180px] mx-auto  items-center flex pt-1"
+                    " justify-center h-[180px] mx-auto items-center flex pt-1"
                   }`}
                 >
                   {selected <= 2 &&
@@ -191,7 +247,7 @@ const Pricing: React.FC = () => {
                         <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between items-center">
                           <div className=" flex  bg-[#e6eaeb] p-2 md:px-4 rounded gap-1 md:gap-3 items-center">
                             <img src={File} alt="" />
-                            <h1 className="truncate inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
+                            <h1 className="truncate max-w-48  inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
                               {file.name}
                             </h1>
                           </div>
@@ -231,7 +287,7 @@ const Pricing: React.FC = () => {
                     </div>
                   )}
                   {selected == 5 && (
-                    <div className="px-2 md:px-0 w-full flex flex-col gap-5 p-2 md:gap-2">
+                    <div className="px-2 md:px-0 w-full flex flex-col gap-0 p-2 md:gap-2">
                       <InputFieldWrapper
                         label={"Name"}
                         placeholder={"Full Name"}
@@ -261,7 +317,7 @@ const Pricing: React.FC = () => {
                 )}
 
                 <ButtonWrapper
-                  className="bg-[#20B2FF] p-3 lg:p-0 lg:h-[56px]  text-white rounded-lg font-semibold 
+                  className="bg-[#20B2FF] p-3 lg:p-0 lg:h-[56px]  text-white font-hellix rounded-lg font-semibold 
           text-sm lg:text-base h-[46px] w-[120px] lg:w-[139px]  lg:mx-0"
                   label={selected === 4 ? (!file ? "Skip" : "Next") : "Next"}
                   onClick={handleNextSection}
@@ -291,7 +347,7 @@ const Pricing: React.FC = () => {
             </div>
           </div>
         )}
-      </div>
+      </section>
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal />
       </div>

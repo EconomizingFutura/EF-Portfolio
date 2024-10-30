@@ -38,6 +38,10 @@ const BlogsCard: React.FC<CardProps> = ({ card }) => {
   const navigate = useNavigate();
   const handleClick = (a: number) => {
     navigate(`/blog/${a}`);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (

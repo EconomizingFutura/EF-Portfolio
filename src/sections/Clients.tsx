@@ -45,6 +45,7 @@ const Clients: React.FC = () => {
 
   const headers = [
     { id: 1, section: "How We Start" },
+
     { id: 2, section: "How We Work" },
   ];
 
@@ -90,9 +91,8 @@ const Clients: React.FC = () => {
         {activeSection.content.map((section, index) => (
           <div key={index} className="my-2 p-5 lg:h-40 ">
             <div className="flex items-center gap-8">
-              <div className="relative inline-block bg-[#00A4FF] text-white font-bold text-lg p-2 rounded-md">
+              <div className="relative step-button inline-block bg-[#00A4FF] text-white font-bold text-lg p-2 rounded-md">
                 Step {index + 1}
-                <div className="absolute top-0 right-[-17px] w-0 h-0 border-t-[24px] border-b-[24px] border-l-[20px] border-transparent border-l-[#00A4FF]" />
               </div>
               <h2 className="font-bold lg:text-xl text-[18px]">
                 {section.heading}

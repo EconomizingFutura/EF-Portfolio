@@ -9,7 +9,7 @@ interface ProjectItem {
   id: number;
   projectName: string;
   description: string;
-  lottie: object; // Adjust the type as necessary
+  lottie: object;
   projectBanner: string;
   image: string;
 }
@@ -44,29 +44,29 @@ const Projects: React.FC<ProjectsProps> = ({
   return (
     <div
       ref={container}
-      className="h-[540px]  w-[1136px] bg-[#F4FAFF] sticky top-5 flex justify-center items-center"
+      className="h-[540px] md:h-[400px] lg:h-[540px] w-full max-w-[1136px] bg-[#F4FAFF] sticky top-5 flex justify-center items-center p-4 sm:p-6 md:p-8 lg:p-5"
     >
       <motion.div
-        className="flex py-10 justify-between px-10 items-center relative -top-[50%] h-full w-full rounded-[25px] origin-top"
+        className="flex flex-col  md:flex-row py-10 justify-between items-center relative h-full w-full rounded-[25px] origin-top"
         style={{
           scale,
           top: `calc(-5vh + ${i * 25}px)`,
         }}
       >
-        <div className=" w-full lg:w-[433px] sm:h-[300px] flex flex-col items-start mb-6 lg:mb-0">
+        <div className="w-full  md:w-[733px] lg:w-[433px] flex flex-col items-start mb-6 md:mb-0">
           <Lottie
             animationData={project.lottie}
             loop={true}
             className="h-11 w-11"
           />
-          <h1 className="text-[24px] sm:text-[28px] my-3">
+          <h1 className="text-[20px] sm:text-[24px] md:text-[28px] my-3">
             {project.projectName}
           </h1>
-          <p className="text-[#999999] font-medium text-[15px] sm:text-[17px] leading-6 tracking-[0.002em] my-3">
+          <p className="text-[#999999] font-medium text-[14px] sm:text-[15px] md:text-[12px] lg:text-[17px] leading-6 tracking-[0.002em] my-3">
             {project.description}
           </p>
           <button
-            className="hover:underline flex gap-2 font-medium text-[15px] sm:text-[17px] leading-6 tracking-[0.002em] text-[#20B2FF]"
+            className="hover:underline flex gap-2 font-medium text-[14px] sm:text-[15px] md:text-[17px] leading-6 tracking-[0.002em] text-[#20B2FF]"
             onMouseEnter={handleRotate}
             onMouseLeave={handleRotate}
             onClick={() => handleClick(project.id)}
@@ -74,21 +74,19 @@ const Projects: React.FC<ProjectsProps> = ({
             Read More
             <img
               src={ButtonArror}
-              className={
-                rotate
-                  ? "rotate-45 transition-transform duration-75"
-                  : "rotate-90"
-              }
+              className={`transition-transform duration-75 ${
+                rotate ? "rotate-45" : "rotate-90"
+              }`}
               alt=""
             />
           </button>
         </div>
-        <div className="relative w-full flex gap-3 flex-col-reverse lg:w-auto">
+        <div className="relative w-full flex flex-col-reverse gap-3 md:flex-col lg:flex-row lg:gap-0 lg:w-auto">
           <img src={project.projectBanner} alt="" className="w-full" />
           <img
             src={project.image}
             alt=""
-            className="lg:absolute lg:top-0 -left-5 lg:-left-24 lg:h-auto lg:w-[70px] h-[50px] w-[50px]"
+            className="md:absolute lg:top-0 lg:-left-24 h-[40px] sm:h-[50px] lg:h-auto w-[40px] sm:w-[50px] lg:w-[70px]"
           />
         </div>
       </motion.div>

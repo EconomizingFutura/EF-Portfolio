@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import WaveRight from "../assets/WaveRight.svg";
 import WaveLeft from "../assets/WaveLeft.svg";
 import { Technologies } from "../constants/constants";
@@ -6,25 +6,73 @@ import AvailableIcon from "../assets/AvailableIcon.svg";
 import Footer from "../sections/Footer";
 import ContactModal from "../modal/ContactModal";
 import EnqueryModal from "../modal/EnqueryModal";
+import Header from "../sections/Header";
+import wave from "../assets/wave.svg";
+
+// Define the colors for each section
+const sectionColors = ["#BCE7FF", "#F4FAFF"];
 
 const Technology: React.FC = () => {
   const [show, setShow] = useState(false);
   const handleToggle = () => {
     setShow(!show);
   };
+
+  const [backgroundColor, setBackgroundColor] = useState(sectionColors[0]);
+
+  // Refs for each section with type HTMLDivElement | null
+  const mainSectionRef = useRef<HTMLDivElement | null>(null);
+  const techSectionRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (entry.target === mainSectionRef.current) {
+              setBackgroundColor(sectionColors[0]);
+            } else if (entry.target === techSectionRef.current) {
+              setBackgroundColor(sectionColors[1]);
+            }
+          }
+        });
+      },
+      { threshold: 0.25, rootMargin: "0px 0px -40% 0px" } // Adjust this for sensitivity in detecting section visibility
+    );
+
+    // Observe both sections
+    const sections = [mainSectionRef, techSectionRef];
+    sections.forEach((section) => {
+      if (section.current) {
+        console.log(`Observing section: ${section.current}`);
+        observer.observe(section.current);
+      }
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        if (section.current) observer.unobserve(section.current);
+      });
+    };
+  }, []);
+
   return (
-    <div className="overflow-x-hidden">
+    <div className="mt-16 font-hellix sm:mt-0 overflow-x-hidden">
+      <Header
+        width={"xl:w-[1246px] "}
+        handleShowForms={handleToggle}
+        background={backgroundColor}
+      />
       <div
-        className="bg-sky-200 h-48   sm:h-60 md:h-72 lg:h-[248px] flex justify-between items-center"
+        ref={mainSectionRef}
+        className="bg-[#BCE7FF] h-48 w-full sm:h-60 md:h-72 lg:h-[322px] flex justify-between items-center"
         style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(173, 216, 230, 0.2) 0%, rgba(173, 216, 230, 0) 50%, rgba(173, 216, 230, 0.2) 100%),
-            linear-gradient(to right, rgba(135, 206, 235, 0.1) 15%, rgba(135, 206, 235, 0) 50%, rgba(135, 206, 235, 0.1) 100%),
-            linear-gradient(to right, rgba(100, 149, 237, 0.05) 0%, rgba(100, 149, 237, 0) 50%, rgba(100, 149, 237, 0.05) 100%)
-          `,
-          backgroundSize: "100% 30px, 100% 20px, 100% 10px",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "0 20%, 0 40%, 0 60%",
+          backgroundImage: `url(${new URL(wave, window.location.origin)})`,
+          backgroundRepeat: "repeat",
+          backgroundPositionY: 0,
+          backgroundPositionX: "0",
+          backgroundColor: "#C8EBFF",
+          backgroundSize: "50% 50%",
         }}
       >
         <img
@@ -43,15 +91,18 @@ const Technology: React.FC = () => {
           draggable={false}
         />
       </div>
-      <section className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto py-8 sm:py-10 px-4 min-h-screen">
+      <section
+        ref={techSectionRef}
+        className="bg-[#F4FAFF] flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto py-8 sm:py-10 px-4 min-h-screen"
+      >
         {Technologies.map((tech) => (
           <div
             key={tech.id}
-            className={`bg-[#F4FAFF] flex flex-col p-4 sm:p-6 md:p-8 items-center 
+            className={`flex flex-col p-4 sm:p-6 md:p-8 items-center 
               ${
                 tech.id >= 4
-                  ? "h-min  lg:h-[540px]"
-                  : "h-min  lg:h-[540px] justify-between"
+                  ? "h-min lg:h-[540px]"
+                  : "h-min lg:h-[540px] justify-between"
               }  
               w-full sm:w-[calc(50%-1rem)] md:w-[calc(50%-1rem)] lg:w-[394px] rounded-xl sm:rounded-2xl border border-[#9CA4B580] relative`}
           >
@@ -77,7 +128,7 @@ const Technology: React.FC = () => {
           </div>
         ))}
       </section>
-      <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
+      <div className="md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal />
       </div>
       <Footer />

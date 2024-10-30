@@ -17,10 +17,10 @@ import AeniniBanner from "../assets/AeniniBanner.svg";
 import Aenini from "../assets/Aenini.svg";
 import TrevaChat from "../assets/TrevaChat.svg";
 import AeiniImg from "../assets/AeiniImg.svg";
-import mobile_dev from "../assets/mobile_dev.svg";
+import mobiledev from "../assets/mobiledev.svg";
 import web_dev from "../assets/web_dev.svg";
-import devops_dev from "../assets/devops_dev.svg";
-import UI_dev from "../assets/UI_dev.svg";
+import devopsDev from "../assets/devopsDev.svg";
+import UI from "../assets/UI.svg";
 export const navLinks = [
   {
     id: 1,
@@ -183,7 +183,7 @@ export const AreasConstants = [
     info: "We create mobile apps that provide seamless and engaging experiences across all platforms.",
     li1: "Our developers are expertise in developing intuitive, high-performance apps for both iOS and Android.",
     li2: "Focus on user-centric design, ensuring smooth functionality and responsiveness for all devices.",
-    icons: mobile_dev,
+    icons: mobiledev,
   },
   {
     id: "3",
@@ -192,7 +192,7 @@ export const AreasConstants = [
     info: "Our DevOps solutions streamline the development lifecycle, ensuring faster delivery and efficient workflows.",
     li1: "We implement CI/CD pipelines using tools such as Jenkins for continuous integration, Docker for containerization, and Kubernetes for orchestration.",
     li2: "We are expertise in cloud infrastructure management on AWS, Azure, and Google Cloud to support scalable applications.",
-    icons: devops_dev,
+    icons: devopsDev,
   },
   {
     id: "4",
@@ -201,7 +201,7 @@ export const AreasConstants = [
     info: "Our design philosophy revolves around crafting visually stunning and highly intuitive experiences that captivate users and drive engagement.",
     li1: "We employ a user-first design strategy, leveraging tools like Figma, Adobe XD, and Sketch to bring ideas to life with clarity and creativity.",
     li2: "By focusing on accessibility, responsive design, and dynamic prototypes, we create a fluid user experience across all platforms, ensuring every interaction is intuitive and engaging.",
-    icons: UI_dev,
+    icons: UI,
   },
 ];
 
@@ -297,3 +297,13 @@ export const blogs = [
     icon: Blogs1,
   },
 ];
+// src/constants/sectionColors.js
+export const sectionColors = {
+  hero: "#c3e9ff",
+  testimonials: "#E0F3FF",
+  projects: "#FFFFFF",
+  expertise: "#c3e9ff",
+  clients: "#F4F8FB",
+  blogs: "#FFFFFF",
+  faq: "#F4F8FB",
+};
