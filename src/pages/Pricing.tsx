@@ -10,8 +10,8 @@ import Lottie from "lottie-react";
 import ContactModal from "../modal/ContactModal";
 import EnqueryModal from "../modal/EnqueryModal";
 import Header from "../sections/Header";
-
-const sectionColors = ["#BCE7FF", "#ffffff"];
+import projectHeader from "../assets/projectsHeader.svg";
+const sectionColors = ["#e3f5ff", "#FFFFFF"];
 
 const Pricing: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -52,10 +52,9 @@ const Pricing: React.FC = () => {
           }
         });
       },
-      { threshold: 0.25, rootMargin: "0px 0px -40% 0px" } // Adjust this for sensitivity in detecting section visibility
+      { threshold: 0.25, rootMargin: "0px 0px -40% 0px" }
     );
 
-    // Observe both sections
     const sections = [mainSectionRef, techSectionRef];
     sections.forEach((section) => {
       if (section.current) {
@@ -147,9 +146,14 @@ const Pricing: React.FC = () => {
         handleShowForms={handleToggle}
         background={backgroundColor}
       />
+
+      <div
+        style={{ backgroundImage: `url(${projectHeader})` }}
+        className=" h-96 w-full absolute top-0 left-0 opacity-80"
+      ></div>
       <div
         ref={mainSectionRef}
-        className=" h-[340px] bg-gradient-to-b from-[#d6f1ff] via-[#ddf3ff] to-[#ecf8ff] w-full flex justify-center items-center "
+        className=" h-[340px] w-full flex justify-center items-center "
       >
         <h1 className=" text-[#24536E] font-bold leading-[52.81px] text-center text-[44px]">
           Pricing
@@ -331,7 +335,7 @@ const Pricing: React.FC = () => {
               <Lottie
                 animationData={Proppers}
                 loop={true}
-                className=" lg:w-72 absolute h-56 w-56 left-0"
+                className="lg:h-72 lg:w-72 h-56 w-56 absolute left-0 rounded-full"
               />
               <p className=" text-secondary text-center font-bold lg:text-[40px] text-[30px]  leading-[48.01px] -tracking-[0.02em]">
                 <span className=" text-primary">

@@ -32,29 +32,69 @@
   border-bottom: 10px solid transparent;
   border-left: 10px solid rgb(231, 221, 221);
 } */
-.step-button {
-  background-color: #00a4ff; /* Light blue color */
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 15px 30px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  z-index: 100;
+
+.with-wave-background {
+  background-image: url("../assets/wave.svg");
+  background-size: 100% auto;
 }
 
-.step-button::before {
+.progress-line {
+  transition: height 0.1s ease-out;
+  will-change: height;
+}
+
+/* Optional: Add these styles for smoother circle transitions */
+.rounded-full {
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Optional: Add a glow effect when the line passes through */
+.progress-line::after {
   content: "";
-  z-index: -1;
   position: absolute;
-  width: 31px;
-  height: 31px;
-  background-color: #00a4ff;
-  right: -11.2px;
-  top: 50%;
-  transform: translateY(-49%) rotate(45deg);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(4px);
+  opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+  .with-wave-background {
+    background-image: url("../assets/wave.svg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+  }
+}
+
+.step-button {
+  background-image: url("data:image/svg+xml,%3Csvg width='300' height='100' viewBox='0 0 300 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0H260L290 30L290 40L260 70L260 100H20C8.954 100 0 91.046 0 80V20C0 8.954 8.954 0 20 0Z' fill='%2300A4FF'/%3E%3Cpath d='M260 15L275 35L260 55' stroke='white' stroke-width='8' fill='none'/%3E%3Cpath d='M245 15L260 35L245 55' stroke='white' stroke-width='8' fill='none'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 20px 60px;
+  border: none;
+  min-width: 200px;
+  height: 80px;
+  font-size: 24px;
+  font-family: "Hellix", sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.step-button::after {
+  content: "";
+  position: absolute;
+  right: -15px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 15px solid #00a4ff;
 }
 
 @font-face {
@@ -247,4 +287,52 @@
     url("Hellix-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
+}
+
+/* Progress line styles */
+.progress-line {
+  will-change: height;
+  transition: height 0.1s ease-out;
+}
+
+/* Optional: Add glow effect */
+.progress-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(4px);
+  opacity: 0.5;
+}
+
+/* Ensure list items have bullets */
+.list-item {
+  list-style-type: disc;
+  margin-left: 1.5em;
+}
+
+/* Optional: Add smooth transition for circle connectors */
+.rounded-full {
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Optional: Add hover effect for circles */
+.rounded-full:hover {
+  transform: scale(1.1);
+  border-color: #3fb950;
+}
+
+/* Ensure images maintain aspect ratio */
+img {
+  object-fit: contain;
+}
+
+/* Responsive container */
+@media (max-width: 768px) {
+  .progress-line {
+    transition: height 0.05s ease-out;
+  }
 }

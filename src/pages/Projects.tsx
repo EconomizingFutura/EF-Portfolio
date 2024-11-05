@@ -5,11 +5,12 @@ import ContactModal from "../modal/ContactModal";
 import { useNavigate, useParams } from "react-router";
 import { projectsInfo } from "../constants/constants";
 import ButtonArror from "../assets/ButtonArror.svg";
+import projectHeader from "../assets/projectsHeader.svg";
 
 import Lottie from "lottie-react";
 import Header from "../sections/Header";
 
-const sectionColors = ["#e3f5ff", "#F4FAFF"];
+const sectionColors = ["#e3f5ff", "#FFFFFF"];
 
 const Projects: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -21,34 +22,33 @@ const Projects: React.FC = () => {
 
   const [backgroundColor, setBackgroundColor] = useState(sectionColors[0]);
 
-  // Refs for each section with type HTMLDivElement | null
   const mainSectionRef = useRef<HTMLDivElement | null>(null);
   const filterSectionRef = useRef<HTMLDivElement | null>(null);
 
   console.log(backgroundColor);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (entry.target === mainSectionRef.current) {
-              setBackgroundColor(sectionColors[0]);
-            } else if (entry.target === filterSectionRef.current) {
-              setBackgroundColor(sectionColors[1]);
-            }
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
+    const handleScroll = () => {
+      const mainSectionTop =
+        mainSectionRef.current?.getBoundingClientRect().top;
+      const filterSectionTop =
+        filterSectionRef.current?.getBoundingClientRect().top;
 
-    // Observe both sections
-    const sections = [mainSectionRef.current, filterSectionRef.current];
-    sections.forEach((section) => section && observer.observe(section));
+      console.log(mainSectionTop, filterSectionTop);
+      if (mainSectionTop && filterSectionTop) {
+        if (mainSectionTop < -120) {
+          setBackgroundColor(sectionColors[0]);
+        }
+        if (filterSectionTop < -90) {
+          setBackgroundColor(sectionColors[1]);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      sections.forEach((section) => section && observer.unobserve(section));
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -80,9 +80,8 @@ const Projects: React.FC = () => {
     );
   };
 
-  console.log(projectDetails);
   return (
-    <div className=" font-hellix min-h-screen justify-center  w-full flex flex-col overflow-x-hidden">
+    <div className=" font-hellix min-h-screen justify-center relative  w-full flex flex-col overflow-x-hidden">
       <div ref={mainSectionRef}>
         <Header
           width={"xl:w-[1107px]"}
@@ -98,8 +97,22 @@ const Projects: React.FC = () => {
       )}
       <div
         ref={filterSectionRef}
-        className=" flex-grow py-20 w-11/12 h-auto justify-center items-center mx-auto my-10 px-2 xl:w-[1107px]"
+        className=" flex-grow pt-24 w-11/12 h-auto justify-center items-center mx-auto my-10 px-2 xl:w-[1107px]"
       >
+        <div
+          style={{ backgroundImage: `url(${projectHeader})` }}
+          className=" h-60 w-full absolute top-0 left-0 opacity-80"
+        ></div>
+
+        <div
+          style={{ backgroundImage: `url(${projectHeader})` }}
+          className=" md:h-[400px] md:w-[400px] h-[300px] w-[300px] rounded-full absolute blur-xl -translate-x-2/3 md:top-1/2  left-0 rotate-90 opacity-80"
+        ></div>
+        <div
+          style={{ backgroundImage: `url(${projectHeader})` }}
+          className=" h-[400px] w-[400px] rounded-full absolute blur-xl translate-x-2/3  top-1/4 right-0 -rotate-90 opacity-80"
+        ></div>
+
         <div>
           <div className=" border-l-8 border-l-primary ps-6">
             <h1 className=" text-[#24536E] font-bold leading-[40px] xl:leading-[52.81px] text-[24px] xl:text-[44px]">

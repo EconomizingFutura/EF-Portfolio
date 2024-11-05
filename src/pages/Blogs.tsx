@@ -50,10 +50,9 @@ const Blogs: React.FC = () => {
           }
         });
       },
-      { threshold: 0.25, rootMargin: "0px 0px -40% 0px" } // Adjust this for sensitivity in detecting section visibility
+      { threshold: 0.25, rootMargin: "0px 0px -40% 0px" }
     );
 
-    // Observe both sections
     const sections = [mainSectionRef, techSectionRef];
     sections.forEach((section) => {
       if (section.current) {
@@ -107,9 +106,7 @@ const Blogs: React.FC = () => {
         />
       </div>
 
-      {/* Filter Section (Separate Div for Observer) */}
       <div className="px-8 py-4 w-full max-w-[1140px] bg-[#ffffff] md:flex items-center justify-between mx-auto rounded-2xl mt-8 hidden ">
-        {/* Filter Section */}
         <div className="flex items-center gap-4 text-[#111111] text-[18px] font-medium">
           <span>Filter By :</span>
           <div className="flex gap-5">
@@ -129,14 +126,14 @@ const Blogs: React.FC = () => {
           </div>
         </div>
 
-        {/* Search Bar */}
-        <div className="flex items-center justify-between border-[1px] border-[#9CA4B5] rounded-[4px] h-[44px] w-[223px] text-[16px] placeholder:text-[#999999]">
+        <div className="flex items-center justify-between border-[1px] border-[#9CA4B5] rounded-[4px] h-[44px] w-[223px] max-w-[223px] text-[16px] placeholder:text-[#999999]">
           <img src={searchIcon} alt="search" className="px-2" />
           <input
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Search blogs"
-            className="focus:outline-none"
+            placeholder="Search"
+            className="focus:outline-none w-full pe-2"
+            maxLength={20}
           />
         </div>
       </div>

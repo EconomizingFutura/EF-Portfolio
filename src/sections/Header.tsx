@@ -4,6 +4,8 @@ import { navLinks } from "../constants/constants";
 import { Link, useNavigate } from "react-router-dom";
 import ButtonWrapper from "../components/ButtonWrapper";
 import { Menu, X } from "lucide-react";
+import wave from "../assets/wave.svg";
+
 interface propsTypes {
   background: string;
   width: string;
@@ -20,15 +22,35 @@ const Header: React.FC<propsTypes> = ({
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
-  console.log(background);
+
+  const headerStyle = {
+    backgroundColor: background,
+    backgroundRepeat: "no-repeat",
+
+    ...(background !== "#FFFFFF" &&
+      background !== "#dcf3ff" &&
+      background !== "#F4FAFF" &&
+      background !== "#F4F8FB" &&
+      background !== "#e3f5ff" &&
+      background !== "#E0F3FF" && {
+        backgroundImage: `url(${new URL(wave, window.location.origin)})`,
+        backgroundSize: "100% auto",
+        // backgroundPosition: "center",
+        "@media (min-width: 768px)": {
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100% auto",
+          backgroundPosition: "center",
+        },
+      }),
+  };
   return (
     <div
-      style={{
-        // backgroundImage: `url(${new URL(wave, window.location.origin)})`,
-        backgroundColor: background,
-        // opacity: 0.5,
-      }}
-      className={` ${background}  py-2 px-5 fixed z-[100] top-0 xl:px-0 w-full flex md:items-center md:justify-center font-hellix h-[74px] `}
+      style={headerStyle}
+      className={` ${background} ${
+        background === "#FFFFFF" || background == "#F4F8FB"
+          ? "dark:shadow-xl shadow-slate-500"
+          : ""
+      }  py-2 px-5 fixed z-[100] top-0 xl:px-0 w-full flex md:items-center md:justify-center font-hellix h-[74px] `}
     >
       <div className={`${width} w-full flex justify-between items-center`}>
         <img

@@ -299,10 +299,10 @@ export const blogs = [
 ];
 // src/constants/sectionColors.js
 export const sectionColors = {
-  hero: "#c3e9ff",
+  hero: "#aee2ff",
   testimonials: "#E0F3FF",
   projects: "#FFFFFF",
-  expertise: "#c3e9ff",
+  expertise: "#aee2ff",
   clients: "#F4F8FB",
   blogs: "#FFFFFF",
   faq: "#F4F8FB",

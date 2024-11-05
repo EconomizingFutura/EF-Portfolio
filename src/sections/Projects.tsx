@@ -4,7 +4,6 @@ import Lottie from "lottie-react";
 import { useNavigate } from "react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
 import ButtonArror from "../assets/ButtonArror.svg";
-
 interface ProjectItem {
   id: number;
   projectName: string;
@@ -47,7 +46,7 @@ const Projects: React.FC<ProjectsProps> = ({
       className="h-[540px] md:h-[400px] lg:h-[540px] w-full max-w-[1136px] bg-[#F4FAFF] sticky top-5 flex justify-center items-center p-4 sm:p-6 md:p-8 lg:p-5"
     >
       <motion.div
-        className="flex flex-col  md:flex-row py-10 justify-between items-center relative h-full w-full rounded-[25px] origin-top"
+        className="flex flex-col lg:gap-5  md:flex-row py-10 justify-between items-center relative h-full w-full rounded-[25px] origin-top "
         style={{
           scale,
           top: `calc(-5vh + ${i * 25}px)`,

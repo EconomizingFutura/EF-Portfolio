@@ -7,8 +7,9 @@ import Star from "../assets/Star.svg";
 import EnqueryModal from "../modal/EnqueryModal";
 import BlogsCard from "../components/BlogsCard";
 import Header from "../sections/Header";
+import projectHeader from "../assets/projectsHeader.svg";
 
-const sectionColors = ["#e3f5ff", "#ffffff"];
+const sectionColors = ["#e3f5ff", "#FFFFFF"];
 
 const Blog: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -73,13 +74,17 @@ const Blog: React.FC = () => {
           background={backgroundColor}
         />
       </div>
+      <div
+        style={{ backgroundImage: `url(${projectHeader})` }}
+        className=" h-60 w-full absolute top-0 left-0 opacity-80"
+      ></div>
 
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal />
       </div>
       <section
         ref={techSectionRef}
-        className=" h-auto flex-grow flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto xl:w-[1107px] mt-16  py-8 sm:py-10 w-11/12"
+        className=" h-auto flex-grow flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto xl:w-[1107px]  mt-16  py-8 sm:py-10 w-11/12"
       >
         <div className="flex flex-col lg:flex-row justify-between w-full lg:h-[412px] gap-4">
           {/* Blog Details */}
@@ -109,7 +114,7 @@ const Blog: React.FC = () => {
           </div>
 
           {/* Blog Image */}
-          <div className="h-[180px]  sm:h-auto lg:h-[412px] w-full lg:w-[532px] ">
+          <div className="h-[180px]  sm:h-auto lg:h-[412px] w-full lg:w-[532px] z-10">
             <img
               src={content.icon}
               alt=""

@@ -18,10 +18,10 @@ import BlogsCard from "../components/BlogsCard";
 import { useNavigate } from "react-router";
 import { blogs, projectsInfo } from "../constants/constants";
 import EnqueryModal from "../modal/EnqueryModal";
-import { useScroll } from "framer-motion";
+// import { useScroll } from "framer-motion";
 import Header from "../sections/Header";
 import { sectionColors } from "../constants/constants";
-
+// import wave from "../assets/wave.svg";
 interface ProjectItem {
   id: number;
   projectName: string;
@@ -105,17 +105,17 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start start", "end end"],
-  });
+  // const { scrollYProgress } = useScroll({
+  //   target: container,
+  //   offset: ["start start", "end end"],
+  // });
   const navigate = useNavigate();
   return (
     <div className=" mt-16 overflow-x-clip flex flex-col justify-between ">
       {show && (
         <ContactModal isModalOpen={show} handleToggle={handleToogleForms} />
       )}
-      <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
+      <div className="  md:right-10 md:bottom-5 right-5 bottom-5 z-40 fixed">
         <EnqueryModal />
       </div>
       <Header
@@ -126,15 +126,10 @@ const Home: React.FC = () => {
       {/* ceedff #DAF1FF */}
       <section
         ref={heroSection}
-        className="flex lg:flex-row flex-col bg-[#c3e9ff] backdrop-blur-304 bg-opacity-50 lg:justify-end items-center px-4 lg:pe-0 py-8 lg:py-12"
-        // style={{
-        //   backgroundImage: `url(${new URL(wave, window.location.origin)})`,
-        //   backgroundRepeat: "repeat",
-        //   backgroundPositionY: 0,
-        //   backgroundPositionX: "0",
-        //   // backgroundColor: "#DAF1FF",
-        //   backgroundSize: "50% 30%",
-        // }}
+        className="flex lg:flex-row flex-col bg-[#aee2ff] backdrop-blur-304 bg-opacity-50 lg:justify-end items-center px-4 lg:pe-0 py-8 lg:py-12"
+        style={{
+          background: "linear-gradient(180deg, #AEE2FF 0%, #E0F3FF 100%)",
+        }}
       >
         <div className="w-full font-hellix lg:w-[520px] flex flex-col h-auto lg:h-[450px] gap-6 lg:gap-9 justify-between">
           <h1 className="text-[#24536E] lg:leading-[52.81px] font-bold text-3xl lg:text-[44px] leading-[38.5px] text-start lg:text-left ">
@@ -210,7 +205,6 @@ const Home: React.FC = () => {
                 key={a.id}
                 project={a}
                 i={i}
-                progress={scrollYProgress}
                 range={[i * 0.25, 1]}
                 targetScale={targetScale}
               />
@@ -221,7 +215,7 @@ const Home: React.FC = () => {
       {/* Area of expertise */}
       <section
         ref={expertiseSection}
-        className="h-min py-8 lg:py-0 lg:h-[2033px] flex flex-col justify-center sm:mt-40 md:mt-0 items-center bg-[#032435] w-full font-hellix  lg:gap-20"
+        className="h-min py-8 lg:h-[2233px] flex flex-col justify-center  sm:mt-40 md:mt-0 items-center bg-[#032435] w-full font-hellix  lg:gap-20"
       >
         <div className="relative my-10">
           <h1 className="font-bold text-[30px] md:text-[38px] leading-[45.61px] text-[#ffffff] text-center">

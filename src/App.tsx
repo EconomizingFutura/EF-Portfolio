@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { AppRouter } from "./router";
-import ScrollProgressLine from "../src/ScrollProgressLine";
 import Lenis from "@studio-freight/lenis";
 import "./style.css";
 function App() {
