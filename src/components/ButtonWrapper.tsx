@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/Header.css"
 interface PropsTypes {
   className: string;
   label: string;

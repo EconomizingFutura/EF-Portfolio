@@ -19,6 +19,7 @@ import { useNavigate } from "react-router";
 import { blogs, projectsInfo } from "../constants/constants";
 import EnqueryModal from "../modal/EnqueryModal";
 import { useScroll } from "framer-motion";
+import {Header} from "../components/Header";
 
 interface ProjectItem {
   id: number;
@@ -49,6 +50,7 @@ const Home: React.FC = () => {
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal />
       </div>
+       <Header show_props = {handleToogleForms} />
       {/* ceedff */}
       <section className="flex  bg-[#ceedff] backdrop-blur-304 bg-opacity-50 justify-end items-center px-4 lg:pe-0 py-8 lg:py-12">
         <div className="w-full lg:w-[520px] flex flex-col h-auto lg:h-[378px] gap-6 lg:gap-9 justify-between">

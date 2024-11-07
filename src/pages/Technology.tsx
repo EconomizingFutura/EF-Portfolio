@@ -6,6 +6,7 @@ import AvailableIcon from "../assets/AvailableIcon.svg";
 import Footer from "../sections/Footer";
 import ContactModal from "../modal/ContactModal";
 import EnqueryModal from "../modal/EnqueryModal";
+import { Header } from "../components/Header";
 
 const Technology: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -14,6 +15,7 @@ const Technology: React.FC = () => {
   };
   return (
     <div className="overflow-x-hidden">
+      <Header show_props = {handleToggle}/>
       <div
         className="bg-sky-200 h-48   sm:h-60 md:h-72 lg:h-[248px] flex justify-between items-center"
         style={{
@@ -80,6 +82,7 @@ const Technology: React.FC = () => {
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal />
       </div>
+      
       <Footer />
       {show && <ContactModal isModalOpen={show} handleToggle={handleToggle} />}
     </div>

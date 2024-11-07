@@ -9,6 +9,7 @@ import Proppers from "../assets/Proppers.json";
 import Lottie from "lottie-react";
 import ContactModal from "../modal/ContactModal";
 import EnqueryModal from "../modal/EnqueryModal";
+import { Header } from "../components/Header";
 const Pricing: React.FC = () => {
   const [show, setShow] = useState(false);
   const handleToggle = () => {
@@ -97,6 +98,7 @@ const Pricing: React.FC = () => {
   return (
     <div className="Prizing-section flex min-h-screen flex-col w-full overflow-hidden">
       {show && <ContactModal isModalOpen={show} handleToggle={handleToggle} />}
+      <Header show_props={handleToggle}/>
       <div className=" h-[250px] bg-gradient-to-b from-[#d6f1ff] via-[#ddf3ff] to-[#ecf8ff] w-full flex justify-center items-center ">
         <h1 className=" text-[#24536E] font-bold leading-[52.81px] text-center text-[44px]">
           Pricing
@@ -295,6 +297,7 @@ const Pricing: React.FC = () => {
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal />
       </div>
+      
       <Footer />
     </div>
   );

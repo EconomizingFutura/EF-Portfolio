@@ -7,6 +7,7 @@ import BlogsCard from "../components/BlogsCard";
 import searchIcon from "../assets/search.svg";
 import { blogs } from "../constants/constants";
 import EnqueryModal from "../modal/EnqueryModal";
+import { Header } from "../components/Header";
 const Blogs: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [activeFilter, setActiveFilter] = useState<string>("All");
@@ -24,6 +25,7 @@ const Blogs: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Header show_props={handleToggle}/>
       {/* Content Section */}
       <div className="flex-grow">
         {/* Hero Section */}
@@ -104,6 +106,7 @@ const Blogs: React.FC = () => {
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal />
       </div>
+      
       {showModal && (
         <ContactModal isModalOpen={showModal} handleToggle={handleToggle} />
       )}
