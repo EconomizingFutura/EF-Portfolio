@@ -33,12 +33,12 @@ const ContactModal: React.FC<propsTypes> = ({ isModalOpen, handleToggle }) => {
         className="cursor-pointer "
         alt=""
       />
-      <div className="bg-white rounded-3xl px-5 lg:p-6 gap-5 flex flex-col justify-start items-start md:h-[557px] h-4/5 w-11/12 max-w-lg lg:max-w-2xl mx-4 lg:mx-0">
-        <div className="w-full ">
-          <h1 className="text-center md:text-start md:py-2.5 text-2xl lg:text-[32px] leading-[38.41px] text-[#24536E] font-bold">
+      <div className="bg-white rounded-3xl px-5 py-2 md:py-0 lg:p-6 gap-5 flex flex-col justify-start items-start md:h-[557px] h-4/5 w-11/12 max-w-lg lg:max-w-2xl ">
+        <div className="w-full gap-6 flex flex-col md:h-[81px] md:py-1">
+          <h1 className="text-center md:text-start text-2xl lg:text-[32px] md:leading-[38.41px] text-[#24536E] font-bold">
             Contact Us
           </h1>
-          <p className="font-medium md:py-2.5 text-xs lg:text-base leading-[19.2px] text-[#031924]">
+          <p className="font-medium text-xs lg:text-base leading-[19.2px] text-[#031924]">
             Please provide your email address, and our team will get in touch
             with you.
           </p>

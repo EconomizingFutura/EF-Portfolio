@@ -12,13 +12,6 @@ const AreaSection: React.FC = () => {
     "4": "text-[#A465F1]",
   };
 
-  // const customBlur = {
-  //   "1": "bg-customGreen",
-  //   "2": "bg-customPink",
-  //   "3": "bg-customBlue",
-  //   "4": "bg-customPurple",
-  // };
-
   const glowMap = {
     "1": "shadow-[0_0_40px_15px_rgba(63,185,80,0.45)]",
     "2": "shadow-[0_0_40px_15px_rgba(247,120,186,0.45)]",
@@ -54,6 +47,21 @@ const AreaSection: React.FC = () => {
         ) as HTMLElement;
         if (progressLine) {
           progressLine.style.height = `${progress * 100}%`;
+
+          // Change gradient color based on scroll progress
+          if (progress < 0.33) {
+            // Initial: green to pink
+            progressLine.style.backgroundImage =
+              "linear-gradient(to bottom, #3FB950, #F778BA)";
+          } else if (progress < 0.66) {
+            // Midway: pink to blue
+            progressLine.style.backgroundImage =
+              "linear-gradient(to bottom, #F778BA, #5a8be8)";
+          } else {
+            // Final: pink to violet
+            progressLine.style.backgroundImage =
+              "linear-gradient(to bottom, #F778BA, #A465F1)";
+          }
         }
 
         const sections = element.querySelectorAll("[data-section-id]");
@@ -97,8 +105,11 @@ const AreaSection: React.FC = () => {
         }}
       >
         <div
-          className="progress-line absolute top-0 left-0 w-full bg-gradient-to-b from-[#3FB950] via-[#F778BA] to-[#A465F1] transition-height duration-100 "
-          style={{ height: "0%" }}
+          className="progress-line absolute top-0 left-0 w-full transition-height duration-100"
+          style={{
+            height: "0%",
+            backgroundImage: "linear-gradient(to bottom, #3FB950, #F778BA)",
+          }}
         />
       </div>
 

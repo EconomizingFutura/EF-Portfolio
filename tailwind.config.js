@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  purge: ["./src/**/*.{js,jsx,ts,tsx,html}"], // Adjust as needed
   theme: {
     extend: {
       boxShadow: {
@@ -20,8 +20,8 @@ export default {
         client: "44px",
       },
       fontFamily: {
-        sans: ["Poppins", "sans-serif"],
-        hellix: ["Hellix", "sans-serif"],
+        // sans: ["Poppins", "sans-serif"],
+        hellix: ["Hellix"],
       },
     },
   },

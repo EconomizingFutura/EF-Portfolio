@@ -97,20 +97,20 @@ const Projects: React.FC = () => {
       )}
       <div
         ref={filterSectionRef}
-        className=" flex-grow pt-24 w-11/12 h-auto justify-center items-center mx-auto my-10 px-2 xl:w-[1107px]"
+        className=" flex-grow pt-24  h-auto justify-center items-center mx-auto my-10  xl:w-[1107px]"
       >
         <div
           style={{ backgroundImage: `url(${projectHeader})` }}
-          className=" h-60 w-full absolute top-0 left-0 opacity-80"
+          className=" h-32 md:h-60 w-full rounded-[50%] blur-lg bg-opacity-65  absolute top-0 left-0 opacity-80"
         ></div>
 
         <div
           style={{ backgroundImage: `url(${projectHeader})` }}
-          className=" md:h-[400px] md:w-[400px] h-[300px] w-[300px] rounded-full absolute blur-xl -translate-x-2/3 md:top-1/2  left-0 rotate-90 opacity-80"
+          className=" md:h-[400px] md:w-[400px] h-[200px] w-32 rounded-full absolute blur-xl -translate-x-2/3 md:top-1/2 hidden md:block pointer-events-none left-0 rotate-90 opacity-80"
         ></div>
         <div
           style={{ backgroundImage: `url(${projectHeader})` }}
-          className=" h-[400px] w-[400px] rounded-full absolute blur-xl translate-x-2/3  top-1/4 right-0 -rotate-90 opacity-80"
+          className=" h-[350px] w-[350px] rounded-full absolute blur-xl translate-x-2/3 pointer-events-none top-1/4 right-0 -rotate-90 opacity-80"
         ></div>
 
         <div>
@@ -144,7 +144,7 @@ const Projects: React.FC = () => {
             detailsContent={projectDetails.services}
           />
         </div>
-        <div className="h-min md:h-[400px] lg:h-[540px] w-full max-w-[1136px] bg-[#F4FAFF]  flex justify-center items-center p-0 sm:p-6 md:p-8 lg:p-5">
+        <div className="h-min md:h-[400px] lg:h-[540px] w-full max-w-[1136px] bg-red-600 bg-[#F4FAFF]  flex justify-center items-center p-0 sm:p-6 md:p-8 lg:p-5">
           <div className="flex flex-col  md:flex-row py-5 justify-between items-center relative h-full w-full rounded-[25px] origin-top">
             <div className="w-full  md:w-[733px] lg:w-[433px] flex flex-col items-start mb-6 md:mb-0">
               <Lottie

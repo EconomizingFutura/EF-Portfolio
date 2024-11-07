@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import arrows from "../assets/arrows.svg";
-
+import "../style.css";
 interface ContentItem {
   heading: string;
   info: string;
@@ -87,7 +87,7 @@ const ToggleSection = React.memo(
     toggle: number;
     setToggle: (index: number) => void;
   }) => (
-    <div className="flex flex-col w-full px-3.5 max-w-sm lg:my-8 font-hellix">
+    <div className="flex flex-col  w-full px-3.5 max-w-sm lg:my-8 font-hellix">
       {HEADERS.map((header, index) => (
         <React.Fragment key={header.id}>
           <div

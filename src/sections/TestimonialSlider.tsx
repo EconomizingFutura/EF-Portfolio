@@ -121,16 +121,16 @@ const TestimonialSlider: React.FC = () => {
           onClick={prevTestimonial}
           aria-label="Previous testimonial"
         >
-          <ChevronLeft className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+          <ChevronLeft className="h-5 w-5 " />
         </button>
         <button
-          className="h-10 w-10 bg-white/30 rounded-full border border-[#032435]/20
-          transition-all duration-300 hover:bg-white/50 hover:shadow-md
+          className="h-10 w-10 rounded-full border
+          
           flex justify-center items-center group"
           onClick={nextTestimonial}
           aria-label="Next testimonial"
         >
-          <ChevronRight className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+          <ChevronRight className="h-5 w-5  " />
         </button>
       </div>
     </div>

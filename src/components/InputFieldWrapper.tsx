@@ -18,7 +18,10 @@ const InputFieldWrapper: React.FC<propsTypes> = ({
 }) => {
   return (
     <div className="flex flex-col w-full gap-2 ">
-      <label className="text-[#031924] text-base leading-5" htmlFor={label}>
+      <label
+        className="text-[#031924] lg:text-base text-sm leading-5"
+        htmlFor={label}
+      >
         {label}
       </label>
       {label === "Comments" ? (
@@ -29,13 +32,13 @@ const InputFieldWrapper: React.FC<propsTypes> = ({
           placeholder={placeholder}
           onChange={(e) => onChange(e.target.value)}
           draggable={false}
-          className={`border-[#DDE4EE] focus:outline-none border resize-none  placeholder:text-[#F9FBFC] rounded-lg p-3 `}
+          className={`border-[#DDE4EE] bg-[#F9FBFC] focus:outline-none border resize-none  placeholder:text-[#F9FBFC] rounded-lg p-3 `}
         />
       ) : (
         <input
-          className={`${className} border-[#DDE4EE] border
+          className={`${className} border-[#DDE4EE]  bg-[#F9FBFC] border
                placeholder:text-[#999999] text-[#999999]"
-          }  focus:outline-none rounded-lg p-3 h-[48px]`}
+          }  focus:outline-none rounded-lg p-3 md:h-[48px] h-[42px]`}
           placeholder={placeholder}
           type={label === "Email" ? "email" : "text"}
           name={label}

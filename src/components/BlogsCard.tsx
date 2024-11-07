@@ -51,9 +51,9 @@ const BlogsCard: React.FC<CardProps> = ({ card }) => {
         className="h-[199px] object-cover rounded-[10px] w-full md:w-[353px]"
         alt=""
       />
-      <div className="bg-[#F4F8FB] absolute bottom-0 flex flex-col w-11/12 sm:w-[337px] p-2 justify-evenly gap-[6px] rounded-[10px] h-[240px]">
-        <div className="w-full h-full flex flex-col justify-between mx-auto ">
-          <div className="h-[16px] gap-2 flex">
+      <div className="bg-[#F4F8FB] py-4 px-3 absolute bottom-0 flex flex-col w-11/12 sm:w-[337px] p-2 justify-evenly gap-[6px] rounded-[10px] h-[240px]">
+        <div className="w-full h-[190px] flex flex-col gap-2 mx-auto ">
+          <div className="h-[16px] gap-3 flex ">
             {blogsInfo.map((a) => (
               <div
                 key={a.id}
@@ -68,12 +68,14 @@ const BlogsCard: React.FC<CardProps> = ({ card }) => {
               </div>
             ))}
           </div>
-          <h1 className="text-[#111111] font-bold text-[18px] md:text-[20px] leading-6">
-            {card.heading}
-          </h1>
-          <h1 className="text-[#999999] font-medium text-[14px] md:text-[16px] leading-5">
-            {card.sub}
-          </h1>
+          <div className=" h-[145px] w-full  flex flex-col gap-4">
+            <h1 className="text-[#111111] font-bold text-[18px] md:text-[20px] leading-6">
+              {card.heading}
+            </h1>
+            <h1 className="text-[#999999] font-medium text-[14px] md:text-[16px] leading-5">
+              {card.sub}
+            </h1>
+          </div>
         </div>
         <button
           className="ml-auto text-primary font-medium text-sm float-end leading-6 flex justify-between w-[93px]"

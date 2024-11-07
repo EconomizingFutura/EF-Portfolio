@@ -39,10 +39,9 @@ const Blog: React.FC = () => {
           }
         });
       },
-      { threshold: 0.3 } // Adjust this for sensitivity in detecting section visibility
+      { threshold: 0.1 }
     );
 
-    // Observe both sections
     const sections = [mainSectionRef, techSectionRef];
     sections.forEach((section) => {
       if (section.current) {
@@ -56,7 +55,7 @@ const Blog: React.FC = () => {
         if (section.current) observer.unobserve(section.current);
       });
     };
-  }, [backgroundColor]);
+  }, []);
 
   const param = useParams<{ id?: string }>();
   console.log(blogs);
@@ -66,26 +65,45 @@ const Blog: React.FC = () => {
 
   const content = blogs.filter((a) => a.id == Number(param.id))[0];
   return (
-    <div className=" font-hellix min-h-screen flex flex-col overflow-x-hidden">
-      <div className=" bg-red-500 h-[32px] w-full" ref={mainSectionRef}>
+    <div className=" font-hellix min-h-screen flex flex-col overflow-x-hidden relative">
+      {/* <div
+        style={{ backgroundImage: `url(${projectHeader})` }}
+        className="absolute bg-red-300 left-0 top-1/3"
+      ></div> */}
+      <div className=" h-[32px] w-full" ref={mainSectionRef}>
         <Header
           width={"xl:w-[1107px]"}
           handleShowForms={handleToggle}
           background={backgroundColor}
         />
       </div>
+      {/* top */}
       <div
         style={{ backgroundImage: `url(${projectHeader})` }}
-        className=" h-60 w-full absolute top-0 left-0 opacity-80"
+        className=" md:h-60 w-full rounded-b-[50%] absolute top-0  opacity-80"
       ></div>
-
+      {/* right */}
+      <div
+        style={{
+          backgroundImage: `url(${projectHeader})`,
+          backdropFilter: "blur(304px)",
+          opacity: "20%",
+          height: "150px",
+          width: "400px",
+          borderRadius: "160px 160px 0 0",
+          left: "-200px",
+        }}
+        className="rotate-90 absolute top-[30%]"
+      ></div>
+      {/* enquery */}
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal />
       </div>
       <section
         ref={techSectionRef}
-        className=" h-auto flex-grow flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto xl:w-[1107px]  mt-16  py-8 sm:py-10 w-11/12"
+        className=" h-auto flex-grow flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto xl:w-[1107px] overflow-x-hidden  mt-16  py-8 sm:py-10 w-11/12 relative"
       >
+        {" "}
         <div className="flex flex-col lg:flex-row justify-between w-full lg:h-[412px] gap-4">
           {/* Blog Details */}
           <div className="flex flex-col h-auto lg:h-full w-full lg:w-[532px] gap-4">
@@ -96,10 +114,8 @@ const Blog: React.FC = () => {
                 {content.min}
               </p>
             </div>
-            <h1 className="md:text-[44px] text-[24px] text-[#24536E] leading-[28.8px] md:leading-[52.81px] font-bold">
-              Blog Heading
-            </h1>
-            <p className="text-base text-[#000000] leading-[20px] md:text-[20px] text-[14px] md:leading-[28px]">
+            <h1 className="">Blog Heading</h1>
+            <p className="">
               Treva Chat is an advanced chatbot platform that allows users to
               ask questions and resolve their doubts with ease. It incorporates
               features like reference tracking for each conversation, providing
@@ -122,7 +138,6 @@ const Blog: React.FC = () => {
             />
           </div>
         </div>
-
         {/* Additional Details */}
         <div className="mt-8 w-full px-2 lg:px-0 ">
           <h1 className="text-[24px] text-[#24536E] font-bold md:leading-[38.14px] leading-[28.8px] md:text-[32px] mb-4">
