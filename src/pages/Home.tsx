@@ -131,7 +131,7 @@ const Home: React.FC = () => {
           background: "linear-gradient(180deg, #AEE2FF 0%, #E0F3FF 100%)",
         }}
       >
-        <div className="w-full font-hellix lg:w-[520px] flex flex-col h-auto lg:h-[450px] gap-6 lg:gap-9 justify-between">
+        <div className="w-full font-hellix lg:w-[520px] flex flex-col h-auto lg:h-[380px] gap-6 lg:gap-9 justify-between">
           <h1 className="text-[#24536E] lg:leading-[52.81px] font-bold text-3xl lg:text-[44px] leading-[38.5px] text-start lg:text-left ">
             Creative Solutions for a Brighter Future
           </h1>
@@ -232,7 +232,7 @@ const Home: React.FC = () => {
       {/* section Client handling */}
       <section
         ref={clientsSection}
-        className="h-auto font-hellix lg:h-[818px] bg-[#F4F8FB] flex flex-col justify-center items-center w-full py-10"
+        className="h-auto font-hellix lg:h-[818px]  bg-[#F4F8FB] flex flex-col justify-center lg:justify-evenly items-center w-full "
       >
         <h1 className="text-[32px] lg:text-[38px] leading-tight lg:leading-[45.16px] font-bold text-center text-[#032435] mb-10">
           Client Handling

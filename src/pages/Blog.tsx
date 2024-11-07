@@ -24,37 +24,25 @@ const Blog: React.FC = () => {
   console.log(backgroundColor);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          console.log(entry);
-          if (entry.isIntersecting) {
-            if (entry.target === mainSectionRef.current) {
-              setBackgroundColor(sectionColors[0]);
-              console.log("Main section in view");
-            } else if (entry.target === techSectionRef.current) {
-              setBackgroundColor(sectionColors[1]);
-              console.log("Tech section in view");
-            }
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+    const handleScroll = () => {
+      const mainSectionTop =
+        mainSectionRef.current?.getBoundingClientRect().top;
+      const techSectionTop =
+        techSectionRef.current?.getBoundingClientRect().top;
 
-    const sections = [mainSectionRef, techSectionRef];
-    sections.forEach((section) => {
-      if (section.current) {
-        console.log(`Observing section: ${section.current}`);
-        observer.observe(section.current);
+      if (mainSectionTop !== undefined && techSectionTop !== undefined) {
+        if (techSectionTop < -90) {
+          setBackgroundColor(sectionColors[1]);
+        } else if (mainSectionTop < -120) {
+          setBackgroundColor(sectionColors[0]);
+        } else {
+          setBackgroundColor(sectionColors[0]);
+        }
       }
-    });
-
-    return () => {
-      sections.forEach((section) => {
-        if (section.current) observer.unobserve(section.current);
-      });
     };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const param = useParams<{ id?: string }>();
@@ -80,7 +68,7 @@ const Blog: React.FC = () => {
       {/* top */}
       <div
         style={{ backgroundImage: `url(${projectHeader})` }}
-        className=" md:h-60 w-full rounded-b-[50%] absolute top-0  opacity-80"
+        className=" h-60  w-full rounded-b-[50%] absolute blur-md md:top-0 "
       ></div>
       {/* right */}
       <div
@@ -114,8 +102,10 @@ const Blog: React.FC = () => {
                 {content.min}
               </p>
             </div>
-            <h1 className="">Blog Heading</h1>
-            <p className="">
+            <h1 className="text-[#24536E] text-[36px] md:text-[44px] font-bold leading-[52.8px]">
+              Blog Heading
+            </h1>
+            <p className=" text-[#000000] text-[18px] md:text-[20px] leading-[20px] md:leading-[28px] font-medium">
               Treva Chat is an advanced chatbot platform that allows users to
               ask questions and resolve their doubts with ease. It incorporates
               features like reference tracking for each conversation, providing
@@ -162,20 +152,19 @@ const Blog: React.FC = () => {
               ))}
           </ul>
         </div>
-        <section className="min-h-screen xl:overflow-x-hidden flex flex-col justify-evenly items-center  md:p-6  md:h-[741px] bg-white">
-          <h1 className="text-[32px] md:text-[38px] font-bold text-[#032435] leading-tight text-center">
-            More Blogs
-          </h1>
-
-          {/* Blog Card Container */}
-          <div className="flex flex-row xl:w-[1139px] justify-start md:justify-between overflow-x-auto  gap-4 md:gap-6 items-center w-full sm:w-4/5 md:w-11/12 h-auto">
-            {otherBlogs.map((a) => (
-              <BlogsCard card={a} key={a.id} />
-            ))}
-          </div>
-        </section>
       </section>
+      <section className="min-h-screen md:h-[657px] xl:overflow-x-hidden bg-[#F4FAFF] flex flex-col justify-evenly items-center w-full ">
+        <h1 className="text-[32px] md:text-[38px] font-bold text-[#032435] leading-tight text-center">
+          More Blogs
+        </h1>
 
+        {/* Blog Card Container */}
+        <div className="flex flex-row xl:w-[1139px] justify-start md:justify-between overflow-x-auto  gap-4 md:gap-6 items-center w-full sm:w-4/5 md:w-11/12 h-auto">
+          {otherBlogs.map((a) => (
+            <BlogsCard card={a} key={a.id} />
+          ))}
+        </div>
+      </section>
       <Footer />
       {showModal && (
         <ContactModal isModalOpen={showModal} handleToggle={handleToggle} />

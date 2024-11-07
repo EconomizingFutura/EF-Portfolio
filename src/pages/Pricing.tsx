@@ -202,7 +202,7 @@ const Pricing: React.FC = () => {
                   className={`lg:h-[228px] lg:w-[487px] w-full
                   ${
                     selected === 4
-                      ? "md:w-[423px] border-dashed-spaced items-center inline-block"
+                      ? "md:w-[423px] border-dashed-spaced  items-center inline-block"
                       : "border-[1px]  border-[#E0E0E0]"
                   } flex lg:justify-center lg:items-center rounded-[16px] ${
                     selected === 5

@@ -32,7 +32,7 @@ const TestimonialSlider: React.FC = () => {
 
   return (
     <div className="relative mx-auto sm:w-full w-11/12 xl:h-[300px] min-h-min overflow-hidden">
-      <div className="flex xl:flex-row flex-col justify-center gap-10 sm:gap-16 items-center h-full xl:py-0 py-16 xl:h-[225px]">
+      <div className="flex xl:flex-row flex-col pointer-events-none justify-center gap-10 sm:gap-16 items-center h-full xl:py-0 py-16 xl:h-[225px]">
         {getVisibleTestimonials().map((index, i) => (
           <div
             key={index}
@@ -115,8 +115,7 @@ const TestimonialSlider: React.FC = () => {
       {/* Navigation Controls */}
       <div className="w-24 justify-between lg:flex mt-20 right-0 xl:right-24 hidden  sm:right-5 bottom-0 absolute">
         <button
-          className="h-10 w-10 bg-white/30 rounded-full border border-[#032435]/20
-          transition-all duration-300 hover:bg-white/50 hover:shadow-md
+          className="h-10 w-10 rounded-full border border-[#03243533]
           flex justify-center items-center group"
           onClick={prevTestimonial}
           aria-label="Previous testimonial"
@@ -124,11 +123,9 @@ const TestimonialSlider: React.FC = () => {
           <ChevronLeft className="h-5 w-5 " />
         </button>
         <button
-          className="h-10 w-10 rounded-full border
-          
+          className="h-10 w-10 rounded-full border border-[#03243533]
           flex justify-center items-center group"
           onClick={nextTestimonial}
-          aria-label="Next testimonial"
         >
           <ChevronRight className="h-5 w-5  " />
         </button>

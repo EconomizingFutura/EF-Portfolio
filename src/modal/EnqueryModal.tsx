@@ -23,7 +23,7 @@ const EnqueryModal: React.FC = () => {
       className={` ${
         !showForms
           ? "h-[56px] w-[56px] "
-          : " h-[520px] lg:h-[560px] w-[275px]  lg:w-[350px] "
+          : " h-[520px] lg:h-[580px] w-[275px]  lg:w-[350px] "
       } flex flex-col justify-between items-end  `}
     >
       {showForms && (

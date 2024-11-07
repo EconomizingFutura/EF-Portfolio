@@ -10,7 +10,7 @@ import EnqueryModal from "../modal/EnqueryModal";
 import wave from "../assets/wave.svg";
 import Header from "../sections/Header";
 
-const sectionColors = ["#c6ebff", "#FFFFFF"];
+const sectionColors = ["#c6ebff", "#F4F8FB"];
 
 const Blogs: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -109,11 +109,11 @@ const Blogs: React.FC = () => {
       <div className="px-8 py-4 w-full max-w-[1140px] bg-[#FFFFFF] md:flex items-center justify-between mx-auto rounded-2xl mt-10 hidden absolute top-1/3 right-0 left-0 ">
         <div className="flex items-center gap-4 text-[#111111] text-[18px] font-medium">
           <span>Filter By :</span>
-          <div className="flex gap-5">
+          <div className="flex gap-3 lg:h-[30px] lg:w-[454px] ">
             {blogsFilter.map((blog) => (
               <button
                 key={blog.id}
-                className={`rounded px-4 py-1 ${
+                className={`rounded h-[30px] px-2.5 ${
                   blog.header === activeFilter
                     ? "bg-[#20B2FF] text-white "
                     : "bg-[#F5F5F5]"
@@ -141,7 +141,7 @@ const Blogs: React.FC = () => {
       {/* Blog Cards Section */}
       <section
         ref={techSectionRef}
-        className="w-full flex min-h-screen mx-auto bg-[#F4F8FB] justify-center items-center py-20"
+        className="w-full flex min-h-screen mx-auto bg-[#F4F8FB]  justify-center items-center py-20"
       >
         <div className="flex flex-wrap items-center justify-center gap-6 w-full max-w-[1139px]">
           {blogs.map((a) => (

@@ -122,7 +122,7 @@ const AreaSection: React.FC = () => {
           data-section-id={a.id}
         >
           <div
-            className={`z-50 flex justify-center  h-8 w-8 items-center md:justify-start md:items-start
+            className={`z-50 flex justify-center  h-8  items-center md:justify-start md:items-start
                        ${
                          passedSections.has(a.id)
                            ? `relative overflow-hidden ${
@@ -137,7 +137,7 @@ const AreaSection: React.FC = () => {
             <img
               src={a.icons}
               alt=""
-              className="h-6 w-6 md:h-8 md:w-8  object-fill  relative z-10 transition-transform duration-300"
+              className="  relative z-10 transition-transform duration-300"
             />
           </div>
 
@@ -159,7 +159,7 @@ const AreaSection: React.FC = () => {
                 className={`${colorMap[a.id as keyof typeof colorMap] || ""}
                            text-lg font-bold leading-snug
                            sm:text-xl
-                           lg:text-[24px] lg:leading-[28.61px]`}
+                           lg:text-[28px] lg:leading-[33.61px]`}
               >
                 {a.heading}
               </h1>
@@ -167,14 +167,14 @@ const AreaSection: React.FC = () => {
                 className="text-white text-base font-semibold leading-relaxed
                 text-[14px]
                            sm:text-[16px]
-                           lg:text-[24px] lg:leading-[28.8px]"
+                           lg:text-[22px] lg:leading-[28.8px]"
               >
                 {a.info}
               </p>
               <div
-                className="text-[rgba(255,255,255,1)] space-y-5 ml-6 lg:ml-0
+                className="text-[#e5e9ea] space-y-5 ml-6 lg:ml-0
                              sm:space-y-6
-                             lg:space-y-2 text-[14px] lg:text-[18px] lg:leading-[21.6px] font-normal"
+                             lg:space-y-2 text-[14px] lg:text-[17px] lg:leading-[21.6px] font-normal"
               >
                 <p className="list-item ">{a.li1}</p>
                 <p className="list-item">{a.li2}</p>

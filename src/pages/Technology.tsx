@@ -8,9 +8,9 @@ import ContactModal from "../modal/ContactModal";
 import EnqueryModal from "../modal/EnqueryModal";
 import Header from "../sections/Header";
 import wave from "../assets/wave.svg";
-
+import greyCircles from "../assets/greyClircles.svg";
 // Define the colors for each section
-const sectionColors = ["#BCE7FF", "#F4FAFF"];
+const sectionColors = ["#BCE7FF", "#FFFFFF"];
 
 const Technology: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -57,7 +57,7 @@ const Technology: React.FC = () => {
   }, []);
 
   return (
-    <div className="mt-16 font-hellix sm:mt-0 overflow-x-hidden">
+    <div className="mt-16  font-hellix sm:mt-0 overflow-x-hidden">
       <Header
         width={"xl:w-[1246px] "}
         handleShowForms={handleToggle}
@@ -65,7 +65,7 @@ const Technology: React.FC = () => {
       />
       <div
         ref={mainSectionRef}
-        className="bg-[#BCE7FF] h-48 w-full sm:h-60 md:h-72 lg:h-[322px] flex justify-between items-center"
+        className="bg-[#BCE7FF]  h-48 w-full sm:h-60 md:h-72 lg:h-[322px] flex justify-between items-center"
         style={{
           backgroundImage: `url(${new URL(wave, window.location.origin)})`,
           backgroundRepeat: "repeat",
@@ -91,43 +91,55 @@ const Technology: React.FC = () => {
           draggable={false}
         />
       </div>
-      <section
-        ref={techSectionRef}
-        className="bg-[#F4FAFF] flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto py-8 sm:py-10 px-4 min-h-screen"
-      >
-        {Technologies.map((tech) => (
-          <div
-            key={tech.id}
-            className={`flex flex-col p-4 sm:p-6 md:p-8 items-center 
+      <div className=" bg-[#FFFFFF] relative">
+        <img
+          src={greyCircles}
+          alt=""
+          className="absolute top-0 right-0 lg:h-auto lg:w-auto h-16 "
+          draggable={false}
+        />
+        <section
+          ref={techSectionRef}
+          className="  flex flex-wrap relative justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto py-8 sm:py-10 px-4 min-h-screen"
+        >
+          {Technologies.map((tech) => (
+            <div
+              key={tech.id}
+              className={`flex flex-col z-20 
               ${
                 tech.id >= 4
-                  ? "h-min lg:h-[540px]"
-                  : "h-min lg:h-[540px] justify-between"
+                  ? "h-min lg:h-[540px] "
+                  : "h-min lg:h-[440px]  justify-between"
               }  
-              w-full sm:w-[calc(50%-1rem)] md:w-[calc(50%-1rem)] lg:w-[394px] rounded-xl sm:rounded-2xl border border-[#9CA4B580] relative`}
-          >
-            <div className="w-full h-36 flex justify-center items-center">
+              w-full sm:w-[calc(50%-1rem)] z-50 md:w-[calc(50%-1rem)]  lg:w-[394px] rounded-xl sm:rounded-2xl border border-[#9CA4B580] relative`}
+            >
+              <div className="w-full h-[147px] bg-[#FFFFFF] rounded-t-xl  sm:rounded-t-2xl flex justify-center items-center">
+                <img
+                  src={tech.logo}
+                  alt=""
+                  className="max-w-full max-h-full"
+                  draggable={false}
+                />
+              </div>
+              <div
+                className={`w-full h-full rounded-b-xl  sm:rounded-b-2xl px-4 sm:px-6 md:px-8 flex-grow  
+               bg-[#F4FAFF]`}
+              >
+                <p className="text-sm  sm:text-base text-[#666666] font-medium leading-relaxed">
+                  {tech.text}
+                </p>
+              </div>
               <img
-                src={tech.logo}
+                src={AvailableIcon}
                 alt=""
-                className="max-w-full max-h-full"
+                className="absolute -right-2 sm:-right-3 md:-right-3.5 w-8 sm:w-10 md:w-auto"
                 draggable={false}
               />
             </div>
-            <div className="w-full mt-2 md:mt-4">
-              <p className="text-sm sm:text-base text-gray-600 font-medium leading-relaxed">
-                {tech.text}
-              </p>
-            </div>
-            <img
-              src={AvailableIcon}
-              alt=""
-              className="absolute -right-2 sm:-right-3 md:-right-3.5 w-8 sm:w-10 md:w-auto"
-              draggable={false}
-            />
-          </div>
-        ))}
-      </section>
+          ))}
+        </section>
+      </div>
+
       <div className="md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal />
       </div>
