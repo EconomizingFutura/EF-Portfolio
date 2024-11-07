@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Pricing from "../pages/Pricing";
 import Blogs from "../pages/Blogs";
@@ -9,7 +9,6 @@ import Projects from "../pages/Projects";
 
 export const AppRouter: React.FC = () => {
   return (
-    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/pricing" element={<Pricing />} />
@@ -18,6 +17,5 @@ export const AppRouter: React.FC = () => {
         <Route path="/blog/:id" element={<Blog />} />
         <Route path="/projects/:id" element={<Projects />} />
       </Routes>
-    </Router>
   );
 };

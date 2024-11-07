@@ -1,13 +1,13 @@
-.active {
-    background-color: #1d4ed8;
+.active{
+    background-color: #20B2FF;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color : #B1E3FF;    ;
-    color: #B1E3FF;
+    background-color: #B1E3FF;
+    color: white;
     position: sticky;
     top: 0;
 }
@@ -16,30 +16,30 @@ nav .title {
     font-size: 1.5rem;
     margin: 1rem;
     font-weight: bold;
-    color: black;
+    text-decoration: none;
+    color: white;
 }
 
-/* Changed from nav ul to nav ul li div for non-link items */
 nav ul {
     display: flex;
 }
 
 nav ul li {
-    list-style: none; 
+   list-style: none; 
 }
 
-nav ul li div { /* Targeting div elements inside li */
+nav ul li a {
     display: block;
+    text-decoration: none;
     color: black;
     padding: 0.5rem;
     margin: 0 0.5rem;
     border-radius: 0.5rem;
-    cursor: pointer; /* Indicate that it's clickable */
 }
 
-/* Apply hover effect directly to the div */
-nav ul li div:hover {
-    background-color: #20B2FF;
+nav ul li a:not(.active):hover {
+    background-color: #8ad2f9;
+    ;
 }
 
 nav .menu {
@@ -59,6 +59,7 @@ nav .menu span {
     background-color: #fff;
     border-radius: 0.2rem;
 }
+
 
 @media (max-width: 480px) {
     nav .menu {
@@ -86,15 +87,7 @@ nav .menu span {
         text-align: center;
     }
 
-    nav ul li div { /* Targeting div elements inside li */
+    nav ul li a {
         margin: 0.2rem 0.5rem;
     }
-    .title {
-        margin-left: auto; /* This pushes the title (logo) to the right */
-    }
-    .logo {
-        height: 50px; /* Adjust height as needed */
-        margin: 0 1rem; /* Optional: add margin for spacing */
-    }
-    
 }
