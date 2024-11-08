@@ -10,12 +10,16 @@ interface propsTypes {
   background: string;
   width: string;
   handleShowForms: () => void;
+  transparent?: boolean;
+  home?: boolean;
 }
 
 const Header: React.FC<propsTypes> = ({
   background,
   handleShowForms,
   width,
+  transparent,
+  home,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -28,6 +32,7 @@ const Header: React.FC<propsTypes> = ({
     backgroundRepeat: "no-repeat",
 
     ...(background !== "#FFFFFF" &&
+      background !== "" &&
       background !== "#dcf3ff" &&
       background !== "#F4FAFF" &&
       background !== "#F4F8FB" &&
@@ -45,12 +50,14 @@ const Header: React.FC<propsTypes> = ({
   };
   return (
     <div
-      style={headerStyle}
-      className={` ${background} ${
-        background === "#FFFFFF" || background == "#F4F8FB"
+      style={transparent ? {} : headerStyle}
+      className={`${transparent ? "bg-[#ddf3ff] " : ""} ${
+        background === "#FFFFFF" || background === "#F4F8FB"
           ? "dark:shadow-xl shadow-slate-500"
           : ""
-      }  py-2 px-5 fixed z-[100] top-0 xl:px-0 w-full flex md:items-center md:justify-center font-hellix h-[74px] `}
+      } py-2 px-5 fixed ${
+        home ? "z-50" : "z-30"
+      } top-0 xl:px-0 w-full flex md:items-center md:justify-center font-hellix h-[74px]`}
     >
       <div className={`${width} w-full flex justify-between items-center`}>
         <img

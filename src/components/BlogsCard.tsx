@@ -45,31 +45,31 @@ const BlogsCard: React.FC<CardProps> = ({ card }) => {
   };
 
   return (
-    <div className="w-[90%] sm:w-[353px]   h-[395px] shrink-0 flex flex-col justify-between items-center relative  rounded-lg overflow-hidden">
+    <div className="w-[90%] sm:w-[353px]  h-[395px] shrink-0 flex flex-col justify-between items-center relative  rounded-lg overflow-hidden">
       <img
         src={card.icon}
         className="h-[199px] object-cover rounded-[10px] w-full md:w-[353px]"
         alt=""
       />
-      <div className="bg-[#F4F8FB] py-4 px-3 absolute bottom-0 flex flex-col w-11/12 sm:w-[337px] p-2 justify-evenly gap-[6px] rounded-[10px] h-[240px]">
+      <div className="bg-[#F4F8FB] px-3 absolute bottom-0 flex flex-col w-11/12 sm:w-[337px] p-2 justify-evenly gap-[6px] rounded-[10px] h-[240px]">
         <div className="w-full h-[190px] flex flex-col gap-2 mx-auto ">
-          <div className="h-[16px] gap-3 flex ">
+          <div className="h-[16px] md:gap-3 gap-1 flex ">
             {blogsInfo.map((a) => (
               <div
                 key={a.id}
-                className="justify-center gap-1 items-center flex"
+                className="justify-center md:gap-1 gap-1.5 items-center flex"
               >
                 <img
                   src={a.icon}
                   alt=""
                   className={`${a.id == 1 && "md:h-[16px] md:w-[16px]"}`}
                 />
-                <p>{a.header}</p>
+                <p className="md:text-[12px] text-[10px]">{a.header}</p>
               </div>
             ))}
           </div>
-          <div className=" h-[145px] w-full  flex flex-col gap-4">
-            <h1 className="text-[#111111] font-bold text-[18px] md:text-[20px] leading-6">
+          <div className=" h-[145px] w-full  flex flex-col md:gap-4 gap-2">
+            <h1 className="text-[#111111] font-bold text-[16px] md:text-[20px] leading-6">
               {card.heading}
             </h1>
             <h1 className="text-[#999999] font-medium text-[14px] md:text-[16px] leading-5">

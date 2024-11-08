@@ -41,55 +41,56 @@ const Projects: React.FC<ProjectsProps> = ({
   const handleRotate = () => setRotate(!rotate);
 
   return (
-    <div
+    <motion.div
       ref={container}
-      className="h-[540px] md:h-[400px] lg:h-[540px] w-full max-w-[1136px] bg-[#F4FAFF] sticky top-5 flex justify-center items-center p-4 sm:p-6 md:p-8 lg:p-5"
+      style={{
+        scale,
+        top: `calc(-5vh + ${i * 25}px)`,
+        boxShadow: "0px 18px 36px -18px #0000001A",
+      }}
+      className="h-min lg:h-[512px] w-full max-w-[1136px] rounded-sm md:rounded-3xl sm:p-6 md:p-8 lg:p-5  bg-[#F4FAFF] sticky top-5 flex justify-center items-center "
     >
-      <motion.div
-        className="flex flex-col lg:gap-5  md:flex-row py-10 justify-between items-center relative h-full w-full rounded-[25px] origin-top "
-        style={{
-          scale,
-          top: `calc(-5vh + ${i * 25}px)`,
-        }}
-      >
-        <div className="w-full  md:w-[733px] lg:w-[433px] flex flex-col items-start mb-6 md:mb-0">
+      <div className="flex flex-col lg:gap-5 md:flex-row justify-between items-center relative h-full w-full ">
+        <div className="w-full gap-10 md:w-[733px] lg:w-[433px] md:h-[348px] flex flex-col items-start relative">
+          <img
+            src={project.image}
+            alt=""
+            className=" hidden md:block md:absolute md:top-0 md:right-4 xl:-top-[20%] xl:right-0 h-[40px] sm:h-[50px] lg:h-auto w-[40px] sm:w-[50px] lg:w-[70px]"
+          />
           <Lottie
             animationData={project.lottie}
             loop={true}
             className="h-11 w-11"
           />
-          <h1 className="text-[20px] sm:text-[24px] md:text-[28px] my-3">
-            {project.projectName}
-          </h1>
-          <p className="text-[#999999] font-medium text-[14px] sm:text-[15px] md:text-[12px] lg:text-[17px] leading-6 tracking-[0.002em] my-3">
-            {project.description}
-          </p>
-          <button
-            className="hover:underline flex gap-2 font-medium text-[14px] sm:text-[15px] md:text-[17px] leading-6 tracking-[0.002em] text-[#20B2FF]"
-            onMouseEnter={handleRotate}
-            onMouseLeave={handleRotate}
-            onClick={() => handleClick(project.id)}
-          >
-            Read More
-            <img
-              src={ButtonArror}
-              className={`transition-transform duration-75 ${
-                rotate ? "rotate-45" : "rotate-90"
-              }`}
-              alt=""
-            />
-          </button>
+          <div className=" w-full lg:h-[264px] flex flex-col gap-4">
+            <h1 className="text-[20px] sm:text-[24px] font-bold md:text-[28px]  leading-[39px] -tracking-[0.002em] text-[#032435]">
+              {project.projectName}
+            </h1>
+            <p className="text-[#999999] font-medium text-[14px] sm:text-[15px] md:text-[12px] lg:text-[17px] leading-6 tracking-[0.002em] ">
+              {project.description}
+            </p>
+            <button
+              className="hover:underline flex gap-2 font-medium text-[14px] sm:text-[15px] md:text-[17px] leading-6 tracking-[0.002em] text-[#20B2FF]"
+              onMouseEnter={handleRotate}
+              onMouseLeave={handleRotate}
+              onClick={() => handleClick(project.id)}
+            >
+              Read More
+              <img
+                src={ButtonArror}
+                className={`transition-transform duration-75 ${
+                  rotate ? "rotate-45" : "rotate-90"
+                }`}
+                alt=""
+              />
+            </button>
+          </div>
         </div>
-        <div className="relative w-full flex flex-col-reverse gap-3 md:flex-col lg:flex-row lg:gap-0 lg:w-auto">
+        <div className=" w-full flex flex-col-reverse gap-3 md:flex-col lg:flex-row lg:gap-0 lg:w-auto">
           <img src={project.projectBanner} alt="" className="w-full" />
-          <img
-            src={project.image}
-            alt=""
-            className="md:absolute lg:top-0 lg:-left-24 h-[40px] sm:h-[50px] lg:h-auto w-[40px] sm:w-[50px] lg:w-[70px]"
-          />
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 

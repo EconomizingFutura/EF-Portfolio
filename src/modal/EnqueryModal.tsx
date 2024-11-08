@@ -23,7 +23,7 @@ const EnqueryModal: React.FC = () => {
       className={` ${
         !showForms
           ? "h-[56px] w-[56px] "
-          : " h-[520px] lg:h-[580px] w-[275px]  lg:w-[350px] "
+          : " h-[500px] md:h-[520px] lg:h-[580px] w-[275px]  lg:w-[350px] "
       } flex flex-col justify-between items-end  `}
     >
       {showForms && (
@@ -32,7 +32,7 @@ const EnqueryModal: React.FC = () => {
             Contact Us
           </h1>
 
-          <form className="w-full flex flex-col gap-y-2 md:gap-y-4 lg:gap-y-2.5">
+          <form className="w-full flex flex-col gap-y-2 lg:gap-y-4 ">
             <InputFieldWrapper
               label="First Name"
               placeholder="First Name"

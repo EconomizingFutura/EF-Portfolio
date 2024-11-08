@@ -151,7 +151,7 @@ const Projects: React.FC = () => {
         <img src={Boxes} alt="" className="absolute right-0 top-1 " />
         <div className="h-min  lg:h-[512px] w-full max-w-[1136px] rounded-sm md:rounded-3xl flex justify-center items-center p-0 sm:p-6 md:p-8 lg:p-5">
           <div className="flex flex-col  md:flex-row py-5 justify-between items-center relative h-full w-full rounded-[25px] origin-top">
-            <div className="w-full relative  md:w-[733px] lg:w-[433px] md:h-[348px] flex flex-col items-start gap-4 ">
+            <div className="w-full relative  md:w-[733px] lg:w-[433px] md:h-[348px] flex flex-col items-start gap-10 ">
               <img
                 src={projectDetails.image}
                 alt=""

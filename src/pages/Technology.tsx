@@ -37,7 +37,7 @@ const Technology: React.FC = () => {
           }
         });
       },
-      { threshold: 0.25, rootMargin: "0px 0px -40% 0px" } // Adjust this for sensitivity in detecting section visibility
+      { threshold: 0.25, rootMargin: "0px 0px -40% 0px" }
     );
 
     // Observe both sections
@@ -105,13 +105,13 @@ const Technology: React.FC = () => {
           {Technologies.map((tech) => (
             <div
               key={tech.id}
-              className={`flex flex-col z-20 
+              className={`flex flex-col 
               ${
                 tech.id >= 4
                   ? "h-min lg:h-[540px] "
                   : "h-min lg:h-[440px]  justify-between"
               }  
-              w-full sm:w-[calc(50%-1rem)] z-50 md:w-[calc(50%-1rem)]  lg:w-[394px] rounded-xl sm:rounded-2xl border border-[#9CA4B580] relative`}
+              w-full sm:w-[calc(50%-1rem)] z-10 md:w-[calc(50%-1rem)]  lg:w-[394px] rounded-xl sm:rounded-2xl border border-[#9CA4B580] relative`}
             >
               <div className="w-full h-[147px] bg-[#FFFFFF] rounded-t-xl  sm:rounded-t-2xl flex justify-center items-center">
                 <img

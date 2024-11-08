@@ -11,8 +11,9 @@ import ContactModal from "../modal/ContactModal";
 import EnqueryModal from "../modal/EnqueryModal";
 import Header from "../sections/Header";
 import projectHeader from "../assets/projectsHeader.svg";
-const sectionColors = ["#e3f5ff", "#FFFFFF"];
-// import pricingWave from "../assets/pricingWave.svg";
+const sectionColors = ["", "#FFFFFF"];
+import Sun from "../assets/Sun.svg";
+import WavesPriceSection from "../assets/WavesPriceSection.svg";
 const Pricing: React.FC = () => {
   const [show, setShow] = useState(false);
   const handleToggle = () => {
@@ -27,7 +28,7 @@ const Pricing: React.FC = () => {
   const mainSectionRef = useRef<HTMLDivElement | null>(null);
   const techSectionRef = useRef<HTMLDivElement | null>(null);
 
-  console.log(mainSectionRef, techSectionRef);
+  console.log(backgroundColor);
 
   const handleNextSection = () => {
     setSelected((pre) => pre + 1);
@@ -36,38 +37,29 @@ const Pricing: React.FC = () => {
     }
   };
 
+  console.log(backgroundColor);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          console.log(entry);
-          if (entry.isIntersecting) {
-            if (entry.target === mainSectionRef.current) {
-              setBackgroundColor(sectionColors[0]);
-              console.log("Main section in view");
-            } else if (entry.target === techSectionRef.current) {
-              setBackgroundColor(sectionColors[1]);
-              console.log("Tech section in view");
-            }
-          }
-        });
-      },
-      { threshold: 0.25, rootMargin: "0px 0px -40% 0px" }
-    );
+    const handleScroll = () => {
+      const mainSectionTop =
+        mainSectionRef.current?.getBoundingClientRect().top;
+      const techSectionTop =
+        techSectionRef.current?.getBoundingClientRect().top;
 
-    const sections = [mainSectionRef, techSectionRef];
-    sections.forEach((section) => {
-      if (section.current) {
-        console.log(`Observing section: ${section.current}`);
-        observer.observe(section.current);
+      console.log(mainSectionTop, techSectionTop);
+      if (mainSectionTop !== undefined && techSectionTop !== undefined) {
+        if (techSectionTop < 30) {
+          setBackgroundColor(sectionColors[1]);
+        } else if (mainSectionTop < 120) {
+          setBackgroundColor(sectionColors[0]);
+        } else {
+          setBackgroundColor(sectionColors[0]);
+        }
       }
-    });
-
-    return () => {
-      sections.forEach((section) => {
-        if (section.current) observer.unobserve(section.current);
-      });
     };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const ref = useRef<HTMLInputElement>(null);
@@ -136,16 +128,16 @@ const Pricing: React.FC = () => {
 
   const MainSection = selectSections[selected - 1];
 
-  console.log(MainSection);
-
   return (
-    <div className="Prizing-section flex min-h-screen flex-col font-hellix w-full overflow-hidden">
+    <div className="Prizing-section flex min-h-screen  flex-col font-hellix w-full overflow-hidden">
       {show && <ContactModal isModalOpen={show} handleToggle={handleToggle} />}
       <Header
+        // transparent={true}
         width={"xl:w-[1136px] "}
         handleShowForms={handleToggle}
         background={backgroundColor}
       />
+      <div ref={mainSectionRef}></div>
 
       <div
         style={{ backgroundImage: `url(${projectHeader})` }}
@@ -153,26 +145,28 @@ const Pricing: React.FC = () => {
       ></div>
       <div
         ref={mainSectionRef}
-        className=" h-[340px] w-full flex justify-center items-center "
+        className=" h-[300px] relative w-full flex justify-center items-center "
       >
+        <div className="absolute  h-96 top-0  w-full z-auto">
+          <img src={Sun} alt="" />
+        </div>
         <h1 className=" text-[#24536E] font-bold leading-[52.81px] text-center text-[44px]">
           Pricing
         </h1>
       </div>
       <section
         ref={techSectionRef}
-        className="flex-grow w-full  mb-10 flex-col justify-evenly items-center h-min  flex"
+        className="flex-grow w-full xl:w-[1136px] xl:mx-auto z-20  mb-10 flex-col justify-evenly items-center h-min  flex"
       >
         {selected < 6 ? (
-          <div className="lg:h-[428px] flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 lg:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative">
-            {/* <div
-              style={{
-                backgroundImage: `url(${pricingWave})`,
-              }}
-              className="absolute inset-0 z-0"
-            /> */}
-            <div className="relative z-10 w-full flex justify-center sm:justify-center flex-col md:flex-row gap-10">
-              <div className="flex w-full sm:w-1/2 lg:h-[119px] justify-between flex-col px-2 md:px-0 gap-6 my-2">
+          <div
+            style={{
+              backgroundImage: ` URL(${WavesPriceSection})`,
+            }}
+            className="lg:h-[428px] flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 xl:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative"
+          >
+            <div className="relative z-10  w-full flex justify-center  items-center  flex-col md:flex-row gap-10">
+              <div className="flex w-full  sm:w-1/2 lg:h-[119px] mb-auto justify-between flex-col px-2 md:px-0 gap-6 my-2">
                 <div className=" flex gap-1.5 lg:w-[239px]  w-[200px]">
                   {Array.from({ length: selectSections.length }, (_, index) => (
                     <div
@@ -199,10 +193,10 @@ const Pricing: React.FC = () => {
               </div>
               <div className="md:w-[487px]  sm:w-[350px] sm:justify-center sm:items-end md:gap-10 gap-3 flex flex-col w-full h-full bg-[#FFFFFF]   justify-between px-2 md:px-0">
                 <div
-                  className={`lg:h-[228px] lg:w-[487px] w-full
+                  className={`lg:h-[228px] md:w-[423px] lg:w-[487px] w-full
                   ${
                     selected === 4
-                      ? "md:w-[423px] border-dashed-spaced  items-center inline-block"
+                      ? " border-dashed-spaced  items-center inline-block"
                       : "border-[1px]  border-[#E0E0E0]"
                   } flex lg:justify-center lg:items-center rounded-[16px] ${
                     selected === 5
@@ -215,9 +209,9 @@ const Pricing: React.FC = () => {
                       selected == 3
                         ? "md:h-[175px] md:w-[423px] py-0 md:p-5 lg:p-0 md:py-0 h-[164px] mx-auto  flex"
                         : "h-[180px] "
-                    }  flex flex-wrap gap-4 items-center ${
+                    }  flex flex-wrap gap-0 items-center ${
                       selected <= 2
-                        ? "sm:justify-between  items-center w-11/12 mx-auto  gap-4 justify-center  md:w-[416px] md:h-[164px]"
+                        ? "sm:justify-between md:w-10/12 xl:w-[416px] items-center w-full mx-auto  gap-4 justify-center    md:h-[164px]"
                         : " w-[453px] "
                     } ${
                       selected === 5 &&
@@ -228,15 +222,15 @@ const Pricing: React.FC = () => {
                       MainSection.labels?.map((a, index) => (
                         <div
                           key={index}
-                          className="md:w-[109px] w-20 xl:w-auto bg-[rgba(244,250,255,1)]  justify-center items-center p-2  rounded-lg gap-1 h-[44px] md:p-3 flex md:gap-[10px]"
+                          className="lg:w-[109px] md:py-2 lg:py-0 w-16  py-1 rounded-md  sm:py-0 sm:w-20 xl:w-auto bg-[rgba(244,250,255,1)]  justify-center items-center  md:rounded-lg gap-1 lg:h-[44px]  lg:p-3 flex lg:gap-[10px]"
                         >
                           <input
-                            className=" md:h-4 md:w-4 h-3 w-3"
+                            className=" lg:h-4 lg:w-4 h-3 w-3"
                             type={selected == 1 ? "radio" : "checkbox"}
                           />
                           <label
                             htmlFor={a.label}
-                            className=" text-[#031924] font-medium text-[14px] md:text-[17px] md:leading-[20.4px] tracking-[0.02em]"
+                            className=" text-[#031924] font-medium text-[14px] lg:text-[17px] lg:leading-[20.4px] tracking-[0.02em]"
                           >
                             {a.label}
                           </label>

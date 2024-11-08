@@ -68,7 +68,7 @@ const AreaSection: React.FC = () => {
         const newPassedSections = new Set<string>();
 
         sections.forEach((section) => {
-          const iconElement = section.querySelector(".z-50") as HTMLElement;
+          const iconElement = section.querySelector(".z-30") as HTMLElement;
           if (iconElement) {
             const iconRect = iconElement.getBoundingClientRect();
             const progressLineHeight = progress * maxProgressHeight;
@@ -98,7 +98,7 @@ const AreaSection: React.FC = () => {
   return (
     <div className="relative font-hellix" ref={lineRef}>
       <div
-        className="absolute left-7 sm:left-10 lg:left-[calc(50%-520px)] w-1 transition-all duration-300"
+        className="absolute left-7 sm:left-10 lg:left-[calc(50%-465px)] xl:left-[calc(50%-520px)] w-1 transition-all duration-300"
         style={{
           top: "33px",
           height: "calc(100% - 103px)",
@@ -122,7 +122,7 @@ const AreaSection: React.FC = () => {
           data-section-id={a.id}
         >
           <div
-            className={`z-50 flex justify-center  h-8  items-center md:justify-start md:items-start
+            className={`z-30 flex justify-center  h-8  items-center md:justify-start md:items-start
                        ${
                          passedSections.has(a.id)
                            ? `relative overflow-hidden ${

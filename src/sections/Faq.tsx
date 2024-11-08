@@ -96,7 +96,7 @@ const Faq: React.FC = () => {
     setOpenIndex(index === openIndex ? null : index);
   };
   return (
-    <div className="w-full px-4  max-w-md lg:max-w-[608px] flex flex-col lg:px-4 xl:px-0">
+    <div className="w-full px-4  lg:max-w-[608px] flex flex-col  xl:px-0">
       {items.map((item, index) => (
         <AccordionItem
           key={index}

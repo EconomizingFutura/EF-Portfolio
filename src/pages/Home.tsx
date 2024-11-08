@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Hero1 from "../assets/Hero1.svg";
+import HeroMini from "../assets/HeroMini.svg";
 import ButtonWrapper from "../components/ButtonWrapper";
 import CurlArrows from "../assets/CurlArrows.svg";
 import YelloSquare from "../assets/YellowSquare.svg";
@@ -30,6 +31,7 @@ interface ProjectItem {
   projectBanner: string;
   image: string;
 }
+
 const Home: React.FC = () => {
   const [show, setShow] = useState<boolean>(false);
   const handleToogleForms = () => {
@@ -39,7 +41,11 @@ const Home: React.FC = () => {
   const blog = blogs.slice(0, 3);
   const container = useRef(null);
 
-  const [headerBg, setHeaderBg] = useState(sectionColors.hero);
+  const [headerBg, setHeaderBg] = useState<string>(sectionColors.hero);
+
+  useEffect(() => {
+    setHeaderBg(sectionColors.hero);
+  }, []);
 
   const heroSection = useRef<HTMLElement | null>(null);
   const testimonialsSection = useRef<HTMLElement | null>(null);
@@ -122,20 +128,21 @@ const Home: React.FC = () => {
         width={"xl:w-[1167px]"}
         handleShowForms={handleToogleForms}
         background={headerBg}
+        home={true}
       />
       {/* ceedff #DAF1FF */}
       <section
         ref={heroSection}
-        className="flex lg:flex-row flex-col bg-[#aee2ff] backdrop-blur-304 bg-opacity-50 lg:justify-end items-center px-4 lg:pe-0 py-8 lg:py-12"
+        className="flex  lg:flex-row flex-col bg-[#aee2ff]   justify-center xl:justify-end  backdrop-blur-304 bg-opacity-50 items-center py-8 lg:py-12 "
         style={{
           background: "linear-gradient(180deg, #AEE2FF 0%, #E0F3FF 100%)",
         }}
       >
-        <div className="w-full font-hellix lg:w-[520px] flex flex-col h-auto lg:h-[380px] gap-6 lg:gap-9 justify-between">
-          <h1 className="text-[#24536E] lg:leading-[52.81px] font-bold text-3xl lg:text-[44px] leading-[38.5px] text-start lg:text-left ">
+        <div className="w-full font-hellix px-5  xl:px-0 lg:w-[505px] flex flex-col h-auto lg:h-[380px] gap-8 xl:gap-10 justify-between">
+          <h1 className="text-[#24536E] lg:leading-[48.61px] xl:leading-[52.81px] font-bold text-3xl xl:text-[44px] leading-[38.5px] text-start lg:text-left ">
             Creative Solutions for a Brighter Future
           </h1>
-          <p className="text-base lg:text-[20px] text-[16px] leading-6 lg:leading-7 text-[#000000] text-start lg:text-left">
+          <p className="text-base lg:text-[20px] text-[16px] leading-6 lg:leading-7 text-[#000000] ">
             Embrace a brighter future with our technology-driven solutions that
             enhance your business capabilities. We empower your success through
             innovation, helping you unlock new opportunities and stay ahead in a
@@ -147,16 +154,21 @@ const Home: React.FC = () => {
             className="bg-[#20B2FF] p-3 lg:p-[10px] text-white rounded-lg font-semibold text-sm lg:text-base h-[46px] w-[120px] lg:w-[139px]  "
           />
         </div>
-        <div className="relative">
+        <div className="relative ">
           <img
             src={CurlArrows}
             alt="arrows"
             className="absolute h-[24px] w-[28px] top-5 right-1/2 sm:h-auto sm:w-auto sm:right-20 lg:right-80  sm:top-10 lg:top-24"
           />
           <img
+            src={HeroMini}
+            alt="hero"
+            className="relative w-full sm:w-full md:hidden sm:h-auto "
+          />
+          <img
             src={Hero1}
             alt="hero"
-            className="relative sm:w-full sm:h-auto "
+            className="relative hidden md:block w-full  sm:h-auto "
           />
           <img
             src={YelloSquare}
@@ -187,7 +199,7 @@ const Home: React.FC = () => {
       {/* projects */}
       <section
         ref={projectsSection}
-        className=" font-hellix min-h-svh py-10 w-11/12 mx-auto  bg-[#FFFFFF] relative flex flex-col justify-evenly items-center mb-48 md:mb-0"
+        className=" font-hellix min-h-svh py-10 w-11/12 mx-auto  bg-[#FFFFFF] relative flex flex-col justify-evenly items-center  md:mb-0"
       >
         <h1 className="font-bold text-[32px] sm:text-[38px] leading-[40px] sm:leading-[45.61px] text-[#031924] text-center ">
           Projects
@@ -197,7 +209,7 @@ const Home: React.FC = () => {
           alt=""
           className="absolute right-0 top-1 w-[80px] sm:w-auto"
         />
-        <div ref={container} className=" mt-20 relative">
+        <div ref={container} className=" relative">
           {projectsInfo.map((a: ProjectItem, i: number) => {
             const targetScale = 1 - (projectsInfo.length - i) * 0.05;
             return (
@@ -242,14 +254,14 @@ const Home: React.FC = () => {
       {/* Blogs */}
       <section
         ref={blogsSection}
-        className="min-h-screen xl:overflow-x-hidden flex flex-col justify-evenly items-center p-4 md:p-6  md:h-[741px] bg-white font-hellix"
+        className=" xl:overflow-x-hidden flex flex-col  justify-evenly items-center   md:h-[741px] bg-[#FFFFFF] font-hellix"
       >
-        <h1 className="text-[32px] md:text-[38px] font-bold text-[#032435] leading-tight text-center">
+        <h1 className="text-[32px] md:text-[38px] md:leading-[45.61px] font-bold text-[#032435] leading-tight text-center">
           Blog
         </h1>
 
         {/* Blog Card Container */}
-        <div className="flex font-hellix flex-row xl:w-[1139px] justify-start md:justify-between overflow-x-auto  gap-4 md:gap-6 items-center w-full sm:w-4/5 md:w-11/12 h-auto">
+        <div className="flex font-hellix flex-row xl:w-[1139px] justify-start md:justify-between overflow-x-auto  gap-4 md:gap-6 items-center w-full sm:w-4/5 md:px-0 px-5 h-auto">
           {blog.map((a) => (
             <BlogsCard card={a} key={a.id} />
           ))}
@@ -267,9 +279,9 @@ const Home: React.FC = () => {
       {/* FAQ */}
       <section
         ref={faqSection}
-        className="bg-[#F4F8FB] h-auto w-full font-hellix"
+        className="bg-[#F4F8FB] h-auto  w-full font-hellix"
       >
-        <div className="xl:w-[1120px] mx-auto h-auto flex flex-col lg:flex-row justify-between py-10 px-2  md:px-10 lg:px-5 lg:h-[799px] items-center">
+        <div className="xl:w-[1120px] mx-auto h-auto flex flex-col lg:flex-row justify-between px-2  md:px-10 lg:px-5 lg:h-[799px] items-center">
           <div className="text-center md:text-left">
             <h1 className="text-[#032435] font-bold text-3xl lg:text-[38px] md:leading-[45.61px] w-full lg:w-[360px] mx-auto md:mx-0">
               Frequently asked questions
@@ -280,7 +292,7 @@ const Home: React.FC = () => {
               className="mt-4 md:mt-0 mx-auto md:mx-0"
             />
           </div>
-          <div className="w-full lg:w-[608px]  lg:h-[639px]  flex justify-center items-center mt-10 ">
+          <div className="w-full lg:w-[608px] bg-[#F4F8FB] lg:h-[639px]  flex justify-center items-center  ">
             <Faq />
           </div>
         </div>
