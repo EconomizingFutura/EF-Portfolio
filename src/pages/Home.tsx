@@ -254,7 +254,7 @@ const Home: React.FC = () => {
       {/* Blogs */}
       <section
         ref={blogsSection}
-        className=" xl:overflow-x-hidden flex flex-col  justify-evenly items-center   md:h-[741px] bg-[#FFFFFF] font-hellix"
+        className=" flex flex-col xl:max-w-screen justify-evenly items-center   md:h-[741px] bg-[#FFFFFF] font-hellix"
       >
         <h1 className="text-[32px] md:text-[38px] md:leading-[45.61px] font-bold text-[#032435] leading-tight text-center">
           Blog
@@ -270,7 +270,7 @@ const Home: React.FC = () => {
         {/* View All Button */}
         <button
           onClick={() => navigate("/blogs")}
-          className="w-[120px] h-[40px] md:w-[140px] md:h-[45px] lg:w-[202px] lg:h-[56px] font-bold text-[14px] md:text-[16px] lg:text-[18px] leading-snug bg-[#F1FAFF] text-primary hover:underline mt-6 xl:me-28 ml-auto"
+          className="w-[120px] h-[40px] md:w-[140px] md:h-[45px] lg:w-[202px] lg:h-[56px] font-bold text-[14px] md:text-[16px] lg:text-[18px] leading-snug bg-[#F1FAFF] text-primary  mt-6 xl:me-52 ml-auto"
         >
           View All
         </button>

@@ -153,7 +153,7 @@ const Blog: React.FC = () => {
           </ul>
         </div>
       </section>
-      <section className="min-h-screen md:h-[657px] xl:overflow-x-hidden bg-[#F4FAFF] flex flex-col justify-evenly items-center w-full ">
+      <section className="h-min md:h-[657px] xl:overflow-x-hidden bg-[#F4FAFF] flex flex-col justify-evenly items-center w-full ">
         <h1 className="text-[32px] md:text-[38px] font-bold text-[#032435] leading-tight text-center">
           More Blogs
         </h1>
