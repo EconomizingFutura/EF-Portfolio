@@ -244,7 +244,7 @@ const Home: React.FC = () => {
       {/* section Client handling */}
       <section
         ref={clientsSection}
-        className="h-auto font-hellix lg:h-[818px]  bg-[#F4F8FB] flex flex-col justify-center lg:justify-evenly items-center w-full "
+        className="h-auto font-hellix lg:h-[818px] bg-[#F4F8FB] flex flex-col justify-center lg:justify-evenly items-center w-full "
       >
         <h1 className="text-[32px] lg:text-[38px] leading-tight lg:leading-[45.16px] font-bold text-center text-[#032435] mb-10">
           Client Handling

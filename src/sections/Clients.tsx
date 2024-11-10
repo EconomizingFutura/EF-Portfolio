@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
-import arrows from "../assets/arrows.svg";
+import Arrows from "../components/Arrows";
 import "../style.css";
+import MySvgComponent from "../components/MySvgComponent";
 interface ContentItem {
   heading: string;
   info: string;
@@ -65,19 +66,6 @@ const HEADERS: Header[] = [
 
 const ANIMATION_INTERVAL = 20000;
 const PROGRESS_BAR_DURATION = 5;
-
-const arrowStyles = {
-  backgroundImage: `url(${arrows})`,
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center",
-  position: "absolute" as const,
-  top: 0,
-  left: 0,
-  width: "100%",
-  height: "100%",
-  zIndex: 1,
-};
 
 const ToggleSection = React.memo(
   ({
@@ -144,24 +132,33 @@ const Clients: React.FC = () => {
   return (
     <div className="flex flex-col lg:flex-row xl:space-x-2 w-11/12 xl:w-[1137px] justify-center">
       <ToggleSection toggle={toggle} setToggle={handleToggle} />
-      <div className="flex flex-col w-full lg:max-w-[701px]">
+      <div className="flex flex-col w-full md:max-w-[701px]">
         {activeSection.content.map((section, index) => (
-          <div key={index} className="my-2 p-5 lg:h-40">
-            <div className="flex md:items-center flex-col md:flex-row gap-4 md:gap-4">
-              <div
-                className="h-12 w-[120px] rounded-2xl pe-5 text-white font-bold text-lg flex justify-center items-center"
-                style={{ position: "relative" }}
-              >
-                <span style={arrowStyles} />
-                <p className="z-20">Step {index + 1}</p>
-              </div>
-              <h2 className="font-bold lg:text-xl px-2 text-[17px]">
-                {section.heading}
-              </h2>
+          <div
+            key={index}
+            className="my-4 relative min-h-[160px] rounded-lg  p-4"
+          >
+            <div className="w-full absolute top-6 left-0 z-0 hidden md:block">
+              <MySvgComponent />
             </div>
-            <p className="lg:text-[16px] text-[14px]  text-[#999999] font-medium px-2 mt-4">
-              {section.info}
-            </p>
+            <div className="relative z-10 pt-2">
+              <div className="flex md:items-center flex-col md:flex-row gap-4">
+                <div className="w-32 h-12 flex justify-center relative">
+                  <div className="w-32 h-12 inset-0 absolute">
+                    <Arrows />
+                  </div>
+                  <p className="relative z-10 text-center m-auto text-white font-semibold text-xl">
+                    Step {index + 1}
+                  </p>
+                </div>
+                <h2 className="font-bold text-[17px] lg:text-xl text-[#333333] md:max-w-[80%]">
+                  {section.heading}
+                </h2>
+              </div>
+              <p className="text-[14px] lg:text-[15px] flex-grow-0 text-[#999999] font-medium mt-3 md:mt-4">
+                {section.info}
+              </p>
+            </div>
           </div>
         ))}
       </div>

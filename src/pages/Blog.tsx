@@ -8,7 +8,6 @@ import EnqueryModal from "../modal/EnqueryModal";
 import BlogsCard from "../components/BlogsCard";
 import Header from "../sections/Header";
 import projectHeader from "../assets/projectsHeader.svg";
-
 const sectionColors = ["#e3f5ff", "#FFFFFF"];
 
 const Blog: React.FC = () => {
@@ -72,16 +71,12 @@ const Blog: React.FC = () => {
       ></div>
       {/* right */}
       <div
-        style={{
-          backgroundImage: `url(${projectHeader})`,
-          backdropFilter: "blur(304px)",
-          opacity: "20%",
-          height: "150px",
-          width: "400px",
-          borderRadius: "160px 160px 0 0",
-          left: "-200px",
-        }}
-        className="rotate-90 absolute top-[30%]"
+        style={{ backgroundImage: `url(${projectHeader})` }}
+        className=" h-[350px] w-[350px] rounded-full absolute blur-xl translate-x-2/3 pointer-events-none top-[20%] right-0 -rotate-90 opacity-80"
+      ></div>
+      <div
+        style={{ backgroundImage: `url(${projectHeader})` }}
+        className=" md:h-[400px] md:w-[400px] h-[200px] w-32 rounded-full absolute blur-xl -translate-x-2/3 md:top-1/3 hidden md:block pointer-events-none left-0 rotate-90 opacity-80"
       ></div>
       {/* enquery */}
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">

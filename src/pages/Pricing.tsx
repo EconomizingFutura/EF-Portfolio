@@ -12,14 +12,17 @@ import EnqueryModal from "../modal/EnqueryModal";
 import Header from "../sections/Header";
 import projectHeader from "../assets/projectsHeader.svg";
 const sectionColors = ["", "#FFFFFF"];
-import Sun from "../assets/Sun.svg";
 import WavesPriceSection from "../assets/WavesPriceSection.svg";
+import CustomSun from "../assets/CustomSun";
 const Pricing: React.FC = () => {
   const [show, setShow] = useState(false);
   const handleToggle = () => {
     setShow(!show);
   };
   const [selected, setSelected] = useState<number>(1);
+  const [section1, setSection1] = useState<string>("");
+  // const [checkedItems, setCheckedItems] = useState<string[]>([]);
+  console.log(section1);
   const [file, setFile] = useState<File | null>(null);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -67,6 +70,7 @@ const Pricing: React.FC = () => {
   const handlePrevSection = () => {
     setSelected((pre) => pre - 1);
   };
+
   useEffect(() => {
     if (selected === 6) {
       const changeSelected = setTimeout(() => {
@@ -98,7 +102,7 @@ const Pricing: React.FC = () => {
       label: "label",
       header: "What is Question What is Question ?",
       labels: [
-        { label: "Label 1" },
+        { label: "Hello 1" },
         { label: "Label 2" },
         { label: "Label 3" },
         { label: "Label 4" },
@@ -125,11 +129,11 @@ const Pricing: React.FC = () => {
       header: "What is Question What is Question ?",
     },
   ];
-
+  console.log(selected);
   const MainSection = selectSections[selected - 1];
 
   return (
-    <div className="Prizing-section flex min-h-screen  flex-col font-hellix w-full overflow-hidden">
+    <div className="Prizing-section flex min-h-screen md:min-h-0  flex-col font-hellix w-full overflow-hidden">
       {show && <ContactModal isModalOpen={show} handleToggle={handleToggle} />}
       <Header
         // transparent={true}
@@ -145,10 +149,10 @@ const Pricing: React.FC = () => {
       ></div>
       <div
         ref={mainSectionRef}
-        className=" h-[300px] relative w-full flex justify-center items-center "
+        className=" h-[225px] md:h-[200px] lg:h-[400px] xl:h-[300px] relative w-full flex justify-center items-center "
       >
-        <div className="absolute  h-96 top-0  w-full z-auto">
-          <img src={Sun} alt="" />
+        <div className=" absolute top-0 left-0 w-full h-full">
+          <CustomSun />
         </div>
         <h1 className=" text-[#24536E] font-bold leading-[52.81px] text-center text-[44px]">
           Pricing
@@ -226,6 +230,11 @@ const Pricing: React.FC = () => {
                         >
                           <input
                             className=" lg:h-4 lg:w-4 h-3 w-3"
+                            onChange={(e) =>
+                              selected == 1 ? setSection1(e.target.value) : ""
+                            }
+                            name={selected == 1 ? "uniqueRadioGroup" : ""}
+                            value={a.label}
                             type={selected == 1 ? "radio" : "checkbox"}
                           />
                           <label

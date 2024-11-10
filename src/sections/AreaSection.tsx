@@ -12,6 +12,13 @@ const AreaSection: React.FC = () => {
     "4": "text-[#A465F1]",
   };
 
+  const bgColorMap = {
+    "1": "bg-gradient-to-r from-[#503FB950] to-[#503FB950] ",
+    "2": "bg-gradient-to-r from-[#F778BA] to-[#F778BA]",
+    "3": "bg-gradient-to-r from-[#505FB6FF] to-[#505FB6FF]",
+    "4": "bg-gradient-to-r from-[#A465F1] to-[#A465F1]",
+  };
+
   const glowMap = {
     "1": "shadow-[0_0_40px_15px_rgba(63,185,80,0.45)]",
     "2": "shadow-[0_0_40px_15px_rgba(247,120,186,0.45)]",
@@ -100,12 +107,12 @@ const AreaSection: React.FC = () => {
       <div
         className="absolute left-7 sm:left-10 lg:left-[calc(50%-465px)] xl:left-[calc(50%-520px)] w-1 transition-all duration-300"
         style={{
-          top: "33px",
+          top: "0px",
           height: "calc(100% - 103px)",
         }}
       >
         <div
-          className="progress-line absolute top-0 left-0 w-full transition-height duration-100"
+          className="progress-line absolute top-0 left-0 w-[2px] transition-height duration-100"
           style={{
             height: "0%",
             backgroundImage: "linear-gradient(to bottom, #3FB950, #F778BA)",
@@ -127,17 +134,19 @@ const AreaSection: React.FC = () => {
                          passedSections.has(a.id)
                            ? `relative overflow-hidden ${
                                glowMap[a.id as keyof typeof glowMap]
-                             } transition-all duration-300 ease-in-out  bg-transparent backdrop-blur-md`
-                           : ""
+                             } transition-all duration-300  ${
+                               bgColorMap[a.id as keyof typeof bgColorMap]
+                             }`
+                           : " bg-transparent"
                        }`}
           >
             {passedSections.has(a.id) && (
-              <div className="absolute inset-0 backdrop-blur-md bg-opacity-40" />
+              <div className="absolute  backdrop-blur-md bg-opacity-40" />
             )}
             <img
               src={a.icons}
               alt=""
-              className="  relative z-10 transition-transform duration-300"
+              className=" relative z-20 transition-transform duration-300"
             />
           </div>
 

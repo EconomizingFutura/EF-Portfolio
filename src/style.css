@@ -24,14 +24,6 @@
   background-color: antiquewhite;
   height: 50px;
 }
-/* #arrow_1 {
-  height: 200;
-  width: 80px;
-
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid rgb(231, 221, 221);
-} */
 
 .with-wave-background {
   background-image: url("../assets/wave.svg");
