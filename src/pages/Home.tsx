@@ -19,10 +19,11 @@ import BlogsCard from "../components/BlogsCard";
 import { useNavigate } from "react-router";
 import { blogs, projectsInfo } from "../constants/constants";
 import EnqueryModal from "../modal/EnqueryModal";
-// import { useScroll } from "framer-motion";
 import Header from "../sections/Header";
+import { Toaster, toast } from "sonner";
 import { sectionColors } from "../constants/constants";
-// import wave from "../assets/wave.svg";
+import { contactAPI, ContactData } from "../api/ContactAPI";
+
 interface ProjectItem {
   id: number;
   projectName: string;
@@ -37,7 +38,9 @@ const Home: React.FC = () => {
   const handleToogleForms = () => {
     setShow((pre) => !pre);
   };
-  console.log(show);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const blog = blogs.slice(0, 3);
   const container = useRef(null);
 
@@ -111,18 +114,40 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  // const { scrollYProgress } = useScroll({
-  //   target: container,
-  //   offset: ["start start", "end end"],
-  // });
+  const handleFormSubmit = async (data: ContactData) => {
+    if (
+      data.firstName === "" ||
+      data.lastName === "" ||
+      data.email === "" ||
+      data.comments === ""
+    ) {
+      toast.error("All fields are required");
+      return;
+    }
+    try {
+      const response = await contactAPI(data, setIsLoading);
+      toast.success(response.message);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const navigate = useNavigate();
   return (
     <div className=" mt-16 overflow-x-clip flex flex-col justify-between ">
+      <Toaster richColors />
       {show && (
-        <ContactModal isModalOpen={show} handleToggle={handleToogleForms} />
+        <ContactModal
+          isLoading={isLoading}
+          isModalOpen={show}
+          handleToggle={handleToogleForms}
+          onFormSubmit={handleFormSubmit}
+        />
       )}
       <div className="  md:right-10 md:bottom-5 right-5 bottom-5 z-40 fixed">
-        <EnqueryModal />
+        <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
       </div>
       <Header
         width={"xl:w-[1167px]"}
@@ -244,7 +269,7 @@ const Home: React.FC = () => {
       {/* section Client handling */}
       <section
         ref={clientsSection}
-        className="h-auto font-hellix lg:h-[818px] bg-[#F4F8FB] flex flex-col justify-center lg:justify-evenly items-center w-full "
+        className="h-auto font-hellix lg:h-[818px] py-6 md:py-0 bg-[#F4F8FB] flex flex-col justify-center lg:justify-evenly items-center w-full "
       >
         <h1 className="text-[32px] lg:text-[38px] leading-tight lg:leading-[45.16px] font-bold text-center text-[#032435] mb-10">
           Client Handling
@@ -254,9 +279,9 @@ const Home: React.FC = () => {
       {/* Blogs */}
       <section
         ref={blogsSection}
-        className=" flex flex-col xl:max-w-screen justify-evenly items-center   md:h-[741px] bg-[#FFFFFF] font-hellix"
+        className=" flex flex-col xl:max-w-screen justify-evenly items-center py-6 md:py-0 md:h-[741px]  bg-[#FFFFFF] font-hellix"
       >
-        <h1 className="text-[32px] md:text-[38px] md:leading-[45.61px] font-bold text-[#032435] leading-tight text-center">
+        <h1 className="text-[32px] md:text-[38px] py-4 md:py-0 md:leading-[45.61px] font-bold text-[#032435] leading-tight text-center">
           Blog
         </h1>
 
@@ -279,7 +304,7 @@ const Home: React.FC = () => {
       {/* FAQ */}
       <section
         ref={faqSection}
-        className="bg-[#F4F8FB] h-auto  w-full font-hellix"
+        className="bg-[#F4F8FB] h-auto  w-full font-hellix py-6 md:py-0"
       >
         <div className="xl:w-[1120px] mx-auto h-auto flex flex-col lg:flex-row justify-between px-2  md:px-10 lg:px-5 lg:h-[799px] items-center">
           <div className="text-center md:text-left">

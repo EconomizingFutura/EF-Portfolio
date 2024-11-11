@@ -9,15 +9,39 @@ import projectHeader from "../assets/projectsHeader.svg";
 import Boxes from "../assets/Boxes.svg";
 import Lottie from "lottie-react";
 import Header from "../sections/Header";
+import { contactAPI, ContactData } from "../api/ContactAPI";
+import { toast, Toaster } from "sonner";
 
 const sectionColors = ["#e3f5ff", "#FFFFFF"];
 
 const Projects: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [rotate, setRotate] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const handleToggle = () => {
     setShowModal(!showModal);
+  };
+
+  const handleFormSubmit = async (data: ContactData) => {
+    if (
+      data.firstName === "" ||
+      data.lastName === "" ||
+      data.email === "" ||
+      data.comments === ""
+    ) {
+      toast.error("All fields are required");
+      return;
+    }
+    try {
+      const response = await contactAPI(data, setIsLoading);
+      toast.success(response.message);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const [backgroundColor, setBackgroundColor] = useState(sectionColors[0]);
@@ -90,10 +114,15 @@ const Projects: React.FC = () => {
         />
       </div>
       <div className="  md:right-10 md:bottom-10  right-5 bottom-5 z-50 fixed">
-        <EnqueryModal />
+        <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
       </div>
       {showModal && (
-        <ContactModal isModalOpen={showModal} handleToggle={handleToggle} />
+        <ContactModal
+          isLoading={isLoading}
+          isModalOpen={showModal}
+          handleToggle={handleToggle}
+          onFormSubmit={handleFormSubmit}
+        />
       )}
       <div
         ref={filterSectionRef}
@@ -113,9 +142,10 @@ const Projects: React.FC = () => {
           style={{ backgroundImage: `url(${projectHeader})` }}
           className=" h-[350px] w-[350px] rounded-full absolute blur-xl translate-x-2/3 pointer-events-none top-1/4 right-0 -rotate-90 opacity-80"
         ></div>
+        <Toaster richColors />
         {/* project details */}
         <div className="">
-          <div className=" border-l-8 border-l-primary ps-6">
+          <div className=" border-l-8 border-l-primary ps-6 flex flex-col gap-6">
             <h1 className=" text-[#24536E] font-bold leading-[40px] xl:leading-[52.81px] text-[24px] xl:text-[44px]">
               {projectDetails.projectName}
             </h1>

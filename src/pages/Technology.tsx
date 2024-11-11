@@ -9,51 +9,64 @@ import EnqueryModal from "../modal/EnqueryModal";
 import Header from "../sections/Header";
 import wave from "../assets/wave.svg";
 import greyCircles from "../assets/greyClircles.svg";
-// Define the colors for each section
+import { toast, Toaster } from "sonner";
+import { contactAPI, ContactData } from "../api/ContactAPI";
 const sectionColors = ["#BCE7FF", "#FFFFFF"];
 
 const Technology: React.FC = () => {
   const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const handleToggle = () => {
     setShow(!show);
   };
-
+  const handleFormSubmit = async (data: ContactData) => {
+    if (
+      data.firstName === "" ||
+      data.lastName === "" ||
+      data.email === "" ||
+      data.comments === ""
+    ) {
+      toast.error("All fields are required");
+      return;
+    }
+    try {
+      const response = await contactAPI(data, setIsLoading);
+      toast.success(response.message);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   const [backgroundColor, setBackgroundColor] = useState(sectionColors[0]);
 
-  // Refs for each section with type HTMLDivElement | null
   const mainSectionRef = useRef<HTMLDivElement | null>(null);
   const techSectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (entry.target === mainSectionRef.current) {
-              setBackgroundColor(sectionColors[0]);
-            } else if (entry.target === techSectionRef.current) {
-              setBackgroundColor(sectionColors[1]);
-            }
-          }
-        });
-      },
-      { threshold: 0.25, rootMargin: "0px 0px -40% 0px" }
-    );
+    const handleScroll = () => {
+      const mainSection = mainSectionRef.current;
+      const techSection = techSectionRef.current;
 
-    // Observe both sections
-    const sections = [mainSectionRef, techSectionRef];
-    sections.forEach((section) => {
-      if (section.current) {
-        console.log(`Observing section: ${section.current}`);
-        observer.observe(section.current);
+      if (mainSection && techSection) {
+        // const mainRect = mainSection.getBoundingClientRect();
+        const techRect = techSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        if (techRect.top <= windowHeight * 0.3) {
+          setBackgroundColor(sectionColors[1]);
+        } else {
+          setBackgroundColor(sectionColors[0]);
+        }
       }
-    });
-
-    return () => {
-      sections.forEach((section) => {
-        if (section.current) observer.unobserve(section.current);
-      });
     };
+
+    window.addEventListener("scroll", handleScroll);
+    // Initial check
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -139,12 +152,19 @@ const Technology: React.FC = () => {
           ))}
         </section>
       </div>
-
+      <Toaster richColors />
       <div className="md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
-        <EnqueryModal />
+        <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
       </div>
       <Footer />
-      {show && <ContactModal isModalOpen={show} handleToggle={handleToggle} />}
+      {show && (
+        <ContactModal
+          isLoading={isLoading}
+          onFormSubmit={handleFormSubmit}
+          isModalOpen={show}
+          handleToggle={handleToggle}
+        />
+      )}
     </div>
   );
 };

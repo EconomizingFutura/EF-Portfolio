@@ -93,7 +93,7 @@
 
 @font-face {
   font-family: "Hellix";
-  src: url("../assets/fonts/Hellix-Regular.ttf") format("truetype");
+  src: url("../assets/fonts/Hellix-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }

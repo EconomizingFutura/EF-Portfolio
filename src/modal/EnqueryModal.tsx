@@ -4,15 +4,37 @@ import Lottie from "lottie-react";
 import ButtonWrapper from "../components/ButtonWrapper";
 import InputFieldWrapper from "../components/InputFieldWrapper";
 import { X } from "lucide-react";
+import { ContactData } from "../api/ContactAPI";
 
-const EnqueryModal: React.FC = () => {
+interface PropsTypes {
+  isLoading: boolean;
+  onFormSubmit: (data: ContactData) => void;
+}
+
+const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
   const [showForms, setShowForms] = useState<boolean>(false);
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [comments, setComments] = useState<string>("");
 
-  console.log(firstName, lastName, email, comments);
+  const handleClick = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!firstName || !lastName || !email || !comments) {
+      return;
+    }
+    try {
+      onFormSubmit({ firstName, lastName, email, comments });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setComments("");
+      setShowForms(false);
+    }
+  };
 
   useEffect(() => {
     setShowForms(false);
@@ -23,7 +45,7 @@ const EnqueryModal: React.FC = () => {
       className={` ${
         !showForms
           ? "h-[56px] w-[56px] "
-          : " h-[500px] md:h-[520px] lg:h-[580px] w-[275px]  lg:w-[350px] "
+          : " h-[500px] md:h-[520px] lg:h-[600px] w-[275px]  lg:w-[350px] "
       } flex flex-col justify-between items-end  `}
     >
       {showForms && (
@@ -32,7 +54,10 @@ const EnqueryModal: React.FC = () => {
             Contact Us
           </h1>
 
-          <form className="w-full flex flex-col gap-y-2 lg:gap-y-4 ">
+          <form
+            onSubmit={handleClick}
+            className="w-full flex flex-col gap-y-2 lg:gap-y-4 "
+          >
             <InputFieldWrapper
               label="First Name"
               placeholder="First Name"
@@ -64,7 +89,7 @@ const EnqueryModal: React.FC = () => {
             <ButtonWrapper
               className="bg-[#20B2FF] h-[35px] md:h-[47px] rounded-lg font-semibold text-white text-base w-full"
               label="Submit"
-              onClick={() => console.log("Contact Us clicked")}
+              disabled={isLoading}
             />
           </form>
         </div>

@@ -8,10 +8,15 @@ import EnqueryModal from "../modal/EnqueryModal";
 import BlogsCard from "../components/BlogsCard";
 import Header from "../sections/Header";
 import projectHeader from "../assets/projectsHeader.svg";
+import { ContactData } from "../api/ContactAPI";
+import { toast, Toaster } from "sonner";
+import { contactAPI } from "../api/ContactAPI";
 const sectionColors = ["#e3f5ff", "#FFFFFF"];
 
 const Blog: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const handleToggle = () => {
     setShowModal(!showModal);
   };
@@ -20,7 +25,26 @@ const Blog: React.FC = () => {
   const mainSectionRef = useRef<HTMLDivElement | null>(null);
   const techSectionRef = useRef<HTMLDivElement | null>(null);
 
-  console.log(backgroundColor);
+  const handleFormSubmit = async (data: ContactData) => {
+    if (
+      data.firstName === "" ||
+      data.lastName === "" ||
+      data.email === "" ||
+      data.comments === ""
+    ) {
+      toast.error("All fields are required");
+      return;
+    }
+    try {
+      const response = await contactAPI(data, setIsLoading);
+      toast.success(response.message);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,8 +104,9 @@ const Blog: React.FC = () => {
       ></div>
       {/* enquery */}
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
-        <EnqueryModal />
+        <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
       </div>
+      <Toaster richColors />
       <section
         ref={techSectionRef}
         className=" h-auto flex-grow flex flex-col justify-center items-center gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto xl:w-[1107px] overflow-x-hidden  mt-16  py-8 sm:py-10 w-11/12 relative"
@@ -162,7 +187,12 @@ const Blog: React.FC = () => {
       </section>
       <Footer />
       {showModal && (
-        <ContactModal isModalOpen={showModal} handleToggle={handleToggle} />
+        <ContactModal
+          onFormSubmit={handleFormSubmit}
+          isLoading={isLoading}
+          isModalOpen={showModal}
+          handleToggle={handleToggle}
+        />
       )}
     </div>
   );

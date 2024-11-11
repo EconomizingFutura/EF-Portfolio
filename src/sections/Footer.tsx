@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <section className="bg-[#011520] flex flex-col justify-center px-4 md:py-6 md:px-10 font-hellix lg:px-24 xl:max-h-[405px] lg:h-[404px] h-[450px] ">
+    <section className="bg-[#011520] flex flex-col justify-center px-4 md:py-6 md:px-10 font-hellix lg:px-44 xl:max-h-[405px] lg:h-[404px] h-[450px] ">
       <div className="flex flex-col lg:flex-row lg:justify-between gap-8 lg:gap-0">
         <div className="flex flex-col gap-4">
           <div className="bg-white flex justify-center items-center h-16 w-20 rounded-md">

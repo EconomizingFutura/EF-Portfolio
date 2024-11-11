@@ -14,11 +14,15 @@ import projectHeader from "../assets/projectsHeader.svg";
 const sectionColors = ["", "#FFFFFF"];
 import WavesPriceSection from "../assets/WavesPriceSection.svg";
 import CustomSun from "../assets/CustomSun";
+import { ContactData } from "../api/ContactAPI";
+import { toast, Toaster } from "sonner";
+import { contactAPI } from "../api/ContactAPI";
 const Pricing: React.FC = () => {
   const [show, setShow] = useState(false);
   const handleToggle = () => {
     setShow(!show);
   };
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selected, setSelected] = useState<number>(1);
   const [section1, setSection1] = useState<string>("");
   // const [checkedItems, setCheckedItems] = useState<string[]>([]);
@@ -40,8 +44,26 @@ const Pricing: React.FC = () => {
     }
   };
 
-  console.log(backgroundColor);
-
+  const handleFormSubmit = async (data: ContactData) => {
+    if (
+      data.firstName === "" ||
+      data.lastName === "" ||
+      data.email === "" ||
+      data.comments === ""
+    ) {
+      toast.error("All fields are required");
+      return;
+    }
+    try {
+      const response = await contactAPI(data, setIsLoading);
+      toast.success(response.message);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
     const handleScroll = () => {
       const mainSectionTop =
@@ -84,7 +106,8 @@ const Pricing: React.FC = () => {
     {
       id: 1,
       label: "label",
-      header: "What is Question What is Question ?",
+      header:
+        "Please share any additional details, goals, or specific needs for your project. The more information, the better we can tailor our solutions.",
       labels: [
         { label: "Label 1" },
         { label: "Label 2" },
@@ -100,7 +123,8 @@ const Pricing: React.FC = () => {
     {
       id: 2,
       label: "label",
-      header: "What is Question What is Question ?",
+      header:
+        "Please share any additional details, goals, or specific needs for your project. The more information, the better we can tailor our solutions.",
       labels: [
         { label: "Hello 1" },
         { label: "Label 2" },
@@ -116,7 +140,8 @@ const Pricing: React.FC = () => {
     {
       id: 3,
       label: "label",
-      header: "What is Question What is Question ?",
+      header:
+        "Please share any additional details, goals, or specific needs for your project. The more information, the better we can tailor our solutions.",
     },
     {
       id: 4,
@@ -134,15 +159,22 @@ const Pricing: React.FC = () => {
 
   return (
     <div className="Prizing-section flex min-h-screen md:min-h-0  flex-col font-hellix w-full overflow-hidden">
-      {show && <ContactModal isModalOpen={show} handleToggle={handleToggle} />}
+      {show && (
+        <ContactModal
+          isLoading={isLoading}
+          onFormSubmit={handleFormSubmit}
+          isModalOpen={show}
+          handleToggle={handleToggle}
+        />
+      )}
+      <Toaster richColors />
       <Header
-        // transparent={true}
         width={"xl:w-[1136px] "}
         handleShowForms={handleToggle}
         background={backgroundColor}
       />
       <div ref={mainSectionRef}></div>
-
+      <Toaster richColors />
       <div
         style={{ backgroundImage: `url(${projectHeader})` }}
         className=" h-96 w-full absolute top-0 left-0 opacity-80"
@@ -380,7 +412,7 @@ const Pricing: React.FC = () => {
         )}
       </section>
       <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
-        <EnqueryModal />
+        <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
       </div>
       <Footer />
     </div>

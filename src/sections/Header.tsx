@@ -41,7 +41,7 @@ const Header: React.FC<propsTypes> = ({
         backgroundImage: `url(${new URL(wave, window.location.origin)})`,
         backgroundSize: "100% auto",
         // backgroundPosition: "center",
-        "@media (min-width: 768px)": {
+        "@media (minWidth: 768px)": {
           backgroundRepeat: "no-repeat",
           backgroundSize: "100% auto",
           backgroundPosition: "center",
@@ -57,7 +57,7 @@ const Header: React.FC<propsTypes> = ({
           : ""
       } py-2 px-5 fixed ${
         home ? "z-50" : "z-30"
-      } top-0 xl:px-0 w-full flex md:items-center md:justify-center font-hellix h-[74px]`}
+      } top-0 xl:px-0 w-full border-b border-b-[#D1EEFF] flex md:items-center md:justify-center font-hellix h-[74px]`}
     >
       <div className={`${width} w-full flex justify-between items-center`}>
         <img
