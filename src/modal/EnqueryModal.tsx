@@ -17,12 +17,19 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [comments, setComments] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const handleClick = (e: React.FormEvent) => {
     e.preventDefault();
     if (!firstName || !lastName || !email || !comments) {
       return;
     }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
     try {
       onFormSubmit({ firstName, lastName, email, comments });
     } catch (error) {
@@ -72,13 +79,16 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
               className="w-full text-[#999999]"
               onChange={setLastName}
             />
-            <InputFieldWrapper
-              label="Email"
-              placeholder="xyz@gmail.com"
-              value={email}
-              onChange={setEmail}
-              className=" text-[#999999]"
-            />
+            <div>
+              <InputFieldWrapper
+                label="Email"
+                placeholder="xyz@gmail.com"
+                value={email}
+                onChange={setEmail}
+                className=" text-[#999999]"
+              />
+              {error && <p className="text-red-500">{error}</p>}
+            </div>
             <InputFieldWrapper
               label="Comments"
               placeholder="Enter your message"

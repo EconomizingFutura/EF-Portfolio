@@ -1,0 +1,192 @@
+.cardContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 160px;
+}
+
+.cardContainer:last-of-type {
+  &.card1 {
+    padding-top: 0;
+  }
+}
+
+.cardContainer .card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: -25%;
+  height: 512px;
+  width: 1136px;
+  border-radius: 24px;
+
+  background-color: #f4faff;
+  padding: 0 12px;
+  transform-origin: top;
+}
+
+@media (max-width: 768px) {
+  .cardContainer .card {
+    width: 90%; /* Adjust the width to fit smaller screens */
+    height: 450px; /* Adjust height if needed */
+    padding: 8px; /* Adjust padding */
+  }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 480px) {
+  .cardContainer {
+    height: auto; /* Adjust height to fit content on smaller screens */
+  }
+
+  .cardContainer .card {
+    width: 100%; /* Full width on small screens */
+    height: auto; /* Allow card height to adjust based on content */
+    padding: 6px;
+    top: 0; /* Remove or adjust top positioning */
+  }
+}
+
+.mailto {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* .main-container {
+  position: absolute;
+  background-color: #212735cc;
+  z-index: 1;
+  inset: 0;
+} */
+
+.logoContainer {
+  flex-direction: row;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+}
+.logoText {
+  font-family: "Overpass";
+  font-weight: 600;
+  font-size: 16px;
+  padding-left: 5px;
+  color: #000;
+  padding-top: 2px;
+}
+
+.selected a {
+  color: #fff;
+  background-color: #5740e4;
+  padding: 15px 20px 13px 20px;
+  border-radius: 8px;
+  font-family: "Overpass";
+  font-weight: 600;
+  font-size: 16px;
+}
+.selected link {
+  color: #fff;
+  background-color: #5740e4;
+  padding: 15px 20px 15px 20px;
+  border-radius: 8px;
+  font-family: "Overpass";
+  font-weight: 600;
+  font-size: 16px;
+}
+/* Home Page */
+
+.titleText {
+  font-family: "Overpass";
+  font-weight: 800;
+  font-size: 40px;
+  color: #212735;
+}
+.colorTitleText {
+  font-family: "Overpass";
+  font-weight: 500;
+  font-size: 18px;
+  color: #5740e4;
+}
+
+.thinkCard {
+  border: 1px solid;
+}
+.thinkCardTitle {
+  font-family: "Overpass";
+  font-weight: 800;
+  font-size: 32px;
+  color: #212735;
+}
+.thinkSubText {
+  font-family: "Overpass";
+  font-weight: 400;
+  font-size: 17px;
+  color: #6d7486;
+}
+
+/* Footer */
+
+.socialMedia {
+  padding-left: 20px;
+}
+
+.pageTitle {
+  font-family: "hellix";
+  font-weight: 800;
+  font-size: 40px;
+  font-weight: 700;
+  color: #031924;
+  /* max-width: 1136px; */
+  margin: 0 auto;
+  padding: 0 25px;
+  padding-bottom: 60px;
+  padding-left: 28px;
+}
+.pagetitleColor {
+  color: #5740e4;
+}
+
+@media (max-width: 768px) {
+  .cardContainer {
+    position: unset !important;
+  }
+  .card1 {
+    top: 0px !important;
+    transform: none !important;
+    padding-top: 0px !important;
+  }
+  .pageTitle {
+    font-weight: 800 !important;
+    font-size: 24px !important;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  scroll-snap-align: start;
+}
+
+.content-why {
+  padding-top: 60px;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.containerNew {
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.sticky-landingpage {
+  position: sticky;
+  top: 0;
+}

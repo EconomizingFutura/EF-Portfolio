@@ -1,29 +1,17 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import Footer from "../sections/Footer";
+import React, { useMemo, useRef, useState } from "react";
 import ButtonWrapper from "../components/ButtonWrapper";
 import Dropbox from "../assets/Dropbox.svg";
 import File from "../assets/File.svg";
-import "../style.css";
-import InputFieldWrapper from "../components/InputFieldWrapper";
-import Proppers from "../assets/Proppers.json";
-import Lottie from "lottie-react";
-import ContactModal from "../modal/ContactModal";
-import EnqueryModal from "../modal/EnqueryModal";
-import Header from "../sections/Header";
-import projectHeader from "../assets/projectsHeader.svg";
-const sectionColors = ["", "#FFFFFF"];
+import RadioButtonWrapper from "../components/RadioButtonWrapper";
+import CheckBoxWrapper from "../components/CheckBoxWrapper";
+import PricingInputWrapper from "../components/PricingInputWrapper";
 import WavesPriceSection from "../assets/WavesPriceSection.svg";
-import CustomSun from "../assets/CustomSun";
-import { ContactData } from "../api/ContactAPI";
-import { toast, Toaster } from "sonner";
-import { contactAPI } from "../api/ContactAPI";
+
+import InputFieldWrapper from "../components/InputFieldWrapper";
 import {
   softwareDevelopment,
   teamAugmentation,
 } from "../constants/PricingConstants";
-import RadioButtonWrapper from "../components/RadioButtonWrapper";
-import CheckBoxWrapper from "../components/CheckBoxWrapper";
-import PricingInputWrapper from "../components/PricingInputWrapper";
 interface SubSectionLabel {
   label: string;
   dropval?: string[];
@@ -35,59 +23,8 @@ interface SubSection {
   label?: string;
   labels?: SubSectionLabel[];
 }
-const Pricing: React.FC = () => {
-  const [show, setShow] = useState(false);
-  const handleToggle = () => {
-    setShow(!show);
-  };
 
-  const [backgroundColor, setBackgroundColor] = useState(sectionColors[0]);
-  const mainSectionRef = useRef<HTMLDivElement | null>(null);
-  const techSectionRef = useRef<HTMLDivElement | null>(null);
-
-  const handleFormSubmit = async (data: ContactData) => {
-    if (
-      data.firstName === "" ||
-      data.lastName === "" ||
-      data.email === "" ||
-      data.comments === ""
-    ) {
-      toast.error("All fields are required");
-      return;
-    }
-    try {
-      const response = await contactAPI(data, setIsLoading);
-      toast.success(response.message);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  useEffect(() => {
-    const handleScroll = () => {
-      const mainSection = mainSectionRef.current;
-      const techSection = techSectionRef.current;
-
-      if (mainSection && techSection) {
-        const techRect = techSection.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-
-        if (techRect.top <= windowHeight * 0.3) {
-          setBackgroundColor(sectionColors[1]);
-        } else {
-          setBackgroundColor(sectionColors[0]);
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+const Price: React.FC = () => {
   const [subSection, setSubSection] = useState<SubSection[]>([]);
   const [stage, setStage] = useState<string>("");
   const [marketOthers, setMarketOthers] = useState<string>("");
@@ -109,7 +46,6 @@ const Pricing: React.FC = () => {
   const [softwareType, setSoftwareType] = useState<string>("");
   const [dropBox, setDropBox] = useState<boolean>(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const ref = useRef<HTMLInputElement>(null);
 
@@ -127,6 +63,7 @@ const Pricing: React.FC = () => {
     ],
     []
   );
+
   const handlePrevSection = () => {
     if (selected === 0) {
       setSubSection([]);
@@ -137,8 +74,6 @@ const Pricing: React.FC = () => {
       setSelected(selected - 1);
     }
   };
-  const [isFormCompleted, setIsFormCompleted] = useState<boolean>(false);
-
   const handleNextSection = () => {
     if (subSection.length === 0) {
       if (!selectedValue) {
@@ -163,9 +98,7 @@ const Pricing: React.FC = () => {
         return;
       }
 
-      if (selected === subSection.length - 1) {
-        setIsFormCompleted(true);
-      } else {
+      if (subSection.length > 1) {
         setSelected(selected + 1);
         setErrors({});
       }
@@ -243,6 +176,7 @@ const Pricing: React.FC = () => {
       </div>
     );
   };
+
   const validateSoftwareDevelopment = (currentSection: SubSection) => {
     const newErrors: { [key: string]: string } = {};
 
@@ -736,191 +670,81 @@ const Pricing: React.FC = () => {
         );
     }
   };
-  console.log(selected, subSection?.length);
-  // Reset the section and selected value after 2 seconds if selected value is greater than the subSection length
-  //   useEffect(() => {
-  //     if (selected === subSection?.length) {
-  //       const changeSelected = setTimeout(() => {
-  //         setSubSection([]);
-  //         setSelected(0);
-  //       }, 2000);
-  //       return () => clearTimeout(changeSelected);
-  //     }
-  //   }, [selected, subSection?.length]);
 
-  console.log(isFormCompleted);
-
-  useEffect(() => {
-    if (isFormCompleted) {
-      const resetTimer = setTimeout(() => {
-        setDropBox(false);
-        setSubSection([]);
-        setSelected(0);
-        setIsFormCompleted(false);
-        setSelectedValue("");
-        setStage("");
-        setMarketOthers("");
-        setServiceOthers("");
-        setPlatformOthers("");
-        setPlatform([]);
-        setService([]);
-        setMarket([]);
-        setComments("");
-        setName("");
-        setEmail("");
-        setFile(null);
-        setExpert([]);
-        setTechnology([]);
-        setDuration("");
-        setCompanyType("");
-        setSoftwareType("");
-        setErrors({});
-      }, 20000);
-
-      return () => clearTimeout(resetTimer);
-    }
-  }, [isFormCompleted]);
+  console.log(subSection[selected], selected, subSection);
 
   return (
-    <div className="Prizing-section flex min-h-screen md:min-h-0  flex-col font-hellix w-full overflow-hidden">
-      {show && (
-        <ContactModal
-          isLoading={isLoading}
-          onFormSubmit={handleFormSubmit}
-          isModalOpen={show}
-          handleToggle={handleToggle}
-        />
-      )}
-      <Toaster richColors />
-      <Header
-        width={"xl:w-[1136px] "}
-        handleShowForms={handleToggle}
-        background={backgroundColor}
-      />
-      <div ref={mainSectionRef}></div>
-      <Toaster richColors />
+    <div className=" bg-violet-300 h-dvh w-full flex justify-center font-hellix items-center">
       <div
-        style={{ backgroundImage: `url(${projectHeader})` }}
-        className=" h-96 w-full absolute top-0 left-0 opacity-80"
-      ></div>
-      <div
-        ref={mainSectionRef}
-        className=" h-[225px] md:h-[200px] lg:h-[400px] xl:h-[300px] relative w-full flex justify-center items-center "
+        style={{
+          backgroundImage: ` URL(${WavesPriceSection})`,
+        }}
+        className=" xl:w-[1136px] xl:h-[428px] rounded-[30px] bg-[#FFFFFF] border flex justify-between items-center"
       >
-        <div className=" absolute top-0 left-0 w-full h-full">
-          <CustomSun />
-        </div>
-        <h1 className=" text-[#24536E] font-bold leading-[52.81px] text-center text-[44px]">
-          Pricing
-        </h1>
-      </div>
-      <section
-        ref={techSectionRef}
-        className="flex-grow w-full xl:w-[1136px] xl:mx-auto z-20  mb-10 flex-col justify-evenly items-center h-min  flex"
-      >
-        <div
-          style={{
-            backgroundImage: ` URL(${WavesPriceSection})`,
-          }}
-          className="lg:h-[428px] flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 xl:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative"
-        >
-          {!isFormCompleted ? (
-            <div className="relative z-10  w-full flex justify-center  items-center  flex-col md:flex-row gap-10">
-              <div className="flex w-full  sm:w-1/2 lg:h-[119px] mb-auto justify-between flex-col px-2 md:px-0 gap-6 my-2">
-                <div className=" flex gap-1.5 lg:w-[239px]  w-[200px]">
-                  {Array.from({ length: subSection.length }, (_, index) => (
-                    <div
-                      key={index}
-                      className={`w-[32px] h-[4px] rounded-[40px]  flex justify-center items-center ${
-                        index < selected + 1 ? " bg-primary" : "bg-[#E0E0E0]"
-                      }`}
-                    >
-                      <span
-                        className={`${
-                          index < selected + 1 ? "text-white" : "text-gray-400"
-                        }`}
-                      ></span>
-                    </div>
-                  ))}
-                </div>
-
-                <p className=" font-medium text-[17px] h-5 inline-block py-2  leading-4 tracking-[0.02em] text-[#999999]">
-                  {subSection.length === 0
-                    ? selectSections[0]?.label
-                    : subSection[selected]?.label}
-                </p>
-                <h1 className=" font-semibold lg:text-[28px] text-[20px]  leading-[39px] -tracting-[0.02em] text-[#032435]">
-                  {subSection.length === 0
-                    ? selectSections[0]?.header
-                    : subSection[selected]?.header}
-                </h1>
-              </div>
-              <div className="lg:w-1/2 flex justify-center items-center flex-col h-full gap-5">
-                <div
+        <div className="lg:w-1/2 px-10 font-hellix">
+          <div className=" flex gap-1.5 lg:w-[239px]  w-[200px]">
+            {Array.from({ length: subSection.length }, (_, index) => (
+              <div
+                key={index}
+                className={`w-[32px] h-[4px] rounded-[40px]  flex justify-center items-center ${
+                  index < selected + 1 ? " bg-primary" : "bg-[#E0E0E0]"
+                }`}
+              >
+                <span
                   className={`${
-                    dropBox
-                      ? "border-dashed-spaced font-hellix items-center inline-block"
-                      : "rounded-[16px] border-[#E0E0E0] border-[1px]"
-                  } bg-[#FFFFFF] lg:h-[228px] lg:w-[487px]  flex justify-center items-center`}
-                >
-                  <div className=" h-[164px] w-[416px] px-2 py-1 flex justify-center items-center">
-                    {subSection.length == 0 && <SelectingMainSection />}
-                    {selectedValue &&
-                    selectedValue == "Software Development" ? (
-                      <SoftwareDevelopmentSection />
-                    ) : (
-                      <TeamAugmentationSection />
-                    )}
-                  </div>
-                </div>
-
-                <div className=" flex gap-10 lg:gap-6 lg:w-[487px] justify-end md:mt-0 mt-4 font-hellix">
-                  {subSection.length > 1 && (
-                    <ButtonWrapper
-                      className="bg-[#F1FAFF] p-3 lg:p-0 lg:h-[56px]  text-[#20B2FF] rounded-lg font-semibold 
-          text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px] lg:mx-0"
-                      label={"Prev"}
-                      onClick={handlePrevSection}
-                    />
-                  )}
-
-                  <ButtonWrapper
-                    className="bg-[#20B2FF] p-3 lg:p-0 lg:h-[56px]  text-white font-hellix rounded-lg font-semibold 
-          text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px]  lg:mx-0"
-                    label={dropBox ? (!file ? "Skip" : "Next") : "Next"}
-                    onClick={handleNextSection}
-                  />
-                </div>
+                    index < selected + 1 ? "text-white" : "text-gray-400"
+                  }`}
+                ></span>
               </div>
-            </div>
-          ) : (
-            <div className=" w-full h-full justify-center relative items-center  flex flex-row gap-2">
-              <Lottie
-                animationData={Proppers}
-                loop={true}
-                className="lg:h-72 lg:w-72 h-56 w-56 absolute left-0 rounded-full"
-              />
-              <p className=" text-secondary text-center font-bold lg:text-[40px] text-[30px]  leading-[48.01px] -tracking-[0.02em]">
-                <span className=" text-primary">
-                  Thanks! <br />
-                </span>
-                Our team will be reach out you in 24hrs!
-              </p>
-              <Lottie
-                animationData={Proppers}
-                loop={true}
-                className="lg:h-72 lg:w-72 h-56 w-56 absolute right-0 rounded-full"
-              />
-            </div>
-          )}
+            ))}
+          </div>
+
+          <p className=" font-medium text-[17px] h-5 inline-block py-2  leading-4 tracking-[0.02em] text-[#999999]">
+            Label
+          </p>
+          <h1 className=" font-semibold lg:text-[28px] text-[20px]  leading-[39px] -tracting-[0.02em] text-[#032435]">
+            What is Question What is Question ?
+          </h1>
         </div>
-      </section>
-      <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
-        <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
+        <div className="lg:w-1/2 flex justify-center items-center flex-col h-full gap-5">
+          <div
+            className={`${
+              dropBox
+                ? "border-dashed-spaced font-hellix items-center inline-block"
+                : "rounded-[16px] border-[#E0E0E0] border-[1px]"
+            } bg-[#FFFFFF] lg:h-[228px] lg:w-[487px]  flex justify-center items-center`}
+          >
+            <div className=" h-[164px] w-[416px] px-2 py-1 flex justify-center items-center">
+              {subSection.length == 0 && <SelectingMainSection />}
+              {selectedValue && selectedValue == "Software Development" ? (
+                <SoftwareDevelopmentSection />
+              ) : (
+                <TeamAugmentationSection />
+              )}
+            </div>
+          </div>
+
+          <div className=" flex gap-10 lg:gap-6 lg:w-[487px] justify-end md:mt-0 mt-4 font-hellix">
+            {subSection.length > 1 && (
+              <ButtonWrapper
+                className="bg-[#F1FAFF] p-3 lg:p-0 lg:h-[56px]  text-[#20B2FF] rounded-lg font-semibold 
+          text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px] lg:mx-0"
+                label={"Prev"}
+                onClick={handlePrevSection}
+              />
+            )}
+
+            <ButtonWrapper
+              className="bg-[#20B2FF] p-3 lg:p-0 lg:h-[56px]  text-white font-hellix rounded-lg font-semibold 
+          text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px]  lg:mx-0"
+              label={dropBox ? (!file ? "Skip" : "Next") : "Next"}
+              onClick={handleNextSection}
+            />
+          </div>
+        </div>
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default Pricing;
+export default Price;

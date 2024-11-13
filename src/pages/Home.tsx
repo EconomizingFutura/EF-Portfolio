@@ -23,7 +23,8 @@ import Header from "../sections/Header";
 import { Toaster, toast } from "sonner";
 import { sectionColors } from "../constants/constants";
 import { contactAPI, ContactData } from "../api/ContactAPI";
-
+import { useScroll } from "framer-motion";
+import "../card.css";
 interface ProjectItem {
   id: number;
   projectName: string;
@@ -45,6 +46,11 @@ const Home: React.FC = () => {
   const container = useRef(null);
 
   const [headerBg, setHeaderBg] = useState<string>(sectionColors.hero);
+
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
 
   useEffect(() => {
     setHeaderBg(sectionColors.hero);
@@ -224,17 +230,22 @@ const Home: React.FC = () => {
       {/* projects */}
       <section
         ref={projectsSection}
-        className=" font-hellix min-h-svh py-10 w-11/12 mx-auto  bg-[#FFFFFF] relative flex flex-col justify-evenly items-center  md:mb-0"
+        // className="font-hellix min-h-svh py-10 w-11/12 mx-auto bg-[#FFFFFF] relative"
+        className="bodyBackground relative py-10"
       >
-        <h1 className="font-bold text-[32px] sm:text-[38px] leading-[40px] sm:leading-[45.61px] text-[#031924] text-center ">
-          Projects
-        </h1>
         <img
           src={Boxes}
           alt=""
-          className="absolute right-0 top-1 w-[80px] sm:w-auto"
+          className="absolute right-0  -top-0 z-40 w-[80px] sm:w-auto"
         />
-        <div ref={container} className=" relative">
+        {/* sticky top-20 z-10 bg-white pb-8 */}
+        <div className=" content-why pt-[90px] font-hellix transition-opacity duration-500 sticky top-0">
+          <h1 className="font-bold text-[32px] sm:text-[38px] leading-[40px] sm:leading-[45.61px] text-[#031924] text-center pageTitle">
+            Projects
+          </h1>
+        </div>
+
+        <div ref={container} className="relative">
           {projectsInfo.map((a: ProjectItem, i: number) => {
             const targetScale = 1 - (projectsInfo.length - i) * 0.05;
             return (
@@ -242,6 +253,7 @@ const Home: React.FC = () => {
                 key={a.id}
                 project={a}
                 i={i}
+                progress={scrollYProgress}
                 range={[i * 0.25, 1]}
                 targetScale={targetScale}
               />

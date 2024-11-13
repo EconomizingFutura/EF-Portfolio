@@ -2,7 +2,8 @@ import { useEffect, useRef } from "react";
 import { AppRouter } from "./router";
 import Lenis from "@studio-freight/lenis";
 import "./style.css";
-// import CustomSun from "./assets/CustomSun";
+// import Price from "./pages/Price";
+
 function App() {
   const container = useRef<HTMLElement | null>(null);
 
@@ -26,12 +27,6 @@ function App() {
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
-
-  // return (
-  //   <div className=" absolute top-0 left-0 w-full h-full">
-  //     <CustomSun height={225} />
-  //   </div>
-  // );
 
   return (
     <main ref={container}>

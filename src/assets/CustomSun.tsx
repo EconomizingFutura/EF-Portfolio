@@ -4,8 +4,7 @@ interface CustomSVGProps {
   height?: number;
 }
 
-const CustomSun: React.FC<CustomSVGProps> = ({ height }) => {
-  console.log(height);
+const CustomSun: React.FC<CustomSVGProps> = () => {
   return (
     <svg
       className="w-full hidden md:block lg:h-[628px] xl:h-[328px] sm:h-[300px]"
