@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { AppRouter } from "./router";
 import Lenis from "@studio-freight/lenis";
 import "./style.css";
-// import Price from "./pages/Price";
 
 function App() {
   const container = useRef<HTMLElement | null>(null);
