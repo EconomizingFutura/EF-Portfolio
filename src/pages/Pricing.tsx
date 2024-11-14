@@ -4,7 +4,6 @@ import ButtonWrapper from "../components/ButtonWrapper";
 import Dropbox from "../assets/Dropbox.svg";
 import File from "../assets/File.svg";
 import "../style.css";
-import InputFieldWrapper from "../components/InputFieldWrapper";
 import Proppers from "../assets/Proppers.json";
 import Lottie from "lottie-react";
 import ContactModal from "../modal/ContactModal";
@@ -24,9 +23,10 @@ import {
 import RadioButtonWrapper from "../components/RadioButtonWrapper";
 import CheckBoxWrapper from "../components/CheckBoxWrapper";
 import PricingInputWrapper from "../components/PricingInputWrapper";
+import DropDownWrapper from "../components/DropDownWrapper";
 interface SubSectionLabel {
   label: string;
-  dropval?: string[];
+  dropval?: { id: number; label: string }[];
 }
 
 interface SubSection {
@@ -93,10 +93,12 @@ const Pricing: React.FC = () => {
   const [marketOthers, setMarketOthers] = useState<string>("");
   const [serviceOthers, setServiceOthers] = useState<string>("");
   const [platformOthers, setPlatformOthers] = useState<string>("");
+  const [budget, setBudget] = useState<string>("");
   const [platform, setPlatform] = useState<string[]>([]);
   const [service, setService] = useState<string[]>([]);
   const [market, setMarket] = useState<string[]>([]);
-  const [comments, setComments] = useState<string>("");
+  const [comments1, setComments1] = useState<string>("");
+  const [comments2, setComments2] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [selected, setSelected] = useState<number>(0);
@@ -112,6 +114,8 @@ const Pricing: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const ref = useRef<HTMLInputElement>(null);
+
+  console.log(companyType);
 
   const selectSections = useMemo(
     () => [
@@ -146,9 +150,9 @@ const Pricing: React.FC = () => {
         return;
       }
       if (selectedValue === "Software Development") {
-        setSubSection(softwareDevelopment);
+        setSubSection(softwareDevelopment as SubSection[]);
       } else {
-        setSubSection(teamAugmentation);
+        setSubSection(teamAugmentation as SubSection[]);
       }
       setErrors({});
     } else {
@@ -229,17 +233,26 @@ const Pricing: React.FC = () => {
 
   const SelectingMainSection = () => {
     return (
-      <div className="flex flex-col gap-2">
-        {selectSections[0].labels.map((item) => (
-          <RadioButtonWrapper
-            key={item.id}
-            label={item.label}
-            value={item.label.toString()}
-            selectedValue={selectedValue}
-            onChange={handleRadioChange}
-          />
-        ))}
-        {errors && <p className="text-red-500 text-xs">{errors.selection}</p>}
+      <div
+        className="bg-[#FFFFFF] font-hellix 
+lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+      >
+        <div className=" flex w-full lg:pt-8 ps-4 pt-4  lg:ps-8 pb-8">
+          <div className="flex flex-col gap-2">
+            {selectSections[0].labels.map((item) => (
+              <RadioButtonWrapper
+                key={item.id}
+                label={item.label}
+                value={item.label.toString()}
+                selectedValue={selectedValue}
+                onChange={handleRadioChange}
+              />
+            ))}
+            {errors && (
+              <p className="text-red-500 text-xs">{errors.selection}</p>
+            )}
+          </div>
+        </div>
       </div>
     );
   };
@@ -266,8 +279,15 @@ const Pricing: React.FC = () => {
             "Please select at least one platform or specify other";
         break;
       case 6:
-        if (!companyType)
-          newErrors.companyType = "Please select a company type";
+        currentSection.labels?.forEach((item) => {
+          if (!dropdownValues[item.label]) {
+            newErrors[item.label] = `Please select ${item.label}`;
+          }
+        });
+
+        if (!budget.trim()) {
+          newErrors.budget = "Please specify your budget range";
+        }
         break;
       case 7:
         if (!name) newErrors.name = "Name is required";
@@ -312,6 +332,19 @@ const Pricing: React.FC = () => {
     return newErrors;
   };
 
+  const [dropdownValues, setDropdownValues] = useState<{
+    [key: string]: string;
+  }>({});
+
+  console.log(dropdownValues);
+
+  const handleDropdownChange = (label: string, value: string) => {
+    setDropdownValues((prevValues) => ({
+      ...prevValues,
+      [label]: value,
+    }));
+  };
+
   const SoftwareDevelopmentSection = () => {
     const currentSection = subSection[selected];
 
@@ -319,165 +352,242 @@ const Pricing: React.FC = () => {
       case 1:
         setDropBox(false);
         return (
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-4">
-              {currentSection?.labels?.map((item, index) => (
-                <RadioButtonWrapper
-                  key={index}
-                  label={item.label}
-                  value={item.label.toString()}
-                  selectedValue={stage}
-                  onChange={handleExperRadio}
-                />
-              ))}
+          <div
+            className="bg-[#FFFFFF] font-hellix 
+       xl:w-[487px] justify-center rounded-[12px]  lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap gap-4">
+                  {currentSection?.labels?.map((item, index) => (
+                    <RadioButtonWrapper
+                      key={index}
+                      label={item.label}
+                      value={item.label.toString()}
+                      selectedValue={stage}
+                      onChange={handleExperRadio}
+                    />
+                  ))}
+                </div>
+                {errors.stage && (
+                  <p className="text-red-500 text-xs">{errors.stage}</p>
+                )}
+              </div>
             </div>
-            {errors.stage && (
-              <p className="text-red-500 text-xs">{errors.stage}</p>
-            )}
           </div>
         );
       case 2:
         setDropBox(false);
         return (
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-2">
-              {currentSection?.labels?.map((item, index) => (
-                <CheckBoxWrapper
-                  key={index}
-                  label={item.label}
-                  isChecked={market.includes(item.label)}
-                  onChange={handleCheckboxChange}
-                  value={item.label.toString()}
-                />
-              ))}
-              <PricingInputWrapper
-                label="others"
-                onChangeFunction={handleMarketOthers}
-                values={marketOthers}
-              />
+          <div
+            className="bg-[#FFFFFF] font-hellix 
+       xl:w-[487px] justify-center rounded-[12px]  lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
+              <div className="flex flex-col gap-2 ">
+                <div className="flex flex-wrap gap-2">
+                  {currentSection?.labels?.map((item, index) => (
+                    <CheckBoxWrapper
+                      key={index}
+                      label={item.label}
+                      isChecked={market.includes(item.label)}
+                      onChange={handleCheckboxChange}
+                      value={item.label.toString()}
+                    />
+                  ))}
+                  <PricingInputWrapper
+                    label="others"
+                    onChangeFunction={handleMarketOthers}
+                    values={marketOthers}
+                  />
+                </div>
+                {errors.market && (
+                  <p className="text-red-500 text-xs">{errors.market}</p>
+                )}
+              </div>
             </div>
-            {errors.market && (
-              <p className="text-red-500 text-xs">{errors.market}</p>
-            )}
           </div>
         );
       case 3:
         setDropBox(false);
         return (
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-2">
-              {currentSection?.labels?.map((item, index) => (
-                <CheckBoxWrapper
-                  key={index}
-                  label={item.label}
-                  isChecked={service.includes(item.label)}
-                  onChange={handleServiceCheckboxChange}
-                  value={item.label.toString()}
-                />
-              ))}
-              <PricingInputWrapper
-                label="others"
-                onChangeFunction={setServiceOthers}
-                values={serviceOthers}
-              />
+          <div
+            className="bg-[#FFFFFF] font-hellix 
+       xl:w-[487px] justify-center rounded-[12px]  lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap gap-2">
+                  {currentSection?.labels?.map((item, index) => (
+                    <CheckBoxWrapper
+                      key={index}
+                      label={item.label}
+                      isChecked={service.includes(item.label)}
+                      onChange={handleServiceCheckboxChange}
+                      value={item.label.toString()}
+                    />
+                  ))}
+                  <PricingInputWrapper
+                    label="others"
+                    onChangeFunction={setServiceOthers}
+                    values={serviceOthers}
+                  />
+                </div>
+                {errors.service && (
+                  <p className="text-red-500 text-xs">{errors.service}</p>
+                )}
+              </div>
             </div>
-            {errors.service && (
-              <p className="text-red-500 text-xs">{errors.service}</p>
-            )}
           </div>
         );
       case 4:
         setDropBox(false);
         return (
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-4">
-              {currentSection?.labels?.map((item, index) => (
-                <CheckBoxWrapper
-                  key={index}
-                  label={item.label}
-                  isChecked={platform.includes(item.label)}
-                  onChange={handlePlatformCheckboxChange}
-                  value={item.label.toString()}
-                />
-              ))}
-              <PricingInputWrapper
-                label="others"
-                onChangeFunction={handlePlatformOthers}
-                values={platformOthers}
-              />
+          <div
+            className="bg-[#FFFFFF] font-hellix 
+       xl:w-[487px] justify-center rounded-[12px]  lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap gap-4">
+                  {currentSection?.labels?.map((item, index) => (
+                    <CheckBoxWrapper
+                      key={index}
+                      label={item.label}
+                      isChecked={platform.includes(item.label)}
+                      onChange={handlePlatformCheckboxChange}
+                      value={item.label.toString()}
+                    />
+                  ))}
+                  <PricingInputWrapper
+                    label="others"
+                    onChangeFunction={handlePlatformOthers}
+                    values={platformOthers}
+                  />
+                </div>
+                {errors.platform && (
+                  <p className="text-red-500 text-xs">{errors.platform}</p>
+                )}
+              </div>
             </div>
-            {errors.platform && (
-              <p className="text-red-500 text-xs">{errors.platform}</p>
-            )}
           </div>
         );
       case 5:
         setDropBox(false);
         return (
-          <div className=" flex flex-col mx-5 h-[164px] md:mx-0 gap-2 w-full ">
-            <h1 className=" text-[#031924] font-normal text-[16px] leading-[19.2px]">
-              Comments
-            </h1>
-            <textarea
-              className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
-              style={{ height: "auto", width: "100%" }}
-              rows={5}
-              cols={30}
-              onChange={(e) => setComments(e.target.value)}
-              //   onChange={(e) => setComments(e.target.value)}
-              draggable={false}
-              placeholder="Enter"
-              value={comments}
-            />
+          <div
+            className="bg-[#FFFFFF] font-hellix 
+        lg:h-[228px] xl:w-[487px] justify-center rounded-[12px] w-full  lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full py-2 sm:p-4 md:p-8">
+              <div className=" flex flex-col mx-5 h-[164px] md:mx-0 gap-2 w-full ">
+                <h1 className=" text-[#031924] font-normal text-[16px] leading-[19.2px]">
+                  Comments
+                </h1>
+                <textarea
+                  className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] px-1 lg:p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
+                  style={{ height: "auto", width: "100%" }}
+                  rows={5}
+                  cols={30}
+                  onChange={(e) => setComments1(e.target.value)}
+                  draggable={false}
+                  placeholder="Enter"
+                  value={comments1}
+                />
+              </div>
+            </div>
           </div>
         );
       case 6:
         setDropBox(false);
         return (
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-4">
-              {currentSection?.labels?.map((item, index) => (
-                <RadioButtonWrapper
-                  key={index}
-                  label={item.label}
-                  value={item.label.toString()}
-                  selectedValue={companyType}
-                  onChange={setCompanyType}
-                />
-              ))}
+          <div className="bg-[#FFFFFF] font-hellix xl:w-[487px] justify-center rounded-[16px] flex border-[#E0E0E0] border-[1px] items-center">
+            <div className="flex w-full p-4 md:p-8">
+              <div className="flex flex-col w-full gap-4">
+                {currentSection?.labels?.map((item, index) => (
+                  <div key={index} className="flex flex-col gap-1">
+                    <DropDownWrapper
+                      label={item.label}
+                      option={item.dropval?.map((opt) => opt.label) || []}
+                      onChange={(value) =>
+                        handleDropdownChange(item.label, value)
+                      }
+                      selectedValue={dropdownValues[item.label] || ""}
+                    />
+                    {errors[item.label] && (
+                      <p className="text-red-500 text-xs">
+                        {errors[item.label]}
+                      </p>
+                    )}
+                  </div>
+                ))}
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-[#031924] text-xs xl:text-[16px] text-[14px] font-normal">
+                    Do you have any budget limits? If yes, please, specify the
+                    range.
+                  </label>
+                  <input
+                    type="text"
+                    value={budget}
+                    placeholder="Enter budget range"
+                    className="w-full text-[#999999] font-normal leading-5 text-[16px] border-b border-[#DDE4EE] focus:outline-none p-2"
+                    onChange={(e) => setBudget(e.target.value)}
+                  />
+                  {errors.budget && (
+                    <p className="text-red-500 text-xs">{errors.budget}</p>
+                  )}
+                </div>
+              </div>
             </div>
-            {errors.companyType && (
-              <p className="text-red-500 text-xs">{errors.companyType}</p>
-            )}
           </div>
         );
       case 7:
         setDropBox(false);
         return (
-          <div className="px-2 md:px-0 w-full flex flex-col gap-2">
-            <div className="flex flex-col gap-1.5">
-              <InputFieldWrapper
-                label={"Name"}
-                placeholder={"Full Name"}
-                onChange={setName}
-                value={name}
-                pricing={true}
-              />
-              {errors.name && (
-                <p className="text-red-500 text-xs">{errors.name}</p>
-              )}
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <InputFieldWrapper
-                label="Email"
-                placeholder={"xyz@gmail.com"}
-                onChange={setEmail}
-                value={email}
-                pricing={true}
-              />
-              {errors.email && (
-                <p className="text-red-500 text-xs">{errors.email}</p>
-              )}
+          <div
+            className="bg-[#FFFFFF]  font-hellix 
+     xl:w-[487px] justify-center rounded-[12px] w-full   lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full p-4 lg:pt-8 lg:ps-8 lg:pb-8">
+              <div className=" md:px-0 w-full flex flex-col gap-2">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[#031924] text-xs xl:text-[16px] text-[14px] font-normal">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
+                    value={name}
+                    onChange={(e) => {
+                      console.log("Name input event:", e.target.value);
+                      setName(e.target.value);
+                    }}
+                  />
+                  {errors.name && (
+                    <p className="text-red-500 text-xs">{errors.name}</p>
+                  )}
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[#031924] text-xs xl:text-[16px] text-[14px] font-normal">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="xyz@gmail.com"
+                    className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
+                    value={email}
+                    onChange={(e) => {
+                      console.log("Email input event:", e.target.value);
+                      setEmail(e.target.value);
+                    }}
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs">{errors.email}</p>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -485,49 +595,56 @@ const Pricing: React.FC = () => {
       case 8:
         setDropBox(true);
         return (
-          <div className="md:w-[408.8px] mx-auto md:h-[104px] flex justify-between items-center  flex-col cursor-pointer font-hellix">
-            {file ? (
-              <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
-                <div className=" flex  bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
-                  <img src={File} alt="" />
-                  <h1 className="truncate max-w-48  inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
-                    {file.name}
-                  </h1>
-                </div>
-                <div className="flex justify-center rounded-md  items-center w-[119px] bg-[rgba(241,250,255,1)] lg:h-[40px] h-7 ">
-                  <button
-                    onClick={() => ref.current?.click()}
-                    className=" text-primary text-base  font-semibold leading-[19.2px]"
-                  >
-                    Change File
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div onClick={() => ref.current?.click()}>
-                <img
-                  src={Dropbox}
-                  alt=""
-                  className=" h-[52px] w-[52px] mx-auto"
-                />
-                <p className="text-[#031924] font-medium text-center text-[16px] ">
-                  Choose a file or drag & drop it here
-                </p>
-                <p className="text-[#999999] font-normal text-[14px] text-center ">
-                  PDF and Doc up to 5MB
-                </p>
-              </div>
-            )}
+          <div
+            className="border-dashed-spaced font-hellix items-center 
+             bg-[#FFFFFF] lg:h-[228px] w-full md:w-[380px] lg:w-[420px] xl:w-[487px] justify-center flex "
+          >
+            <div className=" flex justify-center items-center p-8 ">
+              <div className=" mx-auto md:h-[104px] flex justify-between items-center  flex-col cursor-pointer">
+                {file ? (
+                  <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
+                    <div className=" flex  bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
+                      <img src={File} alt="" />
+                      <h1 className="truncate max-w-48  inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
+                        {file.name}
+                      </h1>
+                    </div>
+                    <div className="flex justify-center rounded-md  items-center w-[119px] bg-[rgba(241,250,255,1)] lg:h-[40px] h-7 ">
+                      <button
+                        onClick={() => ref.current?.click()}
+                        className=" text-primary text-base  font-semibold leading-[19.2px]"
+                      >
+                        Change File
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div onClick={() => ref.current?.click()}>
+                    <img
+                      src={Dropbox}
+                      alt=""
+                      className=" h-[52px] w-[52px] mx-auto"
+                    />
+                    <p className="text-[#031924] font-medium text-center text-[16px] ">
+                      Choose a file or drag & drop it here
+                    </p>
+                    <p className="text-[#999999] font-normal text-[14px] text-center ">
+                      PDF and Doc up to 5MB
+                    </p>
+                  </div>
+                )}
 
-            <input
-              ref={ref}
-              type="file"
-              className="hidden"
-              accept=".pdf,.doc,.docx"
-              onChange={(e) =>
-                setFile(e.target.files ? e.target.files[0] : null)
-              }
-            />
+                <input
+                  ref={ref}
+                  type="file"
+                  className="hidden"
+                  accept=".pdf,.doc,.docx"
+                  onChange={(e) =>
+                    setFile(e.target.files ? e.target.files[0] : null)
+                  }
+                />
+              </div>
+            </div>
           </div>
         );
     }
@@ -540,213 +657,271 @@ const Pricing: React.FC = () => {
       case 1:
         setDropBox(false);
         return (
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-4">
-              {currentSection?.labels?.map((item, index) => (
-                <CheckBoxWrapper
-                  key={index}
-                  label={item.label}
-                  value={item.label.toString()}
-                  isChecked={expert.includes(item.label)}
-                  onChange={handleExpertCheckboxChange}
-                />
-              ))}
+          <div
+            className="bg-[#FFFFFF]  font-hellix 
+     xl:w-[487px]   justify-center  rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap gap-4">
+                  {currentSection?.labels?.map((item, index) => (
+                    <CheckBoxWrapper
+                      key={index}
+                      label={item.label}
+                      value={item.label.toString()}
+                      isChecked={expert.includes(item.label)}
+                      onChange={handleExpertCheckboxChange}
+                    />
+                  ))}
+                </div>
+                {errors.expert && (
+                  <p className="text-red-500 text-xs">{errors.expert}</p>
+                )}
+              </div>
             </div>
-            {errors.expert && (
-              <p className="text-red-500 text-xs">{errors.expert}</p>
-            )}
           </div>
         );
       case 2:
         setDropBox(false);
         return (
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-6">
-              {currentSection?.labels?.map((item, index) => (
-                <CheckBoxWrapper
-                  key={index}
-                  label={item.label}
-                  isChecked={technology.includes(item.label)}
-                  onChange={handleTechnologyCheckboxChange}
-                  value={item.label.toString()}
-                />
-              ))}
+          <div
+            className="bg-[#FFFFFF] font-hellix 
+       xl:w-[487px] justify-center rounded-[12px]  lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap gap-6">
+                  {currentSection?.labels?.map((item, index) => (
+                    <CheckBoxWrapper
+                      key={index}
+                      label={item.label}
+                      isChecked={technology.includes(item.label)}
+                      onChange={handleTechnologyCheckboxChange}
+                      value={item.label.toString()}
+                    />
+                  ))}
+                </div>
+                {errors.technology && (
+                  <p className="text-red-500 text-xs">{errors.technology}</p>
+                )}
+              </div>
             </div>
-            {errors.technology && (
-              <p className="text-red-500 text-xs">{errors.technology}</p>
-            )}
           </div>
         );
       case 3:
         setDropBox(false);
         return (
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-5">
-              {currentSection?.labels?.map((item, index) => (
-                <RadioButtonWrapper
-                  key={index}
-                  label={item.label}
-                  value={item.label.toString()}
-                  selectedValue={duration}
-                  onChange={setDuration}
-                />
-              ))}
+          <div
+            className="bg-[#FFFFFF] font-hellix 
+       xl:w-[487px] justify-center rounded-[12px]  lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap gap-4">
+                  {currentSection?.labels?.map((item, index) => (
+                    <RadioButtonWrapper
+                      key={index}
+                      label={item.label}
+                      value={item.label.toString()}
+                      selectedValue={duration}
+                      onChange={setDuration}
+                    />
+                  ))}
+                </div>
+                {errors.duration && (
+                  <p className="text-red-500 text-xs">{errors.duration}</p>
+                )}
+              </div>
             </div>
-            {errors.duration && (
-              <p className="text-red-500 text-xs">{errors.duration}</p>
-            )}
           </div>
         );
       case 4:
         setDropBox(false);
         return (
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-4">
-              {currentSection?.labels?.map((item, index) => (
-                <RadioButtonWrapper
-                  key={index}
-                  label={item.label}
-                  value={item.label.toString()}
-                  selectedValue={companyType}
-                  onChange={setCompanyType}
-                />
-              ))}
+          <div
+            className="bg-[#FFFFFF] font-hellix 
+       xl:w-[487px] justify-center rounded-[12px]  lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap gap-4">
+                  {currentSection?.labels?.map((item, index) => (
+                    <RadioButtonWrapper
+                      key={index}
+                      label={item.label}
+                      value={item.label.toString()}
+                      selectedValue={companyType}
+                      onChange={setCompanyType}
+                    />
+                  ))}
+                </div>
+                {errors.companyType && (
+                  <p className="text-red-500 text-xs">{errors.companyType}</p>
+                )}
+              </div>
             </div>
-            {errors.companyType && (
-              <p className="text-red-500 text-xs">{errors.companyType}</p>
-            )}
           </div>
         );
       case 5:
         setDropBox(false);
         return (
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-2">
-              {currentSection?.labels?.map((item, index) => (
-                <RadioButtonWrapper
-                  key={index}
-                  label={item.label}
-                  value={item.label.toString()}
-                  selectedValue={softwareType}
-                  onChange={setSoftwareType}
-                />
-              ))}
+          <div
+            className="bg-[#FFFFFF] font-hellix 
+       xl:w-[487px] justify-center rounded-[12px]  lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap gap-4">
+                  {currentSection?.labels?.map((item, index) => (
+                    <RadioButtonWrapper
+                      key={index}
+                      label={item.label}
+                      value={item.label.toString()}
+                      selectedValue={softwareType}
+                      onChange={setSoftwareType}
+                    />
+                  ))}
+                </div>
+                {errors.softwareType && (
+                  <p className="text-red-500 text-xs">{errors.softwareType}</p>
+                )}
+              </div>
             </div>
-            {errors.softwareType && (
-              <p className="text-red-500 text-xs">{errors.softwareType}</p>
-            )}
           </div>
         );
       case 6:
         setDropBox(false);
         return (
-          <div className=" flex flex-col mx-5 h-[164px] md:mx-0 gap-2 w-full ">
-            <h1 className=" text-[#031924] font-normal text-[16px] leading-[19.2px]">
-              Comments
-            </h1>
-            <textarea
-              className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
-              style={{ height: "auto", width: "100%" }}
-              rows={5}
-              cols={30}
-              onChange={(e) => setComments(e.target.value)}
-              draggable={false}
-              placeholder="Enter"
-              value={comments}
-            />
+          <div
+            className="bg-[#FFFFFF] font-hellix 
+          lg:h-[228px] xl:w-[487px] justify-center rounded-[12px]  lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full p-0 lg:p-8">
+              <div className=" flex flex-col mx-5 h-[164px] md:mx-0 gap-2 w-full ">
+                <h1 className=" text-[#031924] font-normal text-[16px] leading-[19.2px]">
+                  Comments
+                </h1>
+                <textarea
+                  className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] px-1 lg:p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
+                  style={{ height: "auto", width: "100%" }}
+                  rows={5}
+                  cols={30}
+                  onChange={(e) => setComments2(e.target.value)}
+                  draggable={false}
+                  placeholder="Enter"
+                  value={comments2}
+                />
+              </div>
+            </div>
           </div>
         );
       case 7:
         setDropBox(false);
         return (
-          <div className="px-2 md:px-0 w-full flex flex-col gap-2">
-            <div className="flex flex-col gap-1.5">
-              <InputFieldWrapper
-                label={"Name"}
-                placeholder={"Full Name"}
-                onChange={setName}
-                value={name}
-                pricing={true}
-              />
-              {errors.name && (
-                <p className="text-red-500 text-xs">{errors.name}</p>
-              )}
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <InputFieldWrapper
-                label="Email"
-                placeholder={"xyz@gmail.com"}
-                onChange={setEmail}
-                value={email}
-                pricing={true}
-              />
-              {errors.email && (
-                <p className="text-red-500 text-xs">{errors.email}</p>
-              )}
+          <div
+            className="bg-[#FFFFFF]  font-hellix 
+     xl:w-[487px] justify-center rounded-[12px] w-full   lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
+          >
+            <div className=" flex w-full p-4 lg:pt-8 lg:ps-8 lg:pb-8">
+              <div className=" md:px-0 w-full flex flex-col gap-2">
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[#031924] text-xs xl:text-[16px] text-[14px] font-normal">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
+                    value={name}
+                    onChange={(e) => {
+                      console.log("Name input event:", e.target.value);
+                      setName(e.target.value);
+                    }}
+                  />
+                  {errors.name && (
+                    <p className="text-red-500 text-xs">{errors.name}</p>
+                  )}
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[#031924] text-xs xl:text-[16px] text-[14px] font-normal">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="xyz@gmail.com"
+                    className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
+                    value={email}
+                    onChange={(e) => {
+                      console.log("Email input event:", e.target.value);
+                      setEmail(e.target.value);
+                    }}
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs">{errors.email}</p>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         );
       case 8:
         setDropBox(true);
         return (
-          <div className="md:w-[408.8px] mx-auto md:h-[104px] flex justify-between items-center  flex-col cursor-pointer">
-            {file ? (
-              <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
-                <div className=" flex  bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
-                  <img src={File} alt="" />
-                  <h1 className="truncate max-w-48  inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
-                    {file.name}
-                  </h1>
-                </div>
-                <div className="flex justify-center rounded-md  items-center w-[119px] bg-[rgba(241,250,255,1)] lg:h-[40px] h-7 ">
-                  <button
-                    onClick={() => ref.current?.click()}
-                    className=" text-primary text-base  font-semibold leading-[19.2px]"
-                  >
-                    Change File
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div onClick={() => ref.current?.click()}>
-                <img
-                  src={Dropbox}
-                  alt=""
-                  className=" h-[52px] w-[52px] mx-auto"
-                />
-                <p className="text-[#031924] font-medium text-center text-[16px] ">
-                  Choose a file or drag & drop it here
-                </p>
-                <p className="text-[#999999] font-normal text-[14px] text-center ">
-                  PDF and Doc up to 5MB
-                </p>
-              </div>
-            )}
+          <div
+            className="border-dashed-spaced font-hellix items-center 
+             bg-[#FFFFFF] lg:h-[228px] w-full md:w-[380px] lg:w-[420px] xl:w-[487px] justify-center flex "
+          >
+            <div className=" flex justify-center items-center p-8 ">
+              <div className=" mx-auto md:h-[104px] flex justify-between items-center  flex-col cursor-pointer">
+                {file ? (
+                  <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
+                    <div className=" flex  bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
+                      <img src={File} alt="" />
+                      <h1 className="truncate max-w-48  inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
+                        {file.name}
+                      </h1>
+                    </div>
+                    <div className="flex justify-center rounded-md  items-center w-[119px] bg-[rgba(241,250,255,1)] lg:h-[40px] h-7 ">
+                      <button
+                        onClick={() => ref.current?.click()}
+                        className=" text-primary text-base  font-semibold leading-[19.2px]"
+                      >
+                        Change File
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div onClick={() => ref.current?.click()}>
+                    <img
+                      src={Dropbox}
+                      alt=""
+                      className=" h-[52px] w-[52px] mx-auto"
+                    />
+                    <p className="text-[#031924] font-medium text-center text-[16px] ">
+                      Choose a file or drag & drop it here
+                    </p>
+                    <p className="text-[#999999] font-normal text-[14px] text-center ">
+                      PDF and Doc up to 5MB
+                    </p>
+                  </div>
+                )}
 
-            <input
-              ref={ref}
-              type="file"
-              className="hidden"
-              accept=".pdf,.doc,.docx"
-              onChange={(e) =>
-                setFile(e.target.files ? e.target.files[0] : null)
-              }
-            />
+                <input
+                  ref={ref}
+                  type="file"
+                  className="hidden"
+                  accept=".pdf,.doc,.docx"
+                  onChange={(e) =>
+                    setFile(e.target.files ? e.target.files[0] : null)
+                  }
+                />
+              </div>
+            </div>
           </div>
         );
     }
   };
   console.log(selected, subSection?.length);
-  // Reset the section and selected value after 2 seconds if selected value is greater than the subSection length
-  //   useEffect(() => {
-  //     if (selected === subSection?.length) {
-  //       const changeSelected = setTimeout(() => {
-  //         setSubSection([]);
-  //         setSelected(0);
-  //       }, 2000);
-  //       return () => clearTimeout(changeSelected);
-  //     }
-  //   }, [selected, subSection?.length]);
 
   console.log(isFormCompleted);
 
@@ -765,7 +940,8 @@ const Pricing: React.FC = () => {
         setPlatform([]);
         setService([]);
         setMarket([]);
-        setComments("");
+        setComments1("");
+        setComments2("");
         setName("");
         setEmail("");
         setFile(null);
@@ -816,17 +992,17 @@ const Pricing: React.FC = () => {
       </div>
       <section
         ref={techSectionRef}
-        className="flex-grow w-full xl:w-[1136px] xl:mx-auto z-20  mb-10 flex-col justify-evenly items-center h-min  flex"
+        className="flex-grow w-full xl:w-[1136px] xl:mx-auto z-20 mb-10 flex-col justify-evenly items-center h-min  flex"
       >
-        <div
-          style={{
-            backgroundImage: ` URL(${WavesPriceSection})`,
-          }}
-          className="lg:h-[428px] flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 xl:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative"
-        >
-          {!isFormCompleted ? (
+        {!isFormCompleted ? (
+          <div
+            style={{
+              backgroundImage: ` URL(${WavesPriceSection})`,
+            }}
+            className="lg:h-min flex-grow flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-8 md:py-16 xl:w-[1136px] w-11/12 rounded-xl md:rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative"
+          >
             <div className="relative z-10  w-full flex justify-center  items-center  flex-col md:flex-row gap-10">
-              <div className="flex w-full  sm:w-1/2 lg:h-[119px] mb-auto justify-between flex-col px-2 md:px-0 gap-6 my-2">
+              <div className="flex w-full   sm:w-1/2  lg:w-1/2 lg:h-[119px] mb-auto justify-between flex-col px-2 md:px-0 gap-3 lg:gap-6 my-2">
                 <div className=" flex gap-1.5 lg:w-[239px]  w-[200px]">
                   {Array.from({ length: subSection.length }, (_, index) => (
                     <div
@@ -844,40 +1020,29 @@ const Pricing: React.FC = () => {
                   ))}
                 </div>
 
-                <p className=" font-medium text-[17px] h-5 inline-block py-2  leading-4 tracking-[0.02em] text-[#999999]">
+                <p className=" font-medium lg:text-[17px] text-[15px] h-min inline-block py-2  leading-4 tracking-[0.02em] text-[#999999]">
                   {subSection.length === 0
                     ? selectSections[0]?.label
                     : subSection[selected]?.label}
                 </p>
-                <h1 className=" font-semibold lg:text-[28px] text-[20px]  leading-[39px] -tracting-[0.02em] text-[#032435]">
+                <h1 className=" font-bold lg:text-[28px] text-[18px]  lg:leading-[39px] lg:-tracting-[0.02em] text-[#032435]">
                   {subSection.length === 0
                     ? selectSections[0]?.header
                     : subSection[selected]?.header}
                 </h1>
               </div>
-              <div className="lg:w-1/2 flex justify-center items-center flex-col h-full gap-5">
-                <div
-                  className={`${
-                    dropBox
-                      ? "border-dashed-spaced font-hellix items-center inline-block"
-                      : "rounded-[16px] border-[#E0E0E0] border-[1px]"
-                  } bg-[#FFFFFF] lg:h-[228px] lg:w-[487px]  flex justify-center items-center`}
-                >
-                  <div className=" h-[164px] w-[416px] px-2 py-1 flex justify-center items-center">
-                    {subSection.length == 0 && <SelectingMainSection />}
-                    {selectedValue &&
-                    selectedValue == "Software Development" ? (
-                      <SoftwareDevelopmentSection />
-                    ) : (
-                      <TeamAugmentationSection />
-                    )}
-                  </div>
-                </div>
+              <div className="lg:w-1/2  w-full px-2 flex justify-center items-center flex-col h-full gap-5">
+                {subSection.length == 0 && <SelectingMainSection />}
+                {selectedValue && selectedValue == "Software Development" ? (
+                  <SoftwareDevelopmentSection />
+                ) : (
+                  <TeamAugmentationSection />
+                )}
 
-                <div className=" flex gap-10 lg:gap-6 lg:w-[487px] justify-end md:mt-0 mt-4 font-hellix">
+                <div className=" flex gap-10 lg:gap-6 ml-auto xl:w-[487px] justify-end md:mt-0 mt-4 font-hellix">
                   {subSection.length > 1 && (
                     <ButtonWrapper
-                      className="bg-[#F1FAFF] p-3 lg:p-0 lg:h-[56px]  text-[#20B2FF] rounded-lg font-semibold 
+                      className="bg-[#F1FAFF] p-3 xl:p-0 xl:h-[56px]  text-[#20B2FF] rounded-lg font-semibold 
           text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px] lg:mx-0"
                       label={"Prev"}
                       onClick={handlePrevSection}
@@ -885,7 +1050,7 @@ const Pricing: React.FC = () => {
                   )}
 
                   <ButtonWrapper
-                    className="bg-[#20B2FF] p-3 lg:p-0 lg:h-[56px]  text-white font-hellix rounded-lg font-semibold 
+                    className="bg-[#20B2FF] p-3 xl:p-0 xl:h-[56px]  text-white font-hellix rounded-lg font-semibold 
           text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px]  lg:mx-0"
                     label={dropBox ? (!file ? "Skip" : "Next") : "Next"}
                     onClick={handleNextSection}
@@ -893,8 +1058,15 @@ const Pricing: React.FC = () => {
                 </div>
               </div>
             </div>
-          ) : (
-            <div className=" w-full h-full justify-center relative items-center  flex flex-row gap-2">
+          </div>
+        ) : (
+          <div
+            style={{
+              backgroundImage: ` URL(${WavesPriceSection})`,
+            }}
+            className="lg:h-[428px] flex-grow flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 xl:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative"
+          >
+            <div className="  w-full h-full justify-center relative items-center  flex flex-row gap-2">
               <Lottie
                 animationData={Proppers}
                 loop={true}
@@ -912,10 +1084,10 @@ const Pricing: React.FC = () => {
                 className="lg:h-72 lg:w-72 h-56 w-56 absolute right-0 rounded-full"
               />
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </section>
-      <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
+      <div className="  md:right-8 md:bottom-8 right-4 bottom-4 z-50 fixed">
         <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
       </div>
       <Footer />

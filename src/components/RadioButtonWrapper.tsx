@@ -13,7 +13,7 @@ const RadioButtonWrapper: React.FC<RadioButtonWrapperProps> = ({
   selectedValue,
 }) => {
   return (
-    <div className=" lg:h-[44px] w-auto gap-2 bg-[#F4FAFF] rounded-lg px-2 flex items-center">
+    <div className=" lg:h-[44px] w-auto gap-2 bg-[#F4FAFF] rounded-lg p-2 flex items-center">
       <input
         required
         className=" h-4 w-4 border-[#999999] rounded-full border-2"

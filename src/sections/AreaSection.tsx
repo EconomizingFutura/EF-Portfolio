@@ -159,7 +159,7 @@ const AreaSection: React.FC = () => {
           >
             <div
               className="flex flex-col gap-7
-                           sm:gap-6
+                           sm:gap-4
                   
                            lg:h-[285px]
                            lg:w-1/2 lg:max-w-[527px]"
@@ -181,7 +181,7 @@ const AreaSection: React.FC = () => {
                 {a.info}
               </p>
               <div
-                className="text-[#e5e9ea] space-y-5 ml-6 lg:ml-0
+                className="text-[#e5e9ea] space-y-2 ml-1 lg:ml-0
                              sm:space-y-6
                              lg:space-y-2 text-[14px] lg:text-[17px] lg:leading-[21.6px] font-normal"
               >
@@ -198,7 +198,7 @@ const AreaSection: React.FC = () => {
                 src={a.logo}
                 alt=""
                 className="rounded-lg w-full max-w-[310px] h-[200px] object-cover
-                           sm:max-w-[380px] sm:h-[240px]
+                           sm:max-w-[330px] sm:h-[220px]
                            lg:max-w-[440px] lg:h-[285px]"
               />
             </div>

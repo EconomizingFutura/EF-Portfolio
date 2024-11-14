@@ -18,7 +18,7 @@ const PricingInputWrapper: React.FC<PricingInputWrapperProps> = ({
       <input
         type="text"
         placeholder={label}
-        className=" border-t-0 border-r-0 border-l-0 border-b-[#999999] border-b-2"
+        className=" border-t-0 border-r-0 border-l-0 focus:border-b-[#999999] border-b-2 focus:outline-none"
         onChange={(e) => onChangeFunction(e.target.value)}
         value={values}
       />

@@ -15,9 +15,9 @@ import AreaSection from "../sections/AreaSection";
 import Clients from "../sections/Clients";
 import FAQ from "../assets/FAQ.svg";
 import Faq from "../sections/Faq";
-import BlogsCard from "../components/BlogsCard";
-import { useNavigate } from "react-router";
-import { blogs, projectsInfo } from "../constants/constants";
+// import BlogsCard from "../components/BlogsCard";
+// import { useNavigate } from "react-router";
+import { projectsInfo } from "../constants/constants";
 import EnqueryModal from "../modal/EnqueryModal";
 import Header from "../sections/Header";
 import { Toaster, toast } from "sonner";
@@ -42,7 +42,7 @@ const Home: React.FC = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const blog = blogs.slice(0, 3);
+  // const blog = blogs.slice(0, 3);
   const container = useRef(null);
 
   const [headerBg, setHeaderBg] = useState<string>(sectionColors.hero);
@@ -140,7 +140,7 @@ const Home: React.FC = () => {
     }
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <div className=" mt-16 overflow-x-clip flex flex-col justify-between ">
       <Toaster richColors />
@@ -230,16 +230,16 @@ const Home: React.FC = () => {
       {/* projects */}
       <section
         ref={projectsSection}
-        // className="font-hellix min-h-svh py-10 w-11/12 mx-auto bg-[#FFFFFF] relative"
-        className="bodyBackground relative py-10"
+        className="bodyBackground relative md:py-10 "
       >
         <img
           src={Boxes}
           alt=""
-          className="absolute right-0  -top-0 z-40 w-[80px] sm:w-auto"
+          className="absolute w-2/3 md:w-auto right-0 top-1 "
         />
+
         {/* sticky top-20 z-10 bg-white pb-8 */}
-        <div className=" content-why pt-[90px] font-hellix transition-opacity duration-500 sticky top-0">
+        <div className=" content-why md:pt-[90px] font-hellix transition-opacity duration-500 static lg:sticky top-0">
           <h1 className="font-bold text-[32px] sm:text-[38px] leading-[40px] sm:leading-[45.61px] text-[#031924] text-center pageTitle">
             Projects
           </h1>
@@ -289,7 +289,7 @@ const Home: React.FC = () => {
         <Clients />
       </section>
       {/* Blogs */}
-      <section
+      {/* <section
         ref={blogsSection}
         className=" flex flex-col xl:max-w-screen justify-evenly items-center py-6 md:py-0 md:h-[741px]  bg-[#FFFFFF] font-hellix"
       >
@@ -297,21 +297,19 @@ const Home: React.FC = () => {
           Blog
         </h1>
 
-        {/* Blog Card Container */}
         <div className="flex font-hellix flex-row xl:w-[1139px] justify-start md:justify-between overflow-x-auto  gap-4 md:gap-6 items-center w-full sm:w-4/5 md:px-0 px-5 h-auto">
           {blog.map((a) => (
             <BlogsCard card={a} key={a.id} />
           ))}
         </div>
 
-        {/* View All Button */}
         <button
           onClick={() => navigate("/blogs")}
           className="w-[120px] h-[40px] md:w-[140px] md:h-[45px] lg:w-[202px] lg:h-[56px] font-bold text-[14px] md:text-[16px] lg:text-[18px] leading-snug bg-[#F1FAFF] text-primary  mt-6 xl:me-52 ml-auto"
         >
           View All
         </button>
-      </section>
+      </section> */}
       {/* F4F8FB */}
       {/* FAQ */}
       <section

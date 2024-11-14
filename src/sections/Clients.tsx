@@ -64,7 +64,7 @@ const HEADERS: Header[] = [
   { id: 2, section: "How We Work" },
 ];
 
-const ANIMATION_INTERVAL = 20000;
+const ANIMATION_INTERVAL = 15000;
 const PROGRESS_BAR_DURATION = 5;
 
 const ToggleSection = React.memo(

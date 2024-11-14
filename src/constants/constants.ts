@@ -21,6 +21,7 @@ import mobiledev from "../assets/mobiledev.svg";
 import web_dev from "../assets/web_dev.svg";
 import devopsDev from "../assets/devopsDev.svg";
 import UI from "../assets/UI.svg";
+import neo4j from "../assets/neo4j.svg";
 export const navLinks = [
   {
     id: 1,
@@ -32,11 +33,11 @@ export const navLinks = [
     link: "/pricing",
     name: "Pricing",
   },
-  {
-    id: 3,
-    link: "/blogs",
-    name: "Blogs",
-  },
+  // {
+  //   id: 3,
+  //   link: "/blogs",
+  //   name: "Blogs",
+  // },
   {
     id: 4,
     link: "/technologies",
@@ -87,22 +88,6 @@ export const projectsInfo: ProjectItem[] = [
       "Many professionals struggle with managing workflows across platforms like GitHub and Google Drive, leading to inefficiencies and wasted time. Without seamless integration, teams face disjointed processes and a lack of clear data visualisation. There’s a need for a unified solution that can streamline workflows, provide secure communication, and offer insights through analytics to boost productivity. Treva bridges this gap by bringing these tools together, ensuring a smooth, integrated experience.",
     services:
       "Treva offers end-to-end workflow management with personalized workflows, secure real-time chat, and conversation history tracking. It features data visualization via Chart.js, ensuring actionable insights. Additionally, the platform supports CRUD operations and integrates third-party tools like GitHub and Google Drive for a more cohesive and efficient workflow.",
-  },
-  {
-    id: 1,
-    lottie: Thunder,
-    projectName: "Aenini",
-    description:
-      "Aenini is an offline tool for counting warp and weft threads in fabric, with data stored locally. It ensures real-time thread count analysis for fabric quality in textile manufacturing. The user-friendly interface allows seamless operation without internet access.",
-    projectBanner: TrevaChat,
-
-    image: AeiniImg,
-    briefNote:
-      "Designed for ease of use, Aenini simplifies thread count analysis for textile experts.It delivers fast, accurate measurements of warp and weft threads.This efficiency improves the speed and precision of fabric quality checks.Aenini supports quality control processes, ensuring industry standards are met.Its seamless operation helps reduce errors and enhance inspection workflows.",
-    problemStatement:
-      "In many textile facilities, signal jammers are deployed to block internet and cellular connectivity for security purposes.This disrupts the functionality of cloud-based or online-dependent fabric inspection tools, leading to operational inefficiencies.Without access to real-time thread count analysis, ensuring fabric quality becomes a bottleneck.Traditional tools relying on continuous network access are rendered unusable in such environments.Aenini addresses this issue with its offline-first architecture, utilising LocalDB to store and process data locally, ensuring uninterrupted inspection workflows",
-    services:
-      "Aenini offers real-time offline thread count analysis and fabric inspection, ensuring accuracy without internet dependence.Our admin dashboard provides secure user management, role-based access control, and analytics for operational efficiency.",
   },
 ];
 
@@ -182,6 +167,11 @@ export const Technologies = [
     id: 5,
     logo: Python,
     text: "Python stands out for its simplicity and versatility, making it a go-to language for various applications. From web development and data analysis to machine learning and automation, Python’s extensive libraries and frameworks support rapid development and innovation. Its clean syntax and dynamic typing streamline coding, allowing us to build scalable and maintainable solutions quickly.",
+  },
+  {
+    id: 6,
+    logo: neo4j,
+    text: "Neo4j is a native graph database that makes it easy to model, store, and analyze highly connected data. By focusing on nodes and relationships, Neo4j allows us to uncover patterns and insights in complex data, ideal for applications like social networks, recommendations, and fraud detection. Its flexible structure supports changing data models, enabling agile development. With Neo4j, we gain a powerful tool for extracting valuable insights from interconnected data, making it essential for today’s relationship-driven applications.",
   },
 ];
 
