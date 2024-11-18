@@ -286,23 +286,25 @@ const ReactForms: React.FC = () => {
       case 1:
         return (
           <FormSectionWrapper>
-            <div className="flex flex-wrap gap-4">
-              {currentSection?.labels?.map((option, index) => (
-                <FormCheckboxInput
-                  type="radio"
-                  key={index}
-                  id={option.label}
-                  label={option.label}
-                  value={option.label}
-                  name="stage"
-                  register={register("stage", {
-                    required: "Please select a project stage",
-                  })}
-                  small={true}
-                />
-              ))}
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap gap-4">
+                {currentSection?.labels?.map((option, index) => (
+                  <FormCheckboxInput
+                    type="radio"
+                    key={index}
+                    id={option.label}
+                    label={option.label}
+                    value={option.label}
+                    name="stage"
+                    register={register("stage", {
+                      required: "Please select a project stage",
+                    })}
+                    small={true}
+                  />
+                ))}
+              </div>
+              <FormError errorMessage={errors.stage?.message as string} />
             </div>
-            <FormError errorMessage={errors.stage?.message as string} />
           </FormSectionWrapper>
         );
       case 2:
@@ -617,75 +619,83 @@ const ReactForms: React.FC = () => {
       case 3:
         return (
           <FormSectionWrapper>
-            <div className="flex flex-wrap gap-4">
-              {currentSection?.labels?.map((option, index) => (
-                <FormRadioCheckbox
-                  type="radio"
-                  key={index}
-                  id={option.label}
-                  label={option.label}
-                  value={option.label}
-                  name="duration"
-                  register={register("duration", {
-                    required: "Please select a project duration",
-                  })}
-                  small={true}
-                />
-              ))}
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap gap-4">
+                {currentSection?.labels?.map((option, index) => (
+                  <FormRadioCheckbox
+                    type="radio"
+                    key={index}
+                    id={option.label}
+                    label={option.label}
+                    value={option.label}
+                    name="duration"
+                    register={register("duration", {
+                      required: "Please select a project duration",
+                    })}
+                    small={true}
+                  />
+                ))}
+              </div>
+              {errors.duration && (
+                <FormError errorMessage={errors.duration?.message as string} />
+              )}
             </div>
-            {errors.duration && (
-              <FormError errorMessage={errors.duration?.message as string} />
-            )}
           </FormSectionWrapper>
         );
       case 4:
         return (
           <FormSectionWrapper>
-            <div className="flex flex-wrap gap-4">
-              {currentSection?.labels?.map((option, index) => (
-                <FormRadioCheckbox
-                  key={index}
-                  type="radio"
-                  id={option.label}
-                  label={option.label}
-                  value={option.label}
-                  name="companyType"
-                  register={register("companyType", {
-                    required: "Please select a company type",
-                  })}
-                  small={true}
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap gap-4">
+                {currentSection?.labels?.map((option, index) => (
+                  <FormRadioCheckbox
+                    key={index}
+                    type="radio"
+                    id={option.label}
+                    label={option.label}
+                    value={option.label}
+                    name="companyType"
+                    register={register("companyType", {
+                      required: "Please select a company type",
+                    })}
+                    small={true}
+                  />
+                ))}
+              </div>
+              {errors.companyType && (
+                <FormError
+                  errorMessage={errors.companyType?.message as string}
                 />
-              ))}
+              )}
             </div>
-            {errors.companyType && (
-              <FormError errorMessage={errors.companyType?.message as string} />
-            )}
           </FormSectionWrapper>
         );
       case 5:
         return (
           <FormSectionWrapper>
-            <div className="flex flex-wrap gap-4">
-              {currentSection?.labels?.map((option, index) => (
-                <FormRadioCheckbox
-                  key={index}
-                  type="radio"
-                  id={option.label}
-                  label={option.label}
-                  value={option.label}
-                  name="softwareType"
-                  register={register("softwareType", {
-                    required: "Please select a software type",
-                  })}
-                  small={true}
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap gap-4">
+                {currentSection?.labels?.map((option, index) => (
+                  <FormRadioCheckbox
+                    key={index}
+                    type="radio"
+                    id={option.label}
+                    label={option.label}
+                    value={option.label}
+                    name="softwareType"
+                    register={register("softwareType", {
+                      required: "Please select a software type",
+                    })}
+                    small={true}
+                  />
+                ))}
+              </div>
+              {errors.softwareType && (
+                <FormError
+                  errorMessage={errors.softwareType?.message as string}
                 />
-              ))}
+              )}
             </div>
-            {errors.softwareType && (
-              <FormError
-                errorMessage={errors.softwareType?.message as string}
-              />
-            )}
           </FormSectionWrapper>
         );
       case 6:
