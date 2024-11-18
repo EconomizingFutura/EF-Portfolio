@@ -1,3 +1,5 @@
+// import { PricingData } from "../api/PricingAPI";
+
 export const softwareDevelopment = [
   {
     id: 1,
@@ -190,3 +192,66 @@ export const teamAugmentation = [
     header: "Attach a Glimpse of Your Vision",
   },
 ];
+
+export const selectSections = [
+  {
+    id: 1,
+    label: "Free analysis and estimation for your project",
+    header: "What do you want to get a quote for?",
+    labels: [
+      { id: 1, label: "Software Development" },
+      { id: 2, label: "Team Augmentation services" },
+    ],
+  },
+];
+
+type PricingData = {
+  name: string;
+  email: string;
+};
+
+type InputField = {
+  id: keyof PricingData;
+  label: string;
+  type: string;
+  placeholder: string;
+  validation: object;
+};
+
+export const NameAndEmailPricing: InputField[] = [
+  {
+    id: "name",
+    label: "Name",
+    type: "text",
+    placeholder: "Enter your name",
+    validation: {
+      required: "Name is required",
+    },
+  },
+  {
+    id: "email",
+    label: "Email",
+    type: "email",
+    placeholder: "Enter your email",
+    validation: {
+      required: "Email is required",
+      pattern: {
+        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+        message: "Enter a valid email",
+      },
+    },
+  },
+];
+
+export const mainSelectionOptions = [
+  {
+    id: "software_development",
+    label: "Custom software development",
+    value: "software_development",
+  },
+  {
+    id: "team_augmentation",
+    label: "Team augmentation services",
+    value: "team_augmentation",
+  },
+] as const;

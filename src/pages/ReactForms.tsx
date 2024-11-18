@@ -1,16 +1,13 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import ReactInputField from "./ReactInputField";
+import ReactInputField from "../components/ReactInputField";
 import Dropbox from "../assets/Dropbox.svg";
 import File from "../assets/File.svg";
-
-interface OrganizationalQuestion {
-  label: string;
-  value: string;
-}
+import FormLabels from "../components/FormLabels";
 import Proppers from "../assets/Proppers.json";
 import projectHeader from "../assets/projectsHeader.svg";
 import {
+  mainSelectionOptions,
   softwareDevelopment,
   teamAugmentation,
 } from "../constants/PricingConstants";
@@ -24,35 +21,32 @@ import ContactModal from "../modal/ContactModal";
 import { contactAPI, ContactData } from "../api/ContactAPI";
 import Footer from "../sections/Footer";
 import EnqueryModal from "../modal/EnqueryModal";
-
-export interface PricingData {
-  name: string;
-  email: string;
-  comments?: string;
-  softwareDevelopment?: boolean;
-  teamAugumentation?: boolean;
-  experts?: string[];
-  marketOthers?: string;
-  technology?: string[];
-  marketing?: string[];
-  services?: string[];
-  duration?: string;
-  companyType?: string;
-  softwareType?: string;
-  stage?: string;
-  organizationalQuestions?: OrganizationalQuestion[];
-  platform?: string[];
-  budget?: string;
-  file?: string;
-  quoteType: string;
-  platforms?: string;
-  serviceothers: string;
-}
+import FormSectionWrapper from "../components/FormSectionWrapper";
+import FormError from "../components/FormError";
+import { PricingData } from "../api/PricingAPI";
+import FormOptions from "../components/FormOptions";
+import {
+  selectSections,
+  NameAndEmailPricing,
+} from "../constants/PricingConstants";
+import ManiSelection from "../components/ManiSelection";
+import FormCheckboxInput from "../components/FormCheckboxInput";
+import FormRadioCheckbox from "../components/FormCheckboxInput";
+import FormTextArea from "../components/FormTextArea";
+// import FormFileUpload from "../components/FormFileUpload";
 
 interface SubSectionLabel {
   label: string;
   dropval?: { id: number; label: string }[];
 }
+
+type InputField = {
+  id: keyof PricingData;
+  label: string;
+  type: string;
+  placeholder: string;
+  validation: object;
+};
 
 const sectionColors = ["", "#FFFFFF"];
 
@@ -76,21 +70,6 @@ const ReactForms: React.FC = () => {
     clearErrors,
     getValues,
   } = useForm<PricingData>();
-
-  const selectSections = useMemo(
-    () => [
-      {
-        id: 1,
-        label: "Free analysis and estimation for your project",
-        header: "What do you want to get a quote for?",
-        labels: [
-          { id: 1, label: "Software Development" },
-          { id: 2, label: "Team Augmentation services" },
-        ],
-      },
-    ],
-    []
-  );
 
   const [show, setShow] = useState(false);
   const handleToggle = () => {
@@ -125,22 +104,13 @@ const ReactForms: React.FC = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      reset();
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [reset]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selected, setSelected] = useState<number>(0);
   const [subData, setSubData] = useState<SubSection[]>([]);
   const [dropBox, setDropBox] = useState<boolean>(false);
   const quoteType = watch("quoteType");
   const [isFormCompleted, setIsFormCompleted] = useState<boolean>(false);
-
+  const file = watch("file")?.[0] as File | undefined;
   const handleNext = async () => {
     let isValid;
 
@@ -187,19 +157,52 @@ const ReactForms: React.FC = () => {
             isValid = await trigger("duration");
             break;
           } else {
-            isValid = await trigger(["services", "serviceothers"]);
-            break;
+            const formValues = getValues();
+            const hasMarketing =
+              formValues.services && formValues.services.length > 0;
+            const hasMarketOthers =
+              formValues.serviceothers &&
+              formValues.serviceothers.trim() !== "";
+
+            if (!hasMarketing && !hasMarketOthers) {
+              setError("services", {
+                type: "manual",
+                message:
+                  "Please either select a service type or specify other services",
+              });
+              isValid = false;
+            } else {
+              clearErrors("services");
+              isValid = true;
+            }
           }
+          break;
         }
-        case 4:
+        case 4: {
           if (quoteType == "team_augmentation") {
             isValid = await trigger("companyType");
             break;
           } else {
-            isValid = await trigger(["platform", "platforms"]);
-            break;
-          }
+            const formValues = getValues();
+            const hasMarketing =
+              formValues.platform && formValues.platform.length > 0;
+            const hasMarketOthers =
+              formValues.platforms && formValues.platforms.trim() !== "";
 
+            if (!hasMarketing && !hasMarketOthers) {
+              setError("platform", {
+                type: "manual",
+                message:
+                  "Please either select a service type or specify other services",
+              });
+              isValid = false;
+            } else {
+              clearErrors("platform");
+              isValid = true;
+            }
+          }
+          break;
+        }
         case 5:
           if (quoteType == "team_augmentation") {
             isValid = await trigger("softwareType");
@@ -252,6 +255,13 @@ const ReactForms: React.FC = () => {
       setSubData(teamAugmentation as SubSection[]);
     }
 
+    if (selected === subData.length - 1) {
+      onSubmit(getValues());
+
+      setIsFormCompleted(true);
+      return;
+    }
+
     if (subData.length > 0) setSelected((prev) => prev + 1);
   };
 
@@ -266,8 +276,6 @@ const ReactForms: React.FC = () => {
     }
   };
 
-  const file = watch("file")?.[0] as File[] | undefined;
-
   const SoftwareDevelopment = () => {
     const currentSection = subData[selected];
     useEffect(() => {
@@ -277,422 +285,275 @@ const ReactForms: React.FC = () => {
     switch (currentSection?.id) {
       case 1:
         return (
-          <div
-            className="bg-[#FFFFFF]  font-hellix 
-      xl:w-[487px]   justify-center  rounded-[16px] flex border-[#E0E0E0] border-[1px]"
-          >
-            <div className=" flex flex-col w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
-              <div className="flex flex-wrap gap-4">
-                {currentSection?.labels?.map((option, index) => (
-                  <div
-                    key={index}
-                    className=" lg:h-[44x] w-auto gap-2 bg-[#F4FAFF] rounded-lg p-2 flex items-center"
-                  >
-                    <input
-                      type="radio"
-                      id={option.label}
-                      value={option.label.toLowerCase().replace(/\s+/g, "_")}
-                      {...register("stage", {
-                        required: "Please select a project stage",
-                      })}
-                      className=" h-4 w-4 border-[#999999] rounded-full border-2"
-                    />
-                    <label
-                      htmlFor={option.label}
-                      className="cursor-pointer text-[#031924] lg:text-base font-medium text-sm leading-5 w-auto"
-                    >
-                      {option.label}
-                    </label>
-                  </div>
-                ))}
-              </div>
-              {errors.stage && (
-                <span className="text-red-500 text-xs">
-                  {errors.stage.message}
-                </span>
-              )}
+          <FormSectionWrapper>
+            <div className="flex flex-wrap gap-4">
+              {currentSection?.labels?.map((option, index) => (
+                <FormCheckboxInput
+                  type="radio"
+                  key={index}
+                  id={option.label}
+                  label={option.label}
+                  value={option.label}
+                  name="stage"
+                  register={register("stage", {
+                    required: "Please select a project stage",
+                  })}
+                  small={true}
+                />
+              ))}
             </div>
-          </div>
+            <FormError errorMessage={errors.stage?.message as string} />
+          </FormSectionWrapper>
         );
       case 2:
         return (
-          <div className="bg-[#FFFFFF] font-hellix xl:w-[487px] justify-center rounded-[12px] lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]">
-            <div className="flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
-              <div className="flex flex-col gap-2">
-                <div className="flex flex-wrap gap-2">
-                  {currentSection?.labels?.map((option, index) => (
-                    <div
-                      key={index}
-                      className=" lg:h-[32px] rounded-lg w-auto gap-4 bg-[#F4FAFF] p-2 justify-between md:px-2 flex items-center"
-                    >
-                      <input
-                        type="checkbox"
-                        id={option.label}
-                        value={option.label.toLowerCase().replace(/\s+/g, "_")}
-                        {...register("marketing")}
-                        className=" lg:h-4 lg:w-4 h-3 w-3 rounded-[2px] lg:p-2 border-[2px]"
-                      />
-                      <label
-                        className="text-[#031924] lg:text-[17px] font-medium tracking-[0.02em] text-sm leading-5"
-                        htmlFor={option.label}
-                      >
-                        {option.label}
-                      </label>
-                    </div>
-                  ))}
-                  <ReactInputField
-                    id="marketOthers"
-                    label="others"
-                    type="text"
-                    placeholder="Enter"
-                    register={register("marketOthers")}
-                    others={true}
+          <FormSectionWrapper>
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap gap-2">
+                {currentSection?.labels?.map((option, index) => (
+                  <FormRadioCheckbox
+                    key={index}
+                    type="checkbox"
+                    id={option.label}
+                    label={option.label}
+                    value={option.label}
+                    name="marketing"
+                    register={register("marketing", {
+                      required: "Please select a marketing type",
+                    })}
+                    small={true}
                   />
-                </div>
-                {errors.marketing && (
-                  <span className="text-red-500 text-xs">
-                    {errors.marketing.message}
-                  </span>
-                )}
+                ))}
+                <ReactInputField
+                  id="marketOthers"
+                  label="others"
+                  type="text"
+                  placeholder="Enter"
+                  register={register("marketOthers")}
+                  others={true}
+                />
               </div>
+              <FormError errorMessage={errors.marketing?.message as string} />
             </div>
-          </div>
+          </FormSectionWrapper>
         );
       case 3:
         return (
-          <div className="bg-[#FFFFFF] font-hellix xl:w-[487px] justify-center rounded-[12px] lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]">
-            <div className="flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
-              <div className="flex flex-col gap-2">
-                <div className="flex flex-wrap gap-2">
-                  {currentSection?.labels?.map((option, index) => (
-                    <div
-                      key={index}
-                      className=" lg:h-[44x] w-auto gap-2 bg-[#F4FAFF] rounded-lg p-2 flex items-center"
-                    >
-                      <input
-                        type="checkbox"
-                        className=" lg:h-4 lg:w-4 h-3 w-3 rounded-[2px] lg:p-2 border-[2px]  "
-                        id={option.label}
-                        value={option.label}
-                        {...register("services", {
-                          validate: (value) => {
-                            console.log("Validating services:", value);
-                            return true;
-                          },
-                        })}
-                      />
-
-                      <label className="text-[#031924] lg:text-[17px] font-medium tracking-[0.02em] text-sm leading-5">
-                        {option.label}
-                      </label>
-                    </div>
-                  ))}
-                  <ReactInputField
-                    id="serviceothers"
-                    label="others"
-                    type="text"
-                    placeholder="Enter your serviceothers"
-                    register={register("serviceothers", {
-                      validate: (value, formValues) => {
-                        const hasServices =
-                          formValues.services &&
-                          (Array.isArray(formValues.services)
-                            ? formValues.services.length > 0
-                            : formValues.services !== "");
-
-                        if (hasServices) {
-                          return true;
-                        }
-
-                        return (
-                          value?.trim() !== "" ||
-                          "Please either select a service or specify other services"
-                        );
-                      },
-                    })}
-                    others={true}
+          <FormSectionWrapper>
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap gap-2">
+                {currentSection?.labels?.map((option, index) => (
+                  <FormRadioCheckbox
+                    key={index}
+                    type="checkbox"
+                    id={option.label}
+                    label={option.label}
+                    value={option.label}
+                    name="services"
+                    register={register("services")}
+                    small={true}
                   />
-                </div>
-
-                {(errors.services || errors.serviceothers) && (
-                  <span className="text-red-500 text-xs">
-                    {errors.services?.message || errors.serviceothers?.message}
-                  </span>
-                )}
+                ))}
+                <ReactInputField
+                  id="serviceothers"
+                  label="others"
+                  type="text"
+                  placeholder="Enter your service others"
+                  register={register("serviceothers")}
+                  others={true}
+                />
               </div>
+
+              <FormError errorMessage={errors.services?.message as string} />
             </div>
-          </div>
+          </FormSectionWrapper>
         );
       case 4:
         return (
-          <div className="bg-[#FFFFFF] font-hellix xl:w-[487px] justify-center rounded-[12px] lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]">
-            <div className="flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
-              <div className="flex flex-col gap-2">
-                <div className="flex flex-wrap gap-4">
-                  {currentSection?.labels?.map((option, index) => (
-                    <div
-                      key={index}
-                      className=" lg:h-[44x] w-auto gap-2 bg-[#F4FAFF] rounded-lg p-2 flex items-center"
-                    >
-                      <input
-                        type="checkbox"
-                        id={option.label}
-                        value={option.label.toLowerCase().replace(/\s+/g, "_")}
-                        {...register("platform", {
-                          validate: (value) => {
-                            console.log("Validating platforms:", value);
-                            return true;
-                          },
-                        })}
-                        className=" lg:h-4 lg:w-4 h-3 w-3 rounded-[2px] lg:p-2 border-[2px]  "
-                      />
-                      <label className="text-[#031924] lg:text-[17px] font-medium tracking-[0.02em] text-sm leading-5">
-                        {" "}
-                        {option.label}
-                      </label>
-                    </div>
-                  ))}
-                  <ReactInputField
-                    others={true}
-                    id="platforms"
-                    label="others"
-                    type="text"
-                    placeholder="Enter"
-                    register={register("platforms", {
-                      validate: (value, formValues) => {
-                        const hasPlatforms =
-                          formValues.platform &&
-                          (Array.isArray(formValues.platform)
-                            ? formValues.platform.length > 0
-                            : formValues.platform !== "");
-
-                        if (hasPlatforms) {
-                          return true;
-                        }
-
-                        return (
-                          value?.trim() !== "" ||
-                          "Please either select a platform or specify other platforms"
-                        );
-                      },
-                    })}
-                    errorMessage={errors.platforms?.message}
+          <FormSectionWrapper>
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap gap-4">
+                {currentSection?.labels?.map((option, index) => (
+                  <FormRadioCheckbox
+                    key={index}
+                    type="checkbox"
+                    id={option.label}
+                    label={option.label}
+                    value={option.label}
+                    name="platform"
+                    register={register("platform")}
+                    small={true}
                   />
-                  {(errors.platform || errors.platforms) && (
-                    <span className="text-red-500 text-xs">
-                      {errors.platform?.message || errors.platforms?.message}
-                    </span>
-                  )}
-                </div>
+                ))}
+                <ReactInputField
+                  others={true}
+                  id="platforms"
+                  label="others"
+                  type="text"
+                  placeholder="Enter"
+                  register={register("platforms")}
+                  errorMessage={errors.platforms?.message}
+                />
+                {(errors.platform || errors.platforms) && (
+                  <FormError
+                    errorMessage={
+                      (errors.platform?.message as string) ||
+                      (errors.platforms?.message as string)
+                    }
+                  />
+                )}
               </div>
             </div>
-          </div>
+          </FormSectionWrapper>
         );
       case 5:
         return (
-          <div
-            className="bg-[#FFFFFF] font-hellix 
-      lg:h-[228px] xl:w-[487px] justify-center rounded-[12px] w-full  lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
-          >
-            <div className=" flex w-full py-5 sm:p-4 md:p-8">
-              <div className=" flex flex-col mx-5 h-[164px] md:mx-0 gap-2 w-full ">
-                <h1 className="text-[#031924] font-normal text-[16px] leading-[19.2px]">
-                  Comments
-                </h1>
-                <textarea
-                  className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal min-h-[120px] p-3 border-[1px] rounded-lg border-[#DDE4EE] resize-y"
-                  style={{ height: "auto", width: "100%" }}
-                  rows={5}
-                  cols={30}
-                  {...register("comments", {
-                    required: "Please enter your comments",
-                  })}
-                  placeholder="Enter"
-                />
-                {errors.comments && (
-                  <span className="text-red-500 text-xs">
-                    {errors.comments.message}
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
+          <FormSectionWrapper isComment={true}>
+            <FormTextArea
+              register={register("comments", {
+                required: "Please enter your comments",
+              })}
+              errorMessage={errors.comments?.message as string}
+            />
+          </FormSectionWrapper>
         );
       case 6:
         return (
-          <div className="bg-[#FFFFFF] font-hellix xl:w-[487px] justify-center rounded-[16px] flex border-[#E0E0E0] border-[1px] items-center">
-            <div className="flex w-full p-4 md:p-8">
-              <div className="flex flex-col gap-1">
-                <div className="flex flex-col w-full gap-4">
-                  {currentSection?.labels?.map((question, index) => (
-                    <div
-                      key={index}
-                      className=" h-75px w-full flex flex-col justify-between gap-2"
+          <FormSectionWrapper className="pe-8">
+            <div className="flex flex-col gap-1">
+              <div className="flex flex-col w-full gap-4">
+                {currentSection?.labels?.map((question, index) => (
+                  <div
+                    key={index}
+                    className=" h-75px w-full flex flex-col justify-between gap-2"
+                  >
+                    <FormLabels label={question.label} dropDown={true} />
+                    <select
+                      {...register(`organizationalQuestions.${index}.value`, {
+                        required: "This field is required",
+                      })}
+                      defaultValue=""
+                      className="w-full bg-[#F9FBFC] cursor-pointer text-[#999999] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] lg:h-[48px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
                     >
-                      <label className="text-[#031924] text-xs xl:text-[16px] text-[14px] font-normal">
-                        {question.label}
-                      </label>
-                      <select
-                        {...register(`organizationalQuestions.${index}.value`, {
-                          required: "This field is required",
-                        })}
-                        className="w-full bg-[#F9FBFC] cursor-pointer text-[#999999] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] lg:h-[48px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
-                      >
-                        <option
-                          value=""
-                          className="text-[#999999] font-normal leading-5"
-                          disabled
-                        >
-                          Select
-                        </option>
-                        {question.dropval?.map((option) => (
-                          <option
-                            key={option.id}
-                            className="text-[#999999] font-normal leading-5"
-                            value={option.label}
-                          >
-                            {option.label}
-                          </option>
-                        ))}
-                      </select>
-                      {errors.organizationalQuestions?.[index]?.value && (
-                        <span className="text-red-500 text-xs">
-                          {
-                            errors.organizationalQuestions[index]?.value
-                              ?.message
-                          }
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                  <ReactInputField
-                    // others={true}
-                    id="budget"
-                    label=" Do you have any budget limits? If yes, please, specify the
+                      <FormOptions value="" options="Select" disabled={true} />
+                      {question.dropval?.map((option) => (
+                        <FormOptions
+                          key={option.id}
+                          value={option.label}
+                          options={option.label}
+                        />
+                      ))}
+                    </select>
+                    {errors.organizationalQuestions?.[index]?.value && (
+                      <FormError
+                        errorMessage={
+                          errors.organizationalQuestions[index]?.value
+                            ?.message as string
+                        }
+                      />
+                    )}
+                  </div>
+                ))}
+                <ReactInputField
+                  id="budget"
+                  label=" Do you have any budget limits? If yes, please, specify the
                         range."
-                    type="text"
-                    placeholder="Enter your budget"
-                    register={register("budget", {
-                      required: "Budget is required",
-                    })}
-                    errorMessage={errors.budget?.message}
-                  />
-                </div>
+                  type="text"
+                  placeholder="Enter your budget"
+                  register={register("budget", {
+                    required: "Budget is required",
+                  })}
+                  errorMessage={errors.budget?.message}
+                />
               </div>
             </div>
-          </div>
+          </FormSectionWrapper>
         );
       case 7:
         return (
-          <div
-            className="bg-[#FFFFFF]  font-hellix 
-   xl:w-[487px] justify-center rounded-[12px] w-full   lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
-          >
-            <div className=" flex w-full p-4 lg:pt-8 lg:ps-8 lg:pb-8">
-              <div className=" md:px-0 w-full flex flex-col gap-2">
+          <FormSectionWrapper isComment={true}>
+            <div className=" md:px-0 w-full flex flex-col gap-2">
+              {NameAndEmailPricing.map((field: InputField, index) => (
                 <ReactInputField
-                  id="name"
-                  label="Name"
-                  type="text"
-                  placeholder="Enter your name"
-                  register={register("name", {
-                    required: "Name is required",
-                  })}
-                  errorMessage={errors.name?.message}
+                  key={index}
+                  id={field.id}
+                  label={field.label}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  register={register(field.id, field.validation)}
+                  errorMessage={errors[field.id]?.message}
                 />
-
-                <ReactInputField
-                  id="email"
-                  label="Email"
-                  type="email"
-                  placeholder="Enter your email"
-                  register={register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value:
-                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                      message: "Enter a valid email",
-                    },
-                  })}
-                  errorMessage={errors.email?.message}
-                />
-              </div>
+              ))}
             </div>
-          </div>
+          </FormSectionWrapper>
         );
       case 8:
         return (
-          <div className="border-dashed-spaced font-hellix items-center bg-[#FFFFFF] lg:h-[228px] w-full md:w-[380px] lg:w-[420px] xl:w-[487px] justify-center flex">
-            <div className="flex justify-center items-center p-8">
-              <div className="mx-auto md:h-[104px] flex justify-between items-center flex-col cursor-pointer">
-                {watch("file")?.[0] ? (
-                  <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
-                    <div className="flex bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
-                      <img src={File} alt="" />
-                      <h1 className="truncate max-w-48 inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
-                        {file?.[0]?.name as string}
-                      </h1>
-                    </div>
-                    <div className="flex justify-center rounded-md items-center w-[119px] bg-[rgba(241,250,255,1)] lg:h-[40px] h-7">
-                      <label
-                        htmlFor="file"
-                        className="text-primary text-base font-semibold leading-[19.2px] cursor-pointer"
-                      >
-                        Change File
-                      </label>
-                    </div>
+          <FormSectionWrapper isFile={true} isComment={true}>
+            <div className="mx-auto md:h-[104px] flex justify-between items-center flex-col cursor-pointer">
+              {watch("file")?.[0] ? (
+                <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
+                  <div className="flex bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
+                    <img src={File} alt="" />
+                    <h1 className="truncate max-w-48 inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
+                      {file?.name as string}
+                    </h1>
                   </div>
-                ) : (
-                  <label htmlFor="file" className="cursor-pointer">
-                    <img
-                      src={Dropbox}
-                      alt=""
-                      className="h-[52px] w-[52px] mx-auto"
-                    />
-                    <p className="text-[#031924] font-medium text-center text-[16px]">
-                      Choose a file or drag & drop it here
-                    </p>
-                    <p className="text-[#999999] font-normal text-[14px] text-center">
-                      PDF and Doc up to 5MB
-                    </p>
-                  </label>
-                )}
+                  <div className="flex justify-center rounded-md items-center w-[119px] bg-[rgba(241,250,255,1)] lg:h-[40px] h-7">
+                    <label
+                      htmlFor="file"
+                      className="text-primary text-base font-semibold leading-[19.2px] cursor-pointer"
+                    >
+                      Change File
+                    </label>
+                  </div>
+                </div>
+              ) : (
+                <label htmlFor="file" className="cursor-pointer">
+                  <img
+                    src={Dropbox}
+                    alt=""
+                    className="h-[52px] w-[52px] mx-auto"
+                  />
+                  <p className="text-[#031924] font-medium text-center text-[16px]">
+                    Choose a file or drag & drop it here
+                  </p>
+                  <p className="text-[#999999] font-normal text-[14px] text-center">
+                    PDF and Doc up to 5MB
+                  </p>
+                </label>
+              )}
 
-                <input
-                  id="file"
-                  type="file"
-                  className="hidden"
-                  accept=".pdf,.doc,.docx"
-                  {...register("file", {
-                    validate: (value) => {
-                      if (value?.[0]) {
-                        const file = value[0] as unknown as File;
-                        const validTypes = [
-                          "application/pdf",
-                          "application/msword",
-                          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                        ];
-                        const maxSize = 5 * 1024 * 1024;
+              <input
+                id="file"
+                type="file"
+                className="hidden"
+                accept=".pdf,.doc,.docx"
+                {...register("file", {
+                  validate: (value) => {
+                    if (value?.[0]) {
+                      const file = value[0] as unknown as File;
+                      const validTypes = [
+                        "application/pdf",
+                        "application/msword",
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                      ];
+                      const maxSize = 5 * 1024 * 1024;
 
-                        if (!validTypes.includes(file.type)) {
-                          return "Only PDF and Word documents are allowed";
-                        }
-                        if (file.size > maxSize) {
-                          return "File must be less than 5MB";
-                        }
+                      if (!validTypes.includes(file.type)) {
+                        return "Only PDF and Word documents are allowed";
                       }
-                      return true;
-                    },
-                  })}
-                />
-                {errors.file && (
-                  <span className="text-red-500 text-xs block mt-2">
-                    {errors.file.message}
-                  </span>
-                )}
-              </div>
+                      if (file.size > maxSize) {
+                        return "File must be less than 5MB";
+                      }
+                    }
+                    return true;
+                  },
+                })}
+              />
+              <FormError errorMessage={errors.file?.message as string} />
             </div>
-          </div>
+          </FormSectionWrapper>
         );
       default:
         return null;
@@ -707,349 +568,229 @@ const ReactForms: React.FC = () => {
     switch (currentSection?.id) {
       case 1:
         return (
-          <div className="bg-[#FFFFFF] font-hellix xl:w-[487px] justify-center rounded-[12px] lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]">
-            <div className="flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
-              <div className="flex flex-col gap-2">
-                <div className="flex flex-wrap gap-2">
-                  {currentSection?.labels?.map((option, index) => (
-                    <div
-                      key={index}
-                      className=" lg:h-[44x] w-auto gap-2 bg-[#F4FAFF] rounded-lg p-2 flex items-center"
-                    >
-                      <input
-                        type="checkbox"
-                        className=" lg:h-4 lg:w-4 h-3 w-3 rounded-[2px] lg:p-2 border-[2px]  "
-                        id={option.label}
-                        value={option.label}
-                        {...register("experts", {
-                          validate: (value) => {
-                            return Array.isArray(value) && value.length > 0
-                              ? true
-                              : "Please select at least one expert";
-                          },
-                        })}
-                      />
-
-                      <label className="text-[#031924] lg:text-[17px] font-medium tracking-[0.02em] text-sm leading-5">
-                        {option.label}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-                {errors.experts && (
-                  <span className="text-red-500 text-xs">
-                    {errors.experts?.message}
-                  </span>
-                )}
+          <FormSectionWrapper>
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap gap-2">
+                {currentSection?.labels?.map((option, index) => (
+                  <FormCheckboxInput
+                    type="checkbox"
+                    key={index}
+                    id={option.label}
+                    label={option.label}
+                    value={option.label}
+                    name="experts"
+                    register={register("experts", {
+                      required: "Please select at least one expert",
+                    })}
+                    small={true}
+                  />
+                ))}
               </div>
+              <FormError errorMessage={errors.experts?.message as string} />
             </div>
-          </div>
+          </FormSectionWrapper>
         );
       case 2:
         return (
-          <div className="bg-[#FFFFFF] font-hellix xl:w-[487px] justify-center rounded-[12px] lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]">
-            <div className="flex w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
-              <div className="flex flex-col gap-2">
-                <div className="flex flex-wrap gap-2">
-                  {currentSection?.labels?.map((option, index) => (
-                    <div
-                      key={index}
-                      className=" lg:h-[44x] w-auto gap-2 bg-[#F4FAFF] rounded-lg p-2 flex items-center"
-                    >
-                      <input
-                        type="checkbox"
-                        className=" lg:h-4 lg:w-4 h-3 w-3 rounded-[2px] lg:p-2 border-[2px]  "
-                        id={option.label}
-                        value={option.label}
-                        {...register("technology", {
-                          validate: (value) => {
-                            return Array.isArray(value) && value.length > 0
-                              ? true
-                              : "Please select at least one technology";
-                          },
-                        })}
-                      />
-
-                      <label className="text-[#031924] lg:text-[17px] font-medium tracking-[0.02em] text-sm leading-5">
-                        {option.label}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-                {errors.technology && (
-                  <span className="text-red-500 text-xs">
-                    {errors.technology?.message}
-                  </span>
-                )}
+          <FormSectionWrapper>
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap gap-2">
+                {currentSection?.labels?.map((option, index) => (
+                  <FormCheckboxInput
+                    type="checkbox"
+                    key={index}
+                    id={option.label}
+                    label={option.label}
+                    value={option.label}
+                    name="technology"
+                    register={register("technology", {
+                      required: "Please select at least one technology",
+                    })}
+                    small={true}
+                  />
+                ))}
               </div>
+              <FormError errorMessage={errors.technology?.message as string} />
             </div>
-          </div>
+          </FormSectionWrapper>
         );
       case 3:
         return (
-          <div
-            className="bg-[#FFFFFF]  font-hellix 
-        xl:w-[487px]   justify-center  rounded-[16px] flex border-[#E0E0E0] border-[1px]"
-          >
-            <div className=" flex flex-col w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
-              <div className="flex flex-wrap gap-4">
-                {currentSection?.labels?.map((option, index) => (
-                  <div
-                    key={index}
-                    className=" lg:h-[44x] w-auto gap-2 bg-[#F4FAFF] rounded-lg p-2 flex items-center"
-                  >
-                    <input
-                      type="radio"
-                      id={option.label}
-                      value={option.label.toLowerCase().replace(/\s+/g, "_")}
-                      {...register("duration", {
-                        required: "Please select a project duration",
-                      })}
-                      className=" h-4 w-4 border-[#999999] rounded-full border-2"
-                    />
-                    <label
-                      htmlFor={option.label}
-                      className="cursor-pointer text-[#031924] lg:text-base font-medium text-sm leading-5 w-auto"
-                    >
-                      {option.label}
-                    </label>
-                  </div>
-                ))}
-              </div>
-              {errors.duration && (
-                <span className="text-red-500 text-xs">
-                  {errors.duration.message}
-                </span>
-              )}
+          <FormSectionWrapper>
+            <div className="flex flex-wrap gap-4">
+              {currentSection?.labels?.map((option, index) => (
+                <FormRadioCheckbox
+                  type="radio"
+                  key={index}
+                  id={option.label}
+                  label={option.label}
+                  value={option.label}
+                  name="duration"
+                  register={register("duration", {
+                    required: "Please select a project duration",
+                  })}
+                  small={true}
+                />
+              ))}
             </div>
-          </div>
+            {errors.duration && (
+              <FormError errorMessage={errors.duration?.message as string} />
+            )}
+          </FormSectionWrapper>
         );
       case 4:
         return (
-          <div
-            className="bg-[#FFFFFF]  font-hellix 
-    xl:w-[487px]   justify-center  rounded-[16px] flex border-[#E0E0E0] border-[1px]"
-          >
-            <div className=" flex flex-col w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
-              <div className="flex flex-wrap gap-4">
-                {currentSection?.labels?.map((option, index) => (
-                  <div
-                    key={index}
-                    className=" lg:h-[44x] w-auto gap-2 bg-[#F4FAFF] rounded-lg p-2 flex items-center"
-                  >
-                    <input
-                      type="radio"
-                      id={option.label}
-                      value={option.label.toLowerCase().replace(/\s+/g, "_")}
-                      {...register("companyType", {
-                        required: "Please select a company type",
-                      })}
-                      className=" h-4 w-4 border-[#999999] rounded-full border-2"
-                    />
-                    <label
-                      htmlFor={option.label}
-                      className="cursor-pointer text-[#031924] lg:text-base font-medium text-sm leading-5 w-auto"
-                    >
-                      {option.label}
-                    </label>
-                  </div>
-                ))}
-              </div>
-              {errors.companyType && (
-                <span className="text-red-500 text-xs">
-                  {errors.companyType.message}
-                </span>
-              )}
+          <FormSectionWrapper>
+            <div className="flex flex-wrap gap-4">
+              {currentSection?.labels?.map((option, index) => (
+                <FormRadioCheckbox
+                  key={index}
+                  type="radio"
+                  id={option.label}
+                  label={option.label}
+                  value={option.label}
+                  name="companyType"
+                  register={register("companyType", {
+                    required: "Please select a company type",
+                  })}
+                  small={true}
+                />
+              ))}
             </div>
-          </div>
+            {errors.companyType && (
+              <FormError errorMessage={errors.companyType?.message as string} />
+            )}
+          </FormSectionWrapper>
         );
       case 5:
         return (
-          <div
-            className="bg-[#FFFFFF]  font-hellix
-      xl:w-[487px]   justify-center  rounded-[16px] flex border-[#E0E0E0] border-[1px]"
-          >
-            <div className=" flex flex-col w-full pt-4 ps-4 pb-4 lg:pt-8 lg:ps-8 lg:pb-8">
-              <div className="flex flex-wrap gap-4">
-                {currentSection?.labels?.map((option, index) => (
-                  <div
-                    key={index}
-                    className=" lg:h-[44x] w-auto gap-2 bg-[#F4FAFF] rounded-lg p-2 flex items-center"
-                  >
-                    <input
-                      type="radio"
-                      id={option.label}
-                      value={option.label.toLowerCase().replace(/\s+/g, "_")}
-                      {...register("softwareType", {
-                        required: "Please select a software type",
-                      })}
-                      className=" h-4 w-4 border-[#999999] rounded-full border-2"
-                    />
-                    <label
-                      htmlFor={option.label}
-                      className="cursor-pointer text-[#031924] lg:text-base font-medium text-sm leading-5 w-auto"
-                    >
-                      {option.label}
-                    </label>
-                  </div>
-                ))}
-              </div>
-              {errors.softwareType && (
-                <span className="text-red-500 text-xs">
-                  {errors.softwareType.message}
-                </span>
-              )}
+          <FormSectionWrapper>
+            <div className="flex flex-wrap gap-4">
+              {currentSection?.labels?.map((option, index) => (
+                <FormRadioCheckbox
+                  key={index}
+                  type="radio"
+                  id={option.label}
+                  label={option.label}
+                  value={option.label}
+                  name="softwareType"
+                  register={register("softwareType", {
+                    required: "Please select a software type",
+                  })}
+                  small={true}
+                />
+              ))}
             </div>
-          </div>
+            {errors.softwareType && (
+              <FormError
+                errorMessage={errors.softwareType?.message as string}
+              />
+            )}
+          </FormSectionWrapper>
         );
       case 6:
         return (
-          <div
-            className="bg-[#FFFFFF] font-hellix 
-      lg:h-[228px] xl:w-[487px] justify-center rounded-[12px] w-full  lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
-          >
-            <div className=" flex w-full py-5 sm:p-4 md:p-8">
-              <div className=" flex flex-col mx-5 h-[164px] md:mx-0 gap-2 w-full ">
-                <h1 className="text-[#031924] font-normal text-[16px] leading-[19.2px]">
-                  Comments
-                </h1>
-                <textarea
-                  className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal min-h-[120px] p-3 border-[1px] rounded-lg text-[#999999] border-[#DDE4EE] resize-y"
-                  style={{ height: "auto", width: "100%" }}
-                  rows={5}
-                  cols={30}
-                  {...register("comments", {
-                    required: "Please enter your comments",
-                  })}
-                  placeholder="Enter"
-                />
-                {errors.comments && (
-                  <span className="text-red-500 text-xs">
-                    {errors.comments.message}
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
+          <FormSectionWrapper isComment={true}>
+            <FormTextArea
+              register={register("comments", {
+                required: "Please enter your comments",
+              })}
+              errorMessage={errors.comments?.message as string}
+            />
+          </FormSectionWrapper>
         );
       case 7:
         return (
-          <div
-            className="bg-[#FFFFFF]  font-hellix 
-   xl:w-[487px] justify-center rounded-[12px] w-full   lg:rounded-[16px] flex border-[#E0E0E0] border-[1px]"
-          >
-            <div className=" flex w-full p-4 lg:pt-8 lg:ps-8 lg:pb-8">
-              <div className=" md:px-0 w-full flex flex-col gap-2">
+          <FormSectionWrapper isComment={true}>
+            <div className=" md:px-0 w-full flex flex-col gap-2">
+              {NameAndEmailPricing.map((field: InputField, index) => (
                 <ReactInputField
-                  id="name"
-                  label="Name"
-                  type="text"
-                  placeholder="Enter your name"
-                  register={register("name", {
-                    required: "Name is required",
-                  })}
-                  errorMessage={errors.name?.message}
+                  key={index}
+                  id={field.id}
+                  label={field.label}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  register={register(field.id, field.validation)}
+                  errorMessage={errors[field.id]?.message}
                 />
-
-                <ReactInputField
-                  id="email"
-                  label="Email"
-                  type="email"
-                  placeholder="Enter your email"
-                  register={register("email", {
-                    required: "Email is required",
-                    pattern: {
-                      value:
-                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                      message: "Enter a valid email",
-                    },
-                  })}
-                  errorMessage={errors.email?.message}
-                />
-              </div>
+              ))}
             </div>
-          </div>
+          </FormSectionWrapper>
         );
       case 8:
         return (
-          <div className="border-dashed-spaced font-hellix items-center bg-[#FFFFFF] lg:h-[228px] w-full md:w-[380px] lg:w-[420px] xl:w-[487px] justify-center flex">
-            <div className="flex justify-center items-center p-8">
-              <div className="mx-auto md:h-[104px] flex justify-between items-center flex-col cursor-pointer">
-                {watch("file")?.[0] ? (
-                  <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
-                    <div className="flex bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
-                      <img src={File} alt="" />
-                      <h1 className="truncate max-w-48 inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
-                        {file?.[0]?.name as string}
-                      </h1>
-                    </div>
-                    <div className="flex justify-center rounded-md items-center w-[119px] bg-[rgba(241,250,255,1)] lg:h-[40px] h-7">
-                      <label
-                        htmlFor="file"
-                        className="text-primary text-base font-semibold leading-[19.2px] cursor-pointer"
-                      >
-                        Change File
-                      </label>
-                    </div>
+          <FormSectionWrapper isFile={true} isComment={true}>
+            <div className="mx-auto md:h-[104px] flex justify-between items-center flex-col cursor-pointer">
+              {watch("file")?.[0] ? (
+                <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
+                  <div className="flex bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
+                    <img src={File} alt="" />
+                    <h1 className="truncate max-w-48 inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
+                      {file?.name as string}
+                    </h1>
                   </div>
-                ) : (
-                  <label htmlFor="file" className="cursor-pointer">
-                    <img
-                      src={Dropbox}
-                      alt=""
-                      className="h-[52px] w-[52px] mx-auto"
-                    />
-                    <p className="text-[#031924] font-medium text-center text-[16px]">
-                      Choose a file or drag & drop it here
-                    </p>
-                    <p className="text-[#999999] font-normal text-[14px] text-center">
-                      PDF and Doc up to 5MB
-                    </p>
-                  </label>
-                )}
+                  <div className="flex justify-center rounded-md items-center w-[119px] bg-[rgba(241,250,255,1)] lg:h-[40px] h-7">
+                    <label
+                      htmlFor="file"
+                      className="text-primary text-base font-semibold leading-[19.2px] cursor-pointer"
+                    >
+                      Change File
+                    </label>
+                  </div>
+                </div>
+              ) : (
+                <label htmlFor="file" className="cursor-pointer">
+                  <img
+                    src={Dropbox}
+                    alt=""
+                    className="h-[52px] w-[52px] mx-auto"
+                  />
+                  <p className="text-[#031924] font-medium text-center text-[16px]">
+                    Choose a file or drag & drop it here
+                  </p>
+                  <p className="text-[#999999] font-normal text-[14px] text-center">
+                    PDF and Doc up to 5MB
+                  </p>
+                </label>
+              )}
 
-                <input
-                  id="file"
-                  type="file"
-                  className="hidden"
-                  accept=".pdf,.doc,.docx"
-                  {...register("file", {
-                    validate: (value) => {
-                      if (value?.[0]) {
-                        const file = value[0] as unknown as File;
-                        const validTypes = [
-                          "application/pdf",
-                          "application/msword",
-                          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                        ];
-                        const maxSize = 5 * 1024 * 1024;
+              <input
+                id="file"
+                type="file"
+                className="hidden"
+                accept=".pdf,.doc,.docx"
+                {...register("file", {
+                  validate: (value) => {
+                    if (value?.[0]) {
+                      const file = value[0] as unknown as File;
+                      const validTypes = [
+                        "application/pdf",
+                        "application/msword",
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                      ];
+                      const maxSize = 5 * 1024 * 1024;
 
-                        if (!validTypes.includes(file.type)) {
-                          return "Only PDF and Word documents are allowed";
-                        }
-                        if (file.size > maxSize) {
-                          return "File must be less than 5MB";
-                        }
+                      if (!validTypes.includes(file.type)) {
+                        return "Only PDF and Word documents are allowed";
                       }
-                      return true;
-                    },
-                  })}
-                />
-                {errors.file && (
-                  <span className="text-red-500 text-xs block mt-2">
-                    {errors.file.message}
-                  </span>
-                )}
-              </div>
+                      if (file.size > maxSize) {
+                        return "File must be less than 5MB";
+                      }
+                    }
+                    return true;
+                  },
+                })}
+              />
+              {errors.file && (
+                <FormError errorMessage={errors.file?.message || ""} />
+              )}
             </div>
-          </div>
+          </FormSectionWrapper>
         );
       default:
         return null;
     }
   };
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleFormSubmit = async (data: ContactData) => {
     if (
@@ -1075,16 +816,6 @@ const ReactForms: React.FC = () => {
   useEffect(() => {
     if (isFormCompleted) {
       reset({
-        name: "",
-        email: "",
-        comments: "",
-        quoteType: undefined,
-        stage: undefined,
-        companyType: undefined,
-        services: undefined,
-        platform: undefined,
-        budget: "",
-        file: undefined,
         organizationalQuestions: softwareDevelopment
           .find((section) => section.id === 6)
           ?.labels?.map(() => ({ value: "" })),
@@ -1094,8 +825,6 @@ const ReactForms: React.FC = () => {
       setSubData([]);
       setDropBox(false);
 
-      setValue("quoteType", "");
-
       const timer = setTimeout(() => {
         setIsFormCompleted(false);
       }, 20000);
@@ -1104,12 +833,10 @@ const ReactForms: React.FC = () => {
     }
   }, [isFormCompleted, reset, setValue]);
 
-  console.log(subData, quoteType);
-
   const onSubmit: SubmitHandler<PricingData> = (data) => {
     console.log("Form Data Submitted:", data);
+    console.log(typeof data);
   };
-  console.log(selected >= 8 ? "submit" : "button");
   return (
     <div className="Prizing-section flex min-h-screen md:min-h-0  flex-col font-hellix w-full overflow-hidden">
       {show && (
@@ -1147,13 +874,15 @@ const ReactForms: React.FC = () => {
         ref={techSectionRef}
         className="flex-grow w-full xl:w-[1136px] xl:mx-auto z-20 mb-10 flex-col justify-evenly items-center h-min  flex"
       >
-        {!isFormCompleted ? (
-          <div
-            style={{
-              backgroundImage: ` URL(${WavesPriceSection})`,
-            }}
-            className="lg:h-min flex-grow flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-8 md:py-16 xl:w-[1136px] w-11/12 rounded-xl md:rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative"
-          >
+        <div
+          style={{
+            backgroundImage: ` URL(${WavesPriceSection})`,
+          }}
+          className={` ${
+            isFormCompleted ? "lg:h-[428px]" : "lg:h-min"
+          } flex-grow flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 xl:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative`}
+        >
+          {!isFormCompleted ? (
             <div className="relative z-10  w-full flex justify-center  items-center  flex-col md:flex-row gap-10">
               <div className="flex w-full   sm:w-1/2  lg:w-1/2 lg:h-[119px] mb-auto justify-between flex-col px-2 md:px-0 gap-3 lg:gap-6 my-2">
                 <div className=" flex gap-1.5 lg:w-[239px]  w-[200px]">
@@ -1189,56 +918,25 @@ const ReactForms: React.FC = () => {
                 className="lg:w-1/2  w-full px-2 flex justify-center items-center flex-col h-full gap-5"
               >
                 {subData.length === 0 && (
-                  <div
-                    className="bg-[#FFFFFF] font-hellix 
-             lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[1px]"
-                  >
-                    <div className=" flex w-full lg:pt-8 ps-4 pt-4  lg:ps-8 pb-8">
-                      <div className="flex flex-col gap-2">
-                        <div className=" lg:h-[44px] w-auto gap-2 bg-[#F4FAFF] rounded-lg p-2 flex items-center">
-                          <input
-                            id="software_development"
-                            type="radio"
-                            className=" h-4 w-4 border-[#999999] rounded-full border-2"
-                            value="software_development"
-                            {...register("quoteType", {
-                              required: "Please select a quote type",
-                            })}
-                          />
-                          <label
-                            htmlFor="software_development"
-                            className="text-[#031924] lg:text-base font-medium text-sm leading-5"
-                          >
-                            Custom software development{" "}
-                          </label>
-                        </div>
-
-                        <div className=" lg:h-[44px] w-auto gap-2 bg-[#F4FAFF] rounded-lg p-2 flex items-center">
-                          <input
-                            id="team_augmentation"
-                            type="radio"
-                            className=" h-4 w-4 border-[#999999] rounded-full border-2"
-                            value="team_augmentation"
-                            {...register("quoteType", {
-                              required: "Please select a quote type",
-                            })}
-                          />
-                          <label
-                            htmlFor="team_augmentation"
-                            className="text-[#031924] lg:text-base font-medium text-sm leading-5"
-                          >
-                            Team augmentation services
-                          </label>
-                        </div>
-
-                        {errors.quoteType && (
-                          <span className="text-red-500 text-xs block">
-                            {errors.quoteType.message}
-                          </span>
-                        )}
-                      </div>
+                  <FormSectionWrapper>
+                    <div className="flex flex-col gap-2">
+                      {mainSelectionOptions.map((option) => (
+                        <ManiSelection
+                          key={option.id}
+                          id={option.id}
+                          label={option.label}
+                          value={option.value}
+                          name="quoteType"
+                          register={register}
+                        />
+                      ))}
+                      {errors.quoteType && (
+                        <FormError
+                          errorMessage={errors.quoteType?.message as string}
+                        />
+                      )}
                     </div>
-                  </div>
+                  </FormSectionWrapper>
                 )}
 
                 {quoteType === "software_development" && (
@@ -1266,14 +964,7 @@ const ReactForms: React.FC = () => {
                 </div>
               </form>
             </div>
-          </div>
-        ) : (
-          <div
-            style={{
-              backgroundImage: ` URL(${WavesPriceSection})`,
-            }}
-            className="lg:h-[428px] flex-grow flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 xl:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative"
-          >
+          ) : (
             <div className="  w-full h-full justify-center relative items-center  flex flex-row gap-2">
               <Lottie
                 animationData={Proppers}
@@ -1292,8 +983,8 @@ const ReactForms: React.FC = () => {
                 className="lg:h-72 lg:w-72 h-56 w-56 absolute right-0 rounded-full"
               />
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </section>
       <div className="  md:right-8 md:bottom-8 right-4 bottom-4 z-50 fixed">
         <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />

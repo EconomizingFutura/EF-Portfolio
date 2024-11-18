@@ -12,12 +12,12 @@ interface OrganizationalQuestion {
 
 export interface PricingData {
   name: string;
-  marketOthers?: string;
   email: string;
   comments?: string;
   softwareDevelopment?: boolean;
   teamAugumentation?: boolean;
   experts?: string[];
+  marketOthers?: string;
   technology?: string[];
   marketing?: string[];
   services?: string[];
@@ -29,6 +29,9 @@ export interface PricingData {
   platform?: string[];
   budget?: string;
   file?: string;
+  quoteType: "software_development" | "team_augmentation";
+  platforms?: string;
+  serviceothers?: string;
 }
 
 export const PricingAPI = async (
