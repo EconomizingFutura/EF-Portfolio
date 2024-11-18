@@ -169,7 +169,8 @@ export const teamAugmentation = [
       { id: 3, label: "Fintech / Accounting software" },
       { id: 4, label: "Investment software" },
       { id: 5, label: "Insurance software" },
-      { id: 6, label: "Another software type" },
+      { id: 6, label: "Content management software" },
+      { id: 7, label: "Another software type" },
     ],
   },
   {

@@ -12,6 +12,7 @@ import Projects from "../sections/Projects";
 import Boxes from "../assets/Boxes.svg";
 import Area from "../assets/Area.svg";
 import AreaSection from "../sections/AreaSection";
+
 import Clients from "../sections/Clients";
 import FAQ from "../assets/FAQ.svg";
 import Faq from "../sections/Faq";
@@ -51,9 +52,20 @@ const Home: React.FC = () => {
     target: container,
     offset: ["start start", "end end"],
   });
+  console.log(headerBg);
+  console.log(window.scrollY);
 
   useEffect(() => {
     setHeaderBg(sectionColors.hero);
+
+    const handleScroll = () => {
+      if (window.scrollY <= 160) {
+        setHeaderBg(sectionColors.hero);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const heroSection = useRef<HTMLElement | null>(null);
@@ -245,7 +257,7 @@ const Home: React.FC = () => {
           </h1>
         </div>
 
-        <div ref={container} className="relative">
+        <div ref={container} className="relative px-2 sm:px-0">
           {projectsInfo.map((a: ProjectItem, i: number) => {
             const targetScale = 1 - (projectsInfo.length - i) * 0.05;
             return (
@@ -273,7 +285,7 @@ const Home: React.FC = () => {
           <img
             src={Area}
             alt=""
-            className="absolute lg:-top-5 md:h-20 md:-right-7 md:-top-5 lg:-right-5 -top-2 -right-3  h-[60px] lg:h-auto"
+            className="absolute lg:-top-5 md:h-20 md:-right-9 md:-top-5 lg:-right-8 -top-2 -right-5  h-[60px] lg:h-auto"
           />
         </div>
         <AreaSection />

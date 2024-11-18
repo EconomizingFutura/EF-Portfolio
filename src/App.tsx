@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import { AppRouter } from "./router";
 import Lenis from "@studio-freight/lenis";
 import "./style.css";
+import ReactForms from "./pages/ReactForms";
+// import { Price } from "./pages/Price";
 
 function App() {
   const container = useRef<HTMLElement | null>(null);
@@ -26,6 +28,8 @@ function App() {
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
+
+  // return <ReactForms />;
 
   return (
     <main ref={container}>

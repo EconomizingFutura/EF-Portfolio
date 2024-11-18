@@ -4,6 +4,8 @@ interface PropsTypes {
   label: string;
   onClick?: () => void;
   disabled?: boolean;
+  children?: React.ReactNode;
+  type?: boolean;
 }
 
 const ButtonWrapper: React.FC<PropsTypes> = ({
@@ -11,9 +13,11 @@ const ButtonWrapper: React.FC<PropsTypes> = ({
   label,
   onClick,
   disabled,
+  type,
 }) => {
   return (
     <button
+      type={type ? "submit" : "button"}
       disabled={disabled}
       className={`${className} font-hellix`}
       onClick={onClick}

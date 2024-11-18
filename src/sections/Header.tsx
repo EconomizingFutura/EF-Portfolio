@@ -8,7 +8,7 @@ import wave from "../assets/wave.svg";
 
 interface propsTypes {
   background: string;
-  width: string;
+  width?: string;
   handleShowForms: () => void;
   transparent?: boolean;
   home?: boolean;
@@ -17,7 +17,6 @@ interface propsTypes {
 const Header: React.FC<propsTypes> = ({
   background,
   handleShowForms,
-  width,
   transparent,
   home,
 }) => {
@@ -59,7 +58,7 @@ const Header: React.FC<propsTypes> = ({
         home ? "z-50" : "z-30"
       } top-0 xl:px-0 w-full border-b border-b-[#D1EEFF] flex md:items-center md:justify-center font-hellix h-[74px]`}
     >
-      <div className={`${width} w-full flex justify-between items-center`}>
+      <div className={`xl:w-[1246px] w-full flex justify-between items-center`}>
         <img
           src={EFLogo}
           alt="Economizing Futura Logo"
@@ -96,7 +95,11 @@ const Header: React.FC<propsTypes> = ({
             onClick={() => setMobileMenuOpen(false)}
           >
             <div
-              style={{ background: background }}
+              style={
+                background == ""
+                  ? { backgroundColor: "#e3f5ff" }
+                  : { background: background }
+              }
               className="mobile-menu relative py-4 w-[75%] max-w-[320px] h-full shadow-lg transition-transform duration-500 transform translate-x-0"
               onClick={(e) => e.stopPropagation()}
             >

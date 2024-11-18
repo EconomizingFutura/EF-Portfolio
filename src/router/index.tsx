@@ -6,11 +6,13 @@ import {
   useLocation,
 } from "react-router-dom";
 import Home from "../pages/Home";
-import Pricing from "../pages/Pricing";
+// import Pricing from "../pages/Pricing";
+// import { Price } from "../pages/Price";
 import Blogs from "../pages/Blogs";
 import Technology from "../pages/Technology";
 import Blog from "../pages/Blog";
 import Projects from "../pages/Projects";
+import ReactForms from "../pages/ReactForms";
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
 
@@ -33,7 +35,8 @@ export const AppRouter: React.FC = () => {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/pricing" element={<ReactForms />} />
+        {/* <Route path="/pricing" element={<Price />} /> */}
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/technologies" element={<Technology />} />
         <Route path="/blog/:id" element={<Blog />} />

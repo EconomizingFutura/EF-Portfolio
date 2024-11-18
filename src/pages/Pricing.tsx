@@ -24,6 +24,8 @@ import RadioButtonWrapper from "../components/RadioButtonWrapper";
 import CheckBoxWrapper from "../components/CheckBoxWrapper";
 import PricingInputWrapper from "../components/PricingInputWrapper";
 import DropDownWrapper from "../components/DropDownWrapper";
+import { PricingAPI, PricingData } from "../api/PricingAPI";
+
 interface SubSectionLabel {
   label: string;
   dropval?: { id: number; label: string }[];
@@ -45,26 +47,6 @@ const Pricing: React.FC = () => {
   const mainSectionRef = useRef<HTMLDivElement | null>(null);
   const techSectionRef = useRef<HTMLDivElement | null>(null);
 
-  const handleFormSubmit = async (data: ContactData) => {
-    if (
-      data.firstName === "" ||
-      data.lastName === "" ||
-      data.email === "" ||
-      data.comments === ""
-    ) {
-      toast.error("All fields are required");
-      return;
-    }
-    try {
-      const response = await contactAPI(data, setIsLoading);
-      toast.success(response.message);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
   useEffect(() => {
     const handleScroll = () => {
       const mainSection = mainSectionRef.current;
@@ -111,11 +93,61 @@ const Pricing: React.FC = () => {
   const [softwareType, setSoftwareType] = useState<string>("");
   const [dropBox, setDropBox] = useState<boolean>(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [dropdownValues, setDropdownValues] = useState<
+    Array<{
+      label: string;
+      value: string;
+    }>
+  >([]);
+  const handleFormSubmit = async (data: ContactData) => {
+    if (
+      data.firstName === "" ||
+      data.lastName === "" ||
+      data.email === "" ||
+      data.comments === ""
+    ) {
+      toast.error("All fields are required");
+      return;
+    }
+    try {
+      const response = await contactAPI(data, setIsLoading);
+      toast.success(response.message);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  console.log(selectedValue);
 
+  async function handleForm() {
+    const data: PricingData = {
+      name: name,
+      email: email,
+      comments: comments2.length > 0 ? comments2 : comments1,
+      softwareDevelopment: selectedValue == "Software Development",
+      teamAugumentation: selectedValue == "Team Augmentation",
+      experts: expert,
+      technology: technology,
+      marketing: market,
+      services: service,
+      duration: duration,
+      companyType: companyType,
+      softwareType: softwareType,
+      stage: stage,
+      organizationalQuestions: dropdownValues,
+      platform: platform,
+      budget: budget as string,
+      // file: file ? await fileToBase64(file) : "",
+    };
+    const response = await PricingAPI(data, setIsLoading);
+
+    console.log(response);
+  }
   const ref = useRef<HTMLInputElement>(null);
 
-  console.log(companyType);
+  console.log(market, service, platform);
 
   const selectSections = useMemo(
     () => [
@@ -143,7 +175,7 @@ const Pricing: React.FC = () => {
   };
   const [isFormCompleted, setIsFormCompleted] = useState<boolean>(false);
 
-  const handleNextSection = () => {
+  const handleNextSection = async () => {
     if (subSection.length === 0) {
       if (!selectedValue) {
         setErrors({ selection: "Please select an option" });
@@ -169,6 +201,7 @@ const Pricing: React.FC = () => {
 
       if (selected === subSection.length - 1) {
         setIsFormCompleted(true);
+        handleForm();
       } else {
         setSelected(selected + 1);
         setErrors({});
@@ -238,7 +271,7 @@ const Pricing: React.FC = () => {
 lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[1px]"
       >
         <div className=" flex w-full lg:pt-8 ps-4 pt-4  lg:ps-8 pb-8">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 bg-slate-900">
             {selectSections[0].labels.map((item) => (
               <RadioButtonWrapper
                 key={item.id}
@@ -280,7 +313,7 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
         break;
       case 6:
         currentSection.labels?.forEach((item) => {
-          if (!dropdownValues[item.label]) {
+          if (!dropdownValues.find((v) => v.label === item.label)) {
             newErrors[item.label] = `Please select ${item.label}`;
           }
         });
@@ -332,25 +365,30 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
     return newErrors;
   };
 
-  const [dropdownValues, setDropdownValues] = useState<{
-    [key: string]: string;
-  }>({});
-
-  console.log(dropdownValues);
-
   const handleDropdownChange = (label: string, value: string) => {
-    setDropdownValues((prevValues) => ({
-      ...prevValues,
-      [label]: value,
-    }));
+    setDropdownValues((prevValues) => {
+      const existingIndex = prevValues.findIndex(
+        (item) => item.label === label
+      );
+      if (existingIndex >= 0) {
+        const newValues = [...prevValues];
+        newValues[existingIndex] = { label, value };
+        return newValues;
+      } else {
+        return [...prevValues, { label, value }];
+      }
+    });
   };
 
   const SoftwareDevelopmentSection = () => {
     const currentSection = subSection[selected];
 
+    useEffect(() => {
+      setDropBox(currentSection?.id === 8);
+    }, [currentSection?.id]);
+
     switch (currentSection?.id) {
       case 1:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF] font-hellix 
@@ -377,7 +415,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 2:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF] font-hellix 
@@ -409,7 +446,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 3:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF] font-hellix 
@@ -441,7 +477,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 4:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF] font-hellix 
@@ -473,7 +508,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 5:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF] font-hellix 
@@ -499,7 +533,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 6:
-        setDropBox(false);
         return (
           <div className="bg-[#FFFFFF] font-hellix xl:w-[487px] justify-center rounded-[16px] flex border-[#E0E0E0] border-[1px] items-center">
             <div className="flex w-full p-4 md:p-8">
@@ -512,7 +545,10 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
                       onChange={(value) =>
                         handleDropdownChange(item.label, value)
                       }
-                      selectedValue={dropdownValues[item.label] || ""}
+                      selectedValue={
+                        dropdownValues.find((v) => v.label === item.label)
+                          ?.value || ""
+                      }
                     />
                     {errors[item.label] && (
                       <p className="text-red-500 text-xs">
@@ -543,7 +579,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 7:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF]  font-hellix 
@@ -560,10 +595,7 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
                     placeholder="Full Name"
                     className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
                     value={name}
-                    onChange={(e) => {
-                      console.log("Name input event:", e.target.value);
-                      setName(e.target.value);
-                    }}
+                    onChange={(e) => setName(e.target.value)}
                   />
                   {errors.name && (
                     <p className="text-red-500 text-xs">{errors.name}</p>
@@ -578,10 +610,7 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
                     placeholder="xyz@gmail.com"
                     className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
                     value={email}
-                    onChange={(e) => {
-                      console.log("Email input event:", e.target.value);
-                      setEmail(e.target.value);
-                    }}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   {errors.email && (
                     <p className="text-red-500 text-xs">{errors.email}</p>
@@ -593,7 +622,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
         );
 
       case 8:
-        setDropBox(true);
         return (
           <div
             className="border-dashed-spaced font-hellix items-center 
@@ -653,9 +681,12 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
   const TeamAugmentationSection = () => {
     const currentSection = subSection[selected];
 
+    useEffect(() => {
+      setDropBox(currentSection?.id === 8);
+    }, [currentSection?.id]);
+
     switch (currentSection?.id) {
       case 1:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF]  font-hellix 
@@ -682,7 +713,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 2:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF] font-hellix 
@@ -709,7 +739,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 3:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF] font-hellix 
@@ -736,7 +765,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 4:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF] font-hellix 
@@ -763,7 +791,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 5:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF] font-hellix 
@@ -790,7 +817,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 6:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF] font-hellix 
@@ -816,7 +842,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 7:
-        setDropBox(false);
         return (
           <div
             className="bg-[#FFFFFF]  font-hellix 
@@ -833,10 +858,7 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
                     placeholder="Full Name"
                     className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
                     value={name}
-                    onChange={(e) => {
-                      console.log("Name input event:", e.target.value);
-                      setName(e.target.value);
-                    }}
+                    onChange={(e) => setName(e.target.value)}
                   />
                   {errors.name && (
                     <p className="text-red-500 text-xs">{errors.name}</p>
@@ -851,10 +873,7 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
                     placeholder="xyz@gmail.com"
                     className="w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
                     value={email}
-                    onChange={(e) => {
-                      console.log("Email input event:", e.target.value);
-                      setEmail(e.target.value);
-                    }}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                   {errors.email && (
                     <p className="text-red-500 text-xs">{errors.email}</p>
@@ -865,7 +884,6 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
           </div>
         );
       case 8:
-        setDropBox(true);
         return (
           <div
             className="border-dashed-spaced font-hellix items-center 
@@ -921,9 +939,8 @@ lg:w-[487px] w-full justify-center rounded-[16px] flex border-[#E0E0E0] border-[
         );
     }
   };
-  console.log(selected, subSection?.length);
 
-  console.log(isFormCompleted);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (isFormCompleted) {

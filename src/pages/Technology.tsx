@@ -63,7 +63,7 @@ const Technology: React.FC = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    // Initial check
+
     handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
@@ -104,7 +104,7 @@ const Technology: React.FC = () => {
           draggable={false}
         />
       </div>
-      <div className=" bg-[#FFFFFF] relative">
+      <div className=" bg-[#FFFFFF] relative ">
         <img
           src={greyCircles}
           alt=""
@@ -145,7 +145,7 @@ const Technology: React.FC = () => {
               <img
                 src={AvailableIcon}
                 alt=""
-                className="absolute -right-2 sm:-right-3 md:-right-3.5 w-8 sm:w-10 md:w-auto"
+                className="absolute top-4 -right-2 sm:-right-3 md:-right-3.5 w-8 sm:w-10 md:w-auto"
                 draggable={false}
               />
             </div>

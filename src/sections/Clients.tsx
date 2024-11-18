@@ -147,7 +147,7 @@ const Clients: React.FC = () => {
                   <div className="w-32 h-12 inset-0 absolute">
                     <Arrows />
                   </div>
-                  <p className="relative z-10 text-center m-auto text-white font-semibold text-xl">
+                  <p className="relative z-10 pr-5 text-center m-auto text-white font-semibold text-xl">
                     Step {index + 1}
                   </p>
                 </div>
