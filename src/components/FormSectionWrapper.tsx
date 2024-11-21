@@ -14,7 +14,7 @@ const FormSectionWrapper: React.FC<FormSectionWrapperProps> = ({
   <div
     className={
       isFile
-        ? "border-dashed-spaced font-hellix items-center bg-[#FFFFFF] lg:h-[228px] w-full md:w-[380px] lg:w-[420px] xl:w-[487px] justify-center flex"
+        ? "border-dashed-spaced font-hellix items-center bg-[#FFFFFF] lg:h-[228px] py-5 md:py-0 w-full md:w-[380px] lg:w-[420px] xl:w-[487px] justify-center flex"
         : `bg-[#FFFFFF] font-hellix xl:w-[487px] justify-center rounded-[16px] flex border-[#E0E0E0] border-[1px] ${className}`
     }
   >

@@ -12,11 +12,11 @@ interface PropsTypes {
   onFormSubmit: (data: ContactData) => void;
 }
 
-// Add validation schema
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
   lastName: Yup.string().required("Last name is required"),
   email: Yup.string()
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email address")
     .email("Invalid email address")
     .required("Email is required"),
   comments: Yup.string().required("Message is required"),
@@ -174,6 +174,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                 <ButtonWrapper
                   className="bg-[#20B2FF] h-[35px] md:h-[44px] rounded-lg font-semibold text-white text-base w-full"
                   label="Submit"
+                  type={true}
                   disabled={isLoading}
                 />
               </Form>

@@ -170,6 +170,7 @@ const ContactModal: React.FC<propsTypes> = ({
 
               <ButtonWrapper
                 className="bg-[#20B2FF] h-[35px] md:h-[47px] rounded-lg font-semibold text-base leading-5 text-white w-full"
+                type={true}
                 label="Contact Us"
                 disabled={isLoading || formik.isSubmitting}
               />

@@ -22,10 +22,10 @@ const ReactInputField: React.FC<InputFieldProps> = ({
 }) => {
   return (
     <div
-      className={`gap-1.5  ${
+      className={`gap-1.5   ${
         others
           ? "flex flex-row mt-1 justify-center items-center"
-          : " flex flex-col"
+          : " flex flex-col w-full px-4"
       }`}
     >
       <label className="text-[#031924] text-xs xl:text-[16px] text-[14px] font-normal">
@@ -36,8 +36,8 @@ const ReactInputField: React.FC<InputFieldProps> = ({
         type={type}
         className={
           others
-            ? "border-t-0 border-r-0 border-l-0 focus:border-b-[#999999] border-b-2 focus:outline-none"
-            : "w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE] text-[#999999]"
+            ? "border-t-0 border-r-0 placeholder:text-[11px] md:placeholder:text-[16px] w-full border-l-0 focus:border-b-[#999999] border-b-2 focus:outline-none"
+            : "w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[11px] md:placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE] text-[#999999]"
         }
         placeholder={placeholder}
         {...register}

@@ -4,9 +4,12 @@ import { motion } from "framer-motion";
 import Arrows from "../components/Arrows";
 import "../style.css";
 import MySvgComponent from "../components/MySvgComponent";
+import { useInView } from "react-intersection-observer";
+
 interface ContentItem {
   heading: string;
   info: string;
+  id: number;
 }
 
 interface Section {
@@ -26,14 +29,17 @@ const SECTIONS: Section[] = [
     title: "How we start",
     content: [
       {
+        id: 1,
         heading: "Arrange a Meeting",
         info: "Let's explore how we can help you. Book a consultation to discuss your project needs and discover tailored solutions.",
       },
       {
+        id: 2,
         heading: "Partner with Us",
         info: "We'll work closely with you to understand your vision, target audience, and desired outcomes, ensuring our approach aligns with your goals.",
       },
       {
+        id: 3,
         heading: "Maximize Technology's Value",
         info: "Leverage your insights and our expertise to develop smart, scalable solutions that drive business success.",
       },
@@ -44,14 +50,17 @@ const SECTIONS: Section[] = [
     title: "How we work",
     content: [
       {
+        id: 1,
         heading: "Delivering Excellence Through Project-Based Outsourcing",
         info: "We are committed to delivering high-quality results by following a structured, project-based outsourcing model. This ensures efficiency, focus on your objectives, and precise execution from start to finish.",
       },
       {
+        id: 2,
         heading: "Focused and Flexible Approach",
         info: "Our project-based model combines flexibility with a focus on your project's goals. We handle every phase of development, adhering to timelines and budgets, while delivering solutions tailored to your needs.",
       },
       {
+        id: 3,
         heading: "End-to-End Project Management",
         info: "From planning to final delivery, our comprehensive project outsourcing services manage the entire lifecycle, ensuring a smooth, efficient process with regular updates and rigorous quality control for successful outcomes.",
       },
@@ -71,22 +80,24 @@ const ToggleSection = React.memo(
   ({
     toggle,
     setToggle,
+    inView,
   }: {
     toggle: number;
     setToggle: (index: number) => void;
+    inView: boolean;
   }) => (
-    <div className="flex flex-col  w-full px-3.5 max-w-sm lg:my-8 font-hellix">
+    <div className="flex flex-col w-full px-3.5 max-w-sm lg:my-8 font-hellix">
       {HEADERS.map((header, index) => (
         <React.Fragment key={header.id}>
           <div
             onClick={() => setToggle(header.id - 1)}
-            className="relative h-[72px] w-full rounded-lg cursor-pointer shadow-clientCustom shadow-md flex justify-between items-center bg-white"
+            className="relative h-16 md:h-[72px] w-full rounded-lg cursor-pointer shadow-clientCustom shadow-md flex justify-between items-center bg-white"
           >
-            {toggle === header.id - 1 && (
+            {toggle === header.id - 1 && inView && (
               <motion.div
                 className="absolute -top-[0px] h-[8px] border-b-4 rounded-lg border-b-white bg-[#20B2FF]"
                 animate={{ width: "75%" }}
-                transition={{ duration: PROGRESS_BAR_DURATION }}
+                transition={{ duration: PROGRESS_BAR_DURATION, ease: "linear" }}
               />
             )}
             <p
@@ -115,6 +126,10 @@ ToggleSection.displayName = "ToggleSection";
 
 const Clients: React.FC = () => {
   const [toggle, setToggle] = useState<number>(0);
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -129,9 +144,16 @@ const Clients: React.FC = () => {
 
   const activeSection = SECTIONS[toggle];
 
+  const addPadding = activeSection.content[0];
+
+  console.log(activeSection.id === 2, addPadding);
+
   return (
-    <div className="flex flex-col lg:flex-row xl:space-x-2 w-11/12 xl:w-[1137px] justify-center">
-      <ToggleSection toggle={toggle} setToggle={handleToggle} />
+    <div
+      ref={ref}
+      className="flex flex-col lg:flex-row xl:space-x-2 w-11/12 xl:w-[1137px] justify-center"
+    >
+      <ToggleSection toggle={toggle} setToggle={handleToggle} inView={inView} />
       <div className="flex flex-col w-full md:max-w-[701px]">
         {activeSection.content.map((section, index) => (
           <div
@@ -147,15 +169,27 @@ const Clients: React.FC = () => {
                   <div className="w-32 h-12 inset-0 absolute">
                     <Arrows />
                   </div>
-                  <p className="relative z-10 pr-5 text-center m-auto text-white font-semibold text-xl">
+                  <p
+                    className={` ${
+                      section.id === 1 && activeSection.id === 2
+                        ? " lg:ps-5 lg:translate-x-1.5 xl:-translate-x-2.5 "
+                        : ""
+                    }relative z-10 pr-5 text-center m-auto text-white font-semibold text-xl`}
+                  >
                     Step {index + 1}
                   </p>
                 </div>
-                <h2 className="font-bold text-[17px] lg:text-xl text-[#333333] md:max-w-[80%]">
+                <h2
+                  className={`font-bold text-[17px] ${
+                    section.id === 1 && activeSection.id === 2
+                      ? " lg:ms-10 xl:ms-0"
+                      : ""
+                  } lg:text-xl text-[#333333] md:max-w-[80%]`}
+                >
                   {section.heading}
                 </h2>
               </div>
-              <p className="text-[14px] lg:text-[15px] flex-grow-0 text-[#999999] font-medium mt-3 md:mt-4">
+              <p className="text-[14px] lg:text-[15px] flex-grow-0 text-[#999999] font-medium mt-3  md:mt-4">
                 {section.info}
               </p>
             </div>

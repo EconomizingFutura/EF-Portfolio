@@ -23,7 +23,7 @@ import Footer from "../sections/Footer";
 import EnqueryModal from "../modal/EnqueryModal";
 import FormSectionWrapper from "../components/FormSectionWrapper";
 import FormError from "../components/FormError";
-import { PricingData } from "../api/PricingAPI";
+import { PricingAPI, PricingData } from "../api/PricingAPI";
 import FormOptions from "../components/FormOptions";
 import {
   selectSections,
@@ -110,7 +110,8 @@ const ReactForms: React.FC = () => {
   const [dropBox, setDropBox] = useState<boolean>(false);
   const quoteType = watch("quoteType");
   const [isFormCompleted, setIsFormCompleted] = useState<boolean>(false);
-  const file = watch("file")?.[0] as File | undefined;
+  const fileList = watch("file") as FileList | undefined;
+  const file = fileList?.[0];
   const handleNext = async () => {
     let isValid;
 
@@ -193,7 +194,7 @@ const ReactForms: React.FC = () => {
               setError("platform", {
                 type: "manual",
                 message:
-                  "Please either select a service type or specify other services",
+                  "Please either select a platform type or specify other platforms",
               });
               isValid = false;
             } else {
@@ -213,8 +214,10 @@ const ReactForms: React.FC = () => {
           }
 
         case 7:
-          isValid = await trigger("name");
-          isValid = await trigger("email");
+          isValid = await trigger(["name", "email"]);
+          if (!isValid) {
+            return;
+          }
           break;
         case 6: {
           if (quoteType == "team_augmentation") {
@@ -421,18 +424,24 @@ const ReactForms: React.FC = () => {
         );
       case 6:
         return (
-          <FormSectionWrapper className="pe-8">
+          <FormSectionWrapper isComment={true}>
             <div className="flex flex-col gap-1">
               <div className="flex flex-col w-full gap-4">
                 {currentSection?.labels?.map((question, index) => (
                   <div
                     key={index}
-                    className=" h-75px w-full flex flex-col justify-between gap-2"
+                    className=" h-75px w-full flex flex-col justify-between gap-2 px-4"
                   >
                     <FormLabels label={question.label} dropDown={true} />
                     <select
                       {...register(`organizationalQuestions.${index}.value`, {
                         required: "This field is required",
+                        onChange: (e) => {
+                          setValue(`organizationalQuestions.${index}`, {
+                            label: question.label,
+                            value: e.target.value,
+                          });
+                        },
                       })}
                       defaultValue=""
                       className="w-full bg-[#F9FBFC] cursor-pointer text-[#999999] placeholder:text-[#999999] focus:outline-none placeholder:text-[16px] placeholder:font-normal h-[44px] lg:h-[48px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE]"
@@ -461,6 +470,7 @@ const ReactForms: React.FC = () => {
                   label=" Do you have any budget limits? If yes, please, specify the
                         range."
                   type="text"
+                  others={false}
                   placeholder="Enter your budget"
                   register={register("budget", {
                     required: "Budget is required",
@@ -473,7 +483,7 @@ const ReactForms: React.FC = () => {
         );
       case 7:
         return (
-          <FormSectionWrapper isComment={true}>
+          <FormSectionWrapper isComment={true} className=" w-full">
             <div className=" md:px-0 w-full flex flex-col gap-2">
               {NameAndEmailPricing.map((field: InputField, index) => (
                 <ReactInputField
@@ -493,7 +503,7 @@ const ReactForms: React.FC = () => {
         return (
           <FormSectionWrapper isFile={true} isComment={true}>
             <div className="mx-auto md:h-[104px] flex justify-between items-center flex-col cursor-pointer">
-              {watch("file")?.[0] ? (
+              {file ? (
                 <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
                   <div className="flex bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
                     <img src={File} alt="" />
@@ -501,17 +511,17 @@ const ReactForms: React.FC = () => {
                       {file?.name as string}
                     </h1>
                   </div>
-                  <div className="flex justify-center rounded-md items-center w-[119px] bg-[rgba(241,250,255,1)] lg:h-[40px] h-7">
+                  <div className="flex justify-center rounded-md items-center w-[119px] bg-[rgba(241,250,255,1)] lg:h-[40px] h-8">
                     <label
                       htmlFor="file"
-                      className="text-primary text-base font-semibold leading-[19.2px] cursor-pointer"
+                      className="text-primary text-base font-semibold py-2 leading-[19.2px] cursor-pointer"
                     >
                       Change File
                     </label>
                   </div>
                 </div>
               ) : (
-                <label htmlFor="file" className="cursor-pointer">
+                <label htmlFor="file" className="cursor-pointer h-16">
                   <img
                     src={Dropbox}
                     alt=""
@@ -533,8 +543,8 @@ const ReactForms: React.FC = () => {
                 accept=".pdf,.doc,.docx"
                 {...register("file", {
                   validate: (value) => {
-                    if (value?.[0]) {
-                      const file = value[0] as unknown as File;
+                    if (value) {
+                      const file = value as unknown as File;
                       const validTypes = [
                         "application/pdf",
                         "application/msword",
@@ -711,7 +721,7 @@ const ReactForms: React.FC = () => {
         );
       case 7:
         return (
-          <FormSectionWrapper isComment={true}>
+          <FormSectionWrapper isComment={true} className=" w-full">
             <div className=" md:px-0 w-full flex flex-col gap-2">
               {NameAndEmailPricing.map((field: InputField, index) => (
                 <ReactInputField
@@ -731,7 +741,7 @@ const ReactForms: React.FC = () => {
         return (
           <FormSectionWrapper isFile={true} isComment={true}>
             <div className="mx-auto md:h-[104px] flex justify-between items-center flex-col cursor-pointer">
-              {watch("file")?.[0] ? (
+              {file ? (
                 <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
                   <div className="flex bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
                     <img src={File} alt="" />
@@ -771,8 +781,8 @@ const ReactForms: React.FC = () => {
                 accept=".pdf,.doc,.docx"
                 {...register("file", {
                   validate: (value) => {
-                    if (value?.[0]) {
-                      const file = value[0] as unknown as File;
+                    if (value) {
+                      const file = value;
                       const validTypes = [
                         "application/pdf",
                         "application/msword",
@@ -843,9 +853,18 @@ const ReactForms: React.FC = () => {
     }
   }, [isFormCompleted, reset, setValue]);
 
-  const onSubmit: SubmitHandler<PricingData> = (data) => {
-    console.log("Form Data Submitted:", data);
-    console.log(typeof data);
+  const onSubmit: SubmitHandler<PricingData> = async (data) => {
+    try {
+      const formData = {
+        ...data,
+        file: data.file instanceof FileList ? data.file[0] : null,
+      };
+
+      const response = await PricingAPI(formData as PricingData, setIsLoading);
+      console.log(response);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
   return (
     <div className="Prizing-section flex min-h-screen md:min-h-0  flex-col font-hellix w-full overflow-hidden">
@@ -966,9 +985,7 @@ const ReactForms: React.FC = () => {
                   <ButtonWrapper
                     className="bg-[#20B2FF] p-3 xl:p-0 xl:h-[56px]  text-white font-hellix rounded-lg font-semibold 
             text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px]  lg:mx-0"
-                    label={
-                      dropBox ? (!watch("file")?.[0] ? "Skip" : "Next") : "Next"
-                    }
+                    label={dropBox ? (!file ? "Skip" : "Next") : "Next"}
                     onClick={handleNext}
                   />
                 </div>

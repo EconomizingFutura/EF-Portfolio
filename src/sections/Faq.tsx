@@ -33,7 +33,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         {isOpen ? <img src={AccordinDash} alt="" /> : <Plus size={20} />}
       </div>
       {isOpen && (
-        <div className="text-[#999999] font-medium text-base leading-6 pt-3">
+        <div className="text-[#999999] font-medium text-sm md:text-base leading-6 pt-3">
           {content}
         </div>
       )}
