@@ -1,17 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import Hero1 from "../assets/Hero1.svg";
-import HeroMini from "../assets/HeroMini.svg";
-import ButtonWrapper from "../components/ButtonWrapper";
-import CurlArrows from "../assets/CurlArrows.svg";
-import YelloSquare from "../assets/YellowSquare.svg";
-import ClientUnderline from "../assets/ClientUnderline.svg";
-import TestimonialSlider from "../sections/TestimonialSlider";
-import ContactModal from "../modal/ContactModal";
-import Footer from "../sections/Footer";
-import Projects from "../sections/Projects";
-import Boxes from "../assets/Boxes.svg";
-import Area from "../assets/Area.svg";
-import AreaSection from "../sections/AreaSection";
+import {
+  Hero1,
+  HeroMini,
+  CurlArrows,
+  YellowSquare,
+  ClientUnderline,
+  Boxes,
+  Area,
+} from "../assets/index";
+import { ButtonWrapper } from "../components/index";
+import { ContactModal, EnqueryModal } from "../modal/index";
 
 import Clients from "../sections/Clients";
 import FAQ from "../assets/FAQ.svg";
@@ -19,13 +17,18 @@ import Faq from "../sections/Faq";
 // import BlogsCard from "../components/BlogsCard";
 // import { useNavigate } from "react-router";
 import { projectsInfo } from "../constants/constants";
-import EnqueryModal from "../modal/EnqueryModal";
-import Header from "../sections/Header";
 import { Toaster, toast } from "sonner";
 import { sectionColors } from "../constants/constants";
 import { contactAPI, ContactData } from "../api/ContactAPI";
 import { useScroll } from "framer-motion";
 import "../card.css";
+import {
+  TestimonialSlider,
+  Projects,
+  AreaSection,
+  Footer,
+  Header,
+} from "../sections/index";
 interface ProjectItem {
   id: number;
   projectName: string;
@@ -154,7 +157,7 @@ const Home: React.FC = () => {
 
   // const navigate = useNavigate();
   return (
-    <div className=" mt-16 overflow-x-clip flex flex-col justify-between ">
+    <div className=" mt-16 overflow-x-clip flex flex-col justify-between max-w-[1640px] mx-auto">
       <Toaster richColors />
       {show && (
         <ContactModal
@@ -214,7 +217,7 @@ const Home: React.FC = () => {
             className="relative hidden md:block w-full  sm:h-auto "
           />
           <img
-            src={YelloSquare}
+            src={YellowSquare}
             alt="yellow square"
             className="absolute hidden md:block bottom-4 lg:bottom-8 right-16 lg:right-80 z-10"
           />

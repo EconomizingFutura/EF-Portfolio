@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import EFLogo from "../assets/EFLogo.svg";
+import { EFLogo, wave } from "../assets/index";
 import { navLinks } from "../constants/constants";
 import { Link, useNavigate } from "react-router-dom";
 import ButtonWrapper from "../components/ButtonWrapper";
 import { Menu, X } from "lucide-react";
-import wave from "../assets/wave.svg";
 
 interface propsTypes {
   background: string;
@@ -54,7 +53,7 @@ const Header: React.FC<propsTypes> = ({
         background === "#FFFFFF" || background === "#F4F8FB"
           ? "dark:shadow-xl shadow-slate-500"
           : ""
-      } py-2 px-5 fixed ${
+      } py-2 px-5 fixed max-w-[1640px] mx-auto ${
         home ? "z-50" : "z-30"
       } top-0 xl:px-0 w-full border-b border-b-[#D1EEFF] flex md:items-center md:justify-center font-hellix h-[74px]`}
     >

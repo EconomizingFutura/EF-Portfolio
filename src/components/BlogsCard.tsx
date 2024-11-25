@@ -1,8 +1,6 @@
 import React from "react";
-import Arrow from "../assets/Arrow.svg";
-import BlogPerson from "../assets/BlogsPerson.svg";
-import BlogEllipse from "../assets/BlogEllipse.svg";
-import Star from "../assets/Star.svg";
+
+import { Arrow, BlogEllipse, Star, BlogsPerson } from "../assets/index";
 import { useNavigate } from "react-router";
 
 interface CardProps {
@@ -22,7 +20,7 @@ const BlogsCard: React.FC<CardProps> = ({ card }) => {
     {
       id: 1,
       header: card.header,
-      icon: BlogPerson,
+      icon: BlogsPerson,
     },
     {
       id: 2,

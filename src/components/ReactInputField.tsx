@@ -36,7 +36,7 @@ const ReactInputField: React.FC<InputFieldProps> = ({
         type={type}
         className={
           others
-            ? "border-t-0 border-r-0 placeholder:text-[11px] md:placeholder:text-[16px] w-full border-l-0 focus:border-b-[#999999] border-b-2 focus:outline-none"
+            ? "border-t-0 border-r-0 placeholder:text-[11px] md:placeholder:text-[16px] w-full border-l-0 focus:border-b-[#999999] border-b-2 focus:outline-none text-[#999999]"
             : "w-full bg-[#F9FBFC] placeholder:text-[#999999] focus:outline-none placeholder:text-[11px] md:placeholder:text-[16px] placeholder:font-normal h-[44px] p-3 flex gap-[10px] border-[1px] rounded-lg border-[#DDE4EE] text-[#999999]"
         }
         placeholder={placeholder}

@@ -1,14 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import Footer from "../sections/Footer";
-import EnqueryModal from "../modal/EnqueryModal";
-import ContactModal from "../modal/ContactModal";
+import { EnqueryModal, ContactModal } from "../modal/index";
 import { useNavigate, useParams } from "react-router";
 import { projectsInfo } from "../constants/constants";
-import ButtonArror from "../assets/ButtonArror.svg";
-import projectHeader from "../assets/projectsHeader.svg";
-import Boxes from "../assets/Boxes.svg";
+import { ButtonArrow, projectsHeader, Boxes } from "../assets/index";
 import Lottie from "lottie-react";
-import Header from "../sections/Header";
+import { Header, Footer } from "../sections/index";
 import { contactAPI, ContactData } from "../api/ContactAPI";
 import { toast, Toaster } from "sonner";
 
@@ -130,16 +126,16 @@ const Projects: React.FC = () => {
       >
         {/* glows */}
         <div
-          style={{ backgroundImage: `url(${projectHeader})` }}
+          style={{ backgroundImage: `url(${projectsHeader})` }}
           className=" h-32 md:h-60 w-full rounded-[40%] blur-lg bg-opacity-65  absolute top-0 left-0 opacity-80"
         ></div>
 
         <div
-          style={{ backgroundImage: `url(${projectHeader})` }}
+          style={{ backgroundImage: `url(${projectsHeader})` }}
           className=" md:h-[400px] md:w-[400px] h-[200px] w-32 rounded-full absolute blur-xl -translate-x-2/3 md:top-1/3 hidden md:block pointer-events-none left-0 rotate-90 opacity-80"
         ></div>
         <div
-          style={{ backgroundImage: `url(${projectHeader})` }}
+          style={{ backgroundImage: `url(${projectsHeader})` }}
           className=" h-[350px] w-[350px] rounded-full absolute blur-xl translate-x-2/3 pointer-events-none top-1/4 right-0 -rotate-90 opacity-80"
         ></div>
         <Toaster richColors />
@@ -207,7 +203,7 @@ const Projects: React.FC = () => {
                 >
                   Read More
                   <img
-                    src={ButtonArror}
+                    src={ButtonArrow}
                     className={`transition-transform duration-75 ${
                       rotate ? "rotate-45" : "rotate-90"
                     }`}

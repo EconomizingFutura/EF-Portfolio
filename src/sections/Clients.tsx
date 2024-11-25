@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
-import Arrows from "../components/Arrows";
 import "../style.css";
-import MySvgComponent from "../components/MySvgComponent";
+import { MySvgComponent, Arrows } from "../components/index";
 import { useInView } from "react-intersection-observer";
 
 interface ContentItem {

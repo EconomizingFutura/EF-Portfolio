@@ -1,14 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import Footer from "../sections/Footer";
-import ContactModal from "../modal/ContactModal";
-import WaveRight from "../assets/WaveRight.svg";
-import WaveLeft from "../assets/WaveLeft.svg";
+import { Footer, Header } from "../sections/index";
+import { ContactModal, EnqueryModal } from "../modal/index";
+import { WaveLeft, WaveRight, search, wave } from "../assets/index";
 import BlogsCard from "../components/BlogsCard";
-import searchIcon from "../assets/search.svg";
 import { blogs } from "../constants/constants";
-import EnqueryModal from "../modal/EnqueryModal";
-import wave from "../assets/wave.svg";
-import Header from "../sections/Header";
 import { ContactData } from "../api/ContactAPI";
 import { contactAPI } from "../api/ContactAPI";
 import { toast, Toaster } from "sonner";
@@ -139,7 +134,7 @@ const Blogs: React.FC = () => {
         </div>
 
         <div className="flex items-center justify-between border-[1px] border-[#9CA4B5] rounded-[4px] h-[44px] w-[223px] max-w-[223px] text-[16px] placeholder:text-[#999999]">
-          <img src={searchIcon} alt="search" className="px-2" />
+          <img src={search} alt="search" className="px-2" />
           <input
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}

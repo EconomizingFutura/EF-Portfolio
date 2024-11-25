@@ -1,39 +1,39 @@
 import React, { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import ReactInputField from "../components/ReactInputField";
-import Dropbox from "../assets/Dropbox.svg";
-import File from "../assets/File.svg";
-import FormLabels from "../components/FormLabels";
-import Proppers from "../assets/Proppers.json";
-import projectHeader from "../assets/projectsHeader.svg";
 import {
   mainSelectionOptions,
   softwareDevelopment,
   teamAugmentation,
 } from "../constants/PricingConstants";
-import ButtonWrapper from "../components/ButtonWrapper";
-import WavesPriceSection from "../assets/WavesPriceSection.svg";
 import Lottie from "lottie-react";
-import CustomSun from "../assets/CustomSun";
+import {
+  CustomSun,
+  WavesPriceSection,
+  projectsHeader,
+  Proppers,
+  File,
+  Dropbox,
+} from "../assets/index";
 import { toast, Toaster } from "sonner";
-import Header from "../sections/Header";
-import ContactModal from "../modal/ContactModal";
 import { contactAPI, ContactData } from "../api/ContactAPI";
-import Footer from "../sections/Footer";
-import EnqueryModal from "../modal/EnqueryModal";
-import FormSectionWrapper from "../components/FormSectionWrapper";
-import FormError from "../components/FormError";
+import { EnqueryModal, ContactModal } from "../modal/index";
 import { PricingAPI, PricingData } from "../api/PricingAPI";
-import FormOptions from "../components/FormOptions";
 import {
   selectSections,
   NameAndEmailPricing,
 } from "../constants/PricingConstants";
-import ManiSelection from "../components/ManiSelection";
-import FormCheckboxInput from "../components/FormCheckboxInput";
-import FormRadioCheckbox from "../components/FormCheckboxInput";
-import FormTextArea from "../components/FormTextArea";
-// import FormFileUpload from "../components/FormFileUpload";
+import { Header, Footer } from "../sections/index";
+import {
+  FormTextArea,
+  FormRadioCheckbox,
+  ManiSelection,
+  FormOptions,
+  FormError,
+  FormSectionWrapper,
+  ButtonWrapper,
+  FormLabels,
+  ReactInputField,
+} from "../components/index";
 
 interface SubSectionLabel {
   label: string;
@@ -292,7 +292,7 @@ const ReactForms: React.FC = () => {
             <div className="flex flex-col gap-2">
               <div className="flex flex-wrap gap-4">
                 {currentSection?.labels?.map((option, index) => (
-                  <FormCheckboxInput
+                  <FormRadioCheckbox
                     type="radio"
                     key={index}
                     id={option.label}
@@ -584,7 +584,7 @@ const ReactForms: React.FC = () => {
             <div className="flex flex-col gap-2">
               <div className="flex flex-wrap gap-2">
                 {currentSection?.labels?.map((option, index) => (
-                  <FormCheckboxInput
+                  <FormRadioCheckbox
                     type="checkbox"
                     key={index}
                     id={option.label}
@@ -608,7 +608,7 @@ const ReactForms: React.FC = () => {
             <div className="flex flex-col gap-2">
               <div className="flex flex-wrap gap-2">
                 {currentSection?.labels?.map((option, index) => (
-                  <FormCheckboxInput
+                  <FormRadioCheckbox
                     type="checkbox"
                     key={index}
                     id={option.label}
@@ -740,9 +740,9 @@ const ReactForms: React.FC = () => {
       case 8:
         return (
           <FormSectionWrapper isFile={true} isComment={true}>
-            <div className="mx-auto md:h-[104px] flex justify-between items-center flex-col cursor-pointer">
+            <div className="mx-auto lg:h-[104px] flex justify-between items-center flex-col cursor-pointer">
               {file ? (
-                <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
+                <div className="lg:w-[379px] lg:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
                   <div className="flex bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
                     <img src={File} alt="" />
                     <h1 className="truncate max-w-48 inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
@@ -867,7 +867,7 @@ const ReactForms: React.FC = () => {
     }
   };
   return (
-    <div className="Prizing-section flex min-h-screen md:min-h-0  flex-col font-hellix w-full overflow-hidden">
+    <div className="Prizing-section flex min-h-screen flex-col font-hellix w-full overflow-hidden">
       {show && (
         <ContactModal
           isLoading={isLoading}
@@ -885,7 +885,7 @@ const ReactForms: React.FC = () => {
       <div ref={mainSectionRef}></div>
       <Toaster richColors />
       <div
-        style={{ backgroundImage: `url(${projectHeader})` }}
+        style={{ backgroundImage: `url(${projectsHeader})` }}
         className=" h-96 w-full absolute top-0 left-0 opacity-80"
       ></div>
       <div

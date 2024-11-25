@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import WaveRight from "../assets/WaveRight.svg";
-import WaveLeft from "../assets/WaveLeft.svg";
+import { Header, Footer } from "../sections/index";
+import { EnqueryModal, ContactModal } from "../modal/index";
+import {
+  // WavesPriceSection,
+  WaveRight,
+  WaveLeft,
+  greyCircles,
+  wave,
+  AvailableIcon,
+} from "../assets/index";
 import { Technologies } from "../constants/constants";
-import AvailableIcon from "../assets/AvailableIcon.svg";
-import Footer from "../sections/Footer";
-import ContactModal from "../modal/ContactModal";
-import EnqueryModal from "../modal/EnqueryModal";
-import Header from "../sections/Header";
-import wave from "../assets/wave.svg";
-import greyCircles from "../assets/greyClircles.svg";
 import { toast, Toaster } from "sonner";
 import { contactAPI, ContactData } from "../api/ContactAPI";
 const sectionColors = ["#BCE7FF", "#FFFFFF"];
@@ -121,8 +122,8 @@ const Technology: React.FC = () => {
               className={`flex flex-col 
               ${
                 tech.id >= 4
-                  ? "h-min lg:h-[540px] "
-                  : "h-min lg:h-[440px]  justify-between"
+                  ? "h-min md:h-[540px] lg:h-[540px] "
+                  : "h-min md:h-[540px] lg:h-[440px]  justify-between"
               }  
               w-full sm:w-[calc(50%-1rem)] z-10 md:w-[calc(50%-1rem)]  lg:w-[394px] rounded-xl sm:rounded-2xl border border-[#9CA4B580] relative`}
             >
@@ -130,7 +131,7 @@ const Technology: React.FC = () => {
                 <img
                   src={tech.logo}
                   alt=""
-                  className="max-w-full max-h-full"
+                  className={`max-w-full ${tech.id === 5 && "h-[110px]"}`}
                   draggable={false}
                 />
               </div>

@@ -1,13 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import Footer from "../sections/Footer";
-import ContactModal from "../modal/ContactModal";
 import { useParams } from "react-router";
 import { blogs } from "../constants/constants";
-import Star from "../assets/Star.svg";
-import EnqueryModal from "../modal/EnqueryModal";
+import { Star, projectsHeader } from "../assets/index";
+import { EnqueryModal, ContactModal } from "../modal/index";
 import BlogsCard from "../components/BlogsCard";
-import Header from "../sections/Header";
-import projectHeader from "../assets/projectsHeader.svg";
+import { Header, Footer } from "../sections/index";
 import { ContactData } from "../api/ContactAPI";
 import { toast, Toaster } from "sonner";
 import { contactAPI } from "../api/ContactAPI";
@@ -71,10 +68,12 @@ const Blog: React.FC = () => {
   const param = useParams<{ id?: string }>();
   console.log(blogs);
 
-  const otherBlogs = blogs.filter((a) => a.id !== Number(param.id)).slice(0, 3);
+  const otherBlogs = blogs
+    .filter((a) => a?.id !== Number(param?.id))
+    .slice(0, 3);
   console.log(otherBlogs);
 
-  const content = blogs.filter((a) => a.id == Number(param.id))[0];
+  const content = blogs.filter((a) => a?.id == Number(param?.id))[0];
   return (
     <div className=" font-hellix min-h-screen flex flex-col overflow-x-hidden relative">
       {/* <div
@@ -90,16 +89,16 @@ const Blog: React.FC = () => {
       </div>
       {/* top */}
       <div
-        style={{ backgroundImage: `url(${projectHeader})` }}
+        style={{ backgroundImage: `url(${projectsHeader})` }}
         className=" h-60  w-full rounded-b-[50%] absolute blur-md md:top-0 "
       ></div>
       {/* right */}
       <div
-        style={{ backgroundImage: `url(${projectHeader})` }}
+        style={{ backgroundImage: `url(${projectsHeader})` }}
         className=" h-[350px] w-[350px] rounded-full absolute blur-xl translate-x-2/3 pointer-events-none top-[20%] right-0 -rotate-90 opacity-80"
       ></div>
       <div
-        style={{ backgroundImage: `url(${projectHeader})` }}
+        style={{ backgroundImage: `url(${projectsHeader})` }}
         className=" md:h-[400px] md:w-[400px] h-[200px] w-32 rounded-full absolute blur-xl -translate-x-2/3 md:top-1/3 hidden md:block pointer-events-none left-0 rotate-90 opacity-80"
       ></div>
       {/* enquery */}

@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import Lottie from "lottie-react";
 import { useNavigate } from "react-router";
 import { motion, MotionValue, useTransform } from "framer-motion";
-import ButtonArror from "../assets/ButtonArror.svg";
+import { ButtonArrow } from "../assets/index";
 import "./../card.css";
 interface ProjectItem {
   id: number;
@@ -72,7 +72,7 @@ const Projects: React.FC<ProjectsProps> = ({
               >
                 Read More
                 <img
-                  src={ButtonArror}
+                  src={ButtonArrow}
                   className={`transition-transform duration-75 ${
                     rotate ? "rotate-45" : "rotate-90"
                   }`}

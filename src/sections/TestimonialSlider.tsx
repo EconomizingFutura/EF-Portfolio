@@ -31,7 +31,7 @@ const TestimonialSlider: React.FC = () => {
   };
 
   return (
-    <div className="relative mx-auto sm:w-full w-11/12 xl:h-[300px] min-h-min overflow-hidden">
+    <div className="relative mx-auto sm:w-full w-11/12 xl:h-[300px] min-h-min overflow-hidden max-w-[1640px]">
       <div className="flex lg:flex-row flex-col pointer-events-none justify-center gap-10 sm:gap-16 items-center h-full xl:py-0 py-16 xl:h-[225px]">
         {getVisibleTestimonials().map((index, i) => (
           <div

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const FreeAnalysisForm = () => {
-  // State management for each part of the form
   const [step, setStep] = useState(1);
   const [selectedService, setSelectedService] = useState<
     "software" | "augmentation" | null
@@ -11,7 +10,6 @@ const FreeAnalysisForm = () => {
   const [services, setServices] = useState<string[]>([]);
   const [platforms, setPlatforms] = useState<string[]>([]);
 
-  // Handlers for toggling checkbox selections
   const toggleSelection = (
     selected: string,
     selections: string[],
@@ -24,11 +22,9 @@ const FreeAnalysisForm = () => {
     );
   };
 
-  // Navigate between steps
   const handleNext = () => setStep(step + 1);
   const handleBack = () => setStep(step - 1);
 
-  // Submission handler
   const handleSubmit = () => {
     console.log({
       selectedService,

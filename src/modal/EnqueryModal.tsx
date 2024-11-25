@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import un from "../assets/un.json";
+import { un } from "../assets/index";
 import Lottie from "lottie-react";
-import ButtonWrapper from "../components/ButtonWrapper";
+import { ButtonWrapper } from "../components/index";
 import { X } from "lucide-react";
 import { ContactData } from "../api/ContactAPI";
 import { Formik, Form, FormikHelpers } from "formik";

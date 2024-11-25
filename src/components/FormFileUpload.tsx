@@ -1,7 +1,6 @@
 import React from "react";
 import { FieldValues, UseFormRegister } from "react-hook-form";
-import Dropbox from "../assets/Dropbox.svg";
-import File from "../assets/File.svg";
+import { Dropbox, File } from "../assets/index";
 import FormError from "./FormError";
 
 interface FormFileUploadProps {

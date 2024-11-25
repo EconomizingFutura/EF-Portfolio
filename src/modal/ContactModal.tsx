@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import ButtonWrapper from "../components/ButtonWrapper";
-import CancelIcon from "../assets/CancelIcon.svg";
+import { ButtonWrapper } from "../components/index";
+import { CancelIcon } from "../assets/index";
 import { ContactData } from "../api/ContactAPI";
 import { Toaster } from "sonner";
 import * as Yup from "yup";

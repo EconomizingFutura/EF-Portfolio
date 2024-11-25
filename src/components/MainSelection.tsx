@@ -7,7 +7,7 @@ interface RadioInputProps<T extends FieldValues> {
   name: Path<T>;
   register: UseFormRegister<T>;
 }
-const ManiSelection = <T extends FieldValues>({
+const MainSelection = <T extends FieldValues>({
   id,
   label,
   value,
@@ -28,4 +28,4 @@ const ManiSelection = <T extends FieldValues>({
   );
 };
 
-export default ManiSelection;
+export default MainSelection;

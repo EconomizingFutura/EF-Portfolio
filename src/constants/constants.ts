@@ -1,27 +1,29 @@
-import Testimonial from "../assets/Testimonial.png";
-import Python from "../assets/Python.svg";
-import Node from "../assets/Node.svg";
-import ReactJS from "../assets/ReactJS.png";
-import ReactNative from "../assets/ReactNative.svg";
-import Java from "../assets/Java.png";
-import mobileApp from "../assets/mobileApp.svg";
-import webapp from "../assets/webapp.svg";
-import devops from "../assets/devops.svg";
-import uiux from "../assets/uiux.svg";
-import Blog_banner_1 from "../assets/Blog_banner_1.svg";
-import Blog_banner_2 from "../assets/Blog_banner_2.svg";
-import pencil from "../assets/pencil.json";
-import Blogs1 from "../assets/Blogs1.svg";
-import Thunder from "../assets/Thunder.json";
-import AeniniBanner from "../assets/AeniniBanner.svg";
-import Aenini from "../assets/Aenini.svg";
-import TrevaChat from "../assets/TrevaChat.svg";
-import AeiniImg from "../assets/AeiniImg.svg";
-import mobiledev from "../assets/mobiledev.svg";
-import web_dev from "../assets/web_dev.svg";
-import devopsDev from "../assets/devopsDev.svg";
-import UI from "../assets/UI.svg";
-import neo4j from "../assets/neo4j.svg";
+import {
+  Testimonial,
+  Python,
+  Node,
+  ReactJS,
+  ReactNative,
+  Java,
+  mobileApp,
+  webapp,
+  devops,
+  uiux,
+  Blog_banner_1,
+  Blog_banner_2,
+  pencil,
+  Blogs1,
+  Thunder,
+  AeniniBanner,
+  Aenini,
+  TrevaChat,
+  AeiniImg,
+  mobiledev,
+  web_dev,
+  devopsDev,
+  UI,
+  neo4j,
+} from "../assets/index";
 export const navLinks = [
   {
     id: 1,
@@ -78,7 +80,6 @@ export const projectsInfo: ProjectItem[] = [
     projectName: "Treva Chat",
     description:
       "Treva Chat is an advanced chatbot platform designed for easy question resolution, with features like reference tracking for seamless conversations. It stores the last five chat sessions for quick access and includes feedback mechanisms to ensure quality interactions. With built-in user authentication, it provides a secure and personalized support experience.",
-    // image: AeiniImg,
     image: Aenini,
 
     projectBanner: AeniniBanner,
@@ -94,46 +95,24 @@ export const projectsInfo: ProjectItem[] = [
 export const testimonials = [
   {
     id: 1,
-    name: "Miche",
+    name: "Hari",
+    position: "Founder",
+    feedback:
+      "Working with Economizing Futura was a game-changer for my business. They delivered a user-friendly app on time, exceeding my expectations and boosting my revenue. I highly recommend their professional and reliable services!",
+    image: Testimonial,
+  },
+
+  {
+    id: 2,
+    name: "Lllllallall",
     position: "Co-founder",
     feedback:
       "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
     image: Testimonial,
   },
+
   {
     id: 3,
-    name: "Bromely",
-    position: "Co-founder",
-    feedback:
-      "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
-    image: Testimonial,
-  },
-  {
-    id: 2,
-    name: "Lllllallall",
-    position: "Co-founder",
-    feedback:
-      "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
-    image: Testimonial,
-  },
-  {
-    id: 2,
-    name: "Lllllallall",
-    position: "Co-founder",
-    feedback:
-      "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
-    image: Testimonial,
-  },
-  {
-    id: 2,
-    name: "Lllllallall",
-    position: "Co-founder",
-    feedback:
-      "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
-    image: Testimonial,
-  },
-  {
-    id: 2,
     name: "Lllllallall",
     position: "Co-founder",
     feedback:
