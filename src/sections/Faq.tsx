@@ -27,7 +27,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         onClick={onClick}
         className="cursor-pointer flex justify-between items-center"
       >
-        <p className="text-[#212735] text-[15px] w-3/4 md:text-[17px] font-bold">
+        <p className="text-[#212735] text-[15px] w-3/4 md:text-[16px]  xl:text-[17px] font-bold">
           {title}
         </p>
         {isOpen ? <img src={AccordinDash} alt="" /> : <Plus size={20} />}
@@ -96,7 +96,7 @@ const Faq: React.FC = () => {
     setOpenIndex(index === openIndex ? null : index);
   };
   return (
-    <div className="w-full px-4  lg:max-w-[608px] flex flex-col  xl:px-0">
+    <div className="w-full px-4 lg:max-w-[558px] xl:max-w-[608px] flex flex-col  xl:px-0">
       {items.map((item, index) => (
         <AccordionItem
           key={index}

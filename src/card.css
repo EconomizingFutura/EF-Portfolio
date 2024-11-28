@@ -190,3 +190,16 @@
   position: sticky;
   top: 0;
 }
+
+.heroSectionBackground {
+  background: linear-gradient(180deg, #aee2ff 0%, #e0f3ff 100%);
+}
+
+@media (min-width: 1024px) {
+  .heroSectionBackground {
+    /* Override for larger screens */
+    background-image: url("./assets/wave_background.svg");
+    background-position: center;
+    background-size: cover;
+  }
+}

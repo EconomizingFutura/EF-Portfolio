@@ -1,24 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  Hero1,
-  HeroMini,
-  CurlArrows,
-  YellowSquare,
+  // HeroMini,
   ClientUnderline,
   Boxes,
   Area,
+  FAQ,
 } from "../assets/index";
-import { ButtonWrapper } from "../components/index";
+// import { ButtonWrapper } from "../components/index";
 import { ContactModal, EnqueryModal } from "../modal/index";
-
-import Clients from "../sections/Clients";
-import FAQ from "../assets/FAQ.svg";
-import Faq from "../sections/Faq";
-// import BlogsCard from "../components/BlogsCard";
-// import { useNavigate } from "react-router";
-import { projectsInfo } from "../constants/constants";
 import { Toaster, toast } from "sonner";
-import { sectionColors } from "../constants/constants";
+import { sectionColors, projectsInfo } from "../constants/constants";
 import { contactAPI, ContactData } from "../api/ContactAPI";
 import { useScroll } from "framer-motion";
 import "../card.css";
@@ -27,8 +18,11 @@ import {
   Projects,
   AreaSection,
   Footer,
+  Clients,
+  Faq,
   Header,
 } from "../sections/index";
+import HeroSection from "../sections/HeroSections";
 interface ProjectItem {
   id: number;
   projectName: string;
@@ -167,61 +161,21 @@ const Home: React.FC = () => {
           onFormSubmit={handleFormSubmit}
         />
       )}
-      <div className="  md:right-10 md:bottom-5 right-5 bottom-5 z-40 fixed">
+      <div className="xl:right-8 xl:bottom-8 lg:right-8 right-5 bottom-5 z-50 fixed">
         <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
       </div>
       <Header
-        width={"xl:w-[1167px]"}
+        width={"xl:w-[1167px] "}
         handleShowForms={handleToogleForms}
         background={headerBg}
         home={true}
       />
-      {/* ceedff #DAF1FF */}
+      {/* ceedff #DAF1FF bg-[#aee2ff] */}
       <section
         ref={heroSection}
-        className="flex  lg:flex-row flex-col bg-[#aee2ff]   justify-center xl:justify-end  backdrop-blur-304 bg-opacity-50 items-center py-8 lg:py-12 "
-        style={{
-          background: "linear-gradient(180deg, #AEE2FF 0%, #E0F3FF 100%)",
-        }}
+        className="flex  lg:flex-row flex-col   justify-center xl:justify-end  backdrop-blur-304 bg-opacity-50 items-center  lg:h-[650px] heroSectionBackground "
       >
-        <div className="w-full font-hellix px-5  xl:px-0 lg:w-[505px] flex flex-col h-auto lg:h-[380px] gap-8 xl:gap-10 justify-between">
-          <h1 className="text-[#24536E] lg:leading-[48.61px] xl:leading-[52.81px] font-bold text-3xl xl:text-[44px] leading-[38.5px] text-start lg:text-left ">
-            Creative Solutions for a Brighter Future
-          </h1>
-          <p className="text-base lg:text-[20px] text-[16px] leading-6 lg:leading-7 text-[#000000] ">
-            Embrace a brighter future with our technology-driven solutions that
-            enhance your business capabilities. We empower your success through
-            innovation, helping you unlock new opportunities and stay ahead in a
-            competitive landscape.
-          </p>
-          <ButtonWrapper
-            onClick={handleToogleForms}
-            label={"Contact Us"}
-            className="bg-[#20B2FF] p-3 lg:p-[10px] text-white rounded-lg font-semibold text-sm lg:text-base h-[46px] w-[120px] lg:w-[139px]  "
-          />
-        </div>
-        <div className="relative ">
-          <img
-            src={CurlArrows}
-            alt="arrows"
-            className="absolute h-[24px] w-[28px] top-5 right-1/2 sm:h-auto sm:w-auto sm:right-20 lg:right-80  sm:top-10 lg:top-24"
-          />
-          <img
-            src={HeroMini}
-            alt="hero"
-            className="relative w-full sm:w-full md:hidden sm:h-auto "
-          />
-          <img
-            src={Hero1}
-            alt="hero"
-            className="relative hidden md:block w-full  sm:h-auto "
-          />
-          <img
-            src={YellowSquare}
-            alt="yellow square"
-            className="absolute hidden md:block bottom-4 lg:bottom-8 right-16 lg:right-80 z-10"
-          />
-        </div>
+        <HeroSection onClickButton={handleToogleForms} />
       </section>
       {/* Testimonials */}
       <section
@@ -279,7 +233,7 @@ const Home: React.FC = () => {
       {/* Area of expertise */}
       <section
         ref={expertiseSection}
-        className="h-min py-8 lg:h-[2233px] flex flex-col justify-center  sm:mt-40 md:mt-0 items-center bg-[#032435] w-full font-hellix  lg:gap-20"
+        className="h-min py-8 xl:h-[2033px] flex flex-col justify-center  sm:mt-40 md:mt-0 items-center bg-[#032435] w-full font-hellix lg:gap-16 xl:gap-20"
       >
         <div className="relative my-10">
           <h1 className="font-bold text-[30px] md:text-[38px] leading-[45.61px] text-[#ffffff] text-center">
@@ -329,20 +283,22 @@ const Home: React.FC = () => {
       {/* FAQ */}
       <section
         ref={faqSection}
-        className="bg-[#F4F8FB] h-auto  w-full font-hellix py-6 md:py-0"
+        className="bg-[#F4F8FB] min-h-[500px] sm:min-h-[600px] xl:h-[699px] w-full font-hellix py-8 sm:py-12 xl:py-16"
       >
-        <div className="xl:w-[1120px] mx-auto h-auto flex flex-col lg:flex-row justify-between px-2  md:px-10 lg:px-5 lg:h-[799px] items-center">
-          <div className="text-center md:text-left">
-            <h1 className="text-[#032435] font-bold text-3xl lg:text-[38px] md:leading-[45.61px] w-full lg:w-[360px] mx-auto md:mx-0">
+        <div className="container mx-auto max-w-[1120px] h-auto flex flex-col lg:flex-row justify-between gap-8 lg:gap-12 px-4 sm:px-6 lg:px-8">
+          {/* Left content */}
+          <div className="flex flex-col items-center lg:items-start space-y-6 lg:max-w-[360px]">
+            <h1 className="text-[#032435] font-bold text-2xl sm:text-3xl lg:text-[38px] leading-tight md:leading-[45.61px] max-w-[360px]">
               Frequently asked questions
             </h1>
             <img
               src={FAQ}
               alt="FAQ illustration"
-              className="mt-4 md:mt-0 mx-auto md:mx-0"
+              className="w-full max-w-[300px] lg:max-w-[360px] object-contain"
             />
           </div>
-          <div className="w-full lg:w-[608px] bg-[#F4F8FB] lg:h-[639px]  flex justify-center items-center  ">
+          {/* Right content */}
+          <div className="flex-1 lg:max-w-[608px] bg-[#F4F8FB] flex justify-center">
             <Faq />
           </div>
         </div>

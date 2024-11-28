@@ -22,6 +22,7 @@ import {
   web_dev,
   devopsDev,
   UI,
+  UserPlaceholder,
   neo4j,
 } from "../assets/index";
 export const navLinks = [
@@ -99,7 +100,7 @@ export const testimonials = [
     position: "Founder",
     feedback:
       "Working with Economizing Futura was a game-changer for my business. They delivered a user-friendly app on time, exceeding my expectations and boosting my revenue. I highly recommend their professional and reliable services!",
-    image: Testimonial,
+    image: UserPlaceholder,
   },
 
   {

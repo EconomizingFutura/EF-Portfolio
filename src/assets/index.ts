@@ -69,7 +69,9 @@ import ReactJS from "./ReactJS.png";
 import mobileApp from "./mobileApp.svg";
 import webapp from "./webapp.svg";
 import WavesPriceSection from "./WavesPriceSection.svg";
+import wave_background from "./wave_background.svg";
 export {
+  wave_background,
   WavesPriceSection,
   _Instagram,
   webapp,

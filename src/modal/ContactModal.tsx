@@ -44,7 +44,7 @@ const ContactModal: React.FC<propsTypes> = ({
 
   return (
     <div
-      className={`fixed inset-0 z-[1000] bg-[#1e75bb] bg-opacity-40 flex flex-col justify-center items-center gap-3 ${
+      className={`fixed inset-0 z-[1000] bg-[#1e75bb] bg-opacity-40 flex flex-col justify-center items-center gap-2.5 ${
         isModalOpen ? "block" : "hidden"
       }`}
     >
@@ -55,12 +55,12 @@ const ContactModal: React.FC<propsTypes> = ({
         alt=""
       />
       <Toaster richColors />
-      <div className="bg-[#FFFFFF] rounded-2xl md:rounded-[30px] px-5 py-2 md:py-0 lg:p-6 gap-0 flex flex-col font-hellix justify-start items-start md:h-[567px] h-4/5 w-11/12 max-w-lg lg:max-w-2xl">
-        <div className="w-full gap-3 flex flex-col md:h-[75px] justify-between">
-          <h1 className="text-start text-2xl lg:text-[32px] md:leading-[38.41px] text-[#24536E] font-bold">
+      <div className="bg-[#FFFFFF] rounded-2xl md:rounded-[30px] px-5 py-1 md:py-0 lg:p-6 gap-0 flex flex-col font-hellix justify-start items-start md:h-[567px] h-4/5 w-11/12 max-w-lg lg:max-w-2xl">
+        <div className="w-full gap-2.5 flex flex-col md:h-[70px] justify-between">
+          <h1 className="text-start text-2xl lg:text-[32px] lg:leading-[38.41px] md:leading-[38.41px] text-[#24536E] font-bold">
             Contact Us
           </h1>
-          <p className="font-medium text-xs lg:text-base leading-[19.2px] text-[#031924]">
+          <p className="font-medium text-xs lg:text-base leading-[19.2px] lg:leading-[19.2px] text-[#031924]">
             Please provide your email address, and our team will get in touch
             with you.
           </p>
@@ -75,8 +75,8 @@ const ContactModal: React.FC<propsTypes> = ({
           }}
         >
           {(formik) => (
-            <Form className="w-full flex flex-col h-full gap-1 md:gap-3 py-2 justify-between lg:gap-6">
-              <div className="flex flex-col w-full lg:h-[72px] lg:flex-row gap-3 lg:gap-4">
+            <Form className="w-full flex flex-col h-full gap-0.5 md:gap-3 py-2 justify-between lg:gap-6">
+              <div className="flex flex-col w-full lg:h-[72px] lg:flex-row gap-1.5 lg:gap-4">
                 <div className="flex flex-col w-full">
                   <div className="flex flex-col w-full gap-1 lg:gap-1.5">
                     <label

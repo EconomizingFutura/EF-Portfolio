@@ -122,10 +122,10 @@ const Technology: React.FC = () => {
               className={`flex flex-col 
               ${
                 tech.id >= 4
-                  ? "h-min md:h-[540px] lg:h-[540px] "
-                  : "h-min md:h-[540px] lg:h-[440px]  justify-between"
+                  ? "h-min md:h-[540px] xl:h-[540px] "
+                  : "h-min md:h-[540px] xl:h-[440px]  justify-between"
               }  
-              w-full sm:w-[calc(50%-1rem)] z-10 md:w-[calc(50%-1rem)]  lg:w-[394px] rounded-xl sm:rounded-2xl border border-[#9CA4B580] relative`}
+              w-full sm:w-[calc(50%-5rem)] z-10 md:w-[calc(50%-1rem)]  lg:w-[374px] rounded-xl sm:rounded-2xl border border-[#9CA4B580] relative`}
             >
               <div className="w-full h-[147px] bg-[#FFFFFF] rounded-t-xl  sm:rounded-t-2xl flex justify-center items-center">
                 <img
@@ -154,7 +154,7 @@ const Technology: React.FC = () => {
         </section>
       </div>
       <Toaster richColors />
-      <div className="md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
+      <div className="xl:right-8 xl:bottom-8 lg:right-8 right-5 bottom-5 z-50 fixed">
         <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
       </div>
       <Footer />

@@ -54,12 +54,12 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
       className={`${
         !showForms
           ? "h-[56px] w-[56px]"
-          : "h-[540px] md:h-[560px] xl:h-[620px] w-[275px] md:w-[300px] xl:w-[380px]"
-      } flex flex-col justify-between items-end`}
+          : "h-[520px] md:h-[530px]   z-[9999] lg:h-[530px] xl:h-[560px] w-[275px] md:w-[300px] lg:w-[350px]"
+      } flex flex-col justify-between items-end font-hellix`}
     >
       {showForms && (
-        <div className="rounded-xl p-2.5 xl:px-6 xl:py-5 shadow-enquery flex flex-col justify-start items-start w-full bg-[#ffffff]">
-          <h1 className="text-[18px] xl:text-[24px] font-bold leading-[1.2] text-[#24536E] mb-4">
+        <div className="rounded-xl p-2.5 xl:px-4 xl:py-2 shadow-enquery flex flex-col justify-start items-start w-full bg-[#ffffff]">
+          <h1 className="text-[18px] xl:text-[20px] font-bold leading-[1.2] text-[#24536E] mb-1.5 xl:mb-2.5">
             Contact Us
           </h1>
 
@@ -74,7 +74,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
             onSubmit={handleSubmit}
           >
             {({ errors, touched, handleChange, handleBlur, values }) => (
-              <Form className="w-full flex flex-col gap-y-2 xl:gap-y-4">
+              <Form className="w-full flex flex-col gap-y-1 xl:gap-y-2.5">
                 <div className="min-h-[80px] relative">
                   <label
                     htmlFor="firstName"
@@ -187,7 +187,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
         onClick={() => setShowForms((prev) => !prev)}
         className={`${
           !showForms ? "bg-white" : "bg-primary"
-        } md:w-[56px] h-12 w-12 md:h-[56px] absolute bottom-0 cursor-pointer rounded-[16px] shadow-enquery flex justify-center items-center ml-auto`}
+        } xl:w-[56px] h-12 w-12 xl:h-[56px] absolute bottom-0 cursor-pointer rounded-xl xl:rounded-[16px] shadow-enquery flex justify-center items-center ml-auto`}
       >
         {showForms ? (
           <X className="h-[40px] w-[40px] text-[#ffffff]" />

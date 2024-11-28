@@ -27,10 +27,10 @@ const Footer: React.FC = () => {
               </p>
             ))}
           </div>
-          {/* <div className="text-white opacity-70 text-xs lg:text-[13px] font-semibold cursor-pointer">
+          <div className="text-white opacity-70 text-xs lg:text-[13px] font-semibold cursor-pointer">
             <p>Privacy Policy</p>
             <p className="py-2 lg:py-3">Terms & Condition</p>
-          </div> */}
+          </div>
         </div>
       </div>
       <div className="h-px w-full bg-[#4d5b62] rounded my-6 lg:my-7"></div>

@@ -109,7 +109,7 @@ const Projects: React.FC = () => {
           background={backgroundColor}
         />
       </div>
-      <div className="  md:right-10 md:bottom-10  right-5 bottom-5 z-50 fixed">
+      <div className="xl:right-8 xl:bottom-8 lg:right-8 right-5 bottom-5 z-50 fixed">
         <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
       </div>
       {showModal && (

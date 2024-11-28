@@ -127,7 +127,7 @@ const TestimonialSlider: React.FC = () => {
           flex justify-center items-center group"
           onClick={nextTestimonial}
         >
-          <ChevronRight className="h-5 w-5  " />
+          <ChevronRight className="h-5 w-5" />
         </button>
       </div>
     </div>

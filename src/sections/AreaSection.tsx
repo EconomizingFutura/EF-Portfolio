@@ -55,17 +55,13 @@ const AreaSection: React.FC = () => {
         if (progressLine) {
           progressLine.style.height = `${progress * 100}%`;
 
-          // Change gradient color based on scroll progress
           if (progress < 0.33) {
-            // Initial: green to pink
             progressLine.style.backgroundImage =
               "linear-gradient(to bottom, #3FB950, #F778BA)";
           } else if (progress < 0.66) {
-            // Midway: pink to blue
             progressLine.style.backgroundImage =
               "linear-gradient(to bottom, #F778BA, #5a8be8)";
           } else {
-            // Final: pink to violet
             progressLine.style.backgroundImage =
               "linear-gradient(to bottom, #F778BA, #A465F1)";
           }
@@ -105,10 +101,10 @@ const AreaSection: React.FC = () => {
   return (
     <div className="relative font-hellix" ref={lineRef}>
       <div
-        className="absolute left-7 sm:left-10 lg:left-[calc(50%-465px)] xl:left-[calc(50%-520px)] w-1 transition-all duration-300"
+        className="absolute left-7 sm:left-10 lg:left-[calc(50%-455px)] xl:left-[calc(50%-525px)] w-1 transition-all duration-300 top-0 h-[calc(100%-128px)] md:h-[calc(100%-90px)]"
         style={{
-          top: "0px",
-          height: "calc(100% - 103px)",
+          top: "15px",
+          // height: "calc(100% - 180px)",
         }}
       >
         <div
@@ -123,8 +119,8 @@ const AreaSection: React.FC = () => {
       {AreasConstants.map((a) => (
         <div
           className="w-full px-4 flex  gap-3 relative
-                     sm:px-6 sm:gap-4
-                    lg:max-h-[465px] lg:h-[465px] lg:px-8 lg:gap-5"
+                     sm:px-6 sm:gap-4 
+                    xl:max-h-[465px] xl:h-[405px] lg:max-h-[355px] lg:h-[355px]  lg:px-8 lg:gap-8 xl:gap-y-0"
           key={a.id}
           data-section-id={a.id}
         >
@@ -153,22 +149,26 @@ const AreaSection: React.FC = () => {
           <div
             className="flex flex-col gap-2 w-full
                          sm:gap-4
-                         lg:max-h-[465px] lg:h-[285px] 
-                         lg:flex-row lg:items-center lg:justify-between lg:max-w-7xl lg:mx-auto
+                         md:max-h-[325px] md:h-[325px]
+                         lg:max-h-[465px] lg:h-[250px] xl:h-[285px] 
+                         md:flex-row md:justify-start md:items-start  lg:items-center lg:justify-between lg:max-w-7xl lg:mx-auto
                          xl:gap-12"
           >
             <div
               className="flex flex-col gap-7
                            sm:gap-4
-                  
-                           lg:h-[285px]
+                           md:w-2/3
+                           md:h-min
+                           lg:h-[250px] 
+                           xl:h-[285px]
                            lg:w-1/2 lg:max-w-[527px]"
             >
               <h1
                 className={`${colorMap[a.id as keyof typeof colorMap] || ""}
                            text-lg font-bold leading-snug
                            sm:text-xl
-                           lg:text-[28px] lg:leading-[33.61px]`}
+                           lg:text-[24px] lg:leading-[30.6px]
+                           xl:text-[28px] xl:leading-[33.61px]`}
               >
                 {a.heading}
               </h1>
@@ -176,14 +176,15 @@ const AreaSection: React.FC = () => {
                 className="text-white text-base font-semibold leading-relaxed
                 text-[14px]
                            sm:text-[16px]
-                           lg:text-[22px] lg:leading-[28.8px]"
+                           lg:text-[18px] lg:leading-[24.6px]
+                           xl:text-[22px] xl:leading-[28.8px]"
               >
                 {a.info}
               </p>
               <div
                 className="text-[#e5e9ea] space-y-2 ml-1 lg:ml-0
                              sm:space-y-6
-                             lg:space-y-2 text-[14px] lg:text-[17px] lg:leading-[21.6px] font-normal"
+                             lg:space-y-2 text-[14px] lg:text-[16px] lg:leading-[18.6px] xl:text-[17px] xl:leading-[21.6px] font-normal"
               >
                 <p className="list-item ">{a.li1}</p>
                 <p className="list-item">{a.li2}</p>
@@ -199,7 +200,7 @@ const AreaSection: React.FC = () => {
                 alt=""
                 className="rounded-lg w-full max-w-[310px] h-[200px] object-cover
                            sm:max-w-[330px] sm:h-[220px]
-                           lg:max-w-[440px] lg:h-[285px]"
+                           xl:max-w-[440px] xl:h-[285px]"
               />
             </div>
           </div>

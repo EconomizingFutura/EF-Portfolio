@@ -502,9 +502,9 @@ const ReactForms: React.FC = () => {
       case 8:
         return (
           <FormSectionWrapper isFile={true} isComment={true}>
-            <div className="mx-auto md:h-[104px] flex justify-between items-center flex-col cursor-pointer">
+            <div className="mx-auto md:h-[104px] flex justify-between items-center flex-col cursor-pointer lg:pe-8 xl:pe-0">
               {file ? (
-                <div className="md:w-[379px] md:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
+                <div className="lg:w-[359px] xl:w-[379px] lg:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
                   <div className="flex bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
                     <img src={File} alt="" />
                     <h1 className="truncate max-w-48 inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
@@ -521,7 +521,7 @@ const ReactForms: React.FC = () => {
                   </div>
                 </div>
               ) : (
-                <label htmlFor="file" className="cursor-pointer h-16">
+                <label htmlFor="file" className="cursor-pointer">
                   <img
                     src={Dropbox}
                     alt=""
@@ -740,9 +740,9 @@ const ReactForms: React.FC = () => {
       case 8:
         return (
           <FormSectionWrapper isFile={true} isComment={true}>
-            <div className="mx-auto lg:h-[104px] flex justify-between items-center flex-col cursor-pointer">
+            <div className="mx-auto md:h-[104px] flex justify-between items-center flex-col cursor-pointer lg:pe-8 xl:pe-0">
               {file ? (
-                <div className="lg:w-[379px] lg:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
+                <div className="lg:w-[359px] xl:w-[379px] lg:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
                   <div className="flex bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
                     <img src={File} alt="" />
                     <h1 className="truncate max-w-48 inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
@@ -909,7 +909,7 @@ const ReactForms: React.FC = () => {
           }}
           className={` ${
             isFormCompleted ? "lg:h-[428px]" : "lg:h-min"
-          } flex-grow flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 xl:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative`}
+          } flex-grow flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 xl:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative xl:max-h-min`}
         >
           {!isFormCompleted ? (
             <div className="relative z-10  w-full flex justify-center  items-center  flex-col md:flex-row gap-10">
@@ -947,7 +947,10 @@ const ReactForms: React.FC = () => {
                 className="lg:w-1/2  w-full px-2 flex justify-center items-center flex-col h-full gap-5"
               >
                 {subData.length === 0 && (
-                  <FormSectionWrapper>
+                  <FormSectionWrapper
+                    isComment={true}
+                    className="w-full px-4 sm:px-0"
+                  >
                     <div className="flex flex-col gap-2">
                       {mainSelectionOptions.map((option) => (
                         <ManiSelection
@@ -1013,7 +1016,7 @@ const ReactForms: React.FC = () => {
           )}
         </div>
       </section>
-      <div className="  md:right-8 md:bottom-8 right-4 bottom-4 z-50 fixed">
+      <div className="xl:right-8 xl:bottom-8 lg:right-8 right-5 bottom-5 z-50 fixed">
         <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
       </div>
       <Footer />

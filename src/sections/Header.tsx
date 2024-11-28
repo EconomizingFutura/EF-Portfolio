@@ -54,10 +54,12 @@ const Header: React.FC<propsTypes> = ({
           ? "dark:shadow-xl shadow-slate-500"
           : ""
       } py-2 px-5 fixed max-w-[1640px] mx-auto ${
-        home ? "z-50" : "z-30"
+        home ? "z-40" : "z-30"
       } top-0 xl:px-0 w-full border-b border-b-[#D1EEFF] flex md:items-center md:justify-center font-hellix h-[74px]`}
     >
-      <div className={`xl:w-[1246px] w-full flex justify-between items-center`}>
+      <div
+        className={`xl:w-[1186px] lg:px-6 xl:px-0 w-full flex justify-between items-center`}
+      >
         <img
           src={EFLogo}
           alt="Economizing Futura Logo"

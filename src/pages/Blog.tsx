@@ -102,7 +102,7 @@ const Blog: React.FC = () => {
         className=" md:h-[400px] md:w-[400px] h-[200px] w-32 rounded-full absolute blur-xl -translate-x-2/3 md:top-1/3 hidden md:block pointer-events-none left-0 rotate-90 opacity-80"
       ></div>
       {/* enquery */}
-      <div className="  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
+      <div className="xl:right-8 xl:bottom-8  md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
         <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
       </div>
       <Toaster richColors />
