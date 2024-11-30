@@ -6,8 +6,8 @@ import {
   teamAugmentation,
 } from "../constants/PricingConstants";
 import Lottie from "lottie-react";
+import Lines from "../assets/Lines.png";
 import {
-  CustomSun,
   WavesPriceSection,
   projectsHeader,
   Proppers,
@@ -467,6 +467,7 @@ const ReactForms: React.FC = () => {
                 ))}
                 <ReactInputField
                   id="budget"
+                  isBudget={true}
                   label=" Do you have any budget limits? If yes, please, specify the
                         range."
                   type="text"
@@ -890,11 +891,17 @@ const ReactForms: React.FC = () => {
       ></div>
       <div
         ref={mainSectionRef}
-        className=" h-[225px] md:h-[200px] lg:h-[400px] xl:h-[300px] relative w-full flex justify-center items-center "
+        className=" h-[225px] md:h-[330px] lg:h-[350px] xl:h-[300px] relative w-full flex justify-center items-center "
       >
-        <div className=" absolute top-0 left-0 w-full h-full">
-          <CustomSun />
-        </div>
+        <div
+          className=" absolute top-0 left-0 hidden md:block  w-full h-full"
+          style={{
+            backgroundImage: `url(${Lines})`,
+            backgroundRepeat: "repeat",
+            backgroundPosition: "0 0",
+            backgroundSize: "100% 100%",
+          }}
+        ></div>
         <h1 className=" text-[#24536E] font-bold leading-[52.81px] text-center text-[44px]">
           Pricing
         </h1>
@@ -908,8 +915,10 @@ const ReactForms: React.FC = () => {
             backgroundImage: ` URL(${WavesPriceSection})`,
           }}
           className={` ${
-            isFormCompleted ? "lg:h-[428px]" : "lg:h-min"
-          } flex-grow flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 xl:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative xl:max-h-min`}
+            isFormCompleted
+              ? "lg:h-[328px] xl:max-h-80"
+              : "lg:h-min xl:max-h-min"
+          } flex-grow flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 xl:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative `}
         >
           {!isFormCompleted ? (
             <div className="relative z-10  w-full flex justify-center  items-center  flex-col md:flex-row gap-10">

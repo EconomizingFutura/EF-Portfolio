@@ -120,23 +120,21 @@ const Technology: React.FC = () => {
             <div
               key={tech.id}
               className={`flex flex-col 
-              ${
-                tech.id >= 4
-                  ? "h-min md:h-[540px] xl:h-[540px] "
-                  : "h-min md:h-[540px] xl:h-[440px]  justify-between"
-              }  
-              w-full sm:w-[calc(50%-5rem)] z-10 md:w-[calc(50%-1rem)]  lg:w-[374px] rounded-xl sm:rounded-2xl border border-[#9CA4B580] relative`}
+              ${tech.id >= 4 ? "h-min" : "h-min justify-between"}  
+              w-full sm:w-[calc(50%-5rem)] md:h-[420px]  z-10 md:w-[calc(50%-1rem)]  lg:w-[374px] rounded-xl sm:rounded-2xl border border-[#9CA4B580] relative`}
             >
               <div className="w-full h-[147px] bg-[#FFFFFF] rounded-t-xl  sm:rounded-t-2xl flex justify-center items-center">
                 <img
                   src={tech.logo}
                   alt=""
-                  className={`max-w-full ${tech.id === 5 && "h-[110px]"}`}
+                  className={`max-w-full ${
+                    tech.id >= 5 && "h-[110px] aspect-video"
+                  }`}
                   draggable={false}
                 />
               </div>
               <div
-                className={`w-full h-full rounded-b-xl  sm:rounded-b-2xl px-4 sm:px-6 md:px-8 flex-grow  
+                className={`w-full h-full py-1 rounded-b-xl  sm:rounded-b-2xl px-4 sm:px-6 md:px-8 flex-grow  
                bg-[#F4FAFF]`}
               >
                 <p className="text-sm  sm:text-base text-[#666666] font-medium leading-relaxed">

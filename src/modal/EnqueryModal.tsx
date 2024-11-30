@@ -54,8 +54,8 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
       className={`${
         !showForms
           ? "h-[56px] w-[56px]"
-          : "h-[520px] md:h-[530px]   z-[9999] lg:h-[530px] xl:h-[560px] w-[275px] md:w-[300px] lg:w-[350px]"
-      } flex flex-col justify-between items-end font-hellix`}
+          : "h-[505px] md:h-[520px]   z-[9999] lg:h-[520px] xl:h-[560px] w-[275px] md:w-[300px] lg:w-[350px]"
+      } flex flex-col justify-between items-end font-hellix `}
     >
       {showForms && (
         <div className="rounded-xl p-2.5 xl:px-4 xl:py-2 shadow-enquery flex flex-col justify-start items-start w-full bg-[#ffffff]">
@@ -74,11 +74,11 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
             onSubmit={handleSubmit}
           >
             {({ errors, touched, handleChange, handleBlur, values }) => (
-              <Form className="w-full flex flex-col gap-y-1 xl:gap-y-2.5">
+              <Form className="w-full flex flex-col gap-y-0.5 xl:gap-y-2.5">
                 <div className="min-h-[80px] relative">
                   <label
                     htmlFor="firstName"
-                    className="block text-sm font-medium text-[#031924] mb-1"
+                    className="block text-sm font-medium text-[#031924] md:mb-1"
                   >
                     First Name
                   </label>
@@ -90,6 +90,15 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="First Name"
+                    onKeyDown={(e) => {
+                      if (
+                        !/^[A-Za-z\s]+$/.test(e.key) &&
+                        e.key !== "Backspace" &&
+                        e.key !== "Tab"
+                      ) {
+                        e.preventDefault();
+                      }
+                    }}
                     className="w-full xl:h-[44px] h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
                   />
                   {errors.firstName && touched.firstName && (
@@ -102,7 +111,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                 <div className="min-h-[80px] relative">
                   <label
                     htmlFor="lastName"
-                    className="block text-sm font-medium text-[#031924] mb-1"
+                    className="block text-sm font-medium text-[#031924] md:mb-1"
                   >
                     Last Name
                   </label>
@@ -114,6 +123,15 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="Last Name"
+                    onKeyDown={(e) => {
+                      if (
+                        !/^[A-Za-z\s]+$/.test(e.key) &&
+                        e.key !== "Backspace" &&
+                        e.key !== "Tab"
+                      ) {
+                        e.preventDefault();
+                      }
+                    }}
                     className="w-full xl:h-[44px] h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
                   />
                   {errors.lastName && touched.lastName && (
@@ -126,7 +144,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                 <div className="min-h-[80px] relative">
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-[#031924] mb-1"
+                    className="block text-sm font-medium text-[#031924] md:mb-1"
                   >
                     Email
                   </label>
@@ -138,6 +156,15 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                     onBlur={handleBlur}
                     onChange={handleChange}
                     placeholder="xyz@gmail.com"
+                    onKeyDown={(e) => {
+                      if (
+                        !/^[A-Za-z0-9@.]+$/.test(e.key) &&
+                        e.key !== "Backspace" &&
+                        e.key !== "Tab"
+                      ) {
+                        e.preventDefault();
+                      }
+                    }}
                     className="w-full xl:h-[44px] h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
                   />
                   {errors.email && touched.email && (
@@ -147,10 +174,10 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                   )}
                 </div>
 
-                <div className="min-h-[85px]  mb-3 relative">
+                <div className="min-h-[95px] mb-3  md:mb-3 relative">
                   <label
                     htmlFor="comments"
-                    className="block text-sm font-medium text-[#031924] mb-1"
+                    className="block text-sm font-medium text-[#031924] md:mb-1"
                   >
                     Comments
                   </label>
@@ -162,10 +189,19 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                     onBlur={handleBlur}
                     placeholder="Enter your message"
                     rows={3}
+                    onKeyDown={(e) => {
+                      if (
+                        !/^[A-Za-z0-9\s,]+$/.test(e.key) &&
+                        e.key !== "Backspace" &&
+                        e.key !== "Tab"
+                      ) {
+                        e.preventDefault();
+                      }
+                    }}
                     className="w-full px-3 py-1  bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none  resize-none"
                   />
                   {errors.comments && touched.comments && (
-                    <p className="absolute text-red-500 text-xs">
+                    <p className="absolute text-red-500 text-xs -translate-y-2">
                       {errors.comments}
                     </p>
                   )}

@@ -91,6 +91,15 @@ const ContactModal: React.FC<propsTypes> = ({
                       {...formik.getFieldProps("firstName")}
                       className="border-[#DDE4EE] bg-[#F9FBFC] focus:outline-none border resize-none placeholder:text-[#999999] rounded-md text-[#999999] lg:rounded-lg lg:p-3 px-2 p-1.5"
                       placeholder="First Name"
+                      onKeyDown={(e) => {
+                        if (
+                          !/^[A-Za-z\s]+$/.test(e.key) &&
+                          e.key !== "Backspace" &&
+                          e.key !== "Tab"
+                        ) {
+                          e.preventDefault();
+                        }
+                      }}
                     />
                   </div>
                   {formik.touched.firstName && formik.errors.firstName ? (
@@ -113,6 +122,15 @@ const ContactModal: React.FC<propsTypes> = ({
                       {...formik.getFieldProps("lastName")}
                       className="border-[#DDE4EE] bg-[#F9FBFC] focus:outline-none border resize-none rounded-md placeholder:text-[#999999] text-[#999999] lg:rounded-lg lg:p-3 px-2 p-1.5"
                       placeholder="Last Name"
+                      onKeyDown={(e) => {
+                        if (
+                          !/^[A-Za-z\s]+$/.test(e.key) &&
+                          e.key !== "Backspace" &&
+                          e.key !== "Tab"
+                        ) {
+                          e.preventDefault();
+                        }
+                      }}
                     />
                   </div>
                   {formik.touched.lastName && formik.errors.lastName ? (
@@ -136,6 +154,15 @@ const ContactModal: React.FC<propsTypes> = ({
                     {...formik.getFieldProps("email")}
                     placeholder="xyz@gmail.com"
                     className="border-[#DDE4EE] bg-[#F9FBFC] focus:outline-none border resize-none placeholder:text-[#999999] rounded-md lg:rounded-lg lg:p-3 px-2 p-1.5 text-[#999999]"
+                    onKeyDown={(e) => {
+                      if (
+                        !/^[A-Za-z0-9@.]+$/.test(e.key) &&
+                        e.key !== "Backspace" &&
+                        e.key !== "Tab"
+                      ) {
+                        e.preventDefault();
+                      }
+                    }}
                   />
                 </div>
                 {formik.touched.email && formik.errors.email ? (
@@ -159,6 +186,15 @@ const ContactModal: React.FC<propsTypes> = ({
                     className="w-full rounded-md bg-[#F9FBFC] border-gray-300 px-3 py-1 lg:py-2 text-[#999999] focus:outline-none border resize-none"
                     placeholder="Enter your message"
                     rows={3.5}
+                    onKeyDown={(e) => {
+                      if (
+                        !/^[A-Za-z0-9\s,]+$/.test(e.key) &&
+                        e.key !== "Backspace" &&
+                        e.key !== "Tab"
+                      ) {
+                        e.preventDefault();
+                      }
+                    }}
                   />
                 </div>
                 {formik.touched.comments && formik.errors.comments ? (

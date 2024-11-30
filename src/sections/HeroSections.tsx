@@ -1,5 +1,6 @@
 import React from "react";
 import { ButtonWrapper } from "../components";
+import Images from "../assets/Images.png";
 import { CurlArrows, Hero1, HeroMini, YellowSquare } from "../assets/index.ts";
 interface onClickProps {
   onClickButton: () => void;
@@ -43,9 +44,9 @@ const HeroSection: React.FC<onClickProps> = ({ onClickButton }) => {
         />
         ``
         <img
-          src={Hero1}
+          src={Images}
           alt="hero"
-          className="relative hidden md:block w-full "
+          className="relative hidden md:block w-full"
         />
       </div>
     </div>

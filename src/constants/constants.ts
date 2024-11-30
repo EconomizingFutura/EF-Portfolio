@@ -1,5 +1,4 @@
 import {
-  Testimonial,
   Python,
   Node,
   ReactJS,
@@ -23,7 +22,7 @@ import {
   devopsDev,
   UI,
   UserPlaceholder,
-  neo4j,
+  Neo,
 } from "../assets/index";
 export const navLinks = [
   {
@@ -97,28 +96,28 @@ export const testimonials = [
   {
     id: 1,
     name: "Hari",
-    position: "Founder",
+    position: "Contributor",
     feedback:
-      "Working with Economizing Futura was a game-changer for my business. They delivered a user-friendly app on time, exceeding my expectations and boosting my revenue. I highly recommend their professional and reliable services!",
+      "As a contributor at Economizing Futura, I’ve seen how the company simplifies complex problems with user-friendly solutions. Their dedication, professionalism, and timely delivery consistently exceed expectations, driving impactful results.",
     image: UserPlaceholder,
   },
 
   {
     id: 2,
-    name: "Lllllallall",
-    position: "Co-founder",
+    name: "Rajesh Kumar",
+    position: "Director",
     feedback:
-      "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
-    image: Testimonial,
+      "Economizing Futura's support team is exceptional, always providing timely and efficient solutions with a friendly approach. Their dedication to resolving issues and ensuring a seamless experience stands out.",
+    image: UserPlaceholder,
   },
 
   {
     id: 3,
-    name: "Lllllallall",
-    position: "Co-founder",
+    name: "Anonymous",
+    position: "Software Engineer",
     feedback:
-      "Their team is large to handle multiple projects at once, and likes to resolve challenges as well as learn new things. They also welcome regular, and of course, needless to say, develop everything in sprints.",
-    image: Testimonial,
+      "Economizing Futura excels in delivering quick solutions in a short time. Their support team is both responsive and approachable, making every interaction seamless.",
+    image: UserPlaceholder,
   },
 ];
 
@@ -126,22 +125,22 @@ export const Technologies = [
   {
     id: 1,
     logo: ReactNative,
-    text: "React Native enables us to build high-performance, cross-platform mobile apps with a single codebase. By leveraging its seamless integration with native components, we deliver smooth, responsive, and feature-rich mobile experiences for both iOS and Android platforms, ensuring a consistent user experience across devices. With React Native, we bring efficiency and innovation to mobile app development, reducing time to market without compromising on quality.",
+    text: "React Native allows us to build high-performance, cross-platform mobile apps with a single codebase. By integrating with native components, it ensures smooth, responsive, and feature-rich experiences on both iOS and Android. React Native accelerates development, reducing time to market while maintaining top-notch quality.",
   },
   {
     id: 2,
     logo: ReactJS,
-    text: "React.js allows us to develop highly interactive, scalable, and fast web applications with ease. Its component-based architecture ensures reusability and flexibility, enabling us to create complex user interfaces with minimal code. By leveraging React’s virtual DOM and declarative programming model, we deliver fast, responsive, and seamless user experiences across web platforms. With React.js, we push the boundaries of modern web development, crafting applications that are both efficient and future-ready.",
+    text: "React.js enables the development of interactive, scalable, and fast web applications with ease. Its component-based architecture ensures reusability and flexibility, while the virtual DOM and declarative programming deliver responsive and seamless user experiences. React.js empowers us to build efficient, modern, and future-ready web applications.",
   },
   {
     id: 3,
     logo: Java,
-    text: "Java is the backbone of our enterprise-level development, known for its stability, scalability, and platform independence. With Java, we build secure, high-performance applications that can handle complex business processes and large-scale systems. Its vast ecosystem and strong object-oriented principles make it ideal for developing everything from mobile apps to web platforms and backend systems. Java’s reliability ensures our solutions can grow alongside our clients' evolving needs, delivering long-term value.",
+    text: "Java is a cornerstone of enterprise development, valued for its stability, scalability, and platform independence. It enables secure, high-performance applications that handle complex business processes and large-scale systems. With a vast ecosystem and strong object-oriented principles, Java supports everything from mobile apps to backend systems, delivering reliable, long-term value.",
   },
   {
     id: 4,
     logo: Node,
-    text: "Node.js empowers us to create highly efficient and scalable server-side applications with its non-blocking, event-driven architecture. Leveraging JavaScript on both the client and server sides, Node.js allows for seamless full-stack development and real-time data processing. Its robust ecosystem and package management system (npm) accelerate development, enabling us to build high-performance applications that handle large volumes of data and user interactions effectively. With Node.js, we deliver dynamic, real-time solutions that keep pace with modern web demands.",
+    text: "Node.js enables efficient, scalable server-side applications with its non-blocking, event-driven architecture. Using JavaScript for both client and server, it supports seamless full-stack development and real-time data processing. Its robust ecosystem and npm accelerate development, making it ideal for high-performance, dynamic web solutions.",
   },
   {
     id: 5,
@@ -150,8 +149,8 @@ export const Technologies = [
   },
   {
     id: 6,
-    logo: neo4j,
-    text: "Neo4j is a native graph database that makes it easy to model, store, and analyze highly connected data. By focusing on nodes and relationships, Neo4j allows us to uncover patterns and insights in complex data, ideal for applications like social networks, recommendations, and fraud detection. Its flexible structure supports changing data models, enabling agile development. With Neo4j, we gain a powerful tool for extracting valuable insights from interconnected data, making it essential for today’s relationship-driven applications.",
+    logo: Neo,
+    text: "Neo4j is a native graph database designed for modeling, storing, and analyzing highly connected data. It excels in uncovering patterns and insights in applications like social networks, recommendations, and fraud detection. Its flexible structure supports evolving data models, enabling agile development and powerful relationship-driven insights.",
   },
 ];
 

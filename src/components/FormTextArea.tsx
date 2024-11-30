@@ -21,6 +21,26 @@ const FormTextArea: React.FC<FormTextAreaProps> = ({
         rows={5}
         cols={30}
         {...register}
+        onKeyDown={(e) => {
+          const allowedKeys = [
+            "Backspace",
+            "Delete",
+            "ArrowLeft",
+            "ArrowRight",
+            "ArrowUp",
+            "ArrowDown",
+            "Home",
+            "End",
+          ];
+          const isLetter = /^[a-zA-Z]$/.test(e.key);
+          const isNumber = /^[0-9]$/.test(e.key);
+          const isComma = e.key === ",";
+          const isNavigationKey = allowedKeys.includes(e.key);
+
+          if (!(isLetter || isNumber || isComma || isNavigationKey)) {
+            e.preventDefault();
+          }
+        }}
         placeholder="Enter"
       />
       {errorMessage && <FormError errorMessage={errorMessage} />}

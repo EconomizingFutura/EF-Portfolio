@@ -29,6 +29,7 @@ const InputFieldWrapper: React.FC<propsTypes> = ({
           id={label}
           required
           value={value}
+          maxLength={60}
           placeholder={placeholder}
           onChange={(e) => onChange(e.target.value)}
           draggable={false}

@@ -192,7 +192,7 @@ const Home: React.FC = () => {
             className="absolute md:right-1/3 sm:right-16 md:translate-x-3 w-[135px] sm:w-auto right-11 md:top-12"
           />
         </div>
-        <div className=" flex gap-10 my-10 h-auto w-screen overflow-x-auto ">
+        <div className=" flex gap-10 my-10 h-auto w-screen overflow-x-auto relative">
           <TestimonialSlider />
         </div>
       </section>

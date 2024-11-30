@@ -28,8 +28,12 @@ const Footer: React.FC = () => {
             ))}
           </div>
           <div className="text-white opacity-70 text-xs lg:text-[13px] font-semibold cursor-pointer">
-            <p>Privacy Policy</p>
-            <p className="py-2 lg:py-3">Terms & Condition</p>
+            <p>
+              <Link to={"/privacypolicy"}>Privacy Policy</Link>
+            </p>
+            <p className="py-2 lg:py-3">
+              <Link to={"/termsandconditions"}>Terms & Condition</Link>
+            </p>
           </div>
         </div>
       </div>

@@ -27,6 +27,7 @@ import Dropbox from "./Dropbox.svg";
 import EFLogo from "./EFLogo.svg";
 import FAQ from "./FAQ.svg";
 import FB from "./FB.svg";
+import Neo from "./Neo.svg";
 import File from "./File.svg";
 import GoldenQuation from "./GoldenQuation.svg";
 import greyCircles from "./greyCircles.svg";
@@ -75,6 +76,7 @@ export {
   WavesPriceSection,
   _Instagram,
   webapp,
+  Neo,
   mobileApp,
   ReactJS,
   AccordinDash,
