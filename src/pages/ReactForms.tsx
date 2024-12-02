@@ -9,10 +9,10 @@ import Lottie from "lottie-react";
 import Lines from "../assets/Lines.png";
 import {
   WavesPriceSection,
-  projectsHeader,
   Proppers,
   File,
   Dropbox,
+  PH,
 } from "../assets/index";
 import { toast, Toaster } from "sonner";
 import { contactAPI, ContactData } from "../api/ContactAPI";
@@ -886,7 +886,7 @@ const ReactForms: React.FC = () => {
       <div ref={mainSectionRef}></div>
       <Toaster richColors />
       <div
-        style={{ backgroundImage: `url(${projectsHeader})` }}
+        style={{ backgroundImage: `url(${PH})` }}
         className=" h-96 w-full absolute top-0 left-0 opacity-80"
       ></div>
       <div

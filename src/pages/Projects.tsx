@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { EnqueryModal, ContactModal } from "../modal/index";
 import { useNavigate, useParams } from "react-router";
 import { projectsInfo } from "../constants/constants";
-import { ButtonArrow, projectsHeader, Boxes } from "../assets/index";
+import { ButtonArrow, PH, Boxes } from "../assets/index";
 import Lottie from "lottie-react";
 import { Header, Footer } from "../sections/index";
 import { contactAPI, ContactData } from "../api/ContactAPI";
@@ -126,16 +126,16 @@ const Projects: React.FC = () => {
       >
         {/* glows */}
         <div
-          style={{ backgroundImage: `url(${projectsHeader})` }}
+          style={{ backgroundImage: `url(${PH})` }}
           className=" h-32 md:h-60 w-full rounded-[40%] blur-lg bg-opacity-65  absolute top-0 left-0 opacity-80"
         ></div>
 
         <div
-          style={{ backgroundImage: `url(${projectsHeader})` }}
+          style={{ backgroundImage: `url(${PH})` }}
           className=" md:h-[400px] md:w-[400px] h-[200px] w-32 rounded-full absolute blur-xl -translate-x-2/3 md:top-1/3 hidden md:block pointer-events-none left-0 rotate-90 opacity-80"
         ></div>
         <div
-          style={{ backgroundImage: `url(${projectsHeader})` }}
+          style={{ backgroundImage: `url(${PH})` }}
           className=" h-[350px] w-[350px] rounded-full absolute blur-xl translate-x-2/3 pointer-events-none top-1/4 right-0 -rotate-90 opacity-80"
         ></div>
         <Toaster richColors />

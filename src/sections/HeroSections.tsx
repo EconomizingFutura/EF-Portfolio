@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonWrapper } from "../components";
 import Images from "../assets/Images.png";
-import { CurlArrows, Hero1, HeroMini, YellowSquare } from "../assets/index.ts";
+import { CurlArrows, HeroMini, YellowSquare } from "../assets/index.ts";
 interface onClickProps {
   onClickButton: () => void;
 }
