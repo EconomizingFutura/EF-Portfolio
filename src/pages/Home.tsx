@@ -173,7 +173,7 @@ const Home: React.FC = () => {
       {/* ceedff #DAF1FF bg-[#aee2ff] */}
       <section
         ref={heroSection}
-        className="flex  lg:flex-row flex-col   justify-center xl:justify-end  backdrop-blur-304 bg-opacity-50 items-center  lg:h-[650px] heroSectionBackground "
+        className="flex  lg:flex-row flex-col py-5 md:py-0  justify-center xl:justify-end  backdrop-blur-304 bg-opacity-50 items-center  lg:h-[650px] heroSectionBackground "
       >
         <HeroSection onClickButton={handleToogleForms} />
       </section>

@@ -28,9 +28,9 @@
 
 @media (max-width: 768px) {
   .cardContainer .card {
-    width: 90%; /* Adjust the width to fit smaller screens */
-    height: 450px; /* Adjust height if needed */
-    padding: 8px; /* Adjust padding */
+    width: 90%;
+    height: 450px;
+    padding: 8px;
   }
 }
 

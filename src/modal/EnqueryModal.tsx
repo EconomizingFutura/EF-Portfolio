@@ -54,7 +54,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
       className={`${
         !showForms
           ? "h-[56px] w-[56px]"
-          : "h-[505px] md:h-[520px]   z-[9999] lg:h-[520px] xl:h-[560px] w-[275px] md:w-[300px] lg:w-[350px]"
+          : "h-[495px]   z-[9999] lg:h-[490px] xl:h-[540px] w-[275px] md:w-[290px] lg:w-[350px]"
       } flex flex-col justify-between items-end font-hellix `}
     >
       {showForms && (
@@ -75,7 +75,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
           >
             {({ errors, touched, handleChange, handleBlur, values }) => (
               <Form className="w-full flex flex-col gap-y-0.5 xl:gap-y-2.5">
-                <div className="min-h-[80px] relative">
+                <div className="min-h-[75px] relative">
                   <label
                     htmlFor="firstName"
                     className="block text-sm font-medium text-[#031924] md:mb-1"
@@ -108,7 +108,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                   )}
                 </div>
 
-                <div className="min-h-[80px] relative">
+                <div className="min-h-[75px] relative">
                   <label
                     htmlFor="lastName"
                     className="block text-sm font-medium text-[#031924] md:mb-1"
@@ -141,7 +141,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                   )}
                 </div>
 
-                <div className="min-h-[80px] relative">
+                <div className="min-h-[75px] relative">
                   <label
                     htmlFor="email"
                     className="block text-sm font-medium text-[#031924] md:mb-1"
@@ -174,7 +174,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                   )}
                 </div>
 
-                <div className="min-h-[95px] mb-3  md:mb-3 relative">
+                <div className="min-h-[90px] mb-3  md:mb-2 relative">
                   <label
                     htmlFor="comments"
                     className="block text-sm font-medium text-[#031924] md:mb-1"
@@ -208,7 +208,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                 </div>
 
                 <ButtonWrapper
-                  className="bg-[#20B2FF] h-[35px] md:h-[44px] rounded-lg font-semibold text-white text-base w-full"
+                  className="bg-[#20B2FF] h-[35px] md:h-[40px] rounded-lg font-semibold text-white text-base w-full"
                   label="Submit"
                   type={true}
                   disabled={isLoading}
