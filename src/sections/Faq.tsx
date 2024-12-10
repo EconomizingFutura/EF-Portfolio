@@ -67,7 +67,7 @@ const Faq: React.FC = () => {
 
       title: "Do you offer post-launch support and maintenance?",
       content:
-        "Yes, we provide comprehensive post-launch support and maintenance to ensure your web or mobile app runs smoothly after it's live. Our services include regular updates, bug fixes, performance monitoring, security enhancements, and feature upgrades. We also offer ongoing technical support to address any issues or new requirements as your app evolves, helping you keep it up-to-date and fully functional for your users.",
+        "We provide post-launch support to ensure your app runs smoothly, including updates, bug fixes, performance monitoring, and security enhancements. Our services also cover feature upgrades and ongoing technical support to address new requirements. This helps keep your app up-to-date and fully functional for users.",
     },
     {
       id: 5,
@@ -88,7 +88,7 @@ const Faq: React.FC = () => {
 
       title: "How does your development process work?",
       content:
-        "Our process starts by understanding your idea and refining it into a clear roadmap. We then design intuitive user interfaces and experiences, followed by development using the latest technologies. After rigorous testing to ensure quality, we deploy your web or mobile app on the necessary platforms. Throughout the process, we keep you informed to ensure your vision is brought to life.",
+        "We begin by refining your idea into a clear roadmap, designing intuitive user interfaces and experiences. Using the latest technologies, we develop and rigorously test your app for quality before deployment. Throughout, we keep you informed to ensure your vision is realized.",
     },
   ];
 

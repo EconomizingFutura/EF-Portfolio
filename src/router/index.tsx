@@ -12,7 +12,7 @@ import {
   Home,
   PrivacyPolicy,
   Projects,
-  ReactForms,
+  // ReactForms,
   Technology,
   TermsAndConditions,
 } from "../pages/index";
@@ -39,7 +39,7 @@ export const AppRouter: React.FC = () => {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/pricing" element={<ReactForms />} />
+        {/* <Route path="/pricing" element={<ReactForms />} /> */}
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/technologies" element={<Technology />} />
         <Route path="/blog/:id" element={<Blog />} />

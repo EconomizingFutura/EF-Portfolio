@@ -5,8 +5,14 @@ import { ContactData } from "../api/ContactAPI";
 import { Toaster } from "sonner";
 import * as Yup from "yup";
 import { Form } from "formik";
-
 import { Formik } from "formik";
+
+interface FormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  comments: string;
+}
 
 interface propsTypes {
   handleToggle: () => void;
@@ -35,6 +41,25 @@ const ContactModal: React.FC<propsTypes> = ({
     comments: Yup.string().required("Comments are required"),
   });
 
+  const handleEmail = (values: FormValues) => {
+    const email = "economizingfutura@gmail.com";
+    const subject = "Reaching Out to Connect";
+
+    const body = `Hi,
+
+I wanted to reach out regarding the following:
+
+${values.comments}
+
+Looking forward to your response.
+
+Thank you,
+${values.firstName} ${values.lastName}`;
+    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  };
   useEffect(() => {
     document.body.style.overflow = isModalOpen ? "hidden" : "auto";
     return () => {
@@ -55,9 +80,9 @@ const ContactModal: React.FC<propsTypes> = ({
         alt=""
       />
       <Toaster richColors />
-      <div className="bg-[#FFFFFF] rounded-2xl md:rounded-[30px] px-5 py-1 md:py-0 lg:p-6 gap-0 flex flex-col font-hellix justify-start items-start md:h-[567px] h-4/5 w-11/12 max-w-lg lg:max-w-2xl">
+      <div className="bg-[#FFFFFF] rounded-2xl md:rounded-[30px] px-5 py-1 lg:py-3 lg:px-6 gap-0 flex flex-col font-hellix justify-start items-start md:h-[min-content] lg:h-[497px] h-4/5 w-11/12 max-w-lg lg:max-w-2xl">
         <div className="w-full gap-2.5 flex flex-col md:h-[70px] justify-between">
-          <h1 className="text-start text-2xl lg:text-[32px] lg:leading-[38.41px] md:leading-[38.41px] text-[#24536E] font-bold">
+          <h1 className="text-start text-xl lg:text-[32px] lg:leading-[38.41px] md:leading-[38.41px] text-[#24536E] font-bold">
             Contact Us
           </h1>
           <p className="font-medium text-xs lg:text-base leading-[19.2px] lg:leading-[19.2px] text-[#031924]">
@@ -72,10 +97,11 @@ const ContactModal: React.FC<propsTypes> = ({
           onSubmit={(values) => {
             onFormSubmit(values);
             handleToggle();
+            handleEmail(values);
           }}
         >
           {(formik) => (
-            <Form className="w-full flex flex-col h-full gap-0.5 md:gap-3 py-2 justify-between lg:gap-6">
+            <Form className="w-full flex flex-col h-full gap-0.5 md:gap-3 py-2 justify-evenly  lg:gap-4">
               <div className="flex flex-col w-full lg:h-[72px] lg:flex-row gap-1.5 lg:gap-4">
                 <div className="flex flex-col w-full">
                   <div className="flex flex-col w-full gap-1 lg:gap-1.5">

@@ -31,13 +31,32 @@ interface FormValues {
 
 const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
   const [showForms, setShowForms] = useState<boolean>(false);
+  const handleEmail = (values: FormValues) => {
+    const email = "economizingfutura@gmail.com";
+    const subject = "Reaching Out to Connect";
 
+    const body = `Hi,
+
+I wanted to reach out regarding the following:
+
+${values.comments}
+
+Looking forward to your response.
+
+Thank you,
+${values.firstName} ${values.lastName}`;
+    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  };
   const handleSubmit = async (
     values: FormValues,
     { resetForm }: FormikHelpers<FormValues>
   ) => {
     try {
       await onFormSubmit(values);
+      handleEmail(values);
       resetForm();
       setShowForms(false);
     } catch (error) {
@@ -208,7 +227,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
                 </div>
 
                 <ButtonWrapper
-                  className="bg-[#20B2FF] h-[35px] md:h-[40px] rounded-lg font-semibold text-white text-base w-full"
+                  className="bg-[#20B2FF] select-none h-[35px] md:h-[40px] rounded-lg font-semibold text-white text-base w-full"
                   label="Submit"
                   type={true}
                   disabled={isLoading}
@@ -226,7 +245,7 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
         } xl:w-[56px] h-12 w-12 xl:h-[56px] absolute bottom-0 cursor-pointer rounded-xl xl:rounded-[16px] shadow-enquery flex justify-center items-center ml-auto`}
       >
         {showForms ? (
-          <X className="h-[40px] w-[40px] text-[#ffffff]" />
+          <X className="h-[40px] w-[40px]  text-[#ffffff]" />
         ) : (
           <Lottie
             animationData={un}
