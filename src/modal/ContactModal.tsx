@@ -43,7 +43,7 @@ const ContactModal: React.FC<propsTypes> = ({
 
   const handleEmail = (values: FormValues) => {
     const email = "economizingfutura@gmail.com";
-    const subject = "Reaching Out to Connect";
+    const subject = "Initiating a Conversation";
 
     const body = `Hi,
 
