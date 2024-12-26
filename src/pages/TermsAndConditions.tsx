@@ -5,6 +5,7 @@ import { toast, Toaster } from "sonner";
 import { ContactData } from "../api/ContactAPI";
 import { ContactModal, EnqueryModal } from "../modal";
 import { termsAndConditionsSections } from "../constants/FooterConstants";
+import { terms } from "../constants/TermsConstants";
 const backgroundColor = "#FFFFFF";
 
 const TermsAndConditions: React.FC = () => {
@@ -33,29 +34,33 @@ const TermsAndConditions: React.FC = () => {
       setIsLoading(false);
     }
   };
+
   return (
     <div className=" flex flex-col w-full min-h-screen ">
       <Header handleShowForms={handleToggle} background={backgroundColor} />
-      <section className="flex-1 flex flex-col my-24 font-hellix px-5 sm:px-7 md:px-8 lg:px-12 xl:w-[1246px] xl:mx-auto xl:px-10 gap-3">
+      <section className="flex-1 flex flex-col my-24 font-hellix px-5 sm:px-7 md:px-8 lg:px-12 xl:w-[1246px] xl:mx-auto xl:px-10 gap-5">
         <div className="flex flex-col gap-2">
           <h1 className="font-bold text-lg md:text-2xl leading-5">
             Terms and Conditions for Economizing Futura
           </h1>
           <p>
             <span className="pe-2 font-bold text-base md:text-lg leading-5">
-              Effective Date:
+              Last Updated:
             </span>
-            1/07/2024
+            24/12/2024
           </p>
         </div>
 
         <p className="text-sm md:text-base">
-          Welcome to Economizing Futura! By accessing or using our website,
-          applications, or services ("Services"), you agree to these Terms and
-          Conditions ("Terms"). Please read them carefully before proceeding.
+          Welcome to Economizing Futura! <br /> These Terms and Conditions
+          ("Terms") govern the use of our website and services provided by
+          Economizing Futura ("we", "our", "us"). By accessing or using our
+          website and services, you ("user", "you", or "your") agree to comply
+          with and be bound by these Terms. Please read them carefully before
+          using our website.
         </p>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
           {termsAndConditionsSections.map((section, index) => (
             <div key={index} className="text-sm md:text-base">
               <p className="font-bold">{section.title}</p>
@@ -64,22 +69,75 @@ const TermsAndConditions: React.FC = () => {
           ))}
         </div>
 
-        <div className="flex flex-col gap-2 text-sm md:text-base mt-4">
-          <h2 className="font-bold">Contact Us</h2>
-          <p>For questions or concerns, contact:</p>
-          <div className="flex flex-col gap-1">
-            <p>Economizing Futura</p>
+        <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
+          <h2 className="font-semibold">{terms.services.heading}</h2>
+          <p>{terms.services.description}</p>
+          {terms.services.lists.map((section, index) => (
+            <div key={index} className="pl-4 list-item">
+              <p>{section}</p>
+            </div>
+          ))}
+          <p>{terms.services.end}</p>
+        </div>
+
+        <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
+          <h2 className="font-semibold">{terms.use.heading}</h2>
+          {terms.use.lists.map((section, index) => (
+            <div key={index} className="pl-4 list-decimal">
+              <p>
+                {index + 1}. {section}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
+          <h2 className="font-semibold">{terms.property.heading}</h2>
+          <p>{terms.property.description}</p>
+        </div>
+
+        <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
+          <h2 className="font-semibold">{terms.liability.heading}</h2>
+          <p>{terms.liability.description}</p>
+        </div>
+
+        <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
+          <h2 className="font-semibold">{terms.Changes.heading}</h2>
+          <p>{terms.Changes.description}</p>
+        </div>
+
+        <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
+          <h2 className="font-semibold">{terms.termination.heading}</h2>
+          <p>{terms.termination.description}</p>
+        </div>
+
+        <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
+          <h2 className="font-semibold">{terms.law.heading}</h2>
+          <p>{terms.law.description}</p>
+        </div>
+
+        <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
+          <h2 className="font-semibold">{terms.dispute.heading}</h2>
+          <p>{terms.dispute.description}</p>
+        </div>
+
+        <div className="text-sm md:text-base space-y-4 mt-6">
+          <h2 className="font-bold">13. Contact Us</h2>
+          <p>
+            For any questions, concerns, or requests related to this Privacy
+            Policy, please contact us:
+          </p>
+          <div className="space-y-2">
+            <p className="font-bold">Economizing Futura (OPC) Pvt. Ltd.</p>
             <p>Email: economizing@gmail.com</p>
-            <p>Phone: 7014968787</p>
             <p>
-              Address: WeWork, Embassy TechVillage,
-              <br /> Bellandur, Bengaluru, 560103
+              Address:
+              <br />
+              101, Unit 101, Oxford Towers, 139, HAL Old Airport Road,
+              <br /> Hulsur Bazaar, Bangalore North, Bangalore - 560008,
+              <br /> Karnataka, India
             </p>
           </div>
-          <p className="mt-2">
-            By using our Services, you acknowledge that you have read,
-            understood, and agreed to these Terms and Conditions.
-          </p>
         </div>
       </section>
       <Toaster richColors />

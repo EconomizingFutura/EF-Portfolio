@@ -12,8 +12,11 @@ const Footer: React.FC = () => {
             <img src={EFLogo} alt="" draggable={false} className="h-12 w-12" />
           </div>
           <p className="font-semibold text-sm lg:text-[15px] text-white">
-            WeWork, Embassy TechVillage,
-            <br /> Bellandur, Bengaluru, 560103
+            ECONOMIZING FUTURA (OPC) PRIVATE LIMITED
+            <br /> 101, Unit 101, Oxford Towers, 139, HAL Old Airport Road,
+            Hulsur Bazaar,
+            <br /> Bangalore North, Bangalore - 560008,
+            <br /> Karnataka, India
           </p>
         </div>
         <div className="flex justify-between lg:w-[227px]">

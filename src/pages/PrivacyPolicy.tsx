@@ -4,6 +4,7 @@ import { contactAPI } from "../api/ContactAPI";
 import { toast, Toaster } from "sonner";
 import { ContactData } from "../api/ContactAPI";
 import { ContactModal, EnqueryModal } from "../modal";
+import { privacyData } from "../constants/PrivacyPolicy";
 const backgroundColor = "#FFFFFF";
 
 const PrivacyPolicy: React.FC = () => {
@@ -35,88 +36,205 @@ const PrivacyPolicy: React.FC = () => {
   return (
     <div className=" flex flex-col w-full min-h-screen ">
       <Header handleShowForms={handleToggle} background={backgroundColor} />
-      <section className="flex-1 flex flex-col my-24 font-hellix px-5 sm:px-7 md:px-8 lg:px-12 xl:w-[1246px] xl:mx-auto xl:px-9 gap-3">
-        <div className=" flex flex-col gap-2">
-          <h1 className=" font-bold text-lg md:text-2xl leading-5 ">
+      <section className="flex-1 flex flex-col my-24 px-5 sm:px-7 md:px-8 lg:px-12 xl:w-[1246px] xl:mx-auto xl:px-9 gap-6">
+        <div className="flex flex-col gap-4">
+          <h1 className="font-bold text-lg md:text-2xl">
             Privacy Policy for Economizing Futura
           </h1>
-          <p>
-            <span className="pe-2 font-bold text-base md:text-lg leading-5">
-              Effective Date :
-            </span>
-            1/07/2024
+          <p className="text-base md:text-lg">
+            <span className="font-semibold">Effective Date:</span> 1/07/2024
           </p>
         </div>
-        <p className=" text-sm md:text-base">
-          {" "}
-          At Economizing Futura, your privacy is a priority. This Privacy Policy
-          explains how we collect, use, share, and protect your information when
-          you use our website, applications, or services ("Services"). By using
-          our Services, you agree to the practices described below.
+
+        <p className="text-sm md:text-base">
+          At Economizing Futura, your privacy is our priority. This Privacy
+          Policy outlines how we collect, use, share, and protect your personal
+          information when you use our website, applications, or services
+          ("Services"). By accessing or using our Services, you consent to the
+          practices described herein.
         </p>
-        <p className=" text-sm md:text-base">
-          1. Information We Collect We may collect personal information (e.g.,
-          name, email, phone, payment details) and non-personal information
-          (e.g., IP address, browser type, usage data). Additionally, we may
-          receive data from third-party services like social media platforms.
-        </p>
-        <p className=" text-sm md:text-base">
-          {" "}
-          2. How We Use Your Information We use your information to provide and
-          improve Services, process transactions, personalize user experiences,
-          ensure security, and comply with legal obligations.
-        </p>
-        <p className=" text-sm md:text-base">
-          3. Sharing Your Information We do not sell your data. We may share it
-          with service providers (e.g., payment processors), comply with legal
-          requirements, or during business transfers (e.g., mergers or
-          acquisitions).
-        </p>
-        <p className=" text-sm md:text-base">
-          4. Data Retention We retain data only as long as necessary to fulfill
-          the purposes described in this policy or as required by law.
-        </p>
-        <p className=" text-sm md:text-base">
-          5. Data Security We use industry-standard measures to protect your
-          information but cannot guarantee absolute security.
-        </p>
-        <p className=" text-sm md:text-base">
-          6. Your Rights Depending on your location, you may have rights to
-          access, update, delete, or withdraw consent regarding your data.
-          Contact us at [Insert Email] to exercise your rights.
-        </p>
-        <p className=" text-sm md:text-base">
-          7. Cookies and Tracking We use cookies to enhance functionality and
-          analyze usage. You can manage cookie preferences via browser settings.
-        </p>
-        <p className=" text-sm md:text-base">
-          8. Third-Party Links We are not responsible for the privacy practices
-          of third-party websites linked through our Services.
-        </p>
-        <p className=" text-sm md:text-base">
-          9. Children's Privacy Our Services are not intended for children under
-          13, and we do not knowingly collect their data.
-        </p>
-        <p className=" text-sm md:text-base">
-          10. Changes to This Policy We may update this policy periodically.
-          Updates will be posted with a revised effective date.
-        </p>
-        <div className="flex flex-col gap-2 text-sm md:text-base">
-          <h2 className="font-bold">Contact Us</h2>
-          <p>For questions or concerns, contact:</p>
-          <div className="flex flex-col gap-1">
-            <p>Economizing Futura</p>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-semibold">1. Information We Collect</h2>
+          <p>
+            We collect information to provide and improve our Services
+            effectively. The information we may collect includes:
+          </p>
+          {privacyData.information_we_collect.map((data, index) => (
+            <div key={index} className="pl-4">
+              <h3 className="font-semibold">
+                {String.fromCharCode(97 + index)}) {data.heading}
+              </h3>
+              <p className="pl-6">{data.info}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-semibold">2. How We Use Your Information</h2>
+          {privacyData.how_we_use_your_information.purposes.map(
+            (data, index) => (
+              <li key={index} className="ml-4">
+                {data}
+              </li>
+            )
+          )}
+        </div>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-semibold">3. Sharing Your Information</h2>
+          <p>
+            We do not sell your data. However, we may share your information
+            under the following circumstances:
+          </p>
+          {privacyData.sharing_your_information.map((data, index) => (
+            <div key={index} className="pl-4">
+              <h3 className="font-semibold">
+                {String.fromCharCode(97 + index)}) {data.heading}
+              </h3>
+              <p className="pl-6">{data.info}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-semibold">4. Data Retention</h2>
+          <p>
+            We retain your data only for as long as necessary to fulfill the
+            purposes outlined in this policy or as required by law. Once the
+            retention period expires, we securely delete or anonymize your
+            information.
+          </p>
+        </div>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-semibold">5. Data Security</h2>
+          <p>
+            We implement industry-standard security measures to protect your
+            data against unauthorized access, loss, misuse, or alteration.
+            However, no method of electronic transmission or storage is
+            completely secure, and we cannot guarantee absolute security.
+          </p>
+        </div>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-semibold">6. Your Rights</h2>
+          <p>
+            Depending on your jurisdiction, you may have rights regarding your
+            personal information, including:
+          </p>
+          {privacyData.user_rights.rights_list.map((data, index) => (
+            <li key={index} className="ml-4">
+              {data}
+            </li>
+          ))}
+          <p>{privacyData.user_rights.contact}</p>
+        </div>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-semibold">
+            7. Cookies and Tracking Technologies
+          </h2>
+          <p>We use cookies and similar technologies to:</p>
+          {privacyData.cookies_and_tracking_technologies.usage.map(
+            (data, index) => (
+              <li key={index} className="ml-4">
+                {data}
+              </li>
+            )
+          )}
+          <h3 className="font-semibold">Types of Cookies Used:</h3>
+          {privacyData.cookies_and_tracking_technologies.types.map(
+            (data, index) => (
+              <li key={index} className="ml-4">
+                {data}
+              </li>
+            )
+          )}
+          <p>{privacyData.cookies_and_tracking_technologies.end}</p>
+        </div>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-semibold">8. Third-Party Links</h2>
+          <p>
+            Our Services may include links to third-party websites. We are not
+            responsible for the privacy practices of these external sites. We
+            encourage you to review their privacy policies before sharing any
+            personal information.
+          </p>
+        </div>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-semibold">9. Children's Privacy</h2>
+          <p>
+            Our Services are not intended for children under 13 years of age. We
+            do not knowingly collect or process personal information from
+            children. If we become aware of such data being collected, we will
+            take steps to delete it promptly.
+          </p>
+        </div>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-semibold">10. International Data Transfers</h2>
+          <p>
+            If you are accessing our Services from outside of India, your
+            information may be transferred to, stored, and processed in India or
+            other countries where our facilities or service providers are
+            located. We ensure that appropriate safeguards are in place for such
+            transfers, in compliance with applicable data protection laws. By
+            using our Services, you consent to this transfer, storage, and
+            processing.
+          </p>
+        </div>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-semibold">11. Changes to This Policy</h2>
+          <p>
+            We reserve the right to update this Privacy Policy to reflect
+            changes in our practices or for legal, operational, or regulatory
+            reasons. Updates will be effective upon posting, with a revised
+            "Effective Date" at the top of this document. We encourage you to
+            review this policy periodically.
+          </p>
+        </div>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-semibold">12. Additional Provisions</h2>
+          <p>
+            <span className="font-semibold">a. Governing Law:</span>
+            {privacyData.additional_provisions.governing_law}
+          </p>
+          <p>
+            <span className="font-semibold">b. Dispute Resolution:</span>
+            {privacyData.additional_provisions.dispute_resolution}
+          </p>
+          <p>
+            <span className="font-semibold">c. Consent for Marketing:</span>
+            {privacyData.additional_provisions.marketing_consent}
+          </p>
+          <p>
+            <span className="font-semibold">d. Data Breach Notification:</span>
+            {privacyData.additional_provisions.data_breach_notification}
+          </p>
+        </div>
+
+        <div className="text-sm md:text-base space-y-4">
+          <h2 className="font-bold">13. Contact Us</h2>
+          <p>
+            If you have any questions or concerns about these Terms, please
+            contact us at:
+          </p>
+          <div className="space-y-2">
+            <p className=" font-bold">Economizing Futura (OPC) Pvt. Ltd.</p>
             <p>Email: economizing@gmail.com</p>
-            <p>Phone: 7014968787</p>
             <p>
-              Address: WeWork, Embassy TechVillage,
-              <br /> Bellandur, Bengaluru, 560103
+              Address:
+              <br />
+              101, Unit 101, Oxford Towers, 139, HAL Old Airport Road,
+              <br /> Hulsur Bazaar, Bangalore North, Bangalore - 560008,
+              <br /> Karnataka, India
             </p>
           </div>
-          <p className="mt-2">
-            This Privacy Policy reflects our commitment to protecting your
-            privacy and maintaining transparency.
-          </p>
         </div>
       </section>
 
