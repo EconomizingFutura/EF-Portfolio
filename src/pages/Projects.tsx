@@ -81,6 +81,8 @@ const Projects: React.FC = () => {
 
   const nextProject = projectsInfo.filter((a) => a.id !== Number(params.id))[0];
 
+  console.log(nextProject);
+
   const Contents = ({
     detail,
     detailsContent,
@@ -179,7 +181,7 @@ const Projects: React.FC = () => {
           <div className="flex flex-col  md:flex-row py-5 justify-between items-center relative h-full w-full rounded-[25px] origin-top">
             <div className="w-full relative  md:w-[733px] lg:w-[433px] md:h-[348px] flex flex-col items-start gap-10 ">
               <img
-                src={projectDetails.image}
+                src={nextProject.image}
                 alt=""
                 className=" hidden md:block md:absolute md:top-0 md:right-4 xl:-top-[20%] xl:-right-16 h-[40px] sm:h-[50px] lg:h-auto w-[40px] sm:w-[50px] lg:w-[70px]"
               />
@@ -213,11 +215,7 @@ const Projects: React.FC = () => {
               </div>
             </div>
             <div className=" w-full flex flex-col-reverse gap-3 md:flex-col lg:flex-row lg:gap-0 lg:w-auto">
-              <img
-                src={projectDetails.projectBanner}
-                alt=""
-                className="w-full"
-              />
+              <img src={nextProject.projectBanner} alt="" className="w-full" />
             </div>
           </div>
         </div>

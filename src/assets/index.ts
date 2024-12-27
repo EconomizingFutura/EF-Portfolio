@@ -72,8 +72,13 @@ import webapp from "./webapp.svg";
 import WavesPriceSection from "./WavesPriceSection.svg";
 import wave_background from "./wave_background.svg";
 import PH from "./PH.png";
+import AeiniOriginal from "./AeiniOriginal.png";
+import finalAeini from "./finalAeini.svg";
+import finalTreva from "./finalTreva.svg";
 export {
   PH,
+  finalAeini,
+  finalTreva,
   wave_background,
   WavesPriceSection,
   _Instagram,
@@ -103,6 +108,7 @@ export {
   CurlArrows,
   CustomSun,
   devops_dev,
+  AeiniOriginal,
   devops,
   devopsDev,
   Dropbox,

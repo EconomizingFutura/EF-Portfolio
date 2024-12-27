@@ -13,9 +13,9 @@ import {
   pencil,
   Blogs1,
   Thunder,
-  AeniniBanner,
+  // AeniniBanner,
   Aenini,
-  TrevaChat,
+  // TrevaChat,
   AeiniImg,
   mobiledev,
   web_dev,
@@ -23,6 +23,8 @@ import {
   UI,
   UserPlaceholder,
   Neo,
+  finalTreva,
+  finalAeini,
 } from "../assets/index";
 export const navLinks = [
   {
@@ -64,7 +66,8 @@ export const projectsInfo: ProjectItem[] = [
     projectName: "Aenini",
     description:
       "Aenini is an offline tool for counting warp and weft threads in fabric, with data stored locally. It ensures real-time thread count analysis for fabric quality in textile manufacturing. The user-friendly interface allows seamless operation without internet access.",
-    projectBanner: TrevaChat,
+    // projectBanner: TrevaChat,
+    projectBanner: finalAeini,
 
     image: AeiniImg,
     briefNote:
@@ -82,7 +85,7 @@ export const projectsInfo: ProjectItem[] = [
       "Treva Chat is an advanced chatbot platform designed for easy question resolution, with features like reference tracking for seamless conversations. It stores the last five chat sessions for quick access and includes feedback mechanisms to ensure quality interactions. With built-in user authentication, it provides a secure and personalized support experience.",
     image: Aenini,
 
-    projectBanner: AeniniBanner,
+    projectBanner: finalTreva,
     briefNote:
       "Treva is a comprehensive platform designed to simplify workflow management by integrating with GitHub and Google Drive. It offers an intuitive dashboard for reviewing workflows, managing user data, and visualising chat sessions. Treva Chat provides a seamless chatbot experience with conversation history, feedback mechanisms, and reference tracking for enhanced support.",
     problemStatement:
