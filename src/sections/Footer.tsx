@@ -11,13 +11,16 @@ const Footer: React.FC = () => {
           <div className="bg-white flex justify-center items-center h-16 w-20 rounded-md">
             <img src={EFLogo} alt="" draggable={false} className="h-12 w-12" />
           </div>
-          <p className="font-semibold text-sm lg:text-[15px] text-white">
-            ECONOMIZING FUTURA (OPC) PRIVATE LIMITED
-            <br /> 101, Unit 101, Oxford Towers, 139, HAL Old Airport Road,
-            Hulsur Bazaar,
-            <br /> Bangalore North, Bangalore - 560008,
-            <br /> Karnataka, India
-          </p>
+          <div className="font-semibold text-sm lg:text-[14px] text-white leading-5 -tracking-[0.03em]">
+            <p>ECONOMIZING FUTURA (OPC) PRIVATE LIMITED,</p>
+            <p>
+              {" "}
+              101, Unit 101, Oxford Towers, 139, HAL Old Airport Road, Hulsur
+              Bazaar,
+            </p>
+            <p> Bangalore North, Bangalore - 560008,</p>
+            <p> Karnataka, India </p>
+          </div>
         </div>
         <div className="flex justify-between lg:w-[227px]">
           <div className="flex flex-col gap-2">

@@ -100,6 +100,10 @@ const TermsAndConditions: React.FC = () => {
           <h2 className="font-semibold">{terms.liability.heading}</h2>
           <p>{terms.liability.description}</p>
         </div>
+        <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
+          <h2 className="font-semibold">{terms.privacyPolicy.heading}</h2>
+          <p>{terms.privacyPolicy.description}</p>
+        </div>
 
         <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
           <h2 className="font-semibold">{terms.Changes.heading}</h2>
@@ -122,14 +126,14 @@ const TermsAndConditions: React.FC = () => {
         </div>
 
         <div className="text-sm md:text-base space-y-4 mt-6">
-          <h2 className="font-bold">13. Contact Us</h2>
+          <h2 className="font-bold">11. Contact Us</h2>
           <p>
             For any questions, concerns, or requests related to this Privacy
             Policy, please contact us:
           </p>
           <div className="space-y-2">
             <p className="font-bold">Economizing Futura (OPC) Pvt. Ltd.</p>
-            <p>Email: economizing@gmail.com</p>
+            <p>Email: economizingfutura@gmail.com</p>
             <p>
               Address:
               <br />

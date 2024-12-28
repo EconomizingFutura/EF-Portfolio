@@ -98,7 +98,7 @@ export const projectsInfo: ProjectItem[] = [
 export const testimonials = [
   {
     id: 1,
-    name: "Hari",
+    name: "Ravi",
     position: "Contributor",
     feedback:
       "As a contributor at Economizing Futura, I’ve seen how the company simplifies complex problems with user-friendly solutions. Their dedication, professionalism, and timely delivery consistently exceed expectations, driving impactful results.",

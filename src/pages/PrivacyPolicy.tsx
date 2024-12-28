@@ -42,7 +42,7 @@ const PrivacyPolicy: React.FC = () => {
             Privacy Policy for Economizing Futura
           </h1>
           <p className="text-base md:text-lg">
-            <span className="font-semibold">Effective Date:</span> 1/07/2024
+            <span className="font-semibold">Effective Date:</span> 01/07/2024
           </p>
         </div>
 
@@ -226,7 +226,7 @@ const PrivacyPolicy: React.FC = () => {
           </p>
           <div className="space-y-2">
             <p className=" font-bold">Economizing Futura (OPC) Pvt. Ltd.</p>
-            <p>Email: economizing@gmail.com</p>
+            <p>Email: economizingfutura@gmail.com</p>
             <p>
               Address:
               <br />
