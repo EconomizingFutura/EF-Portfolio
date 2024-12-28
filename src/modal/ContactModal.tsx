@@ -80,14 +80,17 @@ ${values.firstName} ${values.lastName}`;
         alt=""
       />
       <Toaster richColors />
-      <div className="bg-[#FFFFFF] rounded-2xl md:rounded-[30px] px-5 py-1 lg:py-3 lg:px-6 gap-0 flex flex-col font-hellix justify-start items-start md:h-[min-content] lg:h-[497px] h-4/5 w-11/12 max-w-lg lg:max-w-2xl">
-        <div className="w-full gap-2.5 flex flex-col md:h-[70px] justify-between">
+      <div className="bg-[#FFFFFF] rounded-2xl md:rounded-[30px] px-5 py-1 lg:py-3 lg:px-6 gap-0 flex flex-col font-hellix justify-start items-start md:h-[min-content] lg:h-[517px] h-4/5 w-11/12 max-w-lg lg:max-w-2xl">
+        <div className="w-full gap-2.5 flex flex-col md:h-[90px] justify-between">
           <h1 className="text-start text-xl lg:text-[32px] lg:leading-[38.41px] md:leading-[38.41px] text-[#24536E] font-bold">
             Contact Us
           </h1>
           <p className="font-medium text-xs lg:text-base leading-[19.2px] lg:leading-[19.2px] text-[#031924]">
-            Please provide your email address, and our team will get in touch
-            with you.
+            Please provide your email address so our team can get in touch with
+            you. For any issues, email us at{" "}
+            <span className=" text-primary cursor-pointer hover:underline">
+              economizingfutura@gmail.com
+            </span>
           </p>
         </div>
 

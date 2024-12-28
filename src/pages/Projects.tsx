@@ -151,11 +151,11 @@ const Projects: React.FC = () => {
               {projectDetails.briefNote}
             </p>
           </div>
-          <div className="w-full lg:h-[430px] py-10 relative">
+          <div className="w-full  py-10 relative">
             <img
               src={projectDetails.projectBanner}
               alt=""
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
         </div>
