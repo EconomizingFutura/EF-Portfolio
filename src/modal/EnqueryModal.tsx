@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import { ContactData } from "../api/ContactAPI";
 import { Formik, Form, FormikHelpers } from "formik";
 import * as Yup from "yup";
+import { MdOutlineInfo } from "react-icons/md";
 
 interface PropsTypes {
   isLoading: boolean;
@@ -31,6 +32,8 @@ interface FormValues {
 
 const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
   const [showForms, setShowForms] = useState<boolean>(false);
+  const [showTooltip, setShowTooltip] = useState<boolean>(false);
+
   const handleEmail = (values: FormValues) => {
     const email = "economizingfutura@gmail.com";
     const subject = "Initiating a Conversation";
@@ -78,9 +81,27 @@ ${values.firstName} ${values.lastName}`;
     >
       {showForms && (
         <div className="rounded-xl p-2.5 xl:px-4 xl:py-2 shadow-enquery flex flex-col justify-start items-start w-full bg-[#ffffff]">
-          <h1 className="text-[18px] xl:text-[20px] font-bold leading-[1.2] text-[#24536E] mb-1.5 xl:mb-2.5">
-            Contact Us
-          </h1>
+          <div
+            className="relative flex items-center cursor-pointer"
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+          >
+            <h1 className="text-[18px] flex xl:text-[20px] font-bold leading-[1.2] text-[#24536E] mb-1.5 xl:mb-2.5">
+              Contact Us
+              <MdOutlineInfo className=" mt-1 ms-1" />
+            </h1>
+            {showTooltip && (
+              <div className="absolute top-full mt-1 left-0 bg-white p-3 border border-gray-200 shadow-lg rounded-md text-sm z-10">
+                <p className="font-medium text-xs lg:text-base leading-[19.2px] lg:leading-[19.2px] text-[#031924]">
+                  Please provide your email address so our team can get in touch
+                  with you. For any issues, email us at{" "}
+                  <span className=" text-primary cursor-pointer hover:underline">
+                    economizingfutura@gmail.com
+                  </span>
+                </p>
+              </div>
+            )}
+          </div>
 
           <Formik
             initialValues={{
