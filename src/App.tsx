@@ -8,7 +8,7 @@ function App() {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.5,
+      duration: 0.5,
       easing: (t) => 1 - Math.pow(1 - t, 3),
     });
 
@@ -30,7 +30,7 @@ function App() {
   // return <ReactForms />;
   // return <HeroSection />;
   return (
-    <main ref={container} className="max-w-[1640px] mx-auto">
+    <main ref={container}>
       <AppRouter />
     </main>
   );

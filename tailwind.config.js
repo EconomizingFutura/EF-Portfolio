@@ -20,8 +20,11 @@ export default {
         client: "44px",
       },
       fontFamily: {
-        // sans: ["Poppins", "sans-serif"],
+        overpass: ["Overpass", "sans-serif"],
         hellix: ["Hellix"],
+        hellixBold: ["Hellix Bold", "sans-serif"],
+        hellixSemiBold: ["Hellix SemiBold", "sans-serif"],
+        hellixMedium: ["Hellix Medium", "sans-serif"],
       },
     },
   },

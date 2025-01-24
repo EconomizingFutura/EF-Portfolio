@@ -14,7 +14,7 @@ const FormLabels: React.FC<{
       htmlFor={label}
       className={`${
         small ? "lg:text-base" : "lg:text-[17px]"
-      } text-[#031924] w-auto  font-medium tracking-[0.02em] text-sm leading-5`}
+      } text-[#031924] w-auto  font-hellixMedium tracking-[0.02em] text-sm leading-5`}
     >
       {label}
     </label>

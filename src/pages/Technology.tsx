@@ -95,7 +95,7 @@ const Technology: React.FC = () => {
           className="w-12 md:w-auto"
           draggable={false}
         />
-        <h1 className="text-[#24536E] font-bold text-3xl sm:text-4xl md:text-5xl leading-tight text-center px-4">
+        <h1 className="text-[#24536E] font-hellixBold text-3xl sm:text-4xl md:text-5xl leading-tight text-center px-4">
           Technologies We Use
         </h1>
         <img
@@ -137,7 +137,7 @@ const Technology: React.FC = () => {
                 className={`w-full h-full py-1 rounded-b-xl  sm:rounded-b-2xl px-4 sm:px-6 md:px-8 flex-grow  
                bg-[#F4FAFF]`}
               >
-                <p className="text-sm  sm:text-base text-[#666666] font-medium leading-relaxed">
+                <p className="text-sm  sm:text-base text-[#666666] font-hellixMedium leading-relaxed">
                   {tech.text}
                 </p>
               </div>

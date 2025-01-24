@@ -30,7 +30,7 @@ export const navLinks = [
   {
     id: 1,
     link: "/",
-    name: "Home",
+    name: "",
   },
   // {
   //   id: 2,
@@ -291,10 +291,10 @@ export const blogs = [
 //Home page
 export const sectionColors = {
   hero: "#aee2ff",
-  testimonials: "#E0F3FF",
+  testimonials: "#FFFFFF",
   projects: "#FFFFFF",
-  expertise: "#aee2ff",
+  expertise: "#FFFFFF",
   clients: "#F4F8FB",
   blogs: "#FFFFFF",
-  faq: "#F4F8FB",
+  faq: "#FFFFFF",
 };

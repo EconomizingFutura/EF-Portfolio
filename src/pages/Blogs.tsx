@@ -98,23 +98,23 @@ const Blogs: React.FC = () => {
       >
         <img
           src={WaveLeft}
-          alt="wave left"
+          alt=""
           className="w-12 md:w-auto"
           draggable={false}
         />
-        <h1 className="text-[#24536E] font-bold text-3xl sm:text-4xl md:text-5xl text-center px-4">
+        <h1 className="text-[#24536E] font-hellixBold text-3xl sm:text-4xl md:text-5xl text-center px-4">
           Blog
         </h1>
         <img
           src={WaveRight}
-          alt="wave right"
+          alt=""
           className="w-12 md:w-auto lg:pe-28"
           draggable={false}
         />
       </div>
 
       <div className="px-8 py-4 w-full max-w-[1140px] bg-[#FFFFFF] md:flex items-center justify-between mx-auto rounded-2xl mt-10 hidden absolute top-1/3 right-0 left-0 ">
-        <div className="flex items-center gap-4 text-[#111111] text-[18px] font-medium">
+        <div className="flex items-center gap-4 text-[#111111] text-[18px] font-hellixMedium">
           <span>Filter By :</span>
           <div className="flex gap-3 lg:h-[30px] lg:w-[454px] ">
             {blogsFilter.map((blog) => (
@@ -134,7 +134,7 @@ const Blogs: React.FC = () => {
         </div>
 
         <div className="flex items-center justify-between border-[1px] border-[#9CA4B5] rounded-[4px] h-[44px] w-[223px] max-w-[223px] text-[16px] placeholder:text-[#999999]">
-          <img src={search} alt="search" className="px-2" />
+          <img src={search} alt="" className="px-2" />
           <input
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}

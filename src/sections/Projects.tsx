@@ -58,14 +58,14 @@ const Projects: React.FC<ProjectsProps> = ({
               className="h-11 w-11"
             />
             <div className=" w-full lg:h-[264px] flex flex-col gap-4">
-              <h1 className="text-[20px] sm:text-[24px] font-bold md:text-[28px]  leading-[39px] -tracking-[0.002em] text-[#032435]">
+              <h1 className="text-[20px] sm:text-[24px] font-hellixBold md:text-[28px]  leading-[39px] -tracking-[0.002em] text-[#032435]">
                 {project.projectName}
               </h1>
-              <p className="text-[#999999] font-medium text-[14px] sm:text-[15px] md:text-[12px] lg:text-[17px] leading-6 tracking-[0.002em] ">
+              <p className="text-[#999999] font-hellixMedium text-[14px] sm:text-[15px] md:text-[12px] lg:text-[17px] leading-6 tracking-[0.002em] ">
                 {project.description}
               </p>
               <button
-                className="hover:underline flex gap-2 font-medium text-[14px] sm:text-[15px] md:text-[17px] leading-6 tracking-[0.002em] text-[#20B2FF]"
+                className="hover:underline flex gap-2 font-hellixMedium text-[14px] sm:text-[15px] md:text-[17px] leading-6 tracking-[0.002em] text-[#20B2FF]"
                 onMouseEnter={handleRotate}
                 onMouseLeave={handleRotate}
                 onClick={() => handleClick(project.id)}

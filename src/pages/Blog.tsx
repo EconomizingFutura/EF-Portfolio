@@ -114,17 +114,17 @@ const Blog: React.FC = () => {
         <div className="flex flex-col lg:flex-row justify-between w-full lg:h-[412px] gap-4">
           {/* Blog Details */}
           <div className="flex flex-col h-auto lg:h-full w-full lg:w-[532px] gap-4">
-            <div className="flex justify-between  font-medium text-[12px] leading-[19.2px] md:text-[16px] md:w-[145px]  w-[116px] h-[19px] text-[#031924]">
+            <div className="flex justify-between  font-hellixMedium text-[12px] leading-[19.2px] md:text-[16px] md:w-[145px]  w-[116px] h-[19px] text-[#031924]">
               <p>{content.date}</p>
               <p className="flex items-center">
                 <img src={Star} alt="" className="h-[14px] w-[14px] mr-0.5" />
                 {content.min}
               </p>
             </div>
-            <h1 className="text-[#24536E] text-[36px] md:text-[44px] font-bold leading-[52.8px]">
+            <h1 className="text-[#24536E] text-[36px] md:text-[44px] font-hellixBold leading-[52.8px]">
               Blog Heading
             </h1>
-            <p className=" text-[#000000] text-[18px] md:text-[20px] leading-[20px] md:leading-[28px] font-medium">
+            <p className=" text-[#000000] text-[18px] md:text-[20px] leading-[20px] md:leading-[28px] font-hellixMedium">
               Treva Chat is an advanced chatbot platform that allows users to
               ask questions and resolve their doubts with ease. It incorporates
               features like reference tracking for each conversation, providing
@@ -149,7 +149,7 @@ const Blog: React.FC = () => {
         </div>
         {/* Additional Details */}
         <div className="mt-8 w-full px-2 lg:px-0 ">
-          <h1 className="text-[24px] text-[#24536E] font-bold md:leading-[38.14px] leading-[28.8px] md:text-[32px] mb-4">
+          <h1 className="text-[24px] text-[#24536E] font-hellixBold md:leading-[38.14px] leading-[28.8px] md:text-[32px] mb-4">
             Heading
           </h1>
           <ul className="list-disc ml-6 space-y-2  text-[#000000]">
@@ -158,7 +158,7 @@ const Blog: React.FC = () => {
               .map((_, i) => (
                 <li
                   key={i}
-                  className=" md:text-[20px] md:leading-[28px] font-medium leading-[20px] text-[14px]"
+                  className=" md:text-[20px] md:leading-[28px] font-hellixMedium leading-[20px] text-[14px]"
                 >
                   Treva is a comprehensive platform designed to simplify
                   workflow management by integrating with GitHub and Google
@@ -173,7 +173,7 @@ const Blog: React.FC = () => {
         </div>
       </section>
       <section className="h-min md:h-[657px] xl:overflow-x-hidden bg-[#F4FAFF] flex flex-col justify-evenly items-center w-full ">
-        <h1 className="text-[32px] md:text-[38px] font-bold text-[#032435] leading-tight text-center">
+        <h1 className="text-[32px] md:text-[38px] font-hellixBold text-[#032435] leading-tight text-center">
           More Blogs
         </h1>
 

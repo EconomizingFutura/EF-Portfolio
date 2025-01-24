@@ -67,20 +67,20 @@ const BlogsCard: React.FC<CardProps> = ({ card }) => {
             ))}
           </div>
           <div className=" h-[145px] w-full  flex flex-col md:gap-4 gap-2">
-            <h1 className="text-[#111111] font-bold text-[16px] md:text-[20px] leading-6">
+            <h1 className="text-[#111111] font-hellixBold text-[16px] md:text-[20px] leading-6">
               {card.heading}
             </h1>
-            <h1 className="text-[#999999] font-medium text-[14px] md:text-[16px] leading-5">
+            <h1 className="text-[#999999] font-hellixMedium text-[14px] md:text-[16px] leading-5">
               {card.sub}
             </h1>
           </div>
         </div>
         <button
-          className="ml-auto text-primary font-medium text-sm float-end leading-6 flex justify-between w-[93px]"
+          className="ml-auto text-primary font-hellixMedium text-sm float-end leading-6 flex justify-between w-[93px]"
           onClick={() => handleClick(card.id)}
         >
           Read Post
-          <img src={Arrow} alt="Arrow" />
+          <img src={Arrow} alt="" />
         </button>
       </div>
     </div>

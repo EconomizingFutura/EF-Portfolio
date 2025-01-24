@@ -75,7 +75,11 @@ import PH from "./PH.png";
 import AeiniOriginal from "./AeiniOriginal.png";
 import finalAeini from "./finalAeini.svg";
 import finalTreva from "./finalTreva.svg";
+import Next from "./Next.svg";
+import Previous from "./Previous.svg";
 export {
+  Next,
+  Previous,
   PH,
   finalAeini,
   finalTreva,

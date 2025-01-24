@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import GoldenQuation from "../assets/GoldenQuation.svg";
 import { testimonials } from "../constants/constants";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Next, Previous } from "../assets";
 
 const TestimonialSlider: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -31,8 +31,8 @@ const TestimonialSlider: React.FC = () => {
   };
 
   return (
-    <div className=" mx-auto sm:w-full w-11/12 lg:h-[340px] min-h-min overflow-hidden max-w-[1640px]">
-      <div className="flex lg:flex-row flex-col pointer-events-none justify-center gap-10 sm:gap-16 items-center h-full xl:py-0 py-16 xl:h-[225px]">
+    <div className=" mx-auto sm:w-full w-11/12 lg:h-[340px] xl:h-[600px] flex flex-col  overflow-x-hidden max-w-[1640px] gap-10">
+      <div className="flex lg:flex-row flex-col pointer-events-none justify-center gap-10 sm:gap-16 items-center h-full xl:py-0 py-8 lg:h-[225px]">
         {getVisibleTestimonials().map((index, i) => (
           <div
             key={index}
@@ -62,7 +62,7 @@ const TestimonialSlider: React.FC = () => {
               >
                 <img
                   src={GoldenQuation}
-                  alt="Quotation mark"
+                  alt=""
                   className="absolute z-50 left-5 -top-2 sm:-top-4 sm:left-12 sm:h-auto sm:w-auto w-[22.67px] h-[18.54px]
                   transition-transform duration-300 group-hover:scale-110"
                 />
@@ -77,13 +77,13 @@ const TestimonialSlider: React.FC = () => {
                   />
                   <div className="flex flex-col">
                     <h1
-                      className="font-semibold text-[#031924] text-[12px] sm:text-base leading-5
+                      className="font-hellixSemiBold text-[#031924] text-[12px] sm:text-base leading-5
                     transition-colors duration-300"
                     >
                       {testimonials[index].name}
                     </h1>
                     <p
-                      className="text-[8px] sm:text-sm font-semibold leading-4 text-[#999999]
+                      className="text-[8px] sm:text-sm font-hellixSemiBold leading-4 text-[#999999]
                     transition-colors duration-300"
                     >
                       {testimonials[index].position}
@@ -113,22 +113,23 @@ const TestimonialSlider: React.FC = () => {
       </div>
 
       {/* Navigation Controls */}
-      <div className="w-24 justify-between lg:flex mt-20 right-0 xl:right-24 hidden  sm:right-5 bottom-0 absolute">
-        <button
-          className="h-10 w-10 rounded-full border border-[#03243533]
-          flex justify-center items-center group"
-          onClick={prevTestimonial}
-          aria-label="Previous testimonial"
-        >
-          <ChevronLeft className="h-5 w-5 " />
-        </button>
-        <button
-          className="h-10 w-10 rounded-full border border-[#03243533]
-          flex justify-center items-center group"
-          onClick={nextTestimonial}
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
+      <div className=" w-11/12   mx-auto ">
+        <div className="w-24 justify-between lg:flex ml-auto hidden">
+          <img
+            src={Previous}
+            alt=""
+            className="h-10 w-10 rounded-full border border-[#03243533]
+          flex justify-center items-center  cursor-pointer"
+            onClick={prevTestimonial}
+          />
+          <img
+            src={Next}
+            alt=""
+            className="h-10 w-10 rounded-full border border-[#03243533]
+          flex justify-center items-center outline-none cursor-pointer"
+            onClick={nextTestimonial}
+          />
+        </div>
       </div>
     </div>
   );

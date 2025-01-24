@@ -53,7 +53,7 @@ const Header: React.FC<propsTypes> = ({
         background === "#FFFFFF" || background === "#F4F8FB"
           ? "dark:shadow-xl shadow-slate-500"
           : ""
-      } py-2 px-5 fixed max-w-[1640px] mx-auto ${
+      } py-2 px-5 fixed  ${
         home ? "z-40" : "z-30"
       } top-0 xl:px-0 w-full border-b border-b-[#D1EEFF] flex md:items-center md:justify-center font-hellix h-[74px]`}
     >
@@ -62,7 +62,7 @@ const Header: React.FC<propsTypes> = ({
       >
         <img
           src={EFLogo}
-          alt="Economizing Futura Logo"
+          alt=""
           className="h-[60px] w-[48px] cursor-pointer"
           onClick={() => navigate("/")}
         />
@@ -76,7 +76,7 @@ const Header: React.FC<propsTypes> = ({
         </button>
 
         {/* Desktop menu */}
-        <ul className="hidden font-hellix sm:flex gap-5 items-center text-[#031924] font-semibold text-base">
+        <ul className="hidden  sm:flex gap-5 items-center text-[#031924] font-hellixSemiBold text-base">
           {navLinks.map((nav) => (
             <li key={nav.id}>
               <Link to={nav.link}>{nav.name}</Link>
@@ -85,14 +85,14 @@ const Header: React.FC<propsTypes> = ({
           <ButtonWrapper
             onClick={() => handleShowForms()}
             label={"Contact Us"}
-            className="bg-[#20B2FF] font-hellix  p-[10px] text-[#FFFFFF] rounded-lg font-semibold text-base h-[46px] w-[139px]"
+            className="bg-[#20B2FF]   p-[10px] text-[#FFFFFF] rounded-lg font-hellixSemiBold text-base h-[46px] w-[139px]"
           />
         </ul>
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-end"
+            className="fixed inset-0 bg-black font-hellixSemiBold bg-opacity-50 z-50 flex justify-end"
             onClick={() => setMobileMenuOpen(false)}
           >
             <div
@@ -116,7 +116,7 @@ const Header: React.FC<propsTypes> = ({
                 {navLinks.map((nav, index) => (
                   <li
                     key={nav.id}
-                    className={`text-gray-800 text-lg font-medium hover:text-blue-600 mobile-menu-item`}
+                    className={`text-gray-800 text-lg font-hellixMedium hover:text-blue-600 mobile-menu-item`}
                     style={{ transitionDelay: `${index * 0.1}s` }}
                   >
                     <Link
@@ -134,7 +134,7 @@ const Header: React.FC<propsTypes> = ({
                       setMobileMenuOpen(false);
                     }}
                     label={"Contact Us"}
-                    className="bg-[#20B2FF] p-3 text-[#FFFFFF] rounded-lg font-semibold w-10/12"
+                    className="bg-[#20B2FF] p-3 text-[#FFFFFF] rounded-lg font-hellixSemiBold w-10/12"
                   />
                 </li>
               </ul>

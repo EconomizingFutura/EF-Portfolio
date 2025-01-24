@@ -38,11 +38,12 @@ const PrivacyPolicy: React.FC = () => {
       <Header handleShowForms={handleToggle} background={backgroundColor} />
       <section className="flex-1 flex flex-col my-24 px-5 sm:px-7 md:px-8 lg:px-12 xl:w-[1246px] xl:mx-auto xl:px-9 gap-6">
         <div className="flex flex-col gap-4">
-          <h1 className="font-bold text-lg md:text-2xl">
+          <h1 className="font-hellixBold text-lg md:text-2xl">
             Privacy Policy for Economizing Futura
           </h1>
           <p className="text-base md:text-lg">
-            <span className="font-semibold">Effective Date:</span> 01/07/2024
+            <span className="font-hellixSemiBold">Effective Date:</span>{" "}
+            01/07/2024
           </p>
         </div>
 
@@ -55,14 +56,14 @@ const PrivacyPolicy: React.FC = () => {
         </p>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-semibold">1. Information We Collect</h2>
+          <h2 className="font-hellixSemiBold">1. Information We Collect</h2>
           <p>
             We collect information to provide and improve our Services
             effectively. The information we may collect includes:
           </p>
           {privacyData.information_we_collect.map((data, index) => (
             <div key={index} className="pl-4">
-              <h3 className="font-semibold">
+              <h3 className="font-hellixSemiBold">
                 {String.fromCharCode(97 + index)}) {data.heading}
               </h3>
               <p className="pl-6">{data.info}</p>
@@ -71,7 +72,9 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-semibold">2. How We Use Your Information</h2>
+          <h2 className="font-hellixSemiBold">
+            2. How We Use Your Information
+          </h2>
           {privacyData.how_we_use_your_information.purposes.map(
             (data, index) => (
               <li key={index} className="ml-4">
@@ -82,14 +85,14 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-semibold">3. Sharing Your Information</h2>
+          <h2 className="font-hellixSemiBold">3. Sharing Your Information</h2>
           <p>
             We do not sell your data. However, we may share your information
             under the following circumstances:
           </p>
           {privacyData.sharing_your_information.map((data, index) => (
             <div key={index} className="pl-4">
-              <h3 className="font-semibold">
+              <h3 className="font-hellixSemiBold">
                 {String.fromCharCode(97 + index)}) {data.heading}
               </h3>
               <p className="pl-6">{data.info}</p>
@@ -98,7 +101,7 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-semibold">4. Data Retention</h2>
+          <h2 className="font-hellixSemiBold">4. Data Retention</h2>
           <p>
             We retain your data only for as long as necessary to fulfill the
             purposes outlined in this policy or as required by law. Once the
@@ -108,7 +111,7 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-semibold">5. Data Security</h2>
+          <h2 className="font-hellixSemiBold">5. Data Security</h2>
           <p>
             We implement industry-standard security measures to protect your
             data against unauthorized access, loss, misuse, or alteration.
@@ -118,7 +121,7 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-semibold">6. Your Rights</h2>
+          <h2 className="font-hellixSemiBold">6. Your Rights</h2>
           <p>
             Depending on your jurisdiction, you may have rights regarding your
             personal information, including:
@@ -132,7 +135,7 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-semibold">
+          <h2 className="font-hellixSemiBold">
             7. Cookies and Tracking Technologies
           </h2>
           <p>We use cookies and similar technologies to:</p>
@@ -143,7 +146,7 @@ const PrivacyPolicy: React.FC = () => {
               </li>
             )
           )}
-          <h3 className="font-semibold">Types of Cookies Used:</h3>
+          <h3 className="font-hellixSemiBold">Types of Cookies Used:</h3>
           {privacyData.cookies_and_tracking_technologies.types.map(
             (data, index) => (
               <li key={index} className="ml-4">
@@ -155,7 +158,7 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-semibold">8. Third-Party Links</h2>
+          <h2 className="font-hellixSemiBold">8. Third-Party Links</h2>
           <p>
             Our Services may include links to third-party websites. We are not
             responsible for the privacy practices of these external sites. We
@@ -165,7 +168,7 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-semibold">9. Children's Privacy</h2>
+          <h2 className="font-hellixSemiBold">9. Children's Privacy</h2>
           <p>
             Our Services are not intended for children under 13 years of age. We
             do not knowingly collect or process personal information from
@@ -175,7 +178,9 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-semibold">10. International Data Transfers</h2>
+          <h2 className="font-hellixSemiBold">
+            10. International Data Transfers
+          </h2>
           <p>
             If you are accessing our Services from outside of India, your
             information may be transferred to, stored, and processed in India or
@@ -188,7 +193,7 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-semibold">11. Changes to This Policy</h2>
+          <h2 className="font-hellixSemiBold">11. Changes to This Policy</h2>
           <p>
             We reserve the right to update this Privacy Policy to reflect
             changes in our practices or for legal, operational, or regulatory
@@ -199,33 +204,39 @@ const PrivacyPolicy: React.FC = () => {
         </div>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-semibold">12. Additional Provisions</h2>
+          <h2 className="font-hellixSemiBold">12. Additional Provisions</h2>
           <p>
-            <span className="font-semibold">a. Governing Law:</span>
+            <span className="font-hellixSemiBold">a. Governing Law:</span>
             {privacyData.additional_provisions.governing_law}
           </p>
           <p>
-            <span className="font-semibold">b. Dispute Resolution:</span>
+            <span className="font-hellixSemiBold">b. Dispute Resolution:</span>
             {privacyData.additional_provisions.dispute_resolution}
           </p>
           <p>
-            <span className="font-semibold">c. Consent for Marketing:</span>
+            <span className="font-hellixSemiBold">
+              c. Consent for Marketing:
+            </span>
             {privacyData.additional_provisions.marketing_consent}
           </p>
           <p>
-            <span className="font-semibold">d. Data Breach Notification:</span>
+            <span className="font-hellixSemiBold">
+              d. Data Breach Notification:
+            </span>
             {privacyData.additional_provisions.data_breach_notification}
           </p>
         </div>
 
         <div className="text-sm md:text-base space-y-4">
-          <h2 className="font-bold">13. Contact Us</h2>
+          <h2 className="font-hellixBold">13. Contact Us</h2>
           <p>
             If you have any questions or concerns about these Terms, please
             contact us at:
           </p>
           <div className="space-y-2">
-            <p className=" font-bold">Economizing Futura (OPC) Pvt. Ltd.</p>
+            <p className=" font-hellixBold">
+              Economizing Futura (OPC) Pvt. Ltd.
+            </p>
             <p>Email: economizingfutura@gmail.com</p>
             <p>
               Address:

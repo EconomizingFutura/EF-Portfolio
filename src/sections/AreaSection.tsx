@@ -165,7 +165,7 @@ const AreaSection: React.FC = () => {
             >
               <h1
                 className={`${colorMap[a.id as keyof typeof colorMap] || ""}
-                           text-lg font-bold leading-snug
+                           text-lg font-hellixBold leading-snug
                            sm:text-xl
                            lg:text-[24px] lg:leading-[30.6px]
                            xl:text-[28px] xl:leading-[33.61px]`}
@@ -173,7 +173,7 @@ const AreaSection: React.FC = () => {
                 {a.heading}
               </h1>
               <p
-                className="text-white text-base font-semibold leading-relaxed
+                className="text-white text-base font-hellixSemiBold leading-relaxed
                 text-[14px]
                            sm:text-[16px]
                            lg:text-[18px] lg:leading-[24.6px]

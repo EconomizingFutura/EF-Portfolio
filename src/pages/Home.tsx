@@ -6,6 +6,7 @@ import {
   Area,
   FAQ,
 } from "../assets/index";
+
 // import { ButtonWrapper } from "../components/index";
 import { ContactModal, EnqueryModal } from "../modal/index";
 import { Toaster, toast } from "sonner";
@@ -151,7 +152,7 @@ const Home: React.FC = () => {
 
   // const navigate = useNavigate();
   return (
-    <div className=" mt-16 overflow-x-clip flex flex-col justify-between max-w-[1640px] mx-auto">
+    <div className=" mt-16 overflow-x-clip flex flex-col justify-between ">
       <Toaster richColors />
       {show && (
         <ContactModal
@@ -173,32 +174,35 @@ const Home: React.FC = () => {
       {/* ceedff #DAF1FF bg-[#aee2ff] */}
       <section
         ref={heroSection}
-        className="flex  lg:flex-row flex-col py-5 md:py-0  justify-center xl:justify-end  backdrop-blur-304 bg-opacity-50 items-center  lg:h-[650px] heroSectionBackground "
+        className="flex w-full lg:flex-row flex-col py-5 md:py-0  justify-center xl:justify-end heroSectionBackground backdrop-blur-304 bg-opacity-50 items-center  lg:h-[650px] "
       >
+        {/* heroSectionBackground  */}
         <HeroSection onClickButton={handleToogleForms} />
       </section>
       {/* Testimonials */}
       <section
         ref={testimonialsSection}
-        className="testmonial font-hellix w-full h-auto xl:h-[520px] flex flex-col justify-around bg-[#E0F3FF]"
+        className="testmonial font-hellix w-full h-auto xl:h-[580px]  lg:py-20 flex flex-col justify-evenly bg-[#E0F3FF]  space-y-10"
       >
-        <div className=" relative">
-          <h1 className=" text-center font-bold sm:text-[38px] text-[20px] sm:leading-[45px] text-[#031924]">
+        <div className=" relative lg:max-w-[523px] mx-auto">
+          <h1 className=" text-center font-hellixBold sm:text-[38px] text-[20px] sm:leading-[45px] text-[#031924]">
             Testimonials for Happy Clients
           </h1>
           <img
             src={ClientUnderline}
             alt=""
-            className="absolute md:right-1/3 sm:right-16 md:translate-x-3 w-[135px] sm:w-auto right-11 md:top-12"
+            className="absolute md:right-0 sm:right-16 md:translate-x-3 w-[135px] sm:w-auto right-11 md:top-12"
           />
         </div>
-        <div className=" flex gap-10 my-10 h-auto w-screen overflow-x-auto relative">
+        <div className=" flex h-full lg:py-0 w-screen overflow-x-auto relative">
           <TestimonialSlider />
         </div>
       </section>
       {/* projects */}
       <section
-        ref={projectsSection}
+        ref={(el) => {
+          projectsSection.current = el;
+        }}
         className="bodyBackground relative md:py-10 "
       >
         <img
@@ -209,7 +213,7 @@ const Home: React.FC = () => {
 
         {/* sticky top-20 z-10 bg-white pb-8 */}
         <div className=" content-why md:pt-[90px] font-hellix transition-opacity duration-500 static lg:sticky top-0">
-          <h1 className="font-bold text-[32px] sm:text-[38px] leading-[40px] sm:leading-[45.61px] text-[#031924] text-center pageTitle">
+          <h1 className="font-hellixBold text-[32px] sm:text-[38px] leading-[40px] sm:leading-[45.61px] text-[#031924] text-center pageTitle">
             Projects
           </h1>
         </div>
@@ -236,13 +240,13 @@ const Home: React.FC = () => {
         className="h-min py-8 xl:h-[2033px] flex flex-col justify-center  sm:mt-40 md:mt-0 items-center bg-[#032435] w-full font-hellix lg:gap-16 xl:gap-20"
       >
         <div className="relative my-10">
-          <h1 className="font-bold text-[30px] md:text-[38px] leading-[45.61px] text-[#ffffff] text-center">
-            Area of <span className="text-[#20B2FF]">Expertise</span>
+          <h1 className="font-hellixBold text-[30px] md:text-[38px] leading-[45.61px] text-[#ffffff] text-center">
+            Area of <span className="text-[#20B2FF]">{"  "}Expertise</span>
           </h1>
           <img
             src={Area}
             alt=""
-            className="absolute lg:-top-5 md:h-20 md:-right-9 md:-top-5 lg:-right-8 -top-2 -right-5  h-[60px] lg:h-auto"
+            className="absolute lg:-top-5 md:h-20 md:-right-9 md:-top-5 lg:-right-6 -top-2 -right-5  h-[60px] lg:h-auto"
           />
         </div>
         <AreaSection />
@@ -252,7 +256,7 @@ const Home: React.FC = () => {
         ref={clientsSection}
         className="h-auto font-hellix lg:h-[818px] py-6 md:py-0 bg-[#F4F8FB] flex flex-col justify-center lg:justify-evenly items-center w-full "
       >
-        <h1 className="text-[32px] lg:text-[38px] leading-tight lg:leading-[45.16px] font-bold text-center text-[#032435] mb-10">
+        <h1 className="text-[32px] lg:text-[38px] leading-tight lg:leading-[45.16px] font-hellixBold text-center text-[#032435] mb-10">
           Client Handling
         </h1>
         <Clients />
@@ -262,7 +266,7 @@ const Home: React.FC = () => {
         ref={blogsSection}
         className=" flex flex-col xl:max-w-screen justify-evenly items-center py-6 md:py-0 md:h-[741px]  bg-[#FFFFFF] font-hellix"
       >
-        <h1 className="text-[32px] md:text-[38px] py-4 md:py-0 md:leading-[45.61px] font-bold text-[#032435] leading-tight text-center">
+        <h1 className="text-[32px] md:text-[38px] py-4 md:py-0 md:leading-[45.61px] font-hellixBold text-[#032435] leading-tight text-center">
           Blog
         </h1>
 
@@ -274,7 +278,7 @@ const Home: React.FC = () => {
 
         <button
           onClick={() => navigate("/blogs")}
-          className="w-[120px] h-[40px] md:w-[140px] md:h-[45px] lg:w-[202px] lg:h-[56px] font-bold text-[14px] md:text-[16px] lg:text-[18px] leading-snug bg-[#F1FAFF] text-primary  mt-6 xl:me-52 ml-auto"
+          className="w-[120px] h-[40px] md:w-[140px] md:h-[45px] lg:w-[202px] lg:h-[56px] font-hellixBold text-[14px] md:text-[16px] lg:text-[18px] leading-snug bg-[#F1FAFF] text-primary  mt-6 xl:me-52 ml-auto"
         >
           View All
         </button>
@@ -288,12 +292,12 @@ const Home: React.FC = () => {
         <div className="container mx-auto max-w-[1120px] h-auto flex flex-col lg:flex-row justify-between gap-8 lg:gap-12 px-4 sm:px-6 lg:px-8">
           {/* Left content */}
           <div className="flex flex-col items-center lg:items-start space-y-6 lg:max-w-[360px]">
-            <h1 className="text-[#032435] font-bold text-2xl sm:text-3xl lg:text-[38px] leading-tight md:leading-[45.61px] max-w-[360px]">
+            <h1 className="text-[#032435] font-hellixBold text-2xl sm:text-3xl lg:text-[38px] leading-tight md:leading-[45.61px] max-w-[360px]">
               Frequently asked questions
             </h1>
             <img
               src={FAQ}
-              alt="FAQ illustration"
+              alt=""
               className="w-full max-w-[300px] lg:max-w-[360px] object-contain"
             />
           </div>

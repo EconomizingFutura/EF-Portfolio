@@ -100,9 +100,9 @@ const ToggleSection = React.memo(
               />
             )}
             <p
-              className={`font-semibold text-xl px-6 ${
+              className={`font-hellixSemiBold text-xl px-6 ${
                 toggle === header.id - 1
-                  ? "text-secondary"
+                  ? "text-[#031924]"
                   : "text-[rgba(153,153,153,1)]"
               }`}
             >
@@ -126,16 +126,20 @@ ToggleSection.displayName = "ToggleSection";
 const Clients: React.FC = () => {
   const [toggle, setToggle] = useState<number>(0);
   const { ref, inView } = useInView({
-    threshold: 0.2,
-    triggerOnce: true,
+    threshold: 0.5,
   });
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setToggle((prevToggle) => (prevToggle === 0 ? 1 : 0));
-    }, ANIMATION_INTERVAL);
+    let intervalId: NodeJS.Timeout | undefined;
+    if (inView) {
+      intervalId = setInterval(() => {
+        setToggle((prevToggle) => (prevToggle === 0 ? 1 : 0));
+      }, ANIMATION_INTERVAL);
+    } else {
+      clearInterval(intervalId);
+    }
     return () => clearInterval(intervalId);
-  }, [toggle]);
+  }, [inView]);
 
   const handleToggle = useCallback((index: number) => {
     setToggle(index);
@@ -150,7 +154,7 @@ const Clients: React.FC = () => {
   return (
     <div
       ref={ref}
-      className="flex flex-col lg:flex-row xl:space-x-2 w-11/12 xl:w-[1137px] justify-center"
+      className="flex flex-col lg:flex-row  xl:space-x-2 w-11/12 xl:w-[1137px] justify-center"
     >
       <ToggleSection toggle={toggle} setToggle={handleToggle} inView={inView} />
       <div className="flex flex-col w-full md:max-w-[701px]">
@@ -173,22 +177,28 @@ const Clients: React.FC = () => {
                       section.id === 1 && activeSection.id === 2
                         ? " lg:ps-5 lg:translate-x-1.5 xl:-translate-x-2.5 "
                         : ""
-                    }relative z-10 pr-5 text-center m-auto text-white font-semibold text-xl`}
+                    }relative z-10 pr-5 text-center m-auto text-white font-hellixSemiBold text-xl`}
                   >
                     Step {index + 1}
                   </p>
                 </div>
                 <h2
-                  className={`font-bold text-[17px] ${
+                  className={` font-hellixSemiBold text-[17px] ${
                     section.id === 1 && activeSection.id === 2
                       ? " lg:ms-10 xl:ms-0"
                       : ""
-                  } lg:text-xl text-[#333333] md:max-w-[80%]`}
+                  } lg:text-2xl text-[#031924] md:max-w-[80%]`}
                 >
                   {section.heading}
                 </h2>
               </div>
-              <p className="text-[14px] lg:text-[15px] flex-grow-0 text-[#999999] font-medium mt-3  md:mt-4">
+              <p
+                className={`text-[14px] lg:text-[15px] flex-grow-0 text-[#999999] font-hellixMedium mt-3  ${
+                  section.id === 1 && activeSection.id === 2
+                    ? " md:mt-0"
+                    : "md:mt-4 "
+                }  `}
+              >
                 {section.info}
               </p>
             </div>

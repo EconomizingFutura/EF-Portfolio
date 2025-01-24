@@ -508,14 +508,14 @@ const ReactForms: React.FC = () => {
                 <div className="lg:w-[359px] xl:w-[379px] lg:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
                   <div className="flex bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
                     <img src={File} alt="" />
-                    <h1 className="truncate max-w-48 inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
+                    <h1 className="truncate max-w-48 inline-block text-center my-auto text-sm leading-[16.8px] font-hellixMedium">
                       {file?.name as string}
                     </h1>
                   </div>
                   <div className="flex justify-center rounded-md items-center w-[119px] bg-[rgba(241,250,255,1)] lg:h-[40px] h-8">
                     <label
                       htmlFor="file"
-                      className="text-primary text-base font-semibold py-2 leading-[19.2px] cursor-pointer"
+                      className="text-primary text-base font-hellixSemiBold py-2 leading-[19.2px] cursor-pointer"
                     >
                       Change File
                     </label>
@@ -528,7 +528,7 @@ const ReactForms: React.FC = () => {
                     alt=""
                     className="h-[52px] w-[52px] mx-auto"
                   />
-                  <p className="text-[#031924] font-medium text-center text-[16px]">
+                  <p className="text-[#031924] font-hellixMedium text-center text-[16px]">
                     Choose a file or drag & drop it here
                   </p>
                   <p className="text-[#999999] font-normal text-[14px] text-center">
@@ -746,14 +746,14 @@ const ReactForms: React.FC = () => {
                 <div className="lg:w-[359px] xl:w-[379px] lg:max-w-[380px] max-w-[250px] h-[80px] md:h-[103px] flex flex-col justify-between gap-6 items-center">
                   <div className="flex bg-[#e6eaeb] h-[40px] lg:w-[379px] px-4 rounded gap-1 md:gap-3 items-center">
                     <img src={File} alt="" />
-                    <h1 className="truncate max-w-48 inline-block text-center my-auto text-sm leading-[16.8px] font-medium">
+                    <h1 className="truncate max-w-48 inline-block text-center my-auto text-sm leading-[16.8px] font-hellixMedium">
                       {file?.name as string}
                     </h1>
                   </div>
                   <div className="flex justify-center rounded-md items-center w-[119px] bg-[rgba(241,250,255,1)] lg:h-[40px] h-7">
                     <label
                       htmlFor="file"
-                      className="text-primary text-base font-semibold leading-[19.2px] cursor-pointer"
+                      className="text-primary text-base font-hellixSemiBold leading-[19.2px] cursor-pointer"
                     >
                       Change File
                     </label>
@@ -766,7 +766,7 @@ const ReactForms: React.FC = () => {
                     alt=""
                     className="h-[52px] w-[52px] mx-auto"
                   />
-                  <p className="text-[#031924] font-medium text-center text-[16px]">
+                  <p className="text-[#031924] font-hellixMedium text-center text-[16px]">
                     Choose a file or drag & drop it here
                   </p>
                   <p className="text-[#999999] font-normal text-[14px] text-center">
@@ -902,7 +902,7 @@ const ReactForms: React.FC = () => {
             backgroundSize: "100% 100%",
           }}
         ></div>
-        <h1 className=" text-[#24536E] font-bold leading-[52.81px] text-center text-[44px]">
+        <h1 className=" text-[#24536E] font-hellixBold leading-[52.81px] text-center text-[44px]">
           Pricing
         </h1>
       </div>
@@ -940,12 +940,12 @@ const ReactForms: React.FC = () => {
                   ))}
                 </div>
 
-                <p className=" font-medium lg:text-[17px] text-[15px] h-min inline-block py-2  leading-4 tracking-[0.02em] text-[#999999]">
+                <p className=" font-hellixMedium lg:text-[17px] text-[15px] h-min inline-block py-2  leading-4 tracking-[0.02em] text-[#999999]">
                   {subData.length === 0
                     ? selectSections[0]?.label
                     : subData[selected]?.label}
                 </p>
-                <h1 className=" font-bold lg:text-[28px] text-[18px]  lg:leading-[39px] lg:-tracting-[0.02em] text-[#032435]">
+                <h1 className=" font-hellixBold lg:text-[28px] text-[18px]  lg:leading-[39px] lg:-tracting-[0.02em] text-[#032435]">
                   {subData.length === 0
                     ? selectSections[0]?.header
                     : subData[selected]?.header}
@@ -988,14 +988,14 @@ const ReactForms: React.FC = () => {
                 <div className=" flex gap-10 lg:gap-6 ml-auto xl:w-[487px] justify-end md:mt-0 mt-4 font-hellix">
                   {subData.length > 1 && (
                     <ButtonWrapper
-                      className="bg-[#20B2FF] p-3 xl:p-0 xl:h-[56px]  text-white font-hellix rounded-lg font-semibold 
+                      className="bg-[#20B2FF] p-3 xl:p-0 xl:h-[56px]  text-white  rounded-lg font-hellixSemiBold 
               text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px]  lg:mx-0"
                       label={"Prev"}
                       onClick={handlePrevSection}
                     />
                   )}
                   <ButtonWrapper
-                    className="bg-[#20B2FF] p-3 xl:p-0 xl:h-[56px]  text-white font-hellix rounded-lg font-semibold 
+                    className="bg-[#20B2FF] p-3 xl:p-0 xl:h-[56px]  text-white rounded-lg font-hellixSemiBold 
             text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px]  lg:mx-0"
                     label={dropBox ? (!file ? "Skip" : "Next") : "Next"}
                     onClick={handleNext}
@@ -1010,7 +1010,7 @@ const ReactForms: React.FC = () => {
                 loop={true}
                 className="lg:h-72 lg:w-72 h-56 w-56 absolute left-0 rounded-full"
               />
-              <p className=" text-secondary text-center font-bold lg:text-[40px] text-[30px]  leading-[48.01px] -tracking-[0.02em]">
+              <p className=" text-secondary text-center font-hellixBold lg:text-[40px] text-[30px]  leading-[48.01px] -tracking-[0.02em]">
                 <span className=" text-primary">
                   Thanks! <br />
                 </span>

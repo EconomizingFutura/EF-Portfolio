@@ -69,23 +69,23 @@ ${values.firstName} ${values.lastName}`;
 
   return (
     <div
-      className={`fixed inset-0 z-[1000] bg-[#1e75bb] bg-opacity-40 flex flex-col justify-center items-center gap-2.5 ${
+      className={`fixed inset-0 z-[1000] bg-[#1e75bb] bg-opacity-40 flex flex-col justify-center items-center shadow-enquery gap-1  md:gap-2 lg:gap-2.5 ${
         isModalOpen ? "block" : "hidden"
       }`}
     >
       <img
         src={CancelIcon}
         onClick={handleToggle}
-        className="cursor-pointer"
+        className="cursor-pointer h-10 md:h-12 lg:h-auto"
         alt=""
       />
       <Toaster richColors />
-      <div className="bg-[#FFFFFF] rounded-2xl md:rounded-[30px] px-5 py-1 lg:py-3 lg:px-6 gap-0 flex flex-col font-hellix justify-start items-start md:h-[min-content] lg:h-[517px] h-4/5 w-11/12 max-w-lg lg:max-w-2xl">
+      <div className="bg-[#FFFFFF]  rounded-2xl md:rounded-[30px] px-5 py-1 lg:py-5 lg:px-10 gap-0 flex flex-col font-hellix justify-start items-start md:h-[min-content] lg:h-[517px] h-4/5 w-11/12 max-w-lg lg:max-w-2xl">
         <div className="w-full gap-2.5 flex flex-col md:h-[90px] justify-between">
-          <h1 className="text-start text-xl lg:text-[32px] lg:leading-[38.41px] md:leading-[38.41px] text-[#24536E] font-bold">
+          <h1 className="text-start text-xl lg:text-[32px] lg:leading-[38.41px] md:leading-[38.41px] text-[#24536E] font-hellixBold">
             Contact Us
           </h1>
-          <p className="font-medium text-xs lg:text-base leading-[19.2px] lg:leading-[19.2px] text-[#031924]">
+          <p className="font-hellixMedium text-xs lg:text-base leading-[19.2px] lg:leading-[19.2px] text-[#031924]">
             Please provide your email address so our team can get in touch with
             you. For any issues, email us at{" "}
             <span className=" text-primary cursor-pointer hover:underline">
@@ -107,10 +107,10 @@ ${values.firstName} ${values.lastName}`;
             <Form className="w-full flex flex-col h-full gap-0.5 md:gap-3 py-2 justify-evenly  lg:gap-4">
               <div className="flex flex-col w-full lg:h-[72px] lg:flex-row gap-1.5 lg:gap-4">
                 <div className="flex flex-col w-full">
-                  <div className="flex flex-col w-full gap-1 lg:gap-1.5">
+                  <div className="flex flex-col w-full gap-1">
                     <label
                       htmlFor="firstName"
-                      className="text-[#031924] lg:text-base text-xs leading-5"
+                      className="text-[#031924] lg:text-[16px] text-[12px] leading-[19.2px]"
                     >
                       First Name
                     </label>
@@ -138,10 +138,10 @@ ${values.firstName} ${values.lastName}`;
                   ) : null}
                 </div>
                 <div className="flex flex-col w-full">
-                  <div className="flex flex-col w-full gap-1 lg:gap-1.5">
+                  <div className="flex flex-col w-full gap-1">
                     <label
                       htmlFor="lastName"
-                      className="text-[#031924] lg:text-base text-xs leading-5"
+                      className="text-[#031924] lg:text-[16px] text-[12px] leading-[19.2px]"
                     >
                       Last Name
                     </label>
@@ -169,11 +169,11 @@ ${values.firstName} ${values.lastName}`;
                   ) : null}
                 </div>
               </div>
-              <div className="flex flex-col w-full">
-                <div className="flex flex-col w-full gap-1.5">
+              <div className="flex flex-col w-full lg:h-[75px] ">
+                <div className="flex flex-col w-full gap-1">
                   <label
                     htmlFor="email"
-                    className="text-[#031924] lg:text-base text-xs leading-5"
+                    className="text-[#031924] lg:text-[16px] text-[12px] leading-[19.2px]"
                   >
                     Email
                   </label>
@@ -182,7 +182,7 @@ ${values.firstName} ${values.lastName}`;
                     type="email"
                     {...formik.getFieldProps("email")}
                     placeholder="xyz@gmail.com"
-                    className="border-[#DDE4EE] bg-[#F9FBFC] focus:outline-none border resize-none placeholder:text-[#999999] rounded-md lg:rounded-lg lg:p-3 px-2 p-1.5 text-[#999999]"
+                    className="border-[#DDE4EE] bg-[#F9FBFC] focus:outline-none border resize-none placeholder:text-[#999999] rounded-md lg:rounded-lg lg:px-3 lg:p-0 px-2 p-1.5 text-[#999999] lg:h-12"
                     onKeyDown={(e) => {
                       if (
                         !/^[A-Za-z0-9@.]+$/.test(e.key) &&
@@ -202,17 +202,17 @@ ${values.firstName} ${values.lastName}`;
               </div>
 
               <div className="flex flex-col w-full">
-                <div className="flex flex-col w-full gap-1.5">
+                <div className="flex flex-col w-full gap-1">
                   <label
                     htmlFor="comments"
-                    className="text-[#031924] lg:text-base text-sm leading-5"
+                    className="text-[#031924] lg:text-[16px] text-[12px] leading-[19.2px]"
                   >
                     Comments
                   </label>
                   <textarea
                     id="comments"
                     {...formik.getFieldProps("comments")}
-                    className="w-full rounded-md bg-[#F9FBFC] border-gray-300 px-3 py-1 lg:py-2 text-[#999999] focus:outline-none border resize-none"
+                    className="w-full rounded-md bg-[#F9FBFC] border-gray-300 px-3  lg:py-2 text-[#999999] focus:outline-none border resize-none"
                     placeholder="Enter your message"
                     rows={3.5}
                     onKeyDown={(e) => {
@@ -234,7 +234,7 @@ ${values.firstName} ${values.lastName}`;
               </div>
 
               <ButtonWrapper
-                className="bg-[#20B2FF] h-[35px] md:h-[47px] rounded-lg font-semibold text-base leading-5 text-white w-full"
+                className="bg-[#20B2FF] h-[35px] md:h-[47px] rounded-lg font-hellixSemiBold text-base leading-5 text-white w-full"
                 type={true}
                 label="Contact Us"
                 disabled={isLoading || formik.isSubmitting}

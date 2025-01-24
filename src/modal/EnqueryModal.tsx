@@ -77,22 +77,22 @@ ${values.firstName} ${values.lastName}`;
         !showForms
           ? "h-[56px] w-[56px]"
           : "h-[495px]   z-[9999] lg:h-[490px] xl:h-[540px] w-[275px] md:w-[290px] lg:w-[350px]"
-      } flex flex-col justify-between items-end font-hellix `}
+      } flex flex-col justify-between items-end font-hellix`}
     >
       {showForms && (
-        <div className="rounded-xl p-2.5 xl:px-4 xl:py-2 shadow-enquery flex flex-col justify-start items-start w-full bg-[#ffffff]">
+        <div className="rounded-xl p-2.5 lg:px-5 lg:py-2 shadow-enquery flex flex-col justify-start items-start w-full bg-[#ffffff]">
           <div
             className="relative flex items-center cursor-pointer"
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
           >
-            <h1 className="text-[18px] flex xl:text-[20px] font-bold leading-[1.2] text-[#24536E] mb-1.5 xl:mb-2.5">
+            <h1 className="text-[18px] flex xl:text-[20px] font-hellixBold leading-[1.2] text-[#24536E] mb-1.5 xl:mb-2.5">
               Contact Us
-              <MdOutlineInfo className=" mt-1 ms-1" />
+              <MdOutlineInfo className=" lg:mt-1 ms-1" />
             </h1>
             {showTooltip && (
               <div className="absolute top-full mt-1 left-0 bg-white p-3 border border-gray-200 shadow-lg rounded-md text-sm z-10">
-                <p className="font-medium text-xs lg:text-base leading-[19.2px] lg:leading-[19.2px] text-[#031924]">
+                <p className="font-hellixMedium text-xs lg:text-base leading-[19.2px] lg:leading-[19.2px] text-[#031924]">
                   Please provide your email address so our team can get in touch
                   with you. For any issues, email us at{" "}
                   <span className=" text-primary cursor-pointer hover:underline">
@@ -118,7 +118,7 @@ ${values.firstName} ${values.lastName}`;
                 <div className="min-h-[75px] relative">
                   <label
                     htmlFor="firstName"
-                    className="block text-sm font-medium text-[#031924] md:mb-1"
+                    className="block text-sm font-hellixMedium text-[#031924] md:mb-1"
                   >
                     First Name
                   </label>
@@ -142,16 +142,15 @@ ${values.firstName} ${values.lastName}`;
                     className="w-full xl:h-[44px] h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
                   />
                   {errors.firstName && touched.firstName && (
-                    <p className="absolute text-red-500 text-xs ">
+                    <p className="absolute text-red-500 text-[8px] sm:text-[10px] lg:text-xs ">
                       {errors.firstName}
                     </p>
                   )}
                 </div>
-
                 <div className="min-h-[75px] relative">
                   <label
                     htmlFor="lastName"
-                    className="block text-sm font-medium text-[#031924] md:mb-1"
+                    className="block text-sm font-hellixMedium text-[#031924] md:mb-1"
                   >
                     Last Name
                   </label>
@@ -175,7 +174,7 @@ ${values.firstName} ${values.lastName}`;
                     className="w-full xl:h-[44px] h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
                   />
                   {errors.lastName && touched.lastName && (
-                    <p className="absolute text-red-500 text-xs ">
+                    <p className="absolute text-[8px] text-red-500 sm:text-[10px] lg:text-xs ">
                       {errors.lastName}
                     </p>
                   )}
@@ -184,7 +183,7 @@ ${values.firstName} ${values.lastName}`;
                 <div className="min-h-[75px] relative">
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-[#031924] md:mb-1"
+                    className="block text-sm font-hellixMedium text-[#031924] md:mb-1"
                   >
                     Email
                   </label>
@@ -208,7 +207,7 @@ ${values.firstName} ${values.lastName}`;
                     className="w-full xl:h-[44px] h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
                   />
                   {errors.email && touched.email && (
-                    <p className="absolute text-red-500 text-xs ">
+                    <p className="absolute text-[8px] text-red-500 sm:text-[10px] lg:text-xs ">
                       {errors.email}
                     </p>
                   )}
@@ -217,7 +216,7 @@ ${values.firstName} ${values.lastName}`;
                 <div className="min-h-[90px] mb-3  md:mb-2 relative">
                   <label
                     htmlFor="comments"
-                    className="block text-sm font-medium text-[#031924] md:mb-1"
+                    className="block text-sm font-hellixMedium text-[#031924] md:mb-1"
                   >
                     Comments
                   </label>
@@ -241,14 +240,14 @@ ${values.firstName} ${values.lastName}`;
                     className="w-full px-3 py-1  bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none  resize-none"
                   />
                   {errors.comments && touched.comments && (
-                    <p className="absolute text-red-500 text-xs -translate-y-2">
+                    <p className="absolute text-red-500 text-[8px] sm:text-[10px] lg:text-xs -translate-y-2">
                       {errors.comments}
                     </p>
                   )}
                 </div>
 
                 <ButtonWrapper
-                  className="bg-[#20B2FF] select-none h-[35px] md:h-[40px] rounded-lg font-semibold text-white text-base w-full"
+                  className="bg-[#20B2FF] select-none h-[35px] md:h-[40px] rounded-lg font-hellixSemiBold text-white text-base w-full"
                   label="Submit"
                   type={true}
                   disabled={isLoading}

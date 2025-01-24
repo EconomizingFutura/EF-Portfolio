@@ -92,10 +92,10 @@ const Projects: React.FC = () => {
   }) => {
     return (
       <div className=" flex justify-between font-hellix md:gap-7 gap-4 md:flex-row flex-col">
-        <h1 className=" lg:w-[130px] sm:w-1/4 font-bold inline-block text-primary text-[18px]  xl:text-[24px]">
+        <h1 className=" lg:w-[130px] sm:w-1/4 font-hellixBold inline-block text-primary text-[18px]  xl:text-[24px]">
           {detail + ":"}
         </h1>
-        <p className=" list-item sm:w-2/3 lg:w-[947px] text-[#000000] font-medium text-[12px] sm:text-[16px] xl:text-[20px] leading-5 md:leading-7">
+        <p className=" list-item sm:w-2/3 lg:w-[947px] text-[#000000] font-hellixMedium text-[12px] sm:text-[16px]  lg:text-[20px] leading-5 md:leading-7">
           {detailsContent}
         </p>{" "}
       </div>
@@ -144,10 +144,10 @@ const Projects: React.FC = () => {
         {/* project details */}
         <div className="">
           <div className=" border-l-8 border-l-primary ps-6 flex flex-col gap-6">
-            <h1 className=" text-[#24536E] font-bold leading-[40px] xl:leading-[52.81px] text-[24px] xl:text-[44px]">
+            <h1 className=" text-[#24536E] font-hellixBold leading-[40px] xl:leading-[52.81px] text-[24px] xl:text-[44px]">
               {projectDetails.projectName}
             </h1>
-            <p className=" text-[#000000] font-medium text-[12px] sm:text-[16px] xl:text-[20px] leading-5 md:leading-7">
+            <p className=" text-[#000000] font-hellixMedium text-[12px] sm:text-[16px] xl:text-[20px] leading-5 md:leading-7">
               {projectDetails.briefNote}
             </p>
           </div>
@@ -177,7 +177,7 @@ const Projects: React.FC = () => {
       <div className=" md:h-[672px] relative flex justify-center items-center w-full px-5 bg-[#F4FAFF] md:px-0">
         {" "}
         <img src={Boxes} alt="" className="absolute right-0 top-1 " />
-        <div className="h-min  lg:h-[512px] w-full max-w-[1136px] rounded-sm md:rounded-3xl flex justify-center items-center p-0 sm:p-6 md:p-8 lg:p-5">
+        <div className="h-min bg-[#ffffff]  lg:h-[512px] w-full max-w-[1136px] rounded-sm md:rounded-3xl flex justify-center items-center p-0 sm:p-6 md:p-8 lg:p-5">
           <div className="flex flex-col  md:flex-row py-5 justify-between items-center relative h-full w-full rounded-[25px] origin-top">
             <div className="w-full relative  md:w-[733px] lg:w-[433px] md:h-[348px] flex flex-col items-start gap-10 ">
               <img
@@ -191,14 +191,14 @@ const Projects: React.FC = () => {
                 className="h-11 w-11 "
               />
               <div className=" lg:h-[264px] w-full flex flex-col gap-4">
-                <h1 className="text-[20px] text-[#032435] font-bold sm:text-[24px] md:text-[28px] -tracking-[0.002em] ">
+                <h1 className="text-[20px] text-[#032435] font-hellixBold sm:text-[24px] md:text-[28px] -tracking-[0.002em] ">
                   {nextProject.projectName}
                 </h1>
-                <p className="text-[#999999] font-medium text-[14px] sm:text-[15px] md:text-[12px] lg:text-[17px] leading-6 tracking-[0.2%] ">
+                <p className="text-[#999999] font-hellixMedium text-[14px] sm:text-[15px] md:text-[12px] lg:text-[17px] leading-6 tracking-[0.2%] ">
                   {nextProject.description}
                 </p>
                 <button
-                  className="hover:underline flex gap-2 font-medium text-[14px] sm:text-[15px] md:text-[17px] leading-6 tracking-[0.002em] text-[#20B2FF]"
+                  className="hover:underline flex gap-2 font-hellixMedium text-[14px] sm:text-[15px] md:text-[17px] leading-6 tracking-[0.002em] text-[#20B2FF]"
                   onMouseEnter={handleRotate}
                   onMouseLeave={handleRotate}
                   onClick={() => handleClick(nextProject.id)}

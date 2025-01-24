@@ -27,13 +27,13 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         onClick={onClick}
         className="cursor-pointer flex justify-between items-center"
       >
-        <p className="text-[#212735] text-[15px] w-3/4 md:text-[16px]  xl:text-[17px] font-bold">
+        <p className="text-[#212735] text-[15px] w-3/4 md:text-[16px]  xl:text-[17px] font-hellixBold">
           {title}
         </p>
         {isOpen ? <img src={AccordinDash} alt="" /> : <Plus size={20} />}
       </div>
       {isOpen && (
-        <div className="text-[#999999] font-medium text-justify text-sm md:text-base leading-6 pt-3">
+        <div className="text-[#999999] font-hellixMedium text-justify text-sm md:text-base leading-6 pt-3">
           {content}
         </div>
       )}

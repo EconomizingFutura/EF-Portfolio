@@ -40,11 +40,11 @@ const TermsAndConditions: React.FC = () => {
       <Header handleShowForms={handleToggle} background={backgroundColor} />
       <section className="flex-1 flex flex-col my-24 font-hellix px-5 sm:px-7 md:px-8 lg:px-12 xl:w-[1246px] xl:mx-auto xl:px-10 gap-5">
         <div className="flex flex-col gap-2">
-          <h1 className="font-bold text-lg md:text-2xl leading-5">
+          <h1 className="font-hellixBold text-lg md:text-2xl leading-5">
             Terms and Conditions for Economizing Futura
           </h1>
           <p>
-            <span className="pe-2 font-bold text-base md:text-lg leading-5">
+            <span className="pe-2 font-hellixBold text-base md:text-lg leading-5">
               Last Updated:
             </span>
             24/12/2024
@@ -63,14 +63,14 @@ const TermsAndConditions: React.FC = () => {
         <div className="flex flex-col gap-4">
           {termsAndConditionsSections.map((section, index) => (
             <div key={index} className="text-sm md:text-base">
-              <p className="font-bold">{section.title}</p>
+              <p className="font-hellixBold">{section.title}</p>
               <p>{section.content}</p>
             </div>
           ))}
         </div>
 
         <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
-          <h2 className="font-semibold">{terms.services.heading}</h2>
+          <h2 className="font-hellixSemiBold">{terms.services.heading}</h2>
           <p>{terms.services.description}</p>
           {terms.services.lists.map((section, index) => (
             <div key={index} className="pl-4 list-item">
@@ -81,7 +81,7 @@ const TermsAndConditions: React.FC = () => {
         </div>
 
         <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
-          <h2 className="font-semibold">{terms.use.heading}</h2>
+          <h2 className="font-hellixSemiBold">{terms.use.heading}</h2>
           {terms.use.lists.map((section, index) => (
             <div key={index} className="pl-4 list-decimal">
               <p>
@@ -92,47 +92,49 @@ const TermsAndConditions: React.FC = () => {
         </div>
 
         <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
-          <h2 className="font-semibold">{terms.property.heading}</h2>
+          <h2 className="font-hellixSemiBold">{terms.property.heading}</h2>
           <p>{terms.property.description}</p>
         </div>
 
         <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
-          <h2 className="font-semibold">{terms.liability.heading}</h2>
+          <h2 className="font-hellixSemiBold">{terms.liability.heading}</h2>
           <p>{terms.liability.description}</p>
         </div>
         <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
-          <h2 className="font-semibold">{terms.privacyPolicy.heading}</h2>
+          <h2 className="font-hellixSemiBold">{terms.privacyPolicy.heading}</h2>
           <p>{terms.privacyPolicy.description}</p>
         </div>
 
         <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
-          <h2 className="font-semibold">{terms.Changes.heading}</h2>
+          <h2 className="font-hellixSemiBold">{terms.Changes.heading}</h2>
           <p>{terms.Changes.description}</p>
         </div>
 
         <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
-          <h2 className="font-semibold">{terms.termination.heading}</h2>
+          <h2 className="font-hellixSemiBold">{terms.termination.heading}</h2>
           <p>{terms.termination.description}</p>
         </div>
 
         <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
-          <h2 className="font-semibold">{terms.law.heading}</h2>
+          <h2 className="font-hellixSemiBold">{terms.law.heading}</h2>
           <p>{terms.law.description}</p>
         </div>
 
         <div className="flex flex-col gap-3 text-sm md:text-base mt-4">
-          <h2 className="font-semibold">{terms.dispute.heading}</h2>
+          <h2 className="font-hellixSemiBold">{terms.dispute.heading}</h2>
           <p>{terms.dispute.description}</p>
         </div>
 
         <div className="text-sm md:text-base space-y-4 mt-6">
-          <h2 className="font-bold">11. Contact Us</h2>
+          <h2 className="font-hellixBold">11. Contact Us</h2>
           <p>
             For any questions, concerns, or requests related to this Privacy
             Policy, please contact us:
           </p>
           <div className="space-y-2">
-            <p className="font-bold">Economizing Futura (OPC) Pvt. Ltd.</p>
+            <p className="font-hellixBold">
+              Economizing Futura (OPC) Pvt. Ltd.
+            </p>
             <p>Email: economizingfutura@gmail.com</p>
             <p>
               Address:
