@@ -142,7 +142,7 @@ ${values.firstName} ${values.lastName}`;
                     className="w-full xl:h-[44px] h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
                   />
                   {errors.firstName && touched.firstName && (
-                    <p className="absolute text-red-500 text-[8px] sm:text-[10px] lg:text-xs ">
+                    <p className="absolute text-red-500 text-[10px]  lg:text-xs ">
                       {errors.firstName}
                     </p>
                   )}
@@ -174,7 +174,7 @@ ${values.firstName} ${values.lastName}`;
                     className="w-full xl:h-[44px] h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
                   />
                   {errors.lastName && touched.lastName && (
-                    <p className="absolute text-[8px] text-red-500 sm:text-[10px] lg:text-xs ">
+                    <p className="absolute text-red-500 text-[10px]  lg:text-xs ">
                       {errors.lastName}
                     </p>
                   )}
@@ -207,13 +207,13 @@ ${values.firstName} ${values.lastName}`;
                     className="w-full xl:h-[44px] h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
                   />
                   {errors.email && touched.email && (
-                    <p className="absolute text-[8px] text-red-500 sm:text-[10px] lg:text-xs ">
+                    <p className="absolute text-red-500 text-[10px]  lg:text-xs ">
                       {errors.email}
                     </p>
                   )}
                 </div>
 
-                <div className="min-h-[90px] mb-3  md:mb-2 relative">
+                <div className="min-h-[90px] mb-3   md:mb-2 relative">
                   <label
                     htmlFor="comments"
                     className="block text-sm font-hellixMedium text-[#031924] md:mb-1"
@@ -240,7 +240,7 @@ ${values.firstName} ${values.lastName}`;
                     className="w-full px-3 py-1  bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none  resize-none"
                   />
                   {errors.comments && touched.comments && (
-                    <p className="absolute text-red-500 text-[8px] sm:text-[10px] lg:text-xs -translate-y-2">
+                    <p className="absolute -bottom-2 text-red-500 text-[10px]  lg:text-xs ">
                       {errors.comments}
                     </p>
                   )}

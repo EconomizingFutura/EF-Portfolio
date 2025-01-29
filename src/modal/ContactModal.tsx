@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ButtonWrapper } from "../components/index";
 import { CancelIcon } from "../assets/index";
 import { ContactData } from "../api/ContactAPI";
@@ -60,12 +60,6 @@ ${values.firstName} ${values.lastName}`;
     )}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
   };
-  useEffect(() => {
-    document.body.style.overflow = isModalOpen ? "hidden" : "auto";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isModalOpen]);
 
   return (
     <div
@@ -80,7 +74,7 @@ ${values.firstName} ${values.lastName}`;
         alt=""
       />
       <Toaster richColors />
-      <div className="bg-[#FFFFFF]  rounded-2xl md:rounded-[30px] px-5 py-1 lg:py-5 lg:px-10 gap-0 flex flex-col font-hellix justify-start items-start md:h-[min-content] lg:h-[517px] h-4/5 w-11/12 max-w-lg lg:max-w-2xl">
+      <div className="bg-[#FFFFFF]  rounded-2xl md:rounded-[30px] px-5 py-1 lg:py-5 lg:px-10 gap-0 flex flex-col font-hellix justify-start items-start md:h-[min-content] lg:h-[517px] h-min w-11/12 max-w-lg lg:max-w-2xl">
         <div className="w-full gap-2.5 flex flex-col md:h-[90px] justify-between">
           <h1 className="text-start text-xl lg:text-[32px] lg:leading-[38.41px] md:leading-[38.41px] text-[#24536E] font-hellixBold">
             Contact Us
@@ -104,7 +98,7 @@ ${values.firstName} ${values.lastName}`;
           }}
         >
           {(formik) => (
-            <Form className="w-full flex flex-col h-full gap-0.5 md:gap-3 py-2 justify-evenly  lg:gap-4">
+            <Form className="w-full flex flex-col  h-full gap-0.5 md:gap-3 py-2 justify-evenly  lg:gap-4">
               <div className="flex flex-col w-full lg:h-[72px] lg:flex-row gap-1.5 lg:gap-4">
                 <div className="flex flex-col w-full">
                   <div className="flex flex-col w-full gap-1">
@@ -131,11 +125,14 @@ ${values.firstName} ${values.lastName}`;
                       }}
                     />
                   </div>
-                  {formik.touched.firstName && formik.errors.firstName ? (
-                    <div className="text-red-500 text-[8px] sm:text-[10px] lg:text-xs">
-                      {formik.errors.firstName}
-                    </div>
-                  ) : null}
+                  <div className="h-[20px] md:h-[24px]">
+                    {" "}
+                    {formik.touched.firstName && formik.errors.firstName ? (
+                      <div className="text-red-500 text-[10px] lg:text-xs">
+                        {formik.errors.firstName}
+                      </div>
+                    ) : null}
+                  </div>
                 </div>
                 <div className="flex flex-col w-full">
                   <div className="flex flex-col w-full gap-1">
@@ -162,11 +159,13 @@ ${values.firstName} ${values.lastName}`;
                       }}
                     />
                   </div>
-                  {formik.touched.lastName && formik.errors.lastName ? (
-                    <div className="text-red-500 text-[8px] sm:text-[10px] lg:text-xs">
-                      {formik.errors.lastName}
-                    </div>
-                  ) : null}
+                  <div className="h-[20px] md:h-[24px]">
+                    {formik.touched.lastName && formik.errors.lastName ? (
+                      <div className="text-red-500 text-[10px] lg:text-xs">
+                        {formik.errors.lastName}
+                      </div>
+                    ) : null}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col w-full lg:h-[75px] ">
@@ -194,11 +193,13 @@ ${values.firstName} ${values.lastName}`;
                     }}
                   />
                 </div>
-                {formik.touched.email && formik.errors.email ? (
-                  <div className="text-red-500 text-[8px] sm:text-[10px] lg:text-xs">
-                    {formik.errors.email}
-                  </div>
-                ) : null}
+                <div className="h-[20px] md:h-[24px]">
+                  {formik.touched.email && formik.errors.email ? (
+                    <div className="text-red-500 text-[10px] lg:text-xs">
+                      {formik.errors.email}
+                    </div>
+                  ) : null}
+                </div>
               </div>
 
               <div className="flex flex-col w-full">
@@ -226,11 +227,13 @@ ${values.firstName} ${values.lastName}`;
                     }}
                   />
                 </div>
-                {formik.touched.comments && formik.errors.comments ? (
-                  <div className="text-red-500 text-[8px] sm:text-[10px] lg:text-xs">
-                    {formik.errors.comments}
-                  </div>
-                ) : null}
+                <div className="h-[20px] md:h-[24px]">
+                  {formik.touched.comments && formik.errors.comments ? (
+                    <div className="text-red-500 text-[10px] lg:text-xs">
+                      {formik.errors.comments}
+                    </div>
+                  ) : null}
+                </div>
               </div>
 
               <ButtonWrapper

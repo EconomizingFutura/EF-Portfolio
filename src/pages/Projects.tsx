@@ -105,11 +105,7 @@ const Projects: React.FC = () => {
   return (
     <div className=" font-hellix min-h-screen justify-center relative  w-full flex flex-col overflow-x-hidden">
       <div ref={mainSectionRef}>
-        <Header
-          width={"xl:w-[1107px]"}
-          handleShowForms={handleToggle}
-          background={backgroundColor}
-        />
+        <Header handleShowForms={handleToggle} background={backgroundColor} />
       </div>
       <div className="xl:right-8 xl:bottom-8 lg:right-8 right-5 bottom-5 z-50 fixed">
         <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
@@ -124,7 +120,7 @@ const Projects: React.FC = () => {
       )}
       <div
         ref={filterSectionRef}
-        className=" flex-1 py-24 lg:py-24 xl:px-0 px-7 h-min justify-center items-center xl:mx-auto xl:w-[1107px]"
+        className=" flex-1 py-24 lg:py-24 lg:px-12 xl:px-0 px-7 h-min justify-center items-center xl:mx-auto xl:w-[1107px]"
       >
         {/* glows */}
         <div
@@ -174,10 +170,10 @@ const Projects: React.FC = () => {
           />
         </div>
       </div>
-      <div className=" md:h-[672px] relative flex justify-center items-center w-full px-5 bg-[#F4FAFF] md:px-0">
+      <div className=" md:h-[672px] relative flex justify-center items-center w-full px-5 bg-[#F4FAFF] lg:px-12 xl:px-0">
         {" "}
         <img src={Boxes} alt="" className="absolute right-0 top-1 " />
-        <div className="h-min bg-[#ffffff]  lg:h-[512px] w-full max-w-[1136px] rounded-sm md:rounded-3xl flex justify-center items-center p-0 sm:p-6 md:p-8 lg:p-5">
+        <div className="h-min bg-[#ffffff] z-10  lg:h-[512px] w-full max-w-[1136px] rounded-sm md:rounded-3xl flex justify-center items-center p-0 sm:p-6 md:p-8 lg:p-5">
           <div className="flex flex-col  md:flex-row py-5 justify-between items-center relative h-full w-full rounded-[25px] origin-top">
             <div className="w-full relative  md:w-[733px] lg:w-[433px] md:h-[348px] flex flex-col items-start gap-10 ">
               <img

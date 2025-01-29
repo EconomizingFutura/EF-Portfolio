@@ -50,7 +50,7 @@ const SECTIONS: Section[] = [
     content: [
       {
         id: 1,
-        heading: "Delivering Excellence Through Project-Based Outsourcing",
+        heading: "Project-Based Outsourcing",
         info: "We are committed to delivering high-quality results by following a structured, project-based outsourcing model. This ensures efficiency, focus on your objectives, and precise execution from start to finish.",
       },
       {
@@ -147,10 +147,6 @@ const Clients: React.FC = () => {
 
   const activeSection = SECTIONS[toggle];
 
-  const addPadding = activeSection.content[0];
-
-  console.log(activeSection.id === 2, addPadding);
-
   return (
     <div
       ref={ref}
@@ -173,31 +169,19 @@ const Clients: React.FC = () => {
                     <Arrows />
                   </div>
                   <p
-                    className={` ${
-                      section.id === 1 && activeSection.id === 2
-                        ? " lg:ps-5 lg:translate-x-1.5 xl:-translate-x-2.5 "
-                        : ""
-                    }relative z-10 pr-5 text-center m-auto text-white font-hellixSemiBold text-xl`}
+                    className={`relative z-10 pr-5 text-center m-auto text-white font-hellixSemiBold text-xl`}
                   >
                     Step {index + 1}
                   </p>
                 </div>
                 <h2
-                  className={` font-hellixSemiBold text-[17px] ${
-                    section.id === 1 && activeSection.id === 2
-                      ? " lg:ms-10 xl:ms-0"
-                      : ""
-                  } lg:text-2xl text-[#031924] md:max-w-[80%]`}
+                  className={` font-hellixSemiBold text-[17px]  lg:text-2xl text-[#031924] md:max-w-[80%]`}
                 >
                   {section.heading}
                 </h2>
               </div>
               <p
-                className={`text-[14px] lg:text-[15px] flex-grow-0 text-[#999999] font-hellixMedium mt-3  ${
-                  section.id === 1 && activeSection.id === 2
-                    ? " md:mt-0"
-                    : "md:mt-4 "
-                }  `}
+                className={`text-[14px] lg:text-[15px] flex-grow-0 text-[#999999] font-hellixMedium mt-3 `}
               >
                 {section.info}
               </p>
