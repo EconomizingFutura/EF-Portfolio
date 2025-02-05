@@ -38,7 +38,7 @@ const TermsAndConditions: React.FC = () => {
   return (
     <div className=" flex flex-col w-full min-h-screen ">
       <Header handleShowForms={handleToggle} background={backgroundColor} />
-      <section className="flex-1 flex flex-col my-24 font-hellix px-5 sm:px-7 md:px-8 lg:px-12 xl:w-[1246px] xl:mx-auto xl:px-10 gap-5">
+      <section className="flex-1 flex flex-col my-24 px-5 sm:px-7 md:px-8 lg:px-16 xl:w-[1246px] xl:mx-auto xl:px-11 gap-6 text-justify">
         <div className="flex flex-col gap-2">
           <h1 className="font-hellixBold text-lg md:text-2xl leading-5">
             Terms and Conditions for Economizing Futura

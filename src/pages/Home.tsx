@@ -289,7 +289,7 @@ const Home: React.FC = () => {
         ref={faqSection}
         className="bg-[#F4F8FB] min-h-[500px] sm:min-h-[600px] xl:h-[699px] w-full font-hellix py-8 sm:py-12 xl:py-16"
       >
-        <div className="container mx-auto max-w-[1120px] h-auto flex flex-col lg:flex-row justify-between gap-8 lg:gap-12 px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-[1130px] h-auto flex flex-col lg:flex-row justify-between gap-8 lg:gap-12 px-4 sm:px-6 lg:px-14 xl:px-0">
           {/* Left content */}
           <div className="flex flex-col items-center lg:items-start space-y-6 lg:max-w-[360px]">
             <h1 className="text-[#032435] font-hellixBold text-2xl sm:text-3xl lg:text-[38px] leading-tight md:leading-[45.61px] max-w-[360px]">

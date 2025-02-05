@@ -36,7 +36,7 @@ const PrivacyPolicy: React.FC = () => {
   return (
     <div className=" flex flex-col w-full min-h-screen ">
       <Header handleShowForms={handleToggle} background={backgroundColor} />
-      <section className="flex-1 flex flex-col my-24 px-5 sm:px-7 md:px-8 lg:px-12 xl:w-[1246px] xl:mx-auto xl:px-9 gap-6">
+      <section className="flex-1 flex flex-col my-24 px-5 sm:px-7 md:px-8 lg:px-16 xl:w-[1246px] xl:mx-auto xl:px-11 gap-6 text-justify">
         <div className="flex flex-col gap-4">
           <h1 className="font-hellixBold text-lg md:text-2xl">
             Privacy Policy for Economizing Futura

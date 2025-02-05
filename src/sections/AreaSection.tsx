@@ -101,7 +101,7 @@ const AreaSection: React.FC = () => {
   return (
     <div className="relative font-hellix" ref={lineRef}>
       <div
-        className="absolute left-7 sm:left-10 lg:left-[calc(50%-455px)] xl:left-[calc(50%-525px)] w-1 transition-all duration-300 top-0 h-[calc(100%-128px)] md:h-[calc(100%-90px)]"
+        className="absolute left-7 sm:left-10 lg:left-[calc(50%-460px)] xl:left-[calc(50%-555px)] w-1 transition-all duration-300 top-0 h-[calc(100%-128px)] md:h-[calc(100%-90px)]"
         style={{
           top: "15px",
           // height: "calc(100% - 180px)",
@@ -120,7 +120,7 @@ const AreaSection: React.FC = () => {
         <div
           className="w-full px-4 flex  gap-3 relative
                      sm:px-6 sm:gap-4 
-                    xl:max-h-[465px] xl:h-[405px] lg:max-h-[355px] lg:h-[355px]  lg:px-8 lg:gap-8 xl:gap-y-0"
+                    xl:max-h-[465px] xl:h-[405px] lg:max-h-[355px] lg:h-[355px]  lg:px-0 lg:gap-10 xl:gap-y-0"
           key={a.id}
           data-section-id={a.id}
         >
@@ -152,7 +152,7 @@ const AreaSection: React.FC = () => {
                          md:max-h-[325px] md:h-[325px]
                          lg:max-h-[465px] lg:h-[250px] xl:h-[285px] 
                          md:flex-row md:justify-start md:items-start  lg:items-center lg:justify-between lg:max-w-7xl lg:mx-auto
-                         xl:gap-12"
+                         xl:gap-24 "
           >
             <div
               className="flex flex-col gap-7
