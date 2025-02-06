@@ -74,12 +74,12 @@ ${values.firstName} ${values.lastName}`;
         alt=""
       />
       <Toaster richColors />
-      <div className="bg-[#FFFFFF]  rounded-2xl md:rounded-[30px] px-5 py-1 lg:py-5 lg:px-10 gap-0 flex flex-col font-hellix justify-start items-start md:h-[min-content] lg:h-[517px] h-min w-11/12 max-w-lg lg:max-w-2xl">
+      <div className="bg-[#FFFFFF]  rounded-2xl md:rounded-[30px] px-5 py-1 lg:py-5 lg:px-12 gap-0 flex flex-col font-hellix justify-start items-start md:h-[min-content] lg:h-[517px] h-min w-11/12 max-w-lg lg:max-w-2xl">
         <div className="w-full gap-2.5 flex flex-col md:h-[90px] justify-between">
           <h1 className="text-start text-xl lg:text-[32px] lg:leading-[38.41px] md:leading-[38.41px] text-[#24536E] font-hellixBold">
             Contact Us
           </h1>
-          <p className="font-hellixMedium text-xs lg:text-base leading-[19.2px] lg:leading-[19.2px] text-[#031924]">
+          <p className="font-hellixMedium text-xs lg:text-base leading-[19.2px] lg:leading-[19.2px] text-[#031924] text-opacity-90">
             Please provide your email address so our team can get in touch with
             you. For any issues, email us at{" "}
             <span className=" text-primary cursor-pointer hover:underline">
@@ -112,7 +112,7 @@ ${values.firstName} ${values.lastName}`;
                       id="firstName"
                       type="text"
                       {...formik.getFieldProps("firstName")}
-                      className="border-[#DDE4EE] bg-[#F9FBFC] focus:outline-none border resize-none placeholder:text-[#999999] rounded-md text-[#999999] lg:rounded-lg lg:p-3 px-2 p-1.5"
+                      className="border-[#DDE4EE] bg-[#F9FBFC] focus:outline-none border resize-none placeholder:text-[#999999] lg:placeholder:text-base rounded-md text-[#999999] lg:rounded-lg lg:p-3 px-2 p-1.5"
                       placeholder="First Name"
                       onKeyDown={(e) => {
                         if (
@@ -146,7 +146,7 @@ ${values.firstName} ${values.lastName}`;
                       id="lastName"
                       type="text"
                       {...formik.getFieldProps("lastName")}
-                      className="border-[#DDE4EE] bg-[#F9FBFC] focus:outline-none border resize-none rounded-md placeholder:text-[#999999] text-[#999999] lg:rounded-lg lg:p-3 px-2 p-1.5"
+                      className="border-[#DDE4EE] bg-[#F9FBFC] focus:outline-none border resize-none rounded-md placeholder:text-[#999999] lg:placeholder:text-base text-[#999999] lg:rounded-lg lg:p-3 px-2 p-1.5"
                       placeholder="Last Name"
                       onKeyDown={(e) => {
                         if (
@@ -181,7 +181,7 @@ ${values.firstName} ${values.lastName}`;
                     type="email"
                     {...formik.getFieldProps("email")}
                     placeholder="xyz@gmail.com"
-                    className="border-[#DDE4EE] bg-[#F9FBFC] focus:outline-none border resize-none placeholder:text-[#999999] rounded-md lg:rounded-lg lg:px-3 lg:p-0 px-2 p-1.5 text-[#999999] lg:h-12"
+                    className="border-[#DDE4EE] bg-[#F9FBFC] focus:outline-none border resize-none placeholder:text-[#999999] rounded-md lg:rounded-lg lg:px-3 lg:p-0 px-2 p-1.5 text-[#999999] lg:h-12 lg:placeholder:text-base"
                     onKeyDown={(e) => {
                       if (
                         !/^[A-Za-z0-9@.]+$/.test(e.key) &&
@@ -213,8 +213,8 @@ ${values.firstName} ${values.lastName}`;
                   <textarea
                     id="comments"
                     {...formik.getFieldProps("comments")}
-                    className="w-full rounded-md bg-[#F9FBFC] border-gray-300 px-3  lg:py-2 text-[#999999] focus:outline-none border resize-none"
-                    placeholder="Enter your message"
+                    className="w-full rounded-md bg-[#F9FBFC] border-[#DDE4EE] px-3  lg:py-2 text-[#999999] focus:outline-none border resize-none lg:placeholder:text-base lg:h-24"
+                    placeholder="Enter your comments"
                     rows={3.5}
                     onKeyDown={(e) => {
                       if (

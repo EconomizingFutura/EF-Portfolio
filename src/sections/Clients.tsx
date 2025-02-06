@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import "../style.css";
@@ -125,31 +125,33 @@ ToggleSection.displayName = "ToggleSection";
 
 const Clients: React.FC = () => {
   const [toggle, setToggle] = useState<number>(0);
-  const { ref, inView } = useInView({
-    threshold: 0.5,
-  });
-
+  const [resetCounter, setResetCounter] = useState(0);
+  const { ref, inView } = useInView({ threshold: 0.5 });
+  const intervalRef = useRef<NodeJS.Timeout>();
   useEffect(() => {
-    let intervalId: NodeJS.Timeout | undefined;
     if (inView) {
-      intervalId = setInterval(() => {
-        setToggle((prevToggle) => (prevToggle === 0 ? 1 : 0));
+      intervalRef.current = setInterval(() => {
+        setToggle((prev) => (prev === 0 ? 1 : 0));
       }, ANIMATION_INTERVAL);
-    } else {
-      clearInterval(intervalId);
     }
-    return () => clearInterval(intervalId);
-  }, [inView]);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [inView, resetCounter]);
 
   const handleToggle = useCallback((index: number) => {
     setToggle(index);
   }, []);
 
   const activeSection = SECTIONS[toggle];
-
+  const handleMouseEnter = () => {
+    setToggle(0);
+    setResetCounter((prev) => prev + 1);
+  };
   return (
     <div
       ref={ref}
+      onMouseEnter={handleMouseEnter}
       className="flex flex-col lg:flex-row  xl:space-x-2 w-11/12 xl:w-[1137px] justify-center"
     >
       <ToggleSection toggle={toggle} setToggle={handleToggle} inView={inView} />

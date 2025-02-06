@@ -7,8 +7,8 @@ interface onClickProps {
 }
 const HeroSection: React.FC<onClickProps> = ({ onClickButton }) => {
   return (
-    <div className="font-hellix lg:flex lg:justify-between  lg:h-full mx-auto  lg:max-w-[1840px] w-full">
-      <div className="w-full lg:my-auto  xl:w-full p-2 sm:p-4 lg:p-0 lg:ms-6 xl:mx-16 lg:flex-row lg:justify-end  lg:items-end flex h-min gap-10 ">
+    <div className="font-hellix lg:flex lg:justify-between lg:h-full mx-auto  lg:max-w-[1520px] w-full">
+      <div className="w-full lg:my-auto  xl:w-full p-2 sm:p-4 lg:p-0 lg:ms-6 lg:mx-5 xl:mx-14  lg:flex-row lg:justify-end  lg:items-end flex h-min gap-10 ">
         <div className="h-min gap-6 xl:justify-items-end flex flex-col lg:ml-auto lg:px-10  lg:w-[485px] ">
           <h1 className=" font-hellixBold text-[32px] leading-[38.41px] lg:text-[40px] lg:leading-[48.81px] text-[#24536E]">
             Creative Solutions for a Brighter Future
@@ -44,7 +44,7 @@ const HeroSection: React.FC<onClickProps> = ({ onClickButton }) => {
           <img
             src={YellowSquare}
             alt=""
-            className="absolute hidden xl:block z-20 md:hidden  lg:bottom-24 lg:right-72 xl:bottom-5 xl:right-96 xl:translate-x-10"
+            className="absolute hidden lg:block z-20 md:hidden  lg:bottom-24 lg:right-72 xl:bottom-5 xl:right-96 xl:translate-x-10"
           />
         </div>
       </div>

@@ -76,11 +76,11 @@ ${values.firstName} ${values.lastName}`;
       className={`${
         !showForms
           ? "h-[56px] w-[56px]"
-          : "h-[495px]   z-[9999] lg:h-[490px] xl:h-[540px] w-[275px] md:w-[290px] lg:w-[350px]"
-      } flex flex-col justify-between items-end font-hellix`}
+          : "h-[495px]   z-[9999] lg:h-[490px] xl:h-[540px]  w-[290px] lg:w-[350px]"
+      } flex flex-col justify-between items-end lg:gap-2 font-hellix`}
     >
       {showForms && (
-        <div className="rounded-xl p-2.5 lg:px-5 lg:py-2 shadow-enquery flex flex-col justify-start items-start w-full bg-[#ffffff]">
+        <div className="rounded-xl p-2.5 lg:px-5 lg:py-2.5 shadow-enquery flex flex-col justify-start items-start w-full bg-[#ffffff] px-5">
           <div
             className="relative flex items-center cursor-pointer"
             onMouseEnter={() => setShowTooltip(true)}
@@ -114,7 +114,7 @@ ${values.firstName} ${values.lastName}`;
             onSubmit={handleSubmit}
           >
             {({ errors, touched, handleChange, handleBlur, values }) => (
-              <Form className="w-full flex flex-col gap-y-0.5 xl:gap-y-2.5">
+              <Form className="w-full flex flex-col gap-y-0.5 xl:gap-y-2 lg:py-1">
                 <div className="min-h-[75px] relative">
                   <label
                     htmlFor="firstName"
@@ -139,7 +139,7 @@ ${values.firstName} ${values.lastName}`;
                         e.preventDefault();
                       }
                     }}
-                    className="w-full xl:h-[44px] h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
+                    className="w-full xl:h-[44px] lg:py-0 h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
                   />
                   {errors.firstName && touched.firstName && (
                     <p className="absolute text-red-500 text-[10px]  lg:text-xs ">
@@ -171,7 +171,7 @@ ${values.firstName} ${values.lastName}`;
                         e.preventDefault();
                       }
                     }}
-                    className="w-full xl:h-[44px] h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
+                    className="w-full xl:h-[44px] lg:py-0 h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
                   />
                   {errors.lastName && touched.lastName && (
                     <p className="absolute text-red-500 text-[10px]  lg:text-xs ">
@@ -204,7 +204,7 @@ ${values.firstName} ${values.lastName}`;
                         e.preventDefault();
                       }
                     }}
-                    className="w-full xl:h-[44px] h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
+                    className="w-full xl:h-[44px] lg:py-0 h-10 px-3 py-2 bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none "
                   />
                   {errors.email && touched.email && (
                     <p className="absolute text-red-500 text-[10px]  lg:text-xs ">
@@ -237,7 +237,7 @@ ${values.firstName} ${values.lastName}`;
                         e.preventDefault();
                       }
                     }}
-                    className="w-full px-3 py-1  bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none  resize-none"
+                    className="w-full lg:py-0  px-3 py-2  bg-[#F9FBFC] border border-[#DDE4EE] rounded-lg text-[#999999] placeholder:text-[#999999] focus:outline-none  resize-none"
                   />
                   {errors.comments && touched.comments && (
                     <p className="absolute -bottom-2 text-red-500 text-[10px]  lg:text-xs ">
@@ -247,7 +247,7 @@ ${values.firstName} ${values.lastName}`;
                 </div>
 
                 <ButtonWrapper
-                  className="bg-[#20B2FF] select-none h-[35px] md:h-[40px] rounded-lg font-hellixSemiBold text-white text-base w-full"
+                  className="bg-[#20B2FF] select-none h-[35px] md:h-[40px] rounded-lg font-hellixSemiBold text-white text-base w-full lg:mb-2"
                   label="Submit"
                   type={true}
                   disabled={isLoading}
