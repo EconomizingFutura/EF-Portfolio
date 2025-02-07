@@ -76,8 +76,8 @@ ${values.firstName} ${values.lastName}`;
       className={`${
         !showForms
           ? "h-[56px] w-[56px]"
-          : "h-[495px]   z-[9999] lg:h-[490px] xl:h-[540px]  w-[290px] lg:w-[350px]"
-      } flex flex-col justify-between items-end lg:gap-2 font-hellix`}
+          : "h-[500px] md:h-[490px]   z-[9999] lg:h-[490px] xl:h-[540px]  w-[290px] lg:w-[350px]"
+      } flex flex-col justify-between items-end gap-2 font-hellix`}
     >
       {showForms && (
         <div className="rounded-xl p-2.5 lg:px-5 lg:py-2.5 shadow-enquery flex flex-col justify-start items-start w-full bg-[#ffffff] px-5">
@@ -114,7 +114,7 @@ ${values.firstName} ${values.lastName}`;
             onSubmit={handleSubmit}
           >
             {({ errors, touched, handleChange, handleBlur, values }) => (
-              <Form className="w-full flex flex-col gap-y-0.5 xl:gap-y-2 lg:py-1">
+              <Form className="w-full flex flex-col gap-y-0.5 md:gap-y-0 xl:gap-y-2 lg:py-1">
                 <div className="min-h-[75px] relative">
                   <label
                     htmlFor="firstName"
