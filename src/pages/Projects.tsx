@@ -95,7 +95,7 @@ const Projects: React.FC = () => {
         <h1 className=" lg:w-[130px] sm:w-1/4 font-hellixBold inline-block text-primary text-[18px]  xl:text-[24px]">
           {detail + ":"}
         </h1>
-        <p className=" list-item sm:w-2/3 lg:w-[947px] text-[#000000] font-hellixMedium text-[12px] sm:text-[16px]  lg:text-[20px] leading-5 md:leading-7">
+        <p className=" list-item sm:w-2/3 lg:w-[947px] text-[#000000] font-hellixMedium text-[12px] sm:text-[16px]  lg:text-[20px] leading-5 md:leading-7 text-justify">
           {detailsContent}
         </p>{" "}
       </div>
@@ -143,15 +143,15 @@ const Projects: React.FC = () => {
             <h1 className=" text-[#24536E] font-hellixBold leading-[40px] xl:leading-[52.81px] text-[24px] xl:text-[44px]">
               {projectDetails.projectName}
             </h1>
-            <p className=" text-[#000000] font-hellixMedium text-[12px] sm:text-[16px] xl:text-[20px] leading-5 md:leading-7">
+            <p className=" text-[#000000] font-hellixMedium text-[12px] sm:text-[16px] xl:text-[20px] leading-5 md:leading-7 text-justify">
               {projectDetails.briefNote}
             </p>
           </div>
-          <div className="w-full  py-10 relative">
+          <div className="w-full lg:h-[640px]  py-10 relative">
             <img
               src={projectDetails.projectBanner}
               alt=""
-              className="w-full h-full object-contain"
+              className="w-full h-full"
             />
           </div>
         </div>
