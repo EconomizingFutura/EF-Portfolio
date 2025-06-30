@@ -77,7 +77,9 @@ import finalAeini from "./finalAeini.svg";
 import finalTreva from "./finalTreva.svg";
 import Next from "./Next.svg";
 import Previous from "./Previous.svg";
+import AR_TAX from "./AR_TAX.json";
 export {
+  AR_TAX,
   Next,
   Previous,
   PH,

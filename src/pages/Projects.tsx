@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { EnqueryModal, ContactModal } from "../modal/index";
 import { useNavigate, useParams } from "react-router";
 import { projectsInfo } from "../constants/constants";
@@ -79,9 +79,14 @@ const Projects: React.FC = () => {
     (a) => a.id === Number(params.id)
   )[0];
 
-  const nextProject = projectsInfo.filter((a) => a.id !== Number(params.id))[0];
-
-  console.log(nextProject);
+  const nextProject = useMemo(() => {
+    const filteredProjects = projectsInfo.filter(
+      (a) => a.id !== Number(params.id)
+    );
+    const randomIndex = Math.floor(Math.random() * filteredProjects.length);
+    return filteredProjects[randomIndex];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.id, projectsInfo]);
 
   const Contents = ({
     detail,

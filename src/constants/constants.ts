@@ -25,6 +25,7 @@ import {
   Neo,
   finalTreva,
   finalAeini,
+  AR_TAX,
 } from "../assets/index";
 export const navLinks = [
   {
@@ -92,6 +93,22 @@ export const projectsInfo: ProjectItem[] = [
       "Many professionals struggle with managing workflows across platforms like GitHub and Google Drive, leading to inefficiencies and wasted time. Without seamless integration, teams face disjointed processes and a lack of clear data visualisation. There’s a need for a unified solution that can streamline workflows, provide secure communication, and offer insights through analytics to boost productivity. Treva bridges this gap by bringing these tools together, ensuring a smooth, integrated experience.",
     services:
       "Treva offers end-to-end workflow management with personalized workflows, secure real-time chat, and conversation history tracking. It features data visualization via Chart.js, ensuring actionable insights. Additionally, the platform supports CRUD operations and integrates third-party tools like GitHub and Google Drive for a more cohesive and efficient workflow.",
+  },
+  {
+    id: 3,
+    lottie: AR_TAX,
+    projectName: "AR Tax Solutions",
+    description:
+      "AR Tax Solutions is a digital platform that simplifies tax filing, billing, and financial management for individuals and businesses.Users are connected with certified Chartered Accountants for expert guidance and real-time compliance.Secure, efficient, and tailored to meet your complete tax and billing needs",
+    image: Aenini,
+
+    projectBanner: finalTreva,
+    briefNote:
+      "AR Tax Solutions is a robust digital platform designed to streamline tax management for individuals, professionals, and businesses. The application facilitates secure tax preparation, filing, and document organization, while connecting users directly with certified Chartered Accountants for expert support and real-time compliance oversight. With an intuitive interface and personalized guidance, AR Tax Solutions ensures accurate, timely, and hassle-free tax handling tailored to each user's needs.",
+    problemStatement:
+      "Individuals, freelancers, and small businesses often struggle with the complexities of tax filing, billing, and regulatory compliance. Traditional methods rely heavily on manual processes, scattered records, and minimal professional support—leading to inefficiencies, inaccuracies, and increased risk of penalties. Many users lack access to reliable Chartered Accountants, resulting in missed deadlines and non-compliance with evolving tax laws. Additionally, billing management is often disconnected from tax processes, causing confusion in financial planning. There is a growing demand for a centralized, secure platform that integrates tax filing, expert consultation, and billing management in a streamlined, user-friendly interface. An accessible solution is needed to bridge the gap between users and professional-grade financial oversight",
+    services:
+      "AR Tax Solutions offers an all-in-one platform that simplifies tax filing, billing, and compliance for individuals and businesses. It connects users directly with certified Chartered Accountants for expert support and real-time compliance management. The app streamlines invoicing and billing alongside tax documentation, reducing errors and saving time. Secure cloud storage keeps all financial documents organized and accessible. Automated reminders help users meet deadlines and stay compliant with changing tax laws. With its intuitive interface, AR Tax Solutions makes professional-grade financial management accessible and hassle-free.",
   },
 ];
 
