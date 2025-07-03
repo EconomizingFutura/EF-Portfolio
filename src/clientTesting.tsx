@@ -1,0 +1,35 @@
+import React from "react";
+
+interface clientTestingProps {
+  width: string;
+  height: string;
+  className: string;
+}
+
+const clientTesting: React.FC<clientTestingProps> = ({
+  width,
+  height,
+  className,
+}) => {
+  return (
+    <div className={className}>
+      <svg
+        width={width}
+        height={height}
+        viewBox="0 0 701 142"
+        fill="red"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M701 10C701 4.47715 696.523 0 691 0H157C151.477 0 147 4.47715 147 10V46C147 51.5229 142.523 56 137 56H10C4.47715 56 0 60.4772 0 66V132C0 137.523 4.47717 142 10 142H691C696.523 142 701 137.523 701 132V10Z"
+          fill="blue"
+          //   white
+        />
+      </svg>
+    </div>
+  );
+};
+
+export default clientTesting;
