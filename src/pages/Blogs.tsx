@@ -7,6 +7,7 @@ import { blogs } from "../constants/constants";
 import { ContactData } from "../api/ContactAPI";
 import { contactAPI } from "../api/ContactAPI";
 import { toast, Toaster } from "sonner";
+import { Helmet } from "react-helmet";
 
 const sectionColors = ["#c6ebff", "#F4F8FB"];
 
@@ -43,7 +44,6 @@ const Blogs: React.FC = () => {
     try {
       const response = await contactAPI(data, setIsLoading);
       toast.success(response.message);
-      console.log(response);
     } catch (error) {
       console.log(error);
     } finally {
@@ -75,102 +75,112 @@ const Blogs: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen mt-16 sm:mt-0 flex flex-col font-hellix">
-      <Header
-        width={"xl:w-[1139px]"}
-        handleShowForms={handleToggle}
-        background={backgroundColor}
-      />
-      <Toaster richColors />
-
-      {/* Hero Section */}
-      <div
-        ref={mainSectionRef}
-        className="bg-[#BCE7FF] h-48 relative sm:h-60 md:h-72 lg:h-[322px] flex justify-between items-center"
-        style={{
-          backgroundImage: `url(${new URL(wave, window.location.origin)})`,
-          backgroundRepeat: "repeat",
-          backgroundPositionY: 0,
-          backgroundPositionX: "0",
-          backgroundColor: "#C8EBFF",
-          backgroundSize: "50% 50%",
-        }}
-      >
-        <img
-          src={WaveLeft}
-          alt=""
-          className="w-12 md:w-auto"
-          draggable={false}
+    <>
+      <Helmet>
+        <title>Blog | Economizing Futura</title>
+        <meta
+          name="description"
+          content="Read insights, case studies, and expert articles from Economizing Futura. Discover how we solve business problems with technology."
         />
-        <h1 className="text-[#24536E] font-hellixBold text-3xl sm:text-4xl md:text-5xl text-center px-4">
-          Blog
-        </h1>
-        <img
-          src={WaveRight}
-          alt=""
-          className="w-12 md:w-auto lg:pe-28"
-          draggable={false}
+        <link rel="canonical" href="https://economizingfutura.com/blogs" />
+      </Helmet>
+      <div className="min-h-screen mt-16 sm:mt-0 flex flex-col font-hellix">
+        <Header
+          width={"xl:w-[1139px]"}
+          handleShowForms={handleToggle}
+          background={backgroundColor}
         />
-      </div>
+        <Toaster richColors />
 
-      <div className="px-8 py-4 w-full max-w-[1140px] bg-[#FFFFFF] md:flex items-center justify-between mx-auto rounded-2xl mt-10 hidden absolute top-1/3 right-0 left-0 ">
-        <div className="flex items-center gap-4 text-[#111111] text-[18px] font-hellixMedium">
-          <span>Filter By :</span>
-          <div className="flex gap-3 lg:h-[30px] lg:w-[454px] ">
-            {blogsFilter.map((blog) => (
-              <button
-                key={blog.id}
-                className={`rounded h-[30px] px-2.5 ${
-                  blog.header === activeFilter
-                    ? "bg-[#20B2FF] text-white "
-                    : "bg-[#F5F5F5]"
-                }`}
-                onClick={() => setActiveFilter(blog.header)}
-              >
-                {blog.header}
-              </button>
-            ))}
+        {/* Hero Section */}
+        <div
+          ref={mainSectionRef}
+          className="bg-[#BCE7FF] h-48 relative sm:h-60 md:h-72 lg:h-[322px] flex justify-between items-center"
+          style={{
+            backgroundImage: `url(${new URL(wave, window.location.origin)})`,
+            backgroundRepeat: "repeat",
+            backgroundPositionY: 0,
+            backgroundPositionX: "0",
+            backgroundColor: "#C8EBFF",
+            backgroundSize: "50% 50%",
+          }}
+        >
+          <img
+            src={WaveLeft}
+            alt=""
+            className="w-12 md:w-auto"
+            draggable={false}
+          />
+          <h1 className="text-[#24536E] font-hellixBold text-3xl sm:text-4xl md:text-5xl text-center px-4">
+            Blog
+          </h1>
+          <img
+            src={WaveRight}
+            alt=""
+            className="w-12 md:w-auto lg:pe-28"
+            draggable={false}
+          />
+        </div>
+
+        <div className="px-8 py-4 w-full max-w-[1140px] bg-[#FFFFFF] md:flex items-center justify-between mx-auto rounded-2xl mt-10 hidden absolute top-1/3 right-0 left-0 ">
+          <div className="flex items-center gap-4 text-[#111111] text-[18px] font-hellixMedium">
+            <span>Filter By :</span>
+            <div className="flex gap-3 lg:h-[30px] lg:w-[454px] ">
+              {blogsFilter.map((blog) => (
+                <button
+                  key={blog.id}
+                  className={`rounded h-[30px] px-2.5 ${
+                    blog.header === activeFilter
+                      ? "bg-[#20B2FF] text-white "
+                      : "bg-[#F5F5F5]"
+                  }`}
+                  onClick={() => setActiveFilter(blog.header)}
+                >
+                  {blog.header}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between border-[1px] border-[#9CA4B5] rounded-[4px] h-[44px] w-[223px] max-w-[223px] text-[16px] placeholder:text-[#999999]">
+            <img src={search} alt="" className="px-2" />
+            <input
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              placeholder="Search"
+              className="focus:outline-none w-full pe-2"
+              maxLength={20}
+            />
           </div>
         </div>
 
-        <div className="flex items-center justify-between border-[1px] border-[#9CA4B5] rounded-[4px] h-[44px] w-[223px] max-w-[223px] text-[16px] placeholder:text-[#999999]">
-          <img src={search} alt="" className="px-2" />
-          <input
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Search"
-            className="focus:outline-none w-full pe-2"
-            maxLength={20}
+        {/* Blog Cards Section */}
+        <section
+          ref={techSectionRef}
+          className="w-full flex min-h-screen mx-auto bg-[#F4F8FB]  justify-center items-center py-20"
+        >
+          <div className="flex flex-wrap items-center justify-center gap-6 w-full max-w-[1139px]">
+            {blogs.map((a) => (
+              <BlogsCard card={a} key={a.id} />
+            ))}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <Footer />
+        <div className="md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
+          <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
+        </div>
+        {showModal && (
+          <ContactModal
+            isLoading={isLoading}
+            onFormSubmit={handleFormSubmit}
+            isModalOpen={showModal}
+            handleToggle={handleToggle}
           />
-        </div>
+        )}
       </div>
-
-      {/* Blog Cards Section */}
-      <section
-        ref={techSectionRef}
-        className="w-full flex min-h-screen mx-auto bg-[#F4F8FB]  justify-center items-center py-20"
-      >
-        <div className="flex flex-wrap items-center justify-center gap-6 w-full max-w-[1139px]">
-          {blogs.map((a) => (
-            <BlogsCard card={a} key={a.id} />
-          ))}
-        </div>
-      </section>
-
-      {/* Footer */}
-      <Footer />
-      <div className="md:right-10 md:bottom-10 right-5 bottom-5 z-50 fixed">
-        <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
-      </div>
-      {showModal && (
-        <ContactModal
-          isLoading={isLoading}
-          onFormSubmit={handleFormSubmit}
-          isModalOpen={showModal}
-          handleToggle={handleToggle}
-        />
-      )}
-    </div>
+    </>
   );
 };
 

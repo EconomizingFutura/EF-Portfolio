@@ -78,7 +78,9 @@ import finalTreva from "./finalTreva.svg";
 import Next from "./Next.svg";
 import Previous from "./Previous.svg";
 import AR_TAX from "./AR_TAX.json";
+import artaxsolBanner from "./artaxsolBanner.svg"
 export {
+  artaxsolBanner,
   AR_TAX,
   Next,
   Previous,

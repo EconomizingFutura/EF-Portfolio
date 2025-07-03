@@ -12,6 +12,7 @@ interface ProjectItem {
   lottie: object;
   projectBanner: string;
   image: string;
+  pathName: string;
 }
 
 interface ProjectsProps {
@@ -36,7 +37,7 @@ const Projects: React.FC<ProjectsProps> = ({
 
   const scale = useTransform(progress, range, [1, targetScale]);
 
-  const handleClick = (a: number) => navigate(`/projects/${a}`);
+  const handleClick = (a: string) => navigate(`/projects/${a}`);
   const handleRotate = () => setRotate(!rotate);
 
   return (
@@ -68,7 +69,7 @@ const Projects: React.FC<ProjectsProps> = ({
                 className="hover:underline flex gap-2 font-hellixMedium text-[14px] sm:text-[15px] md:text-[17px] leading-6 tracking-[0.002em] text-[#20B2FF]"
                 onMouseEnter={handleRotate}
                 onMouseLeave={handleRotate}
-                onClick={() => handleClick(project.id)}
+                onClick={() => handleClick(project.pathName)}
               >
                 Read More
                 <img

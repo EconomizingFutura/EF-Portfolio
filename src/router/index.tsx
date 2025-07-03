@@ -16,6 +16,7 @@ import {
   Technology,
   TermsAndConditions,
 } from "../pages/index";
+import RouteTracker from "../utilities/utility";
 
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
@@ -37,6 +38,8 @@ export const AppRouter: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
+      <RouteTracker />
+
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/pricing" element={<ReactForms />} /> */}

@@ -34,6 +34,7 @@ import {
   FormLabels,
   ReactInputField,
 } from "../components/index";
+import { Helmet } from "react-helmet";
 
 interface SubSectionLabel {
   label: string;
@@ -826,7 +827,6 @@ const ReactForms: React.FC = () => {
     try {
       const response = await contactAPI(data, setIsLoading);
       toast.success(response.message);
-      console.log(response);
     } catch (error) {
       console.log(error);
     } finally {
@@ -868,168 +868,180 @@ const ReactForms: React.FC = () => {
     }
   };
   return (
-    <div className="Prizing-section flex min-h-screen flex-col font-hellix w-full overflow-hidden">
-      {show && (
-        <ContactModal
-          isLoading={isLoading}
-          onFormSubmit={handleFormSubmit}
-          isModalOpen={show}
-          handleToggle={handleToggle}
+    <>
+      <Helmet>
+        <title>Pricing | Economizing Futura</title>
+        <meta
+          name="description"
+          content="Get a custom quote for your project with Economizing Futura. Fill out our pricing enquiry form and we’ll get back to you with tailored solutions."
         />
-      )}
-      <Toaster richColors />
-      <Header
-        width={"xl:w-[1136px] "}
-        handleShowForms={handleToggle}
-        background={backgroundColor}
-      />
-      <div ref={mainSectionRef}></div>
-      <Toaster richColors />
-      <div
-        style={{ backgroundImage: `url(${PH})` }}
-        className=" h-96 w-full absolute top-0 left-0 opacity-80"
-      ></div>
-      <div
-        ref={mainSectionRef}
-        className=" h-[225px] md:h-[330px] lg:h-[350px] xl:h-[300px] relative w-full flex justify-center items-center "
-      >
+        <link rel="canonical" href="https://economizingfutura.com/pricing" />
+      </Helmet>
+      <div className="Prizing-section flex min-h-screen flex-col font-hellix w-full overflow-hidden">
+        {show && (
+          <ContactModal
+            isLoading={isLoading}
+            onFormSubmit={handleFormSubmit}
+            isModalOpen={show}
+            handleToggle={handleToggle}
+          />
+        )}
+        <Toaster richColors />
+        <Header
+          width={"xl:w-[1136px] "}
+          handleShowForms={handleToggle}
+          background={backgroundColor}
+        />
+        <div ref={mainSectionRef}></div>
+        <Toaster richColors />
         <div
-          className=" absolute top-0 left-0 hidden md:block  w-full h-full"
-          style={{
-            backgroundImage: `url(${Lines})`,
-            backgroundRepeat: "repeat",
-            backgroundPosition: "0 0",
-            backgroundSize: "100% 100%",
-          }}
+          style={{ backgroundImage: `url(${PH})` }}
+          className=" h-96 w-full absolute top-0 left-0 opacity-80"
         ></div>
-        <h1 className=" text-[#24536E] font-hellixBold leading-[52.81px] text-center text-[44px]">
-          Pricing
-        </h1>
-      </div>
-      <section
-        ref={techSectionRef}
-        className="flex-grow w-full xl:w-[1136px] xl:mx-auto z-20 mb-10 flex-col justify-evenly items-center h-min  flex"
-      >
         <div
-          style={{
-            backgroundImage: ` URL(${WavesPriceSection})`,
-          }}
-          className={` ${
-            isFormCompleted
-              ? "lg:h-[328px] xl:max-h-80"
-              : "lg:h-min xl:max-h-min"
-          } flex-grow flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 xl:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative `}
+          ref={mainSectionRef}
+          className=" h-[225px] md:h-[330px] lg:h-[350px] xl:h-[300px] relative w-full flex justify-center items-center "
         >
-          {!isFormCompleted ? (
-            <div className="relative z-10  w-full flex justify-center  items-center  flex-col md:flex-row gap-10">
-              <div className="flex w-full   sm:w-1/2  lg:w-1/2 lg:h-[119px] mb-auto justify-between flex-col px-2 md:px-0 gap-3 lg:gap-6 my-2">
-                <div className=" flex gap-1.5 lg:w-[239px]  w-[200px]">
-                  {Array.from({ length: subData.length }, (_, index) => (
-                    <div
-                      key={index}
-                      className={`w-[32px] h-[4px] rounded-[40px]  flex justify-center items-center ${
-                        index < selected + 1 ? " bg-primary" : "bg-[#E0E0E0]"
-                      }`}
-                    >
-                      <span
-                        className={`${
-                          index < selected + 1 ? "text-white" : "text-gray-400"
-                        }`}
-                      ></span>
-                    </div>
-                  ))}
-                </div>
-
-                <p className=" font-hellixMedium lg:text-[17px] text-[15px] h-min inline-block py-2  leading-4 tracking-[0.02em] text-[#999999]">
-                  {subData.length === 0
-                    ? selectSections[0]?.label
-                    : subData[selected]?.label}
-                </p>
-                <h1 className=" font-hellixBold lg:text-[28px] text-[18px]  lg:leading-[39px] lg:-tracting-[0.02em] text-[#032435]">
-                  {subData.length === 0
-                    ? selectSections[0]?.header
-                    : subData[selected]?.header}
-                </h1>
-              </div>
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="lg:w-1/2  w-full px-2 flex justify-center items-center flex-col h-full gap-5"
-              >
-                {subData.length === 0 && (
-                  <FormSectionWrapper
-                    isComment={true}
-                    className="w-full px-4 sm:px-0"
-                  >
-                    <div className="flex flex-col gap-2">
-                      {mainSelectionOptions.map((option) => (
-                        <ManiSelection
-                          key={option.id}
-                          id={option.id}
-                          label={option.label}
-                          value={option.value}
-                          name="quoteType"
-                          register={register}
-                        />
-                      ))}
-                      {errors.quoteType && (
-                        <FormError
-                          errorMessage={errors.quoteType?.message as string}
-                        />
-                      )}
-                    </div>
-                  </FormSectionWrapper>
-                )}
-
-                {quoteType === "software_development" && (
-                  <SoftwareDevelopment />
-                )}
-                {quoteType === "team_augmentation" && <TeamAugmentation />}
-
-                <div className=" flex gap-10 lg:gap-6 ml-auto xl:w-[487px] justify-end md:mt-0 mt-4 font-hellix">
-                  {subData.length > 1 && (
-                    <ButtonWrapper
-                      className="bg-[#20B2FF] p-3 xl:p-0 xl:h-[56px]  text-white  rounded-lg font-hellixSemiBold 
-              text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px]  lg:mx-0"
-                      label={"Prev"}
-                      onClick={handlePrevSection}
-                    />
-                  )}
-                  <ButtonWrapper
-                    className="bg-[#20B2FF] p-3 xl:p-0 xl:h-[56px]  text-white rounded-lg font-hellixSemiBold 
-            text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px]  lg:mx-0"
-                    label={dropBox ? (!file ? "Skip" : "Next") : "Next"}
-                    onClick={handleNext}
-                  />
-                </div>
-              </form>
-            </div>
-          ) : (
-            <div className="  w-full h-full justify-center relative items-center  flex flex-row gap-2">
-              <Lottie
-                animationData={Proppers}
-                loop={true}
-                className="lg:h-72 lg:w-72 h-56 w-56 absolute left-0 rounded-full"
-              />
-              <p className=" text-secondary text-center font-hellixBold lg:text-[40px] text-[30px]  leading-[48.01px] -tracking-[0.02em]">
-                <span className=" text-primary">
-                  Thanks! <br />
-                </span>
-                Our team will be reach out you in 24hrs!
-              </p>
-              <Lottie
-                animationData={Proppers}
-                loop={true}
-                className="lg:h-72 lg:w-72 h-56 w-56 absolute right-0 rounded-full"
-              />
-            </div>
-          )}
+          <div
+            className=" absolute top-0 left-0 hidden md:block  w-full h-full"
+            style={{
+              backgroundImage: `url(${Lines})`,
+              backgroundRepeat: "repeat",
+              backgroundPosition: "0 0",
+              backgroundSize: "100% 100%",
+            }}
+          ></div>
+          <h1 className=" text-[#24536E] font-hellixBold leading-[52.81px] text-center text-[44px]">
+            Pricing
+          </h1>
         </div>
-      </section>
-      <div className="xl:right-8 xl:bottom-8 lg:right-8 right-5 bottom-5 z-50 fixed">
-        <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
+        <section
+          ref={techSectionRef}
+          className="flex-grow w-full xl:w-[1136px] xl:mx-auto z-20 mb-10 flex-col justify-evenly items-center h-min  flex"
+        >
+          <div
+            style={{
+              backgroundImage: ` URL(${WavesPriceSection})`,
+            }}
+            className={` ${
+              isFormCompleted
+                ? "lg:h-[328px] xl:max-h-80"
+                : "lg:h-min xl:max-h-min"
+            } flex-grow flex justify-center sm:justify-center bg-[rgba(255,255,255,1)] sm:items-center flex-col md:flex-row gap-10 items-start md:items-start py-16 xl:w-[1136px] w-11/12 rounded-[30px] border-[#E0E0E0] border-[1px] md:px-10 relative `}
+          >
+            {!isFormCompleted ? (
+              <div className="relative z-10  w-full flex justify-center  items-center  flex-col md:flex-row gap-10">
+                <div className="flex w-full   sm:w-1/2  lg:w-1/2 lg:h-[119px] mb-auto justify-between flex-col px-2 md:px-0 gap-3 lg:gap-6 my-2">
+                  <div className=" flex gap-1.5 lg:w-[239px]  w-[200px]">
+                    {Array.from({ length: subData.length }, (_, index) => (
+                      <div
+                        key={index}
+                        className={`w-[32px] h-[4px] rounded-[40px]  flex justify-center items-center ${
+                          index < selected + 1 ? " bg-primary" : "bg-[#E0E0E0]"
+                        }`}
+                      >
+                        <span
+                          className={`${
+                            index < selected + 1
+                              ? "text-white"
+                              : "text-gray-400"
+                          }`}
+                        ></span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <p className=" font-hellixMedium lg:text-[17px] text-[15px] h-min inline-block py-2  leading-4 tracking-[0.02em] text-[#999999]">
+                    {subData.length === 0
+                      ? selectSections[0]?.label
+                      : subData[selected]?.label}
+                  </p>
+                  <h1 className=" font-hellixBold lg:text-[28px] text-[18px]  lg:leading-[39px] lg:-tracting-[0.02em] text-[#032435]">
+                    {subData.length === 0
+                      ? selectSections[0]?.header
+                      : subData[selected]?.header}
+                  </h1>
+                </div>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="lg:w-1/2  w-full px-2 flex justify-center items-center flex-col h-full gap-5"
+                >
+                  {subData.length === 0 && (
+                    <FormSectionWrapper
+                      isComment={true}
+                      className="w-full px-4 sm:px-0"
+                    >
+                      <div className="flex flex-col gap-2">
+                        {mainSelectionOptions.map((option) => (
+                          <ManiSelection
+                            key={option.id}
+                            id={option.id}
+                            label={option.label}
+                            value={option.value}
+                            name="quoteType"
+                            register={register}
+                          />
+                        ))}
+                        {errors.quoteType && (
+                          <FormError
+                            errorMessage={errors.quoteType?.message as string}
+                          />
+                        )}
+                      </div>
+                    </FormSectionWrapper>
+                  )}
+
+                  {quoteType === "software_development" && (
+                    <SoftwareDevelopment />
+                  )}
+                  {quoteType === "team_augmentation" && <TeamAugmentation />}
+
+                  <div className=" flex gap-10 lg:gap-6 ml-auto xl:w-[487px] justify-end md:mt-0 mt-4 font-hellix">
+                    {subData.length > 1 && (
+                      <ButtonWrapper
+                        className="bg-[#20B2FF] p-3 xl:p-0 xl:h-[56px]  text-white  rounded-lg font-hellixSemiBold 
+              text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px]  lg:mx-0"
+                        label={"Prev"}
+                        onClick={handlePrevSection}
+                      />
+                    )}
+                    <ButtonWrapper
+                      className="bg-[#20B2FF] p-3 xl:p-0 xl:h-[56px]  text-white rounded-lg font-hellixSemiBold 
+            text-sm lg:text-base h-[46px] w-[120px] lg:w-[150px]  lg:mx-0"
+                      label={dropBox ? (!file ? "Skip" : "Next") : "Next"}
+                      onClick={handleNext}
+                    />
+                  </div>
+                </form>
+              </div>
+            ) : (
+              <div className="  w-full h-full justify-center relative items-center  flex flex-row gap-2">
+                <Lottie
+                  animationData={Proppers}
+                  loop={true}
+                  className="lg:h-72 lg:w-72 h-56 w-56 absolute left-0 rounded-full"
+                />
+                <p className=" text-secondary text-center font-hellixBold lg:text-[40px] text-[30px]  leading-[48.01px] -tracking-[0.02em]">
+                  <span className=" text-primary">
+                    Thanks! <br />
+                  </span>
+                  Our team will be reach out you in 24hrs!
+                </p>
+                <Lottie
+                  animationData={Proppers}
+                  loop={true}
+                  className="lg:h-72 lg:w-72 h-56 w-56 absolute right-0 rounded-full"
+                />
+              </div>
+            )}
+          </div>
+        </section>
+        <div className="xl:right-8 xl:bottom-8 lg:right-8 right-5 bottom-5 z-50 fixed">
+          <EnqueryModal isLoading={isLoading} onFormSubmit={handleFormSubmit} />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 

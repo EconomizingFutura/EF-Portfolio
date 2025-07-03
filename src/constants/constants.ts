@@ -26,6 +26,7 @@ import {
   finalTreva,
   finalAeini,
   AR_TAX,
+  artaxsolBanner
 } from "../assets/index";
 export const navLinks = [
   {
@@ -59,6 +60,7 @@ interface ProjectItem {
   briefNote: string;
   problemStatement: string;
   services: string;
+  pathName: string;
 }
 export const projectsInfo: ProjectItem[] = [
   {
@@ -69,7 +71,7 @@ export const projectsInfo: ProjectItem[] = [
       "Aenini is an offline tool for counting warp and weft threads in fabric, with data stored locally. It ensures real-time thread count analysis for fabric quality in textile manufacturing. The user-friendly interface allows seamless operation without internet access.",
     // projectBanner: TrevaChat,
     projectBanner: finalAeini,
-
+    pathName: 'aenini',
     image: AeiniImg,
     briefNote:
       "Designed for ease of use, Aenini simplifies thread count analysis for textile experts.It delivers fast, accurate measurements of warp and weft threads.This efficiency improves the speed and precision of fabric quality checks.Aenini supports quality control processes, ensuring industry standards are met.Its seamless operation helps reduce errors and enhance inspection workflows.",
@@ -85,7 +87,7 @@ export const projectsInfo: ProjectItem[] = [
     description:
       "Treva Chat is an advanced chatbot platform designed for easy question resolution, with features like reference tracking for seamless conversations. It stores the last five chat sessions for quick access and includes feedback mechanisms to ensure quality interactions. With built-in user authentication, it provides a secure and personalized support experience.",
     image: Aenini,
-
+    pathName:'treva-chat',
     projectBanner: finalTreva,
     briefNote:
       "Treva is a comprehensive platform designed to simplify workflow management by integrating with GitHub and Google Drive. It offers an intuitive dashboard for reviewing workflows, managing user data, and visualising chat sessions. Treva Chat provides a seamless chatbot experience with conversation history, feedback mechanisms, and reference tracking for enhanced support.",
@@ -98,11 +100,12 @@ export const projectsInfo: ProjectItem[] = [
     id: 3,
     lottie: AR_TAX,
     projectName: "AR Tax Solutions",
+    pathName:'ar-tax-solutions',
     description:
       "AR Tax Solutions is a digital platform that simplifies tax filing, billing, and financial management for individuals and businesses.Users are connected with certified Chartered Accountants for expert guidance and real-time compliance.Secure, efficient, and tailored to meet your complete tax and billing needs",
     image: Aenini,
 
-    projectBanner: finalTreva,
+    projectBanner: artaxsolBanner,
     briefNote:
       "AR Tax Solutions is a robust digital platform designed to streamline tax management for individuals, professionals, and businesses. The application facilitates secure tax preparation, filing, and document organization, while connecting users directly with certified Chartered Accountants for expert support and real-time compliance oversight. With an intuitive interface and personalized guidance, AR Tax Solutions ensures accurate, timely, and hassle-free tax handling tailored to each user's needs.",
     problemStatement:
@@ -315,3 +318,4 @@ export const sectionColors = {
   blogs: "#FFFFFF",
   faq: "#FFFFFF",
 };
+
