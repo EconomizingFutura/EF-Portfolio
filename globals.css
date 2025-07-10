@@ -1,0 +1,455 @@
+@import "tailwindcss";
+
+.cardContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 160px;
+}
+
+.cardContainer:last-of-type {
+  &.card1 {
+    padding-top: 0;
+  }
+}
+
+.cardContainer .card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: -25%;
+  height: 512px;
+  width: 1136px;
+  border-radius: 24px;
+
+  background-color: #f4faff;
+  padding: 0 12px;
+  transform-origin: top;
+}
+
+@media (max-width: 768px) {
+  .cardContainer .card {
+    width: 90%;
+    height: 450px;
+    padding: 8px;
+  }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 480px) {
+  .cardContainer {
+    height: auto;
+    /* Adjust height to fit content on smaller screens */
+  }
+
+  .cardContainer .card {
+    width: 100%;
+    /* Full width on small screens */
+    height: auto;
+    /* Allow card height to adjust based on content */
+    padding: 6px;
+    top: 0;
+    /* Remove or adjust top positioning */
+  }
+}
+
+.mailto {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* .main-container {
+    position: absolute;
+    background-color: #212735cc;
+    z-index: 1;
+    inset: 0;
+  } */
+
+.logoContainer {
+  flex-direction: row;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.logoText {
+  font-family: "Overpass";
+  font-weight: 600;
+  font-size: 16px;
+  padding-left: 5px;
+  color: #000;
+  padding-top: 2px;
+}
+
+.selected a {
+  color: #fff;
+  background-color: #5740e4;
+  padding: 15px 20px 13px 20px;
+  border-radius: 8px;
+  font-family: "Overpass";
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.selected link {
+  color: #fff;
+  background-color: #5740e4;
+  padding: 15px 20px 15px 20px;
+  border-radius: 8px;
+  font-family: "Overpass";
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* Home Page */
+
+.titleText {
+  font-family: "Overpass";
+  font-weight: 800;
+  font-size: 40px;
+  color: #212735;
+}
+
+.colorTitleText {
+  font-family: "Overpass";
+  font-weight: 500;
+  font-size: 18px;
+  color: #5740e4;
+}
+
+.thinkCard {
+  border: 1px solid;
+}
+
+.thinkCardTitle {
+  font-family: "Overpass";
+  font-weight: 800;
+  font-size: 32px;
+  color: #212735;
+}
+
+.thinkSubText {
+  font-family: "Overpass";
+  font-weight: 400;
+  font-size: 17px;
+  color: #6d7486;
+}
+
+/* Footer */
+
+.socialMedia {
+  padding-left: 20px;
+}
+
+.pageTitle {
+  font-family: "hellix";
+  font-weight: 800;
+  font-size: 40px;
+  font-weight: 700;
+  color: #031924;
+  /* max-width: 1136px; */
+  margin: 0 auto;
+  padding: 0 25px;
+  padding-bottom: 60px;
+  padding-left: 28px;
+}
+
+.pagetitleColor {
+  color: #5740e4;
+}
+
+@media (max-width: 768px) {
+  .cardContainer {
+    position: unset !important;
+  }
+
+  .card1 {
+    top: 0px !important;
+    transform: none !important;
+    padding-top: 0px !important;
+  }
+
+  .pageTitle {
+    font-weight: 800 !important;
+    font-size: 24px !important;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  scroll-snap-align: start;
+}
+
+.content-why {
+  padding-top: 60px;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.containerNew {
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.sticky-landingpage {
+  position: sticky;
+  top: 0;
+}
+
+.heroSectionBackground {
+  background: linear-gradient(180deg, #aee2ff 0%, #e0f3ff 100%);
+}
+
+@media (min-width: 1024px) {
+  .heroSectionBackground {
+    /* Override for larger screens */
+    background-image: url("./src/assets/wave_background.svg");
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+@font-face {
+  font-family: "Hellix";
+  src: url("./src/assets/fonts/Hellix-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "overpass";
+  src: url("./src/assets/fonts/Overpass-Bold.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Hellix Bold";
+  src: url("./src/assets/fonts/Hellix-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Hellix SemiBold";
+  src: url("./src/assets/fonts/Hellix-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Hellix Medium";
+  src: url("./src/assets/fonts/Hellix-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+.border-dashed-spaced {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='14' ry='14' stroke='%23032435' stroke-width='4' stroke-dasharray='14%2c14' stroke-dashoffset='32' stroke-linecap='square'/%3e%3c/svg%3e");
+  border-radius: 14px;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: var(--red);
+  transform-origin: 0%;
+}
+
+#arrow {
+  width: 0;
+  height: 0;
+  border-top: 25px solid transparent;
+  border-left: 50px solid #ffffff;
+  border-bottom: 25px solid transparent;
+}
+
+.arrow {
+  background-color: antiquewhite;
+  height: 50px;
+}
+
+.with-wave-background {
+  background-image: url("./src/assets/wave.svg");
+  background-size: 100% auto;
+}
+
+.progress-line {
+  transition: height 0.1s ease-out;
+  will-change: height;
+}
+
+.rounded-full {
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.progress-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(4px);
+  opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+  .with-wave-background {
+    background-image: url("./src/assets/wave.svg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+  }
+}
+
+.font-hellix {
+  font-family: "Hellix";
+}
+
+body {
+  font-family: "Hellix";
+}
+
+.step-button {
+  background-image: url("data:image/svg+xml,%3Csvg width='300' height='100' viewBox='0 0 300 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0H260L290 30L290 40L260 70L260 100H20C8.954 100 0 91.046 0 80V20C0 8.954 8.954 0 20 0Z' fill='%2300A4FF'/%3E%3Cpath d='M260 15L275 35L260 55' stroke='white' stroke-width='8' fill='none'/%3E%3Cpath d='M245 15L260 35L245 55' stroke='white' stroke-width='8' fill='none'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 20px 60px;
+  border: none;
+  min-width: 200px;
+  height: 80px;
+  font-size: 24px;
+  font-family: "Hellix", sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.step-button::after {
+  content: "";
+  position: absolute;
+  right: -15px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 15px solid #00a4ff;
+}
+
+.progress-line {
+  will-change: height;
+  transition: height 0.1s ease-out;
+}
+
+.progress-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(4px);
+  opacity: 0.5;
+}
+
+.list-item {
+  list-style-type: disc;
+  margin-left: 1.5em;
+}
+
+.rounded-full {
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.rounded-full:hover {
+  transform: scale(1.1);
+  border-color: #3fb950;
+}
+
+img {
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .progress-line {
+    transition: height 0.05s ease-out;
+  }
+}
+
+textarea {
+  user-select: text;
+  -webkit-user-drag: none;
+}
+
+.header {
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+@media (min-width: 768px) {
+  .header {
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+  }
+}
+@theme {
+  --font-overpass: "Overpass", sans-serif;
+  --font-hellix: "Hellix";
+  --font-hellixBold: "Hellix Bold", sans-serif;
+  --font-hellixSemiBold: "Hellix SemiBold", sans-serif;
+  --font-hellixMedium: "Hellix Medium", sans-serif;
+  --color-primary: "#20B2FF";
+  --color-secondary: "#032435";
+  --color-customGreen: "rgba(63, 185, 80, 1)";
+  --color-customPink: "rgba(247, 120, 186, 1)";
+  --color-customBlue: "rgba(25, 150, 255, 1)";
+  --color-customPurple: "rgba(164, 101, 241, 1)";
+}
+
+.bg-primary {
+  background: #20b2ff;
+}
+
+.bg-customGreen {
+  background: rgba(63, 185, 80, 1);
+}
+
+.bg-customPurple {
+  background: rgba(164, 101, 241, 1);
+}
+
+.bg-customPink {
+  background: rgba(247, 120, 186, 1);
+}
+.bg-customBlue {
+  background: rgba(25, 150, 255, 1);
+}
+
+.bg-secondary {
+  background: #032435;
+}
+
+.shadow-enquery {
+  box-shadow: 0px 0px 15px 0px #00000038;
+}
+
+.shadow-client {
+  box-shadow: 0px 4px 12px 0px rgba(151, 151, 151, 0.25);
+}
