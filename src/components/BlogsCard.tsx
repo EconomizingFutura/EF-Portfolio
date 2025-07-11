@@ -27,7 +27,7 @@ const BlogsCard: React.FC<BlogsCardProps> = ({ card }) => {
 
   return (
     <div className="w-[90%] sm:w-[353px] h-[380px] sm:h-[395px] shrink-0 flex flex-col justify-between items-center relative  rounded-lg overflow-hidden">
-      <div className="w-[90%] sm:w-[353px] h-[380px] sm:h-[395px] shrink-0 flex flex-col justify-between items-center relative rounded-[10px] overflow-hidden">
+      <div className="w-full sm:w-[353px] h-[380px] sm:h-[395px] shrink-0 flex flex-col justify-between items-center relative rounded-[10px] overflow-hidden">
         <Image
           src={card.thumbnail}
           alt=""
@@ -54,13 +54,13 @@ const BlogsCard: React.FC<BlogsCardProps> = ({ card }) => {
               </div>
             ))}
           </div>
-          <div className=" h-[145px] md:h-[180px] w-full cursor-default flex flex-col md:gap-4 gap-2">
+          <div className=" h-[180px] w-full cursor-default flex flex-col md:gap-4 gap-2">
             <h1 className="text-[#111111] font-hellixBold text-[16px] md:text-[20px] leading-6">
               {card.header}
             </h1>
-            <h1 className="text-[#999999] h-1/3   line-clamp-6 font-hellixMedium text-[14px]  md:text-[16px] leading-5">
+            <p className="text-[#999999]  max-h-min md:line-clamp-4 lg:line-clamp-5 text-pretty overflow-hidden  font-hellixMedium text-[14px] my-2.5 md:my-0 md:text-[16px] leading-5">
               {card.sub}
-            </h1>
+            </p>
           </div>
         </div>
         <button

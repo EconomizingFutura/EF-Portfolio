@@ -201,13 +201,18 @@ const blogs: BlogTypes[] = [
   },
 ];
 
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
 export function generateStaticParams() {
   return blogs.map((post) => ({ slug: post.slug }));
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page({ params }: PageProps) {
   const blog = blogs.find((blog) => blog.slug === params.slug);
-  console.log(blog);
 
   if (!blog) return <div>Not found</div>;
   return <BlogsPage slug={blog.slug} />;

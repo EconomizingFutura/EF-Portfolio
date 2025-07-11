@@ -190,7 +190,7 @@ const BlogsPage = ({ slug }: BlogsPageProps) => {
 
         {otherBlogs.length > 0 && (
           <section className="bg-[#ffffff] py-12 flex flex-col items-center w-full">
-            <h2 className="text-[32px] md:text-[38px] font-hellixBold text-[#032435] md:mb-8 text-center">
+            <h2 className="text-[32px] md:text-[38px] font-hellixBold text-[#032435] mb-8 text-center">
               More Blogs
             </h2>
             <div className="flex flex-row xl:w-[1139px] h-min justify-center md:justify-between overflow-x-auto gap-4 md:gap-6 items-center  w-full sm:w-4/5 md:w-11/12">
