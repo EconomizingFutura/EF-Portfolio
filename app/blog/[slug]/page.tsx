@@ -1,3 +1,4 @@
+import BlogsPage from "@/components/BlogsPage";
 import { blogs } from "@/constants/constants";
 
 export function generateStaticParams() {
@@ -5,5 +6,5 @@ export function generateStaticParams() {
 }
 
 export default function Page({ params }: { params: { slug: string } }) {
-  return <div>Slug: {params.slug}</div>;
+  return <BlogsPage slug={params.slug} />;
 }
