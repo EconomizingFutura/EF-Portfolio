@@ -38,7 +38,7 @@ const ProjectDetails = ({ slug }: { slug: string }) => {
     }
     try {
       //   const response = await contactAPI(data, setIsLoading);
-      toast.success("Message sent successfully");
+      // toast.success("Message sent successfully");
     } catch (error) {
       console.log(error);
     } finally {

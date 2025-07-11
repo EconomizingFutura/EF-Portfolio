@@ -39,7 +39,7 @@ const BlogsPage = ({ slug }: BlogsPageProps) => {
     }
     try {
       // await contactAPI(data, setIsLoading);
-      toast.success("Message sent successfully");
+      // toast.success("Message sent successfully");
     } catch (err) {
       console.error(err);
     } finally {

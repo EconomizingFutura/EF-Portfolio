@@ -29,7 +29,7 @@ const TermsAndConditions: React.FC = () => {
     }
     try {
       //   const response = await contactAPI(data, setIsLoading);
-      toast.success("Message sent successful");
+      // toast.success("Message sent successful");
     } catch (error) {
       console.log(error);
     } finally {

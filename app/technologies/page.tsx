@@ -33,7 +33,7 @@ const Technology: React.FC = () => {
     }
     try {
       //   const response = await contactAPI(data, setIsLoading);
-      toast.success("Message sent successfull");
+      // toast.success("Message sent successfull");
     } catch (error) {
       console.log(error);
     } finally {
