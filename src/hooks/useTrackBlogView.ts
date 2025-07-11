@@ -5,7 +5,6 @@ import { getFirestoreClient } from "@/config/firebaseConfig";
 import { doc, getDoc, setDoc, updateDoc, increment } from "firebase/firestore";
 
 export function useTrackBlogView(slug: string) {
-  console.log("running from hook");
   useEffect(() => {
     const hasVisitedKey = `viewed_${slug}`;
 
@@ -17,9 +16,6 @@ export function useTrackBlogView(slug: string) {
       const db = getFirestoreClient();
       const docRef = doc(db, "blogs", slug);
       const snapshot = await getDoc(docRef);
-
-      console.log(snapshot, db, docRef);
-
       if (snapshot.exists()) {
         await updateDoc(docRef, {
           views: increment(1),

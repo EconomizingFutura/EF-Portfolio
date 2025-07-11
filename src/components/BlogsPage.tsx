@@ -10,6 +10,9 @@ import Head from "next/head";
 import { blogs, blogsPage } from "@/constants/constants";
 import { useScrollBackground } from "@/hooks/useScrollBackground";
 import { ContactData } from "@/api/ContactAPI";
+import { useTrackBlogView } from "@/hooks/useTrackBlogView";
+import { useShowBlogsCount } from "@/hooks/useShowBlogsCount";
+import { Eye } from "lucide-react";
 
 type BlogsPageProps = {
   slug: string;
@@ -18,13 +21,14 @@ type BlogsPageProps = {
 const BlogsPage = ({ slug }: BlogsPageProps) => {
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
   const handleToggle = () => setShowModal(!showModal);
-
   const [backgroundColor, setBackgroundColor] = useState(blogsPage.default);
   const mainSectionRef = useRef<HTMLDivElement | null>(null);
   const techSectionRef = useRef<HTMLDivElement | null>(null);
 
+  const views = useShowBlogsCount(slug);
+
+  useTrackBlogView(slug);
   useScrollBackground({
     mainRef: mainSectionRef,
     otherRef: techSectionRef,
@@ -112,6 +116,12 @@ const BlogsPage = ({ slug }: BlogsPageProps) => {
                   />
                   {content.metadata.read_time}
                 </p>
+                {views && typeof views === "number" && (
+                  <p className=" flex items-center gap-1">
+                    <Eye color="#20B2FF" size={18} />
+                    {views} views
+                  </p>
+                )}
               </div>
               <h1 className="text-[#24536E] text-[32px] md:text-[44px] font-hellixBold leading-tight">
                 {content.header}

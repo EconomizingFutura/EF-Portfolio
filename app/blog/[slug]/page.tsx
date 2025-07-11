@@ -1,5 +1,33 @@
 import BlogsPage from "@/components/BlogsPage";
 import { v4 as uuidv4 } from "uuid";
+
+interface BlogTypes {
+  id: string;
+  header: string;
+  heading: string;
+  sub: string;
+  thumbnail: string;
+  slug: string;
+  metadata: {
+    author: string;
+    read_time: string;
+    published_date: string;
+    tags: string[];
+  };
+  subHeader?: string;
+  subHeading?: {
+    title: string;
+    subheading: string;
+    description: string;
+    sections: {
+      heading: string;
+      content: string;
+      image: string;
+    }[];
+    cta: string;
+  };
+}
+
 const blogs: BlogTypes[] = [
   {
     id: uuidv4(),
@@ -173,40 +201,14 @@ const blogs: BlogTypes[] = [
   },
 ];
 
-interface BlogTypes {
-  id: string;
-  header: string;
-  heading: string;
-  sub: string;
-  thumbnail: string;
-  slug: string;
-  metadata: {
-    author: string;
-    read_time: string;
-    published_date: string;
-    tags: string[];
-  };
-  subHeader?: string;
-  subHeading?: {
-    title: string;
-    subheading: string;
-    description: string;
-    sections: {
-      heading: string;
-      content: string;
-      image: string;
-    }[];
-    cta: string;
-  };
-}
-
 export function generateStaticParams() {
   return blogs.map((post) => ({ slug: post.slug }));
 }
 
 export default function Page({ params }: { params: { slug: string } }) {
   const blog = blogs.find((blog) => blog.slug === params.slug);
+  console.log(blog);
 
   if (!blog) return <div>Not found</div>;
-  return <BlogsPage slug={params.slug} />;
+  return <BlogsPage slug={blog.slug} />;
 }
