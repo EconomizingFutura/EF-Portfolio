@@ -1,5 +1,4 @@
 "use client";
-import { v4 as uuidv4 } from "uuid";
 
 import {
   Python,
@@ -220,7 +219,7 @@ export const AreasConstants = [
 
 export const blogs: BlogTypes[] = [
   {
-    id: uuidv4(),
+    id: '1',
     header: "From Wireframe to React.js: A Step-by-Step Guide(Part-1)",
     heading:
       "Learn How to Transform a Simple Wireframe into a Fully Functional React.js App Step by Step",
@@ -297,7 +296,7 @@ export const blogs: BlogTypes[] = [
     },
   },
   {
-    id: uuidv4(),
+    id: '2',
     header: "From Wireframe to React.js: A Step-by-Step Guide (Part-2)",
     heading: "Turn Your Wireframe into a Fully Functional React.js App",
     sub: "Now that you have your wireframe and plan, it’s time to build! This step-by-step guide walks you through setting up your React environment, creating reusable components, managing state, connecting APIs, styling your app, and preparing for deployment — everything you need to go from plan to production.",
@@ -390,6 +389,11 @@ export const blogs: BlogTypes[] = [
     },
   },
 ];
+
+export async function fetchBlogs() {
+  // Simulate fetching data from an API or database
+  return blogs;
+}
 
 export interface BlogTypes {
   id: string;

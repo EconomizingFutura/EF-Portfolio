@@ -1,4 +1,9 @@
 import type { NextConfig } from "next";
+import withBundleAnalyzer from "@next/bundle-analyzer";
+
+const withAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 const nextConfig: NextConfig = {
   images: {
@@ -11,8 +16,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   distDir: "build",
-
   output: "export",
 };
 
-export default nextConfig;
+export default withAnalyzer(nextConfig);
