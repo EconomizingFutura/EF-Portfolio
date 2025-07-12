@@ -2,13 +2,7 @@
 import BlogsPage from "@/components/BlogsPage";
 import { Metadata } from "next";
 import { getBlogs } from "../../lib/blog";
-// import { use } from "react";
 
-// type PageProps = {
-//   params: {
-//     slug: string; // Ensure this is just a string, not a promise
-//   };
-// };
 
 // ✅ Static paths
 export async function generateStaticParams() {

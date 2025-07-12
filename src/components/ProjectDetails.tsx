@@ -13,7 +13,6 @@ import Head from "next/head";
 import Image from "next/image";
 import { ContactData } from "@/api/ContactAPI";
 import { notFound } from "next/navigation";
-import { useTrackBlogView } from "@/hooks/useTrackBlogView";
 
 const sectionColors = ["#e3f5ff", "#FFFFFF"];
 
@@ -21,7 +20,6 @@ const ProjectDetails = ({ slug }: { slug: string }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [rotate, setRotate] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  useTrackBlogView(slug);
   const handleToggle = () => {
     setShowModal(!showModal);
   };
@@ -38,7 +36,7 @@ const ProjectDetails = ({ slug }: { slug: string }) => {
     }
     try {
       //   const response = await contactAPI(data, setIsLoading);
-      toast.success("Message sent successfully");
+      // toast.success("Message sent successfully");
     } catch (error) {
       console.log(error);
     } finally {

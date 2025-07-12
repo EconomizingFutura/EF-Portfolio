@@ -43,7 +43,6 @@ const Blogs: React.FC = () => {
     }
     try {
       //   const response = await contactAPI(data, setIsLoading);
-      toast.success("Message sent successfully");
     } catch (error) {
       console.log(error);
     } finally {
