@@ -121,7 +121,7 @@ const Blogs: React.FC = () => {
               ))}
             </div>
           </div>
-          {blogs.length > 2 && (
+          {blogs.length > 3 && (
             <div className="flex items-center justify-between border border-[#9CA4B5] rounded-[4px] h-[44px] w-[223px] max-w-[223px] text-[16px] placeholder:text-[#999999]">
               <Image src={search} alt="" className="mx-3" />
               <input

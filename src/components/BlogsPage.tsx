@@ -193,7 +193,7 @@ const BlogsPage = ({ slug }: BlogsPageProps) => {
             <h2 className="text-[32px] md:text-[38px] font-hellixBold text-[#032435] mb-8 text-center">
               More Blogs
             </h2>
-            <div className="flex flex-row xl:w-[1139px] h-min justify-center md:justify-between overflow-x-auto gap-4 md:gap-6 items-center  w-full sm:w-4/5 md:w-11/12">
+            <div className="flex flex-row xl:w-[1139px] h-min justify-center md:justify-start overflow-x-auto gap-4 md:gap-6 items-center  w-full sm:w-4/5 md:w-11/12">
               {otherBlogs.map((blog) => (
                 <BlogsCard key={blog.slug} card={blog} />
               ))}

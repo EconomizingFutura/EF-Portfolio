@@ -219,7 +219,108 @@ export const AreasConstants = [
 
 export const blogs: BlogTypes[] = [
   {
-    id: '1',
+    id: "3",
+    header: "How to Migrate React.js to Next.js: A Step-by-Step Guide",
+    heading: "Upgrade Your React App to Next.js: The Complete Migration Guide",
+    sub: "Already have a React.js app? This detailed guide shows you exactly how to migrate to Next.js — set up Next.js, restructure folders, reuse components, switch to file-based routing, add server-side rendering and static generation, handle styling, fix common issues, and deploy with confidence.",
+    thumbnail:
+      "https://res.cloudinary.com/dtm4ec343/image/upload/comparison-between-next-vs-react_znzj7q.jpg",
+    slug: "migrate-react-to-nextjs",
+    metadata: {
+      author: "Hari",
+      read_time: "8 min",
+      published_date: "2025-07-15",
+      tags: [
+        "nextjs",
+        "react",
+        "migration",
+        "ssr",
+        "ssg",
+        "frontend",
+        "deployment",
+      ],
+    },
+    subHeader: "How to Migrate React.js to Next.js",
+    subHeading: {
+      title: "Step-by-Step: Modernize Your React Project with Next.js",
+      subheading:
+        "Next.js makes React more powerful with built-in routing, SSR, SSG, and better performance. This updated guide shows you exactly how to migrate — from setup and structure to best practices for real projects.",
+      description:
+        "Already have a working React app? Perfect — let’s upgrade it step by step. We’ll set up Next.js, move your files, fix your routes, refactor data fetching to `getStaticProps` or `getServerSideProps`, keep your styles working, and deploy with confidence. Plus, you’ll get troubleshooting tips for common migration bugs.",
+      sections: [
+        {
+          heading: " Install & Initialize Next.js",
+          content:
+            "Start fresh by creating a new Next.js app:\n\n```bash\nnpx create-next-app@latest my-dashboard\ncd my-dashboard\nnpm run dev\n```\n\nThis runs your app on [http://localhost:3000](http://localhost:3000) by default.\n\n✅ TIP: Keep your old React app open as a reference so you can copy/paste components as needed.",
+          image: "",
+        },
+        {
+          heading: " Understand the Next.js Project Structure",
+          content:
+            "A Next.js app has some key folders by default:\n\n- `/pages` → file-based routing.\n- `/public` → static assets (images, icons, etc.).\n- `/styles` → global CSS or modules.\n- `/components` → you’ll create this manually for reusable UI pieces.\n\n✅ TIP: Unlike CRA or Vite, Next.js doesn’t need a `src` folder — but you can add one if you like for organization.",
+          image:
+            "https://res.cloudinary.com/dtm4ec343/image/upload/1_XmOAHrdcqIzsnSmRoQjimg_oaij4n.webp",
+        },
+        {
+          heading: " Copy & Clean Up Your Components",
+          content:
+            'Copy your React components (`Sidebar`, `Header`, `DashboardCard`, etc.) into `/components`.\n\nNext.js supports `.jsx` and `.tsx` files out of the box. Check for **absolute vs. relative imports** — Next.js prefers relative or configured aliases via `jsconfig.json`:\n\n```json\n{\n  "compilerOptions": {\n    "baseUrl": ".",\n    "paths": {\n      "@components/*": ["components/*"]\n    }\n  }\n}\n```\n\n✅ TIP: Fix any import errors after moving files. Use VSCode auto-imports to help.',
+          image: "",
+        },
+        {
+          heading: " Use `_app.js` for Global Layouts",
+          content:
+            "In React, you usually wrap your app in `App.jsx`. In Next.js, wrap your pages using `/pages/_app.js`:\n\n```jsx\nimport '../styles/globals.css';\n\nexport default function App({ Component, pageProps }) {\n  return <Component {...pageProps} />;\n}\n```\n\n✅ TIP: `_app.js` runs on every page load — use it for global providers like Redux, Context API, or Theme providers too.",
+          image: "",
+        },
+        {
+          heading: " Create a Layout Component",
+          content:
+            "A `Layout` helps you share consistent structure across pages:\n\n```jsx\nimport Sidebar from './Sidebar/Sidebar';\nimport Header from './Header/Header';\n\nexport default function Layout({ children }) {\n  return (\n    <div className=\"app\">\n      <Sidebar />\n      <div className=\"main-content\">\n        <Header title=\"My Dashboard\" user={{ name: 'Jane Doe' }} />\n        {children}\n      </div>\n    </div>\n  );\n}\n```\n\nThen wrap pages:\n\n```jsx\nimport Layout from '../components/Layout';\nimport Dashboard from '../components/Dashboard/Dashboard';\n\nexport default function Home() {\n  return (\n    <Layout>\n      <Dashboard />\n    </Layout>\n  );\n}\n```\n\n✅ TIP: You can also use a custom `_document.js` for advanced `<html>` and `<body>` tweaks.",
+          image: "",
+        },
+        {
+          heading: " Migrate to File-Based Routing",
+          content:
+            "Next.js routes come from the `/pages` folder automatically:\n\n- `/pages/index.js` → `/`\n- `/pages/about.js` → `/about`\n- `/pages/dashboard.js` → `/dashboard`\n\nNo more `react-router-dom` needed!\n\n✅ TIP: For dynamic routes, use `[slug].js` — e.g., `/pages/blog/[id].js` maps to `/blog/123`.",
+          image: "",
+        },
+        {
+          heading: " Refactor Data Fetching",
+          content:
+            "In React, you often use `useEffect` for fetching data. In Next.js, use built-in data methods:\n\n**Static Generation:**\n\n```jsx\nexport async function getStaticProps() {\n  return {\n    props: {\n      stats: [\n        { id: 1, title: 'Users', value: 200 },\n        { id: 2, title: 'Revenue', value: '$7,500' }\n      ]\n    }\n  };\n}\n```\n\n**Server-Side Rendering:**\n\n```jsx\nexport async function getServerSideProps() {\n  const res = await fetch('https://api.example.com/stats');\n  const stats = await res.json();\n  return { props: { stats } };\n}\n```\n\n✅ TIP: Use `getStaticPaths` for dynamic pages that need pre-rendering.",
+          image: "",
+        },
+        {
+          heading: " Reuse & Update Your Styling",
+          content:
+            "Next.js works perfectly with CSS Modules, Sass, Tailwind CSS, or styled-components.\n\n- Rename `*.module.css` files and import them locally.\n- For global styles, import your base CSS in `_app.js`.\n\nExample:\n\n```jsx\nimport styles from './Sidebar.module.css';\n```\n\n✅ TIP: Next.js optimizes CSS automatically for production — no extra config needed.",
+          image: "",
+        },
+        {
+          heading: " Debug Common Migration Gotchas",
+          content:
+            '- ✅ **Broken imports** → Check paths and aliases.\n- ✅ **Missing `Link`** → Use `next/link` instead of `<a>` for internal navigation:\n  ```jsx\n  import Link from \'next/link\';\n  <Link href="/about"><a>About</a></Link>\n  ```\n- ✅ **Images** → Use `next/image` for optimized images:\n  ```jsx\n  import Image from \'next/image\';\n  <Image src="/logo.svg" width={100} height={100} alt="Logo" />\n  ```\n- ✅ **Environment variables** → Prefix with `NEXT_PUBLIC_` if used in the browser.',
+          image: "",
+        },
+        {
+          heading: " Deploy & Ship!",
+          content:
+            "When you’re ready, deploy with **Vercel** (Next.js creator):\n\n```bash\nnpx vercel\n```\n\nConnect your GitHub repo, push, and you’ll get preview URLs, automatic builds, and serverless functions.\n\n✅ TIP: Netlify and AWS Amplify also support Next.js well.",
+          image: "",
+        },
+        {
+          heading: "✅ Final Checklist",
+          content:
+            "✅ Moved all components\n✅ Updated routing\n✅ Refactored data fetching\n✅ Tested pages & links\n✅ Used optimized images\n✅ Deployed to production\n\nAwesome — your React app is now faster, more scalable, and ready for modern web workloads!",
+          image: "",
+        },
+      ],
+      cta: "Your migration is complete! Share your new Next.js project, keep experimenting with SSR, SSG, and API routes — and enjoy a faster, cleaner workflow!",
+    },
+  },
+  {
+    id: "1",
     header: "From Wireframe to React.js: A Step-by-Step Guide(Part-1)",
     heading:
       "Learn How to Transform a Simple Wireframe into a Fully Functional React.js App Step by Step",
@@ -296,7 +397,7 @@ export const blogs: BlogTypes[] = [
     },
   },
   {
-    id: '2',
+    id: "2",
     header: "From Wireframe to React.js: A Step-by-Step Guide (Part-2)",
     heading: "Turn Your Wireframe into a Fully Functional React.js App",
     sub: "Now that you have your wireframe and plan, it’s time to build! This step-by-step guide walks you through setting up your React environment, creating reusable components, managing state, connecting APIs, styling your app, and preparing for deployment — everything you need to go from plan to production.",
