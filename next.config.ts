@@ -16,7 +16,6 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   distDir: "build",
-  output: "export",
 };
 
 export default withAnalyzer(nextConfig);
