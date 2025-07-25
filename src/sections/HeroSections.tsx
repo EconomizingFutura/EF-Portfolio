@@ -2,7 +2,7 @@
 import React from "react";
 import { ButtonWrapper } from "../components";
 import Image from "next/image";
-import HeroMini from "@/assets/HeroMini.svg";
+import HeroMini from "@/assets/HeroMini.webp";
 import CurlArrows from "@/assets/CurlArrows.svg";
 import YellowSquare from "@/assets/YellowSquare.svg";
 import HeroMain from "@/assets/HeroMain.png";

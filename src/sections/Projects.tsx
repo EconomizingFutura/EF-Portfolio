@@ -7,6 +7,7 @@ import { motion, MotionValue, useTransform } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ButtonArrow } from "@/assets/index";
+import { useInView } from "react-intersection-observer";
 
 interface ProjectItem {
   id: number;
@@ -37,74 +38,78 @@ const Projects: React.FC<ProjectsProps> = ({
   const router = useRouter();
 
   const scale = useTransform(progress, range, [1, targetScale]);
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const handleClick = (path: string) => router.push(`/projects/${path}`);
 
   return (
-    <div className="cardContainer font-hellix ">
-      <motion.div
-        style={{
-          scale,
-          top: `calc(-5vh + ${i * 25}px)`,
-          boxShadow: "0px 18px 36px -18px #0000001A",
-        }}
-        className="card card1 lg:h-[512px]"
-      >
-        <div className="flex flex-col lg:gap-5 md:flex-row justify-evenly items-center relative h-full w-full">
-          <div className="w-full gap-10 md:w-[733px] lg:w-[433px] md:h-[348px] flex flex-col items-start relative">
-            <Lottie
-              animationData={project.lottie}
-              loop={true}
-              className="h-11 w-11"
-            />
+    <div ref={ref} className="cardContainer font-hellix ">
+      {inView && (
+        <motion.div
+          style={{
+            scale,
+            top: `calc(-5vh + ${i * 25}px)`,
+            boxShadow: "0px 18px 36px -18px #0000001A",
+          }}
+          className="card card1 lg:h-[512px]"
+        >
+          <div className="flex flex-col lg:gap-5 md:flex-row justify-evenly items-center relative h-full w-full">
+            <div className="w-full gap-10 md:w-[733px] lg:w-[433px] md:h-[348px] flex flex-col items-start relative">
+              <Lottie
+                animationData={project.lottie}
+                loop={true}
+                className="h-11 w-11"
+                autoplay={inView}
+              />
 
-            <div className="w-full lg:h-[264px] flex flex-col gap-4">
-              <h1 className="text-[20px] sm:text-[24px] font-hellixBold md:text-[28px] leading-[39px] -tracking-[0.002em] text-[#032435]">
-                {project.projectName}
-              </h1>
-              <p className="text-[#999999] font-hellixMedium text-[14px] sm:text-[15px] md:text-[12px] lg:text-[17px] leading-6 tracking-[0.002em]">
-                {project.description}
-              </p>
+              <div className="w-full lg:h-[264px] flex flex-col gap-4">
+                <h1 className="text-[20px] sm:text-[24px] font-hellixBold md:text-[28px] leading-[39px] -tracking-[0.002em] text-[#032435]">
+                  {project.projectName}
+                </h1>
+                <p className="text-[#999999] font-hellixMedium text-[14px] sm:text-[15px] md:text-[12px] lg:text-[17px] leading-6 tracking-[0.002em]">
+                  {project.description}
+                </p>
 
-              <button
-                className="hover:underline cursor-pointer flex gap-2 font-hellixMedium text-[14px] sm:text-[15px] md:text-[17px] leading-6 tracking-[0.002em] text-[#20B2FF]"
-                onMouseEnter={() => setRotate(true)}
-                onMouseLeave={() => setRotate(false)}
-                onClick={() => handleClick(project.pathName)}
-              >
-                Read More
-                <Image
-                  src={ButtonArrow}
-                  alt="Arrow Icon"
-                  width={16}
-                  height={16}
-                  className={`transition-transform duration-200 ${
-                    rotate ? "rotate-45" : "rotate-90"
-                  }`}
-                />
-              </button>
+                <button
+                  className="hover:underline cursor-pointer flex gap-2 font-hellixMedium text-[14px] sm:text-[15px] md:text-[17px] leading-6 tracking-[0.002em] text-[#20B2FF]"
+                  onMouseEnter={() => setRotate(true)}
+                  onMouseLeave={() => setRotate(false)}
+                  onClick={() => handleClick(project.pathName)}
+                >
+                  Read More
+                  <Image
+                    src={ButtonArrow}
+                    alt="Arrow Icon"
+                    width={16}
+                    height={16}
+                    className={`transition-transform duration-200 ${
+                      rotate ? "rotate-45" : "rotate-90"
+                    }`}
+                  />
+                </button>
+              </div>
+            </div>
+
+            <div className="w-full flex flex-col-reverse gap-3 md:flex-col lg:flex-row lg:gap-0 lg:w-auto relative">
+              <Image
+                src={project.image}
+                className={`absolute hidden md:block lg:top-6 ${
+                  i == 0 ? "lg:-left-28" : "lg:-left-16"
+                }`}
+                alt="Img"
+              />
+
+              <Image
+                src={project.projectBanner}
+                alt={`${project.projectName} Banner`}
+                width={800}
+                height={512}
+                className="w-full object-cover"
+              />
             </div>
           </div>
-
-          <div className="w-full flex flex-col-reverse gap-3 md:flex-col lg:flex-row lg:gap-0 lg:w-auto relative">
-            <Image
-              src={project.image}
-              className={`absolute hidden md:block lg:top-6 ${
-                i == 0 ? "lg:-left-28" : "lg:-left-16"
-              }`}
-              alt="Img"
-            />
-
-            <Image
-              src={project.projectBanner}
-              alt={`${project.projectName} Banner`}
-              width={800}
-              height={512}
-              className="w-full object-cover"
-            />
-          </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 };
