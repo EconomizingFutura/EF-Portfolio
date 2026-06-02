@@ -34,6 +34,14 @@ export async function generateMetadata({
   return {
     title: blog.header,
     description: blog.sub,
+    alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      type: "article",
+      title: blog.header,
+      description: blog.sub,
+      url: `/blog/${slug}`,
+      images: blog.thumbnail ? [blog.thumbnail] : undefined,
+    },
   };
 }
 

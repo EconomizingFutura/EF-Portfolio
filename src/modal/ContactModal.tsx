@@ -9,13 +9,6 @@ import { Formik } from "formik";
 import Image from "next/image";
 import { ContactData } from "@/api/ContactAPI";
 
-interface FormValues {
-  firstName: string;
-  lastName: string;
-  email: string;
-  comments: string;
-}
-
 interface propsTypes {
   handleToggle: () => void;
   onFormSubmit: (data: ContactData) => void;
@@ -42,26 +35,6 @@ const ContactModal: React.FC<propsTypes> = ({
     email: Yup.string().email("Invalid email").required("Email is required"),
     comments: Yup.string().required("Comments are required"),
   });
-
-  const handleEmail = (values: FormValues) => {
-    const email = "economizingfutura@gmail.com";
-    const subject = "Initiating a Conversation";
-
-    const body = `Hi,
-
-I wanted to reach out regarding the following:
-
-${values.comments}
-
-Looking forward to your response.
-
-Thank you,
-${values.firstName} ${values.lastName}`;
-    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
-  };
 
   return (
     <div
@@ -94,10 +67,10 @@ ${values.firstName} ${values.lastName}`;
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
-            onFormSubmit(values);
+          onSubmit={async (values, { resetForm }) => {
+            await onFormSubmit(values);
+            resetForm();
             handleToggle();
-            handleEmail(values);
           }}
         >
           {(formik) => (

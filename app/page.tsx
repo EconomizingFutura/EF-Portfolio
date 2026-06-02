@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { ClientUnderline, Boxes, Area, FAQ } from "@/assets/index";
 import { ContactModal, EnqueryModal } from "@/modal/index";
 import { Toaster, toast } from "sonner";
@@ -16,12 +16,11 @@ import {
   Header,
   HeroSection,
 } from "@/sections/index";
-import Head from "next/head";
 import Image from "next/image";
 import { useScrollBackground } from "@/hooks/useScrollBackground";
 import { BlogsCard } from "@/components";
 import { useRouter } from "next/navigation";
-import { ContactData } from "@/api/ContactAPI";
+import { contactAPI, ContactData } from "@/api/ContactAPI";
 
 interface ProjectItem {
   id: number;
@@ -52,12 +51,6 @@ const Page = () => {
   const heroSection = useRef<HTMLElement | null>(null);
   const otherSections = useRef<HTMLElement | null>(null);
 
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   useScrollBackground({
     mainRef: heroSection,
     otherRef: otherSections,
@@ -76,25 +69,18 @@ const Page = () => {
       return;
     }
     try {
+      await contactAPI(data, setIsLoading);
+      toast.success("Message sent successfully");
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong. Please try again.");
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (!mounted) return null;
-
   return (
     <>
-      <Head>
-        <title>Economizing Futura | Innovative Digital Solutions</title>
-        <meta
-          name="description"
-          content="Economizing Futura builds custom software, helping startups and businesses transform ideas into reality."
-        />
-        <link rel="canonical" href="https://economizingfutura.com/" />
-      </Head>
       <div className="mt-16 overflow-x-clip flex flex-col justify-between">
         <Toaster richColors />
         {show && (
@@ -167,6 +153,15 @@ const Page = () => {
                 />
               );
             })}
+          </div>
+
+          <div className="flex justify-center mt-10 lg:mt-16">
+            <button
+              onClick={() => router.push("/projects")}
+              className="w-[120px] h-[40px] md:w-[140px] md:h-[45px] lg:w-[202px] lg:h-[56px] font-hellixBold text-[14px] md:text-[16px] lg:text-[18px] leading-snug bg-[#F1FAFF] text-primary cursor-pointer"
+            >
+              View All
+            </button>
           </div>
         </section>
 

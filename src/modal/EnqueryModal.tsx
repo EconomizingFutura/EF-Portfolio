@@ -36,36 +36,16 @@ const EnqueryModal: React.FC<PropsTypes> = ({ isLoading, onFormSubmit }) => {
   const [showForms, setShowForms] = useState<boolean>(false);
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
 
-  const handleEmail = (values: FormValues) => {
-    const email = "economizingfutura@gmail.com";
-    const subject = "Initiating a Conversation";
-
-    const body = `Hi,
-
-I wanted to reach out regarding the following:
-
-${values.comments}
-
-Looking forward to your response.
-
-Thank you,
-${values.firstName} ${values.lastName}`;
-    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
-  };
   const handleSubmit = async (
     values: FormValues,
     { resetForm }: FormikHelpers<FormValues>
   ) => {
     try {
       await onFormSubmit(values);
-      handleEmail(values);
       resetForm();
       setShowForms(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

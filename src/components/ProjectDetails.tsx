@@ -6,12 +6,10 @@ import { projectsInfo } from "@/constants/constants";
 import { ButtonArrow, PH, Boxes } from "@/assets/index";
 import Lottie from "lottie-react";
 import { Header, Footer } from "@/sections/index";
-// import { contactAPI, ContactData } from "@/api/ContactAPI";
 import { toast, Toaster } from "sonner";
 import { useRouter } from "next/navigation";
-import Head from "next/head";
 import Image from "next/image";
-import { ContactData } from "@/api/ContactAPI";
+import { contactAPI, ContactData } from "@/api/ContactAPI";
 import { notFound } from "next/navigation";
 
 const sectionColors = ["#e3f5ff", "#FFFFFF"];
@@ -35,10 +33,11 @@ const ProjectDetails = ({ slug }: { slug: string }) => {
       return;
     }
     try {
-      //   const response = await contactAPI(data, setIsLoading);
-      // toast.success("Message sent successfully");
+      await contactAPI(data, setIsLoading);
+      toast.success("Message sent successfully");
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong. Please try again.");
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -110,16 +109,6 @@ const ProjectDetails = ({ slug }: { slug: string }) => {
 
   return (
     <>
-      <Head>
-        <title>
-          {projectDetails.projectName} | Projects | Economizing Futura
-        </title>
-        <meta name="description" content={projectDetails.description} />
-        <link
-          rel="canonical"
-          href={`https://economizingfutura.com/projects/${projectDetails.pathName}`}
-        />
-      </Head>
       <div className=" font-hellix min-h-screen justify-center relative  w-full flex flex-col overflow-x-hidden">
         <div ref={mainSectionRef}>
           <Header handleShowForms={handleToggle} background={backgroundColor} />

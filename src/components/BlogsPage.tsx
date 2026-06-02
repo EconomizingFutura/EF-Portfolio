@@ -6,10 +6,9 @@ import BlogsCard from "./BlogsCard";
 import Image from "next/image";
 import { projectsHeader, Star } from "@/assets";
 import { toast, Toaster } from "sonner";
-import Head from "next/head";
 import { blogs, blogsPage } from "@/constants/constants";
 import { useScrollBackground } from "@/hooks/useScrollBackground";
-import { ContactData } from "@/api/ContactAPI";
+import { contactAPI, ContactData } from "@/api/ContactAPI";
 import { useTrackBlogView } from "@/hooks/useTrackBlogView";
 import { useShowBlogsCount } from "@/hooks/useShowBlogsCount";
 import { Eye } from "lucide-react";
@@ -42,9 +41,10 @@ const BlogsPage = ({ slug }: BlogsPageProps) => {
       return;
     }
     try {
-      // await contactAPI(data, setIsLoading);
-      // toast.success("Message sent successfully");
+      await contactAPI(data, setIsLoading);
+      toast.success("Message sent successfully");
     } catch (err) {
+      toast.error("Something went wrong. Please try again.");
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -58,22 +58,6 @@ const BlogsPage = ({ slug }: BlogsPageProps) => {
 
   return (
     <>
-      <Head>
-        <title>{content.header} | Economizing Futura</title>
-        <meta
-          name="description"
-          content={
-            content.heading ||
-            content.sub ||
-            "Read this blog on Economizing Futura."
-          }
-        />
-        <link
-          rel="canonical"
-          href={`https://economizingfutura.com/projects/${content.slug}`}
-        />
-      </Head>
-
       <div className="font-hellix min-h-screen flex flex-col overflow-x-hidden relative">
         <div className="h-[32px] w-full" ref={mainSectionRef}>
           <Header handleShowForms={handleToggle} background={backgroundColor} />
